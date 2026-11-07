@@ -1,11 +1,35 @@
 # lme-fedora-niri-qs — live state
 
 > UPDATE THIS FILE at the end of every work session. Last updated:
-> 2026-11-07 (after PR #91 merge).
+> 2026-11-07 (after PR #93 merge — Liquid Glass 2.0 epic COMPLETE).
 
-## Merged through PR #91 (`a455f4e`)
+## Merged through PR #93 (`bde3c47`)
 
 Recent history (newest first):
+
+- #93 `feat(glass): settings presets + Lens/Compositor grouping, GLASS.md,
+  attribution (#78)` — closes #78 AND epic #72 (explicit "Closes #72" needed:
+  no GH sub-issue linkage was ever recorded; all sub-issues #73–#78 now
+  closed). `LiquidGlassSettings.qml` restructured: preset row (Clear/Frosted/
+  Vivid + one-line descriptions via `glassMaterialPresetDesc`) moved to top of
+  material card; sliders regrouped `glassLensHeader` (blur/rim/edgeWidth/
+  grain/opacity) + `glassCompositorHeader` (passes/offset, compositor-wide copy
+  on the header); new `glassBlurStatus` derived status line: applied(<preset>) /
+  pending (save snippet) / unsupported (niri < 26.04, detected <version>). All
+  objectNames preserved; NO new pref keys (schema goldens untouched); arch cap
+  entry added for tests/test_glass_controls.py (264). New `docs/GLASS.md`
+  (hybrid model, per-control table with real defaults/ranges, Frosted vs True
+  tradeoff, measured idle facts from #77, 6-scenario p50/p99 marked NOT
+  measured, troubleshooting) linked from CONFIGURATION/TROUBLESHOOTING/README
+  Features+Documentation. Serpantinum-NOTICE + THIRD_PARTY.md extended with
+  #87–#91 renderer refinements (yield/adaptive/grain/floor) + explicit Lens 2.0
+  timing derivation (StretchIndicator ← GlassLens@87d3b927, no engine copied,
+  MIT SPDX kept). feather/smearing/brightness documented as not-shipped (issue
+  text listed controls that never existed). Pre-existing main failures filed as
+  follow-up **#94** (stale 149 schema guard, selection-lens source drift,
+  settings-startup reconnect, pixel-test sensitivity; qmllint 255 = lesson 19).
+  Post-merge: shell restarted on main — MUST be setsid-detached (lesson 23);
+  bar recovery verified via top-strip pixel diff vs dead-state screenshot.
 
 - #91 `feat(glass): idle-frame elimination, frame telemetry, reduced
   transparency, contrast floor` — GlassMaterial `dirty` gate (zero JS for
@@ -49,7 +73,9 @@ Recent history (newest first):
 
 ## Open work (Liquid Glass roadmap)
 
-- **#78** (next): Settings UX + `docs/GLASS.md` + AGPL compliance pass
+- **#94** (follow-up): stale test guards + env-sensitive failures on main
+  (149→151 schema guard, selection-lens source assertion, settings-startup
+  reconnect, pixel tests, qmllint-255 note)
 - **#92** (follow-up, no milestone): profile & reduce ~11-12% quickshell idle
   CPU with zero rendered frames (per-thread table in the issue; perf/QML
   profiler attribution needed)
@@ -62,6 +88,11 @@ Recent history (newest first):
 
 ## User-side checks still pending (tell the user, don't assume)
 
+- #78/#93: open Settings → Appearance → Liquid glass material and eyeball the
+  new layout (presets at top with descriptions, Lens/Compositor sub-headers,
+  status line); try preset switching + a compositor blur save to see
+  pending→applied (no pointer automation on the machine — QML test covered it,
+  human eyes did not)
 - #77: visual live-swap of reduced-transparency on their real screen (chain
   verified + screenshots captured; model cannot read pixels); contrast
   readability on their own wallpapers (brightest available was ~gray 111/255,

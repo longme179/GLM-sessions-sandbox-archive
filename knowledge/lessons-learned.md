@@ -116,3 +116,43 @@
     settings.json/wallpaper (with backup+restore), grim, and spawning/closing
     YOUR OWN test windows are all allowed; never touch user windows; verify
     focus/identity before any destructive action.
+
+22. **The OpenCode gateway message pipeline silently drops short bracket
+    fragments** (e.g. `[m`) in message text, BOTH directions: an agent's
+    "verbatim" diff showed `Theme.glassControlsodelData]` where the real file
+    has `Theme.glassControls[modelData]`, and even my own prompt echoed back
+    through the API was mangled the same way. NEVER trust verbatim diffs in
+    agent messages for syntax-level review — verify against the real file with
+    mangling-proof probes (`grep -c 'pattern['`, `sed | base64`) before
+    approving. This is why the #93 STOP-gate caught nothing on its own.
+
+23. **`/api/shell` (rsh) kills the whole process tree when the HTTP call
+    times out.** `lme-shell start` does a FOREGROUND `exec quickshell`
+    (start.sh:110), so a restart issued directly via rsh leaves the new shell
+    as a child of the gateway bash — and it gets killed minutes later when the
+    call times out, leaving the desktop with NO bar. Recovery + prevention:
+    start with `setsid nohup ~/.local/bin/lme-shell start >/dev/null 2>&1 <
+    /dev/null &` (the launcher PID becomes quickshell via exec, in its own
+    session — survives). Verify with `pgrep -x quickshell` + pixel-diff of the
+    top strip against a dead-state screenshot (bar present = ~30k colors and
+    high variance vs wallpaper-only ~14k). Better: delegate restarts to the
+    agent session's own bash tool, which does not tree-kill.
+
+24. **`pgrep -f` self-matches the gateway's `bash -c` wrapper** (the probe's
+    own cmdline contains the pattern) — every "PID changed between checks"
+    scare during the #93 restart was a self-match. Use `pgrep -x <exact name>`
+    or add `| grep -v bash` and sanity-check the printed cmdline.
+
+25. **OpenCode message streaming race in waiters:** an assistant message read
+    mid-stream has incomplete content — a final marker appended seconds later
+    is missed if the waiter caches messages as "checked". oc_wait exited
+    "idle, no marker" while the agent was still streaming; the report DID end
+    with the marker. Fix: always re-check the ~3 most recent messages every
+    poll (sandbox scripts/oc_wait2.py has it; archive tools/oc_* still old —
+    port the fix when touching the archive).
+
+26. **GitHub sub-issue linkage was never recorded on epic #72**, so closing
+    the last sub-issue #78 would NOT auto-close the epic. The final PR had to
+    say `Closes #72` explicitly (verified all sub-issues closed first). For
+    any epic: check the linkage fields BEFORE the closing PR and add explicit
+    closes as needed — or the epic lingers open forever.
