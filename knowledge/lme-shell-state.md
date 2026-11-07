@@ -1,8 +1,62 @@
 # lme-fedora-niri-qs — live state
 
 > UPDATE THIS FILE at the end of every work session. Last updated:
-> 2026-11-07 (late-night session — full issue triage: all 8 open issues
-> resolved/closed, PRs #98–#102 merged, ambient idle-CPU fix deployed).
+> 2026-11-08 (early-AM session — interaction-logic audit after #104: three
+> user-reported panel bugs + a ~1s reopen hitch root-caused and fixed, PR
+> #105 merged; reopen latency 1000ms→10ms).
+
+## Session 2026-11-08 (early AM): panel interaction audit — PR #105 merged
+
+User report after #104 ("almost smooth now"): (1) clicking Activity Island
+opened BOTH the island and the control center; (2) fast Settings tab
+switching briefly overlaid one tab on another; (3) top-bar → control panel
+sometimes skipped the opening animation; "audit the logic harder".
+
+Root causes (all verified live — timed journal probes, gdb stack sampling,
+pixel-zone screenshot audits):
+
+- **(1)** `SlideLoader.finishClose` parked retained (keepAlive) panels at
+  exit offset 0 = their OPEN position, relying on window unmap to hide
+  them. The island kept the overlay window mapped → the dormant CC popped
+  back into view beside it. Fix: park at the exit-flight edge (off-screen);
+  island got keepAlive too (compact-size rewind on dormancy).
+- **(3)** exit offset 0 on reopen also meant NO slide-in (progress-0
+  deformation ≈ full size at final position → pop). The park restores the
+  slide; content swaps under a shown surface reset the flight likewise.
+- **(2)** `SettingsPageHost.dispatch` early-return left a stale incubation
+  running; its late onLoaded activated the page the user navigated away
+  from. Fix: cancel stale incubations, guard onLoaded by content, hide
+  retired pages before deferred deletion. Renamed→`qml/components/PageHost`
+  and reused for the CC dashboard (no more tab-switch blank flash).
+- **NEW logic bug found in audit**: control-tab gestures (audio/devices/
+  agenda/system) selected the tab then togglePanel'd — closing an
+  already-open CC. Now they only open when closed.
+- **THE deep one — ~1s hitch on every panel reopen**: mapping the overlay
+  PanelWindow with a retained tree in the scene re-attaches every item to
+  the fresh surface (~0.7–1.0s main-thread block; gdb: diffuse QV4 binding
+  churn + GC + QQuickCanvasItem Context2D rebuilds; hiding via Item.visible
+  moves the same cost to the visibility toggle — do NOT hide big dormant
+  trees with visible). Fix: the overlay layer surface stays mapped for the
+  whole session (idle = 1x1 transparent sliver, mask null, blur gated by
+  new `surfaceLive`); resizes are incremental, no scene teardown.
+  **Reopen IPC→slide: ~1000ms → ~10ms.** Island reopen ~11ms retained.
+- Atomic swaps: `ShellState.panelSwap` bumped on replacement → shell
+  `snapOut()`s the outgoing surface — one popover on stage at a time.
+
+Perf-measurement recipe that worked: `console.warn(Date.now())` probes
+chained IPC → togglePanel → onShownChanged → move(), journalctl
+`-o short-precise`, plus `gdb -p PID -batch -ex "thread apply all bt"`
+sampled in a loop during the block. Remove probes before commit.
+
+OPS LESSON: quickshell's file watcher DIES after a failed config load —
+after any mid-edit reload failure, `systemctl --user restart
+lme-shell-perf.service`. Order edits: move/renamed files BEFORE files
+that reference them. `touch` alone may not retrigger; rewrite same
+content does not either after a failed load.
+
+User-side checks pending: eyeball island↔CC swaps (should be instant,
+one panel on stage), panel reopen slide-in, CC tab switches (old tab
+stays until new loads), Settings tab mashing (no wrong-tab flash).
 
 ## Session 2026-11-07 (late): issue triage — 8/8 closed, main green
 
@@ -196,8 +250,8 @@ Recent history (newest first):
   3); deploy.kdl additionally carries a USER-ADDED unscoped window-rule
   (`geometry-corner-radius 28; clip-to-geometry true; background-effect
   { blur true }` — applies to ALL windows; not from the repo, leave it)
-- live checkout on branch `fix/glass-no-backdrop` (PR #96, NOT merged) —
-  after merge: `git switch main` + restart shell
+- live checkout on `main` (#105 merged; service `lme-shell-perf.service`
+  runs the deployment quickshell, auto-reloads on file change)
 - qsb tool: `/usr/lib64/qt6/bin/qsb` (qt6-qtshadertools 6.11.2)
 - bar reserves exclusive zone: app windows start BELOW the bar strip — the
   wallpaper sky is genuinely what is behind the bar pills (pixel-hue
@@ -209,27 +263,15 @@ Recent history (newest first):
 
 ## User-side checks still pending (tell the user, don't assume)
 
-- **#96 (THE one that matters now)**: the user is running the branch live.
-  Eyeball Settings → Night Light over the desktop AND over a browser
-  window: the shell no longer paints ANY wallpaper — what shows through
-  the glass is only niri's blur of what is really behind. Raise **Panel
-  tint opacity back up (their live value is 0.0 from testing!)** — 0 =
-  clear glass, 0.65 default, 1 ≈ frosted 0.9 tint. If the background is
-  still too recognizable at their preferred tint: raise **Blur passes /
-  Blur spread** in the Compositor blur group and hit **Save niri blur
-  snippet**. Merge PR #96 when happy, then `git switch main` + restart.
-- **niri caveat when judging #96** (26.04 docs — knowledge/niri.md §2):
-  non-xray blur (`xray false`, our mode) is upstream-EXPERIMENTAL — it
-  disappears during window open/close animations and while dragging a
-  tiled window. A flash of un-blurred glass in those moments is niri's
-  known limitation, NOT a shell bug. For stronger cheap blur: raise Blur
-  spread (offset) before Blur passes.
-- #77: visual live-swap of reduced-transparency on their real screen;
-  hover/glint feel (ydotool missing on the machine)
+- **#105 (merged, running live)**: eyeball (a) island↔control-center swaps
+  — the outgoing panel should retire instantly, never two panels on stage,
+  never the dormant CC reappearing; (b) top-bar → control panel reopen —
+  should slide in from the right edge every time, no pop, no dead hitch;
+  (c) mashing Settings sidebar tabs — no wrong-tab flash, no overlap;
+  (d) CC tab buttons/gestures — old tab stays visible until the new one
+  lands; the audio/devices/agenda/system bar gestures no longer close an
+  open control center.
 - EQ real-machine check (band drag, Apply, presets, Dynamic EQ, Audio view)
+- #77: hover/glint feel (ydotool missing on the machine)
 
 ## Update protocol
-
-When a PR merges: append a one-liner above, move open-work items, refresh
-runtime facts, list any new pending user-side checks, then commit+push this
-archive (via desktop, see SKILL-github-pr-workflow.md).
