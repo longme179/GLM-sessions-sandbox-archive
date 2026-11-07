@@ -3,7 +3,7 @@
 > One rule per lesson, with the story that taught it. Newest last.
 
 1. **New singletons need the full boilerplate** — `pragma Singleton` +
-   `import Quickshell` + `Singleton {}` root + `qmldim` registration.
+   `import Quickshell` + `Singleton {}` root + `qmldir` registration.
    qmllint does NOT catch a missing `import Quickshell`; the shell crashes
    at startup. (EQ singleton, session of Nov 6.) → Always run the whole
    validation battery, never just qmllint.
@@ -99,7 +99,7 @@
     `sysconf(_SC_CLK_TCK)`, 1s poll, 60s windows) is a full substitute. Same
     for /proc/<pid>/task/*/stat + comm for per-thread profiles.
 
-19. **`/usr/bin/qmllint` is Qt5 1.0 on the machine** — it exits 255 silently
+19. **`/usr/bin/qmllint` is Qt5 1.0 on the machine** — ueits 255 silently
     on `pragma ComponentBehavior: Bound` files. Tool mismatch, not a code
     error; the full `./scripts/check.sh` suite is the real gate.
 
@@ -156,3 +156,36 @@
     say `Closes #72` explicitly (verified all sub-issues closed first). For
     any epic: check the linkage fields BEFORE the closing PR and add explicit
     closes as needed — or the epic lingers open forever.
+
+27. **The "xray" complaint was the yield cap, not niri config.** The user
+    swore glass "x-rayed" the desktop background through windows. Config
+    was verified perfect (niri 26.04, xray-false rules included last,
+    appliedBlur true, all runtime gates true via GLASSDBG logging) and an
+    A/B kill+restart changed NOTHING — determinism proved it was not
+    staleness. Root cause: the shader's yield branch capped its tint at
+    0.15/0.22 and ignored Panel tint opacity, so True-backdrop glass was
+    ~85% see-through and the blurred backdrop stayed recognizable. Fix =
+    feed Theme.panelOpacity in as a yieldOpacity uniform (PR #95). When a
+    visual complaint comes with perfect config, measure the RENDERED pixels
+    (correlation vs wallpaper/browser references) before blaming config or
+    staleness.
+
+28. **VLM + Pearson correlation on the user's own screenshots is the
+    discriminator for "what does the glass show".** Correlation of a glass
+    region against the same-region wallpaper (raw + GaussianBlur(12)x2)
+    settles wallpaper-vs-browser objectively; three traps: correlation is
+    invariant to tint (structure only — a 0.91-corr bar strip can still be
+    correctly tinted), settings-page content dominates the stats (pick
+    sparse areas like the Night Light page, or the VLM for structure), and
+    the wallpaper may have CHANGED between screenshots (shuffle playlist!) —
+    use the wallpaper FILE plus a fresh grim for ground truth, not old
+    screenshots. Single VLM calls can also hallucinate (first call "saw"
+    browser images that a comparative 2-image call disproved) — prefer the
+    multi-image comparative prompt.
+
+29. **`&/.config/lme-shell/settings.json.bak-*` files are a free changelog
+    of what the user was fighting.** Diffing the Nov 6 backup showed
+    opacity 0.2→1.0, a tint change and appliedBlur appearing: the user had
+    been cranking Panel tint opacity for a day trying to de-xray the glass
+    before reporting it. Check the backups before designing the fix — they
+    tell you which knob the user already tried.
