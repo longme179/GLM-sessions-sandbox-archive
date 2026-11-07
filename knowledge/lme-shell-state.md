@@ -1,31 +1,53 @@
 # lme-fedora-niri-qs — live state
 
 > UPDATE THIS FILE at the end of every work session. Last updated:
-> 2026-11-07 (evening session — glass "xray" complaint, PR #95 opened).
+> 2026-11-07 (night session — glass simplification PR #96 opened).
 
 ## Open PR (awaiting owner review)
 
-- **#95** `fix(glass): True backdrop glass reveals the desktop background —
-  scale yield tint with Panel tint opacity` (branch
-  `fix/glass-xray-wallpaper-leak`, commits `c46fe30` + `11601d3`, opened
-  2026-11-07): root cause = `liquid-glass.frag` yield branch hard-capped its
-  tint at alpha 0.15/0.22 (output 0.85), so with the True backdrop preset
-  the glass stayed ~85% see-through and the blurred desktop wallpaper
-  remained recognizable through panels/bar/Settings (user: "render như kiểu
-  xray"). The Panel tint opacity preference was ignored in that path.
-  Fix: new `yieldOpacity` uniform fed from `Theme.panelOpacity`
-  (GlassMaterial → GlassOptics → frag), added into the capped yield tint,
-  alpha ceiling 0.92; `.frag` kept at exactly 221 nonblank lines
-  (architecture ratchet, net-zero patch); `.qsb` rebuilt with
-  `/usr/lib64/qt6/bin/qsb --glsl "100 es,120,150" --hlsl 50 --msl 12`.
-  Live-verified on the machine: Settings-over-desktop wallpaper correlation
-  0.548/0.580 → 0.046/0.055, greenish fraction 51%→15%/2.4%; over browser
-  corr ≈ 0; bar strip 0.912→0.793 (residual = raw wallpaper in the gaps
-  BETWEEN islands pills — no glass there by design). Glass unit tests 41 OK
-  (9 skipped); `check.sh` single failure = the known stale 149-schema guard
-  already tracked as **#94** (verified failing identically on `main`).
-  **NOTE: the live checkout is ON this branch right now (the user is
-  running the fix); `git switch main` after merge.**
+- **#96** `fix(glass): drop backdrop sampling - simple transparent glass
+  (tint, grain, edge + compositor blur)` (branch `fix/glass-no-backdrop`,
+  commits `63eb9b9` + `09f299c` + `0f3a9d9`, pushed 2026-11-07): the user
+  rejected the whole hybrid model with a binding directive — "I only want
+  transparent glass with simply adjustable blur/noise/grain. I do NOT want
+  the glass shader to take ANY information about the desktop background.
+  Don't overcomplicate things." So the wallpaper-sampling lens is now GONE:
+  deleted GlassBackdrop.qml / GlassSampling.js / GlassGeometry.js /
+  scripts/glass_snapshot.py + the ~/.cache/lme-shell/glass snapshot cache;
+  liquid-glass.frag rewritten to 95 nonblank lines with NO sampler2D — one
+  tint path `A = clamp(B + panelOpacity*0.75, 0, 0.92)`,
+  `B = clamp(tintAmount*0.85, 0, 0.15)`, plus grain + geometry edge/rim;
+  yield/compositorBlur/adaptiveContrast/yieldOpacity uniforms all dead.
+  Removed Theme adaptive/contrast-floor helpers + compositor*Blur gates,
+  "True backdrop (experimental)" combo, "Adaptive contrast" switch,
+  "Lens blur" slider, frosted/true presets; liquid_glass.py snippet() is
+  always `xray false` (niri >= 26.04 gate kept), validate drops retired
+  inner keys blur/blurPreset/appliedBlur so old settings.json survives.
+  Settings card now: presets (surviving keys only) / tint picker /
+  opacity+rim+edgeWidth+grain sliders / Glass selection switch /
+  Compositor blur group (status + passes + spread + Save snippet).
+  check.sh: 1064 tests, 1 failure = the known #94 stale 149-schema guard
+  (150 != 149 here, 151 != 149 on main — same #94 root). Blur regions
+  (bar pills, popups) untouched — niri is now the ONLY blur. Live-verified:
+  shell restarted on the branch, cache dir not recreated, over a spawned
+  magenta kitty the Settings glass showed blurred WINDOW content (never
+  wallpaper), settings.json backup/restore byte-exact around the opacity-0
+  test. Bar pills show blurred wallpaper sky behind them — CORRECT: the
+  bar reserves exclusive zone so windows don't extend under it (pixel-hue
+  analysis proved the magenta window starts below the bar).
+  **The live checkout is ON this branch; the user is running it.**
+  User's live liquidGlass: tint #b5465668, **opacity 0.0** (they left it at
+  0 from testing #95 — tell them to raise Panel tint opacity back up).
+
+## Merged through PR #95 (`7a11fc6`)
+
+- #95 `fix(glass): let Panel tint opacity govern the compositor-yield tint`
+  (yieldOpacity uniform, alpha ceiling 0.92) — treated the x-ray symptom
+  at parameter level; correlation 0.55→0.05 at the user's opacity 1.0, but
+  the user still saw the background at opacity 0 and rejected the hybrid
+  model outright → superseded architecturally by PR #96 (full backdrop
+  removal). Lesson: when a visual bug survives a parameter fix, check
+  whether the architecture itself contradicts the user's mental model.
 
 ## Merged through PR #93 (`bde3c47`)
 
@@ -104,42 +126,45 @@ Recent history (newest first):
   CPU with zero rendered frames (per-thread table in the issue; perf/QML
   profiler attribution needed)
 
-## Runtime facts (2026-11-07 evening)
+## Runtime facts (2026-11-07 night, on branch fix/glass-no-backdrop / PR #96)
 
 - Fedora + Niri 26.04 (rpm installed 2026-10-30), quickshell 0.3.2 (deployed
   runtime `~/.local/share/lme-shell/deployment/bin/quickshell` → symlink to
   `/usr/bin/quickshell`), eDP-1 1920x1080 scale 1; no systemd units — niri
   `spawn-at-startup` runs `~/.local/bin/lme-shell start` (logs land in
   `~/.local/state/lme-shell/log/lme-shell.log`, rotated at 1 MB)
-- surfaceStyle=liquid, barStyle=islands, appliedBlur=true (xray false),
-  liquidGlass: tint `#70465668`, opacity 1.0, blur 2.0, rim 2.0,
-  edgeWidth 0.25, grain 0.08, adaptiveContrast on; wallpaper STATIC
+- surfaceStyle=liquid, barStyle=islands; liquidGlass after #96: tint
+  `#b5465668`, **opacity 0.0** (user left it low while testing), rim 2.0,
+  edgeWidth 0.25, grain 0.08, passes 2, offset 3; retired keys blur/
+  blurPreset/appliedBlur dropped on load; wallpaper STATIC
   (`Pictures/Wallpaper1/wallhaven-w5m1y7.jpg`, playlist disabled by the
-  user for this debugging session)
+  user for this debugging session); `~/.cache/lme-shell/glass/` deleted,
+  not recreated
 - niri config includes: `lme-shell-deploy.kdl` then
   `~/.config/lme-shell/liquid-blur.kdl` (xray false, blur passes 2 offset
   3); deploy.kdl additionally carries a USER-ADDED unscoped window-rule
   (`geometry-corner-radius 28; clip-to-geometry true; background-effect
   { blur true }` — applies to ALL windows; not from the repo, leave it)
-- live checkout on branch `fix/glass-xray-wallpaper-leak` (PR #95) —
-  switch back to main after merge
+- live checkout on branch `fix/glass-no-backdrop` (PR #96, NOT merged) —
+  after merge: `git switch main` + restart shell
 - qsb tool: `/usr/lib64/qt6/bin/qsb` (qt6-qtshadertools 6.11.2)
+- bar reserves exclusive zone: app windows start BELOW the bar strip — the
+  wallpaper sky is genuinely what is behind the bar pills (pixel-hue
+  analysis, 2026-11-07 night; matters when interpreting screenshots)
 
 ## User-side checks still pending (tell the user, don't assume)
 
-- **#95**: eyeball Settings → Night Light over the bare desktop AND over a
-  browser window — the wallpaper must no longer read through the glass
-  (frosted dark tint at their opacity=1.0). Tune with the Panel tint
-  opacity slider (0 = old see-through yield, 1 ≈ 0.9 frosted). The bar
-  still shows raw wallpaper in the gaps between islands pills — by design.
-- #78/#93: open Settings → Appearance → Liquid glass material and eyeball
-  the layout (presets at top, Lens/Compositor sub-headers, status line);
-  try preset switching + a compositor blur save to see pending→applied
+- **#96 (THE one that matters now)**: the user is running the branch live.
+  Eyeball Settings → Night Light over the desktop AND over a browser
+  window: the shell no longer paints ANY wallpaper — what shows through
+  the glass is only niri's blur of what is really behind. Raise **Panel
+  tint opacity back up (their live value is 0.0 from testing!)** — 0 =
+  clear glass, 0.65 default, 1 ≈ frosted 0.9 tint. If the background is
+  still too recognizable at their preferred tint: raise **Blur passes /
+  Blur spread** in the Compositor blur group and hit **Save niri blur
+  snippet**. Merge PR #96 when happy, then `git switch main` + restart.
 - #77: visual live-swap of reduced-transparency on their real screen;
-  contrast readability on their own wallpapers; hover/jelly lens feel
-  (ydotool missing on the machine)
-- #76 leftovers: lens motion feel on live tab bars, preset cycling, battery
-  saver glass-off
+  hover/glint feel (ydotool missing on the machine)
 - EQ real-machine check (band drag, Apply, presets, Dynamic EQ, Audio view)
 
 ## Update protocol

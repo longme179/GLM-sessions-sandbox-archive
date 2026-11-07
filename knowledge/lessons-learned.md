@@ -199,3 +199,48 @@
     base64 into silently shorter files (5407/9139 bytes landed). For file
     transfers through prompts keep each prompt ≤ ~12KB, or verify landed
     byte sizes against the source before trusting the transfer.
+
+31. **When a visual bug survives a parameter-level fix, suspect the
+    architecture, not the parameters.** PR #95 tuned the yield tint and
+    measured correlation 0.55→0.05 — yet the user still saw the background
+    and escalated: "I don't want the glass shader to take ANY information
+    about the desktop background. Don't overcomplicate things." The real
+    fix (PR #96) was deletion: the entire wallpaper-sampling lens
+    (GlassBackdrop snapshot → shader sampler) went away, 221→95 frag lines,
+    -736 lines net. The user had diagnosed the architecture better than
+    the fixes did. Ask "which layer SHOULD own this effect?" before
+    patching constants in the wrong layer.
+
+32. **The old-idle trap in gateway waiters.** After POSTing a new prompt,
+    the last `idle` message in the session is still from the PREVIOUS run
+    — a naive waiter exits instantly "success" while the new run is still
+    working. Fix: only accept idles with a timestamp NEWER than the prompt
+    message (scripts/oc_wait2.py takes the prompt epoch-ms as arg). Also
+    re-check the last ~3 messages each poll for the streaming race
+    (lesson 25).
+
+33. **The agent backgrounds long commands and goes idle without
+    reporting.** Twice it launched `./scripts/check.sh ... &` (2.5 min),
+    narrated one line, and ended the run "succeeded" — no report. Don't
+    prompt it to wait; just sleep the expected duration and read the log
+    directly through the raw-shell channel (rsh), which is cheaper and
+    mangling-proof.
+
+34. **VLM verdicts about "what is behind the glass" need geometry
+    awareness.** The VLM swore the bar pills painted a "stale wallpaper
+    copy" because they showed sky while a magenta window filled the
+    screen — but the bar reserves an exclusive zone, so the magenta window
+    starts BELOW the bar; blurred wallpaper sky behind the pills was
+    CORRECT. Ten lines of PIL hue statistics (magentaFrac 0.000 in the
+    pill strip, transition at y≈30/506) settled what the VLM asserted
+    wrongly. Layer-shell exclusive zones mean "content behind a bar" is
+    usually wallpaper, not windows — check before believing a "stale
+    snapshot" verdict.
+
+35. **Grep-proofs + byte-exact file fetch beat narrative review.** For the
+    #96 review gate: sha256-matched base64 fetch of the frag (read every
+    line myself), grep counts (0 sampler2D / 0 GlassBackdrop / 0
+    glass_snapshot), direct log reads (failures=1, the known #94 guard),
+    and pixel statistics on fetched screenshots. The agent's verbatim
+    diffs were never trusted (lesson 22) and nothing was needed from them
+    that a raw probe couldn't prove harder.
