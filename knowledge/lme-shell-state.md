@@ -1,10 +1,60 @@
 # lme-fedora-niri-qs — live state
 
 > UPDATE THIS FILE at the end of every work session. Last updated:
-> 2026-11-07 (night session — glass simplification PR #96 opened; late
-> session — niri 26.04 capability snapshot: knowledge/niri.md).
+> 2026-11-07 (late-night session — full issue triage: all 8 open issues
+> resolved/closed, PRs #98–#102 merged, ambient idle-CPU fix deployed).
 
-## Open PR (awaiting owner review)
+## Session 2026-11-07 (late): issue triage — 8/8 closed, main green
+
+User directive: "hãy xem các issues và xem xét giải quyết hoặc close
+issue" (review the issues; resolve or close). Outcome — every open issue
+is now closed, 0 remain:
+
+- **#64, #65, #66 (items 1–2), #67 (bulk), #94 (items 1/3/4)** were
+  ALREADY fixed on main by earlier audit-bot commits (c847cec, 1c59140,
+  870e001, glass PRs) but never closed — verified each acceptance
+  criterion against live main first, then closed with evidence matrices
+  (lesson 37). G0 baseline on main: 1064 tests OK.
+- **#94 (items 2/5)** — PR #98: the stale `duration: root.forward ? 200`
+  assertion fixed structurally AND `Lens2SourceCase` un-gated from
+  `LME_TEST_PERSONALIZATION_UI` (a pure source test hidden behind an
+  OpenGL gate is exactly how drift survives); qmllint exit-255 quirk
+  documented in VALIDATION.md.
+- **#66 (item 2)** — PR #99: `CaptureSnapshotIsolationCase` regression
+  (snapshot embeds `dict(capture.state)`), PLUS the discovery repair:
+  `action_registry_async.py` doesn't match `test*.py`, so BOTH regression
+  suites in it (incl. the item-1 `UnexpectedCompletionCase`) were dead
+  code in G0 — now imported by `test_action_registry.py` (lesson 38).
+  1066 tests after.
+- **#67 (item 7)** — PR #100: re-pinned AUDIT.md pkexec line (1317→1306).
+- **#92** — PR #101, the big one: reproduced 10.0% idle; backend
+  SIGSTOP A/B proved the 84 KB/2 s snapshot pipeline costs ~nothing;
+  gdb 120-sample stack sampling showed all threads parked ~97% (wakeup
+  frequency, not compute); root cause = `DesktopAmbient` runs
+  `MediaAmbient { playing: true }` on an always-visible full-screen
+  Bottom layer, drifting 12 shapes at every vsync 24/7. Fix: ~22 ms
+  frameTime-accumulation budget (≈30 fps @ 60 Hz, refresh-rate
+  independent, exact motion speed). **Measured 10.0% → 5.75% (−43%)**
+  after shell restart; per-thread table posted in the issue (lesson 39).
+- **#2** — PR #102: fresh previews (5 refreshed + desktop/equalizer/
+  liquid-glass new; VLM-verified content), embedded in GLASS.md +
+  EQUALIZER_UI_PATTERNS.md.
+- **#1** — 23 s demo video (wf-recorder VP9, panel tour) published as
+  release `shell-demo-2026-11` asset + issue closed. wf-recorder notes:
+  libx264 absent → default VP9; `-d` duration flag absent → nohup +
+  kill -INT; `niri msg` has no `--socket` flag → use NIRI_SOCKET env.
+
+Shell restarted once (main @ 0320661); user session verified intact
+afterwards (4 windows, no stray capture processes). Live idle: 5.75% of
+one core. User's liquidGlass.opacity still 0.0 (from #95 testing).
+
+## Merged through PR #97 (`19f1cbf`) — pill shadows
+
+- #97 `fix(bar): reserve the pill shadow envelope inside the bar layer
+  surface` (b3c5469): bar pills' drop shadows no longer clip at the
+  layer-surface edge.
+
+## Superseded section: PR #96 (was "awaiting owner review")
 
 - **#96** `fix(glass): drop backdrop sampling - simple transparent glass
   (tint, grain, edge + compositor blur)` (branch `fix/glass-no-backdrop`,

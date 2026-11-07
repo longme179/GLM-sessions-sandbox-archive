@@ -256,3 +256,37 @@
     the user proactively: non-xray blur is upstream-experimental (vanishes
     during open/close animations and tiled drags) — don't let it be
     mistaken for a regression in #96.
+
+37. **Audit-filed issues are often already fixed — verify before
+    planning.** Of 8 open issues in the triage session, 4+ were resolved
+    in-tree by later commits but never closed (the audit bot committed
+    fixes without closing its own issues). The efficient loop: read each
+    issue's acceptance criteria → probe current main (grep the cited
+    lines/files, run the named gates) → close with an evidence matrix,
+    and only write new code for the genuinely-unfixed remainder.
+
+38. **A test that exists is not a test that runs.**
+    `tests/action_registry_async.py` holds the #66 regression suites but
+    doesn't match unittest's `test*.py` discovery pattern; it only runs
+    classes IMPORTED by `test_action_registry.py` — which imported just
+    one. Both "existing" regression suites were dead code in G0 (a
+    size-ratchet comment even explained the import trick). Check WHERE a
+    test class executes (grep the discovery module), not merely that the
+    file exists — and beware `@skipUnless` env gates hiding pure
+    source-string tests that need no such gate (#94's drift survived
+    exactly there).
+
+39. **Idle-CPU attribution without perf: deltas + SIGSTOP A/B + poor
+    man's gdb sampling.** No perf/strace on the box → /proc task utime
+    deltas (per-thread table), 120× gdb `thread apply all bt` samples
+    (all threads in ppoll/futex ~97% ⇒ cost = wakeup frequency), and a
+    controlled SIGSTOP of the backend for 60 s (CPU unchanged ⇒ backend
+    exonerated; the 84 KB/2 s JSON pipeline costs ~nothing). The real
+    driver: an always-on full-screen layer animating at every vsync
+    (`MediaAmbient { playing: true }` in DesktopAmbient). Fix =
+    frameTime-accumulation budget (~22 ms) in the FrameAnimation —
+    refresh-rate independent, motion speed preserved, measured 10.0% →
+    5.75% of one core. Note: FrameAnimation has no `timestamp` property
+    on this Qt — use `frameTime` accumulation; and VLM screenshot checks
+    misname the compositor (niri → "Hyprland") while still verifying
+    panel content correctly.
