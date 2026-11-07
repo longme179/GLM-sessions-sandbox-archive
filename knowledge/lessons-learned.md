@@ -3,7 +3,7 @@
 > One rule per lesson, with the story that taught it. Newest last.
 
 1. **New singletons need the full boilerplate** — `pragma Singleton` +
-   `import Quickshell` + `Singleton {}` root + `qmldir` registration.
+   `import Quickshell` + `Singleton {}` root + `qmldim` registration.
    qmllint does NOT catch a missing `import Quickshell`; the shell crashes
    at startup. (EQ singleton, session of Nov 6.) → Always run the whole
    validation battery, never just qmllint.
@@ -99,7 +99,7 @@
     `sysconf(_SC_CLK_TCK)`, 1s poll, 60s windows) is a full substitute. Same
     for /proc/<pid>/task/*/stat + comm for per-thread profiles.
 
-19. **`/usr/bin/qmllint` is Qt5 1.0 on the machine** — ueits 255 silently
+19. **`/usr/bin/qmllint` is Qt5 1.0 on the machine** — it exits 255 silently
     on `pragma ComponentBehavior: Bound` files. Tool mismatch, not a code
     error; the full `./scripts/check.sh` suite is the real gate.
 
@@ -183,9 +183,19 @@
     browser images that a comparative 2-image call disproved) — prefer the
     multi-image comparative prompt.
 
-29. **`&/.config/lme-shell/settings.json.bak-*` files are a free changelog
+29. **`~/.config/lme-shell/settings.json.bak-*` files are a free changelog
     of what the user was fighting.** Diffing the Nov 6 backup showed
     opacity 0.2→1.0, a tint change and appliedBlur appearing: the user had
     been cranking Panel tint opacity for a day trying to de-xray the glass
     before reporting it. Check the backups before designing the fix — they
     tell you which knob the user already tried.
+
+30. **Sandbox→GitHub push over HTTPS+PAT WORKS now (2026-11-07).** Lesson 8
+    is outdated for git: `git push https://x-access-token:<PAT>@github.com/...`
+    from the Z.ai sandbox succeeded (previously only reads worked). Still
+    verify with a PAT-authenticated curl because unauthenticated
+    api.github.com calls can rate-limit. AND: the gateway truncates very
+    large prompts (~40KB) mid-base64 — the agent "auto-padded" truncated
+    base64 into silently shorter files (5407/9139 bytes landed). For file
+    transfers through prompts keep each prompt ≤ ~12KB, or verify landed
+    byte sizes against the source before trusting the transfer.
