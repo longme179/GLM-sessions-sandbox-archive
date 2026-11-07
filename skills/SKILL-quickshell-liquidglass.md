@@ -84,6 +84,26 @@ latch (fade out, no ghost rect at 0,0); 300ms settle on `Theme.liquidGlass`
 toggle. NEW timing is default; opt-out via `legacyMotion=true`. Global
 `motion.springMotion` is used by 13+ surfaces — never flip its default.
 
+**Idle & a11y (PR #91)**: `GlassMaterial` has a single `dirty` gate in
+`onAfterAnimating` (telemetry sample first, then `if(!dirty) return`) —
+zero JS for unhovered+static; `updateLight` further gated by
+hovered||hoverAmount>0. `FrameLogger` singleton, env `LME_GLASS_TELEMETRY=1`
+(per-class p50/p99, 10s flush). At idle a Wayland compositor renders ZERO
+frames — silent telemetry at idle is SUCCESS; idle evidence comes from
+/proc CPU sampling (sudo needs a password on the machine; sysstat absent).
+`reducedTransparency` pref (Accessibility) rides the same Theme gate as
+battery saver (`Theme.liquidGlass = !batterySaver && !reducedTransparency &&
+surfaceStyle==="liquid"`); blur gates honor it; live-swaps within one ~2s
+poll cycle (Settings UI `setting` IPC → backend `preferences.set` → revision
+bump → snapshot → QML reactive binding). `Theme.glassContrastFloor`
+(white-text 3:1, composite ≤0.30, yield cap 0.30/normal 0.75) chains after
+adaptive tint; bypass under batterySaver||reducedTransparency.
+Idle CPU stays ~11.9% — attributed to Qt/driver threads, not shell QML
+(follow-up issue #92). `/usr/bin/qmllint` is Qt5 1.0: exits 255 on
+`pragma ComponentBehavior: Bound` files — use `./scripts/check.sh` as the
+real gate. Schema goldens MUST be updated in the same PR that adds keys
+(PR #90 shipped a red golden; #91 fixed it).
+
 ## Repo layout map
 
 - `shell.qml` → `FeatureBootstrap.qml` loads panels per `config/features.json`

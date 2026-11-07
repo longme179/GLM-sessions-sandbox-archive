@@ -1,11 +1,27 @@
 # lme-fedora-niri-qs — live state
 
 > UPDATE THIS FILE at the end of every work session. Last updated:
-> 2026-11-07 (after PR #90 merge).
+> 2026-11-07 (after PR #91 merge).
 
-## Merged through PR #90 (`6b2e076`)
+## Merged through PR #91 (`a455f4e`)
 
 Recent history (newest first):
+
+- #91 `feat(glass): idle-frame elimination, frame telemetry, reduced
+  transparency, contrast floor` — GlassMaterial `dirty` gate (zero JS for
+  unhovered+static; telemetry samples before the gate); FrameLogger singleton
+  env-gated `LME_GLASS_TELEMETRY` (per-class p50/p99, 10s flush);
+  `reducedTransparency` pref (Accessibility; same Theme gate as battery saver
+  incl. blur gates; verified live-swap within one ~2s poll cycle, no restart);
+  `Theme.glassContrastFloor(alpha,l,tintLum)` white-text 3:1 clamp
+  (composite ≤0.30; yield cap 0.30 / normal 0.75; chained after adaptive tint;
+  bypass under batterySaver||reducedTransparency). Schema golden updated in the
+  same PR (151 keys incl. reducedTransparency/adaptiveContrast/grain 0.004).
+  Idle CPU before/after indistinguishable ~11.9% (zero frames at idle by
+  design — Wayland skips rendering); per-thread table shows the cost is
+  Qt/driver internals (QSGRenderThread/WaylandEventThr/GPU helpers) + main
+  4.13% — follow-up issue #92 filed with the table. Measurement tables posted
+  on issue #77 (issuecomment-6699165710).
 
 - #90 `feat(glass): lens 2.0 + adaptive tint + material presets + tunable grain`
   — StretchIndicator 200/350ms OutExpo, lift+magnify 1.16, placed latch, 300ms
@@ -33,8 +49,10 @@ Recent history (newest first):
 
 ## Open work (Liquid Glass roadmap)
 
-- **#77** (next): idle CPU=0 / telemetry / reduced-transparency support
-- **#78**: Settings UX + `docs/GLASS.md` + AGPL compliance pass
+- **#78** (next): Settings UX + `docs/GLASS.md` + AGPL compliance pass
+- **#92** (follow-up, no milestone): profile & reduce ~11-12% quickshell idle
+  CPU with zero rendered frames (per-thread table in the issue; perf/QML
+  profiler attribution needed)
 
 ## Runtime facts (2026-11-07)
 
@@ -44,9 +62,12 @@ Recent history (newest first):
 
 ## User-side checks still pending (tell the user, don't assume)
 
-- Lens motion feel on live tab bars / settings sidebar (lens 2.0)
-- Material preset cycling + grain extremes in Settings UI
-- Battery saver → glass off
+- #77: visual live-swap of reduced-transparency on their real screen (chain
+  verified + screenshots captured; model cannot read pixels); contrast
+  readability on their own wallpapers (brightest available was ~gray 111/255,
+  not near-white); hover/jelly lens feel (ydotool missing on the machine)
+- #76 leftovers: lens motion feel on live tab bars, preset cycling, battery
+  saver glass-off
 - EQ real-machine check (band drag, Apply, presets, Dynamic EQ, Audio view)
 
 ## Update protocol

@@ -67,3 +67,52 @@
     + password were identical across two sessions (found hardcoded in legacy
     scripts), but policy stays: tools read env vars, secrets live only in
     the conversation and runtime files (`/tmp/.ghtoken`), never in repos.
+
+14. **A corrupted final report repeats verbatim.** An agent run ended by
+    emitting a doubled copy of an OLD final report (issue #90 text) instead
+    of the new one; a "fix your report" prompt in the SAME session made it
+    emit the same corruption again — the bad text had entered its context
+    and it kept reproducing it. Fix that worked: abandon the session, create
+    a FRESH one, and pass a full re-orient directive (find the work on disk,
+    verify vs design, finish, report). The fresh session then caught real
+    bugs the corrupted run had shipped (duplicate handlers, broken tests).
+
+15. **Loop signature: 1-2 alternating narrations + 2s tool calls.** When the
+    agent repeats the same one-line narrations for >10 minutes it is looping,
+    not progressing. Fix: `POST .../interrupt`, then a directive with an
+    explicit TIMEBOX ("3 attempts per approach, then mark honestly and move
+    on") and "finish with what you already have".
+
+16. **"Model is unavailable" (idle failed) is infrastructure.** Provider
+    outages end runs mid-flight; state on disk is intact. Retrying the same
+    prompt in the same session after a few minutes worked; the compacted
+    context is fine. Don't rebuild anything — re-orient first.
+
+17. **Wayland skips rendering when idle.** With a working dirty-gate, ZERO
+    frames are rendered at idle, so `onAfterAnimating` never fires and frame
+    telemetry is silent at idle. That silence is SUCCESS, not a bug — the
+    idle evidence must come from /proc-style CPU sampling. (Cost the agent
+    ~40 minutes of chasing before the hint unblocked it.)
+
+18. **Sudo needs a password on the user's machine.** No passwordless sudo →
+    no sysstat/pidstat. Pure-python /proc sampler (stat fields 14+15,
+    `sysconf(_SC_CLK_TCK)`, 1s poll, 60s windows) is a full substitute. Same
+    for /proc/<pid>/task/*/stat + comm for per-thread profiles.
+
+19. **`/usr/bin/qmllint` is Qt5 1.0 on the machine** — it exits 255 silently
+    on `pragma ComponentBehavior: Bound` files. Tool mismatch, not a code
+    error; the full `./scripts/check.sh` suite is the real gate.
+
+20. **Schema goldens must be updated in the SAME PR that evolves the
+    schema.** PR #90 shipped with a red golden (9 failures on main, spotted
+    while re-verifying #77). The fix landed in #91 — but never let a schema
+    change merge with a stale golden; a red main hides real regressions
+    behind baseline noise.
+
+21. **The "real-session rule" means care, not paralysis.** Fresh sessions
+    over-read AGENTS.md caution and refuse to restart the shell or take
+    screenshots at all, stalling whole work phases. State the binding
+    interpretation explicitly: restarting quickshell, editing
+    settings.json/wallpaper (with backup+restore), grim, and spawning/closing
+    YOUR OWN test windows are all allowed; never touch user windows; verify
+    focus/identity before any destructive action.
