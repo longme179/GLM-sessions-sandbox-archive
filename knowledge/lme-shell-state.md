@@ -1,7 +1,8 @@
 # lme-fedora-niri-qs — live state
 
 > UPDATE THIS FILE at the end of every work session. Last updated:
-> 2026-11-07 (night session — glass simplification PR #96 opened).
+> 2026-11-07 (night session — glass simplification PR #96 opened; late
+> session — niri 26.04 capability snapshot: knowledge/niri.md).
 
 ## Open PR (awaiting owner review)
 
@@ -151,6 +152,10 @@ Recent history (newest first):
 - bar reserves exclusive zone: app windows start BELOW the bar strip — the
   wallpaper sky is genuinely what is behind the bar pills (pixel-hue
   analysis, 2026-11-07 night; matters when interpreting screenshots)
+- niri 26.04 IS the latest stable (2026-04-25; repo moved to the niri-wm
+  org). Full capability snapshot + layer-rule/blur reference:
+  knowledge/niri.md. main = 26.04 + 264 unreleased commits (max-bpc, stylus
+  binds, …) — do not design against them
 
 ## User-side checks still pending (tell the user, don't assume)
 
@@ -163,6 +168,12 @@ Recent history (newest first):
   still too recognizable at their preferred tint: raise **Blur passes /
   Blur spread** in the Compositor blur group and hit **Save niri blur
   snippet**. Merge PR #96 when happy, then `git switch main` + restart.
+- **niri caveat when judging #96** (26.04 docs — knowledge/niri.md §2):
+  non-xray blur (`xray false`, our mode) is upstream-EXPERIMENTAL — it
+  disappears during window open/close animations and while dragging a
+  tiled window. A flash of un-blurred glass in those moments is niri's
+  known limitation, NOT a shell bug. For stronger cheap blur: raise Blur
+  spread (offset) before Blur passes.
 - #77: visual live-swap of reduced-transparency on their real screen;
   hover/glint feel (ydotool missing on the machine)
 - EQ real-machine check (band drag, Apply, presets, Dynamic EQ, Audio view)

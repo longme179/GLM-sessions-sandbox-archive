@@ -244,3 +244,15 @@
     and pixel statistics on fetched screenshots. The agent's verbatim
     diffs were never trusted (lesson 22) and nothing was needed from them
     that a raw probe couldn't prove harder.
+
+36. **Stale dependency knowledge masquerades as an architecture mystery.**
+    The niri half of the X-ray saga: xray blur is auto-enabled whenever any
+    background effect is active, and it blurs the WALLPAPER ONLY (ignoring
+    windows below) — those semantics sat in the 26.04 wiki the whole time
+    while we reasoned from a pre-blur mental model ("niri has no blur" was
+    my training belief). When a bug smells like a dependency's semantics,
+    refresh capability knowledge from its source repo BEFORE theorizing
+    (skills/SKILL-codebase-docs-updater.md → knowledge/niri.md). And warn
+    the user proactively: non-xray blur is upstream-experimental (vanishes
+    during open/close animations and tiled drags) — don't let it be
+    mistaken for a regression in #96.

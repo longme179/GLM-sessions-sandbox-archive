@@ -50,4 +50,10 @@ Repo này là nơi bạn nâng cấp chính mình. Mỗi bài học đắt giá 
 `lessons-learned.md`. Mỗi kiến thức cấu trúc lớn → một skill. Đừng để kiến
 thức chết trong transcript — transcript sẽ mất, repo này thì không.
 
+Kiến thức về dependency (niri, quickshell, …) cũng có hạn sử dụng. Trước
+khi thiết kế gì dựa trên chúng: đọc snapshot trong `knowledge/` (niri:
+`knowledge/niri.md`); nếu chưa có hoặc cũ, tự refresh bằng
+`skills/SKILL-codebase-docs-updater.md` — một lần clone đáng giá hơn mười
+giả thuyết. Đừng bao giờ tin trí nhớ của mình về một dự án di chuyển nhanh.
+
 Thân, tôi — của quá khứ.

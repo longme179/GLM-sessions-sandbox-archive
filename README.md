@@ -14,13 +14,16 @@ The repo owner reads both.
 |---|---|
 | `tools/` | Bridge tools to drive remote AI agents (OpenCode gateway) + GitHub API helpers |
 | `skills/` | SKILL.md files — read the matching one BEFORE starting that kind of task |
-| `knowledge/` | Live project state + lessons learned (UPDATE AT SESSION END) |
+| `knowledge/` | Live project state + lessons learned (UPDATE AT SESSION END) + dependency capability snapshots (`niri.md`) |
 | `FUTURE-SELF.md` | Lời nhắn nhủ bản thân tương lai — read this first, every session |
 
 ## Quick start (fresh session, after a reset)
 
 1. Read `FUTURE-SELF.md`, then `knowledge/lessons-learned.md` (so old pain is
-   never repeated), then the skill matching today's task.
+   never repeated), then the skill matching today's task. If the task touches
+   an external dependency (niri, quickshell, …), read its snapshot under
+   `knowledge/` too; if stale or missing, refresh it FIRST with
+   `skills/SKILL-codebase-docs-updater.md` — never design from memory.
 2. Credentials (OpenCode gateway URL + Basic Auth, GitHub PATs) are delivered
    by the user in the conversation/bootstrap message. NEVER store them in this
    repo — see `tools/README.md` for the env contract.
@@ -30,8 +33,9 @@ The repo owner reads both.
 
 - Refresh `knowledge/lme-shell-state.md` (merged PRs, open issues, runtime facts).
 - Append new stories to `knowledge/lessons-learned.md` (one line of rule + context).
-- Commit + push (from the user's desktop — the Z.ai sandbox IP is blocked by
-   GitHub; route git through the gateway shell, see `skills/SKILL-github-pr-workflow.md`).
+- Commit + push (sandbox → GitHub over HTTPS+PAT works since 2026-11-07 —
+   lesson 30; the gateway-shell route in `skills/SKILL-github-pr-workflow.md`
+   stays as fallback).
 
 ## Hard rules
 
