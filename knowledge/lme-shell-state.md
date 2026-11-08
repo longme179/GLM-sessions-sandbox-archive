@@ -1,9 +1,86 @@
 # lme-fedora-niri-qs — live state
 
 > UPDATE THIS FILE at the end of every work session. Last updated:
-> 2026-11-08 (afternoon session — tab-accent race root-caused and FIXED in
-> merged PR #108; invisible GPU warm-up render in PR #109 OPEN for owner
-> review; main @ 2cf536b running).
+> 2026-11-08 (evening session — island first-open jank + open/ESC "stuck"
+> look root-caused and fixed in PR #110 OPEN for owner review; #109 merged
+> earlier today, main @ 3074262; NOTE: this session ran from GLM's sandbox
+> directly against GitHub — no OpenCode desktop agent, credentials for the
+> gateway were NOT re-supplied this session).
+
+## Session 2026-11-08 (evening): island prewarm + warm render + morph reversal (PR #110 OPEN)
+
+User report after testing #109-era main ("VERY GOOD, sắp đạt mức ready for
+release"): (1) activity island still not smooth on FIRST open — maybe some
+other fly-in panels too; (2) pressing open + ESC nearly simultaneously makes
+the island look stuck ("kẹt") then close — function fine, visually not.
+User asked: "Có thể khắc phục tất cả bằng cách render sẵn bên ngoài rồi fly
+in/out khi được trigger chăng?" (pre-render off-screen, fly in/out on
+trigger?).
+
+### Root causes
+
+1. **First open cold** — the island is keepAlive-retained but NOTHING builds
+   or renders it before the first trigger: async incubation dead window +
+   cold first render (glyph/atlas uploads) mid-flight. #107/#109 fixed
+   exactly this for the CC only; the island got nothing.
+2. **ESC race = morph asymmetry (spring mode only)** — width/height spring
+   targets were `mounted && !dormant ? expanded : compact`, so a close fired
+   mid-expansion reversed the flight springs but the island KEPT GROWING
+   while leaving → reads as stuck half-open, then snaps away. Non-spring
+   mode already followed `expansion` (progress) and reversed fine. Fix:
+   targets now follow `mounted && (shown || warmupActive)`.
+
+### PR #110 `perf/island-warmup-flight` @ 4e9488a (OPEN)
+
+- Island prewarm Timer at 6.5 s (staggered after the CC 4 s burst), guarded
+  like the CC's; island warm-up Connections mirror the CC wiring; viewport
+  reserves the island frame during `warmupActive`; `surfaceLive` EXCLUDES
+  the warm pass so the overlay stays the 1×1 sliver (no scrim-window map,
+  no blur region) — the #109 "viewport only" principle preserved.
+- Island warm pass snaps size springs to FULL open geometry (springs would
+  still be mid-expansion during the ≥3 forced frames) and rewinds to
+  compact after; `visible: mounted && (!dormant || warmupActive)` — an
+  invisible (visible:false) item renders NOTHING into a layer.
+- SlideLoader hardening: busy stage DEFERS the warm pass (pending kept;
+  all-closed signal + every quiet park retry) instead of dropping it; a
+  real open during the pass calls warmupPark() first so the entrance still
+  plays the full flight, then retires the warm-up; onLoaded/onShownChanged
+  mark `controlWarmupDone` when the tree renders live (no redundant
+  invisible passes after a real open).
+- PopupElasticity: `warmup` property; `rendering` true during the pass so
+  jelly-v2 keeps layer.enabled live (warms the shader path too).
+- `LME_SHELL_NO_PREWARM=1` env opt-out, set in release_session_fixture
+  (used by BOTH the release-session and render-lifetime suites — they
+  measure steady-state memory/lifetimes; the startup burst would pollute).
+- **Fixed 3 gated suites stale since #105's keepAlive** (they waited for
+  unmount): popup-motion test1 (idle check now reads surfaceLive, close
+  wait `dormant and not visible`), popup-motion test2 island wait
+  (`islandDormant`), popup-entry (`mounted` key = liveness =
+  `mounted && !dormant`), release fixture (`mounted`/`activityMounted` =
+  liveness). These would have failed the next gated run on the desktop
+  regardless of #110.
+- Tests: IslandFlightSourceCase (4 headless source regressions) +
+  IslandFlightQmlCase (2 gated: mid-flight-close reversal, warm-pass
+  geometry/park/reopen). Ratchets shell.qml→301, test_popup_motion.py→357.
+  check.sh green except the 3 pre-existing quickshell-absent errors
+  (fail identically on clean main in GLM's sandbox).
+
+### Session ops notes (important for next session)
+
+- **This session did NOT use the remote OpenCode agent** — the gateway
+  credentials live only in the user's bootstrap message and were not
+  re-supplied; GitHub was directly reachable from the GLM sandbox instead
+  (clone + push + PR via REST, token at /tmp/.ghtoken, origin URLs embed
+  it — local only). The repo clone is at
+  /home/z/my-project/repos/lme-fedora-niri-qs, branch
+  perf/island-warmup-flight; archive at repos/GLM-sessions-sandbox-archive.
+- Live-machine validation (wf-recorder flights, qt.scenegraph.time) NOT
+  done this session — no desktop access. The PR body lists user-side
+  checks. If the gateway credentials arrive again, drive the desktop
+  agent to: checkout the branch, run the gated battery
+  (LME_TEST_MOTION_UI=1; the three repaired suites), record a first-open
+  flight + an open/ESC flight, then report.
+- PR #109 was MERGED by the owner (3074262) before this session.
 
 ## Session 2026-11-08 (afternoon): tab accent race fix (#108 merged) + CC warm-up render (#109 OPEN)
 

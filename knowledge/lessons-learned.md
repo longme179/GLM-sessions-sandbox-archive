@@ -366,3 +366,33 @@
     without the layer does NOTHING; even with the layer it does not equal a
     real on-screen render (does not reach reopen-class, render>4ms frames
     remain). Set expectations accordingly and say so in the PR body.
+
+47. **A size morph must follow the flight, not the mount state.** The island
+    ESC-race ("open + ESC looks stuck then closes") was not a rendering or
+    timing bug: in spring mode the width/height spring targets keyed on
+    `mounted && !dormant`, so a mid-expansion close reversed the flight
+    springs while the island kept GROWING as it left. Non-spring mode keyed
+    the size on progress and never showed it. Whenever two spring families
+    animate one surface, key them on the same driver (shown/flight state),
+    not on lifecycle flags that flip at park time.
+
+48. **Extending a warm-up pass to a size-morphing surface needs three extra
+    pieces.** The CC (#109) has fixed geometry; the island morphs. (a)
+    `visible` must include warmupActive — a visible:false item renders
+    nothing into its layer; (b) size springs must SNAP to open geometry for
+    the forced frames (they'd still be mid-expansion otherwise, warming only
+    the visible slice) and snap back to the park size after, so the next
+    real open still animates from compact; (c) surfaceLive must EXCLUDE the
+    warm pass even though `visible` now includes it, or the scrim window
+    maps and the blur region activates during the "invisible" render.
+
+49. **Gated test suites rot silently behind their env gates.** Three suites
+    (popup-motion, popup-entry, release-session/render-lifetime via the
+    shared fixture) still waited for panels to UNMOUNT after close — stale
+    the moment #105 introduced keepAlive retention (surfaces park DORMANT,
+    mounted stays true). Nothing failed because LME_TEST_MOTION_UI /
+    RELEASE_SESSION / RENDER_LIFETIME gates skip by default; the next gated
+    desktop run would have gone red for unrelated reasons. When a PR changes
+    a lifecycle semantic (unmount→park), grep the gated suites for the old
+    assertion the same day, and prefer liveness (`mounted && !dormant`) over
+    mount booleans in fixture state contracts.
