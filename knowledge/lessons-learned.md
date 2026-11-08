@@ -290,3 +290,52 @@
     on this Qt — use `frameTime` accumulation; and VLM screenshot checks
     misname the compositor (niri → "Hyprland") while still verifying
     panel content correctly.
+
+40. **Perceived latency ≠ CPU: measure dim→arrival with wf-recorder.**
+    The PR46-vs-main A/B (2026-11-08) showed main better on every CPU
+    metric, yet the user called it laggy. The perceptible culprit was
+    the cold-open dead window: scrim dims → 300-450 ms of nothing →
+    whoosh. Recipe that measures what the user SEES: wf-recorder 60 fps
+    of an IPC-driven toggle, then per-frame region stats (mean R for
+    scrim tint, FIND_EDGES variance for blur/sharpness) — dim-start to
+    panel-arrival is the number that maps to "khựng". Partial feedback
+    followed by a stall reads laggier than one clean freeze; latency
+    budgets must be spent on feedback→content, not feedback→wait.
+
+41. **`lme-shell.log` growth is a liar (stdio block-buffering).** With
+    start.sh's `exec >> log 2>&1`, quickshell's stderr is block-buffered:
+    the file can sit byte-frozen while the shell renders 90 KB/s of
+    QSG_RENDER_TIMING lines into an 8 KB buffer. Never conclude "zero
+    frames" from a frozen log — either pump the volume until it flushes
+    or redirect to a file you control (`start.sh` with your own
+    `> /tmp/qs_start.log 2>&1` wrapper) before trusting log-based frame
+    analysis. Screenshot-pair diffs settle "is it rendering" in 10 s.
+
+42. **Verify the documented limitation before blaming it.** The niri
+    snapshot says non-xray blur "disappears during window open/close
+    animations" — tempting theory for the glass flicker feel, but
+    wf-recorder frame analysis proved the blur STAYS active during
+    lme-shell's layer-surface flights (edgeVar low whenever tint
+    present). The limitation covers niri's own window animations, not
+    client-driven layer movement. Same for the ambient-judder theory:
+    the drift is 5-27 px/s = sub-pixel per 24 ms update, invisible at
+    41 fps. Both plausible theories died on arithmetic/evidence in
+    minutes — always run the number before shipping the explanation.
+
+43. **A ratchet gate nobody re-runs goes stale silently.** Main was RED
+    on `check_architecture.py` size caps (ShellState.qml 261, shell.qml
+    255 > 250) since #104/#105 grew the files without ratcheting —
+    discovered only when a new PR ran the battery. And mind the shell
+    you run it from: `./scripts/check.sh | tail -40` returns TAIL's
+    exit code — capture `CHECK_EXIT=$?` into the log, not the pipe.
+
+44. **Prewarm pattern for retained-panel architectures.** One-shot
+    timer N seconds after startup: `dormant = true` BEFORE
+    `mounted = true` (keeps surfaceLive false → no scrim/blur/viewport
+    side effects while the async incubation builds), then
+    `onLoaded → finishClose()` parks it like any dormant tree. First
+    Control Center open after login: 460 → 33 ms, no visible prewarm,
+    +132 MB RSS at t=4 s (the same steady state keepAlive converges to
+    at first open anyway). Watch the Loader semantics: assigning the
+    SAME Component to sourceComponent is a no-op (no reload), so a
+    prewarmed tree survives the later real open unchanged.

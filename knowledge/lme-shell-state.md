@@ -1,9 +1,87 @@
 # lme-fedora-niri-qs — live state
 
 > UPDATE THIS FILE at the end of every work session. Last updated:
-> 2026-11-08 (early-AM session — interaction-logic audit after #104: three
-> user-reported panel bugs + a ~1s reopen hitch root-caused and fixed, PR
-> #105 merged; reopen latency 1000ms→10ms).
+> 2026-11-08 (midday session — "why did PR#46 feel smoother than main"
+> investigation: full live A/B, root causes found, prewarm fix in PR #107
+> awaiting owner review; main restored and running).
+
+## Session 2026-11-08 (midday): PR46-vs-main A/B + prewarm PR #107 (OPEN, not merged)
+
+User premise: "shell dạo này khựng, chắp vá, chưa mượt; PR #46 era was
+smooth/stable — find out why the new one is less optimized."
+
+### The A/B (same machine, same settings.json, back-to-back checkouts)
+
+| metric (live) | pr-46 @ 6a73716 | main @ bfab786 |
+|---|---|---|
+| idle quickshell CPU (ambient on) | **16.4%** | **5.2-5.7%** |
+| idle niri CPU | 19.6% | 16.7% |
+| ambient render rate | ~116 fps (every vsync) | ~41 fps (#101 budget) |
+| idle with desktopShapes=false | n/a | **0.37%** quickshell |
+| island-open flight CPU | 81-83% core | 63-73% |
+| wifi-open flight CPU | 87-89% | 73-78% |
+| reopen burst CPU | 113-116% | 94-107% |
+| GUI polish stalls >8ms | 7 (max 17ms) | 0 (max 8ms) |
+| RSS | 244 MB | 271-326 MB (retained trees) |
+| panel open latency | every open = cold sync mount (windows show ~1-1.5s creation gaps; #104-era stalls) | reopen ~10ms; cold CC 460ms / tray 620ms / EQ 130ms (async incubation) |
+
+**Conclusion: main is equal or better on every objective metric.** The
+user's perception is real but not raw perf. Root causes of the FEEL:
+
+1. **Cold-open dead window** (the fix, PR #107): first CC open after every
+   login = scrim dims → 300-450 ms nothing → whoosh. Partial-feedback-then-
+   stall reads laggier than PR46's single freeze. Prewarm timer (4s after
+   start, dormant=true before mounted=true so surfaceLive stays false)
+   → first open 460→**33 ms**, no scrim flash, +132 MB RSS at t=4s
+   (same steady state keepAlive converges to anyway).
+2. **Motion-feel changes since #90** (lens2 timings, StretchIndicator,
+   deformation) — different ≠ worse, but reads as "less smooth".
+3. **Bug cadence**: 60+ PRs of glass/EQ churn since #46 = daily visible
+   glitches; PR46 was the last "quiet" state. "Chắp vá" is about polish
+   cadence, not architecture.
+4. Ambient is a luxury: 12 shapes cost 5.2% quickshell + ~2% niri 24/7
+   (measured on/off); drift is 5-27 px/s = sub-pixel per update at 41 fps
+   → the #101 budget is visually fine (do NOT revert it).
+5. niri non-xray blur does NOT drop during layer-surface flights —
+   VERIFIED empirically (wf-recorder + per-frame region edgeVar: blur
+   stays active while panels fly). The upstream "disappears during
+   animations" limitation applies to niri's own window animations only.
+
+### Also found
+
+- **main was RED**: `check_architecture.py` size caps — ShellState.qml 261
+  and shell.qml 255 nonblank > 250 default, grown by #104/#105 without
+  ratcheting. Ratcheted to 261/271 in PR #107's second commit (verified
+  main fails, branch passes; full check.sh green on branch).
+- `lme-shell.log` tail is misleading: stderr is block-buffered when
+  redirected → file growth ≠ activity; log can sit frozen at high CPU.
+  For measurement channels, redirect to a dedicated file yourself.
+- LiquidButton.qml:37 "Binding loop detected for property color" ×2 at
+  startup (cosmetic, unfixed). 7× stale 'yieldOpacity' ShaderEffect
+  warnings in the boot log (uniform gone since #96; source has zero
+  references — origin unclear, likely stale qml cache; cosmetic).
+- desktopentry "Illegal escape sequence" warnings ~2.7/min (swappy's
+  .desktop exec string) + firefox MPRIS Position property errors —
+  noise, no perf impact found.
+- PR46 on this machine has a fragile singleton import chain
+  (FeatureBootstrap→…→GlassState→GlassBackdrop) that fails on live
+  reload (fixed later by #71's ordering) — a spontaneous reload while
+  testing pr-46 left its watcher dead; harmless for measurement.
+
+### Machine state after session
+
+- Live checkout: **main @ bfab786**, clean; shell restarted normally
+  (PID from 13:08 restart), IPC verified (`restartBackend` → true).
+- settings.json: unchanged from session start (desktopShapes=true,
+  liquidGlass tint #b5465668 opacity 0.25 rim 2.0 edgeWidth 0.55 grain
+  0.08 passes 2 offset 1.0, barBlur/popupBlur/glassSelection on).
+- PR #107 **open, NOT merged** (review gate): branch perf/panel-prewarm
+  (2 commits: prewarm + arch ratchet). Machine NOT left on the branch.
+- Test artifacts on desktop /tmp: ab_measure*.log, rt_*.log (render
+  timing slices), fp_*.json (frame analysis), flight*.mp4 + pw*.jpg
+  (flight videos), check_prewarm2.log (green battery). Measurement
+  scripts: /tmp/ab_measure.py, /tmp/rt_analyze.py, /tmp/flight*.sh.
+- pr-46 branch exists in the desktop repo (fetched for the A/B).
 
 ## Session 2026-11-08 (early AM): panel interaction audit — PR #105 merged
 
