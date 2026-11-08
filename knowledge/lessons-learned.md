@@ -396,3 +396,39 @@
     a lifecycle semantic (unmount→park), grep the gated suites for the old
     assertion the same day, and prefer liveness (`mounted && !dormant`) over
     mount booleans in fixture state contracts.
+
+50. **The repo's size ratchet counts comments as nonblank lines.** A
+    documentation pass looks "free" but every comment line burns headroom
+    against `config/architecture.json::largeFiles` ceilings (default 250).
+    Compute headroom per file FIRST; headroom-0 files (desktop_backend.py,
+    shell.qml, ShellState.qml, Theme.qml...) accept only trailing same-line
+    comments, and the architecture check must run after every batch.
+
+51. **A docstring inserted above SPDX/old docstring is a real AST break**
+    (stray string expression + `__doc__` hijack), caught only by
+    ast.dump-with-docstrings-stripped comparison — qmllint/tests would not
+    notice. Extend the original docstring; never insert before it.
+
+52. **Prove flakes environmental with a baseline worktree, not isolation
+    passes.** SettingsStartup's reconnect test failed full-suite on HEAD but
+    passed isolated — inconclusive. `git worktree add /tmp/base <baseline>`
+    + full-suite run THERE failed the same way → diff exonerated with
+    verbatim evidence on both sides.
+
+53. **The OpenCode gateway's `idle` message goes stale after a new prompt.**
+    A waiter that returns on "last idle seen" exits instantly with the
+    PREVIOUS run's report. Count only idles appearing after the last USER
+    message (tools/wait2.py in this archive).
+
+54. **Agents told to be "proportionate" under-deliver coverage** (skip every
+    file that already has a docstring) and will reference ephemeral /tmp
+    note paths inside docstrings. Countermeasures that worked: explicit
+    per-file coverage audit with a log ("missed 0" required), and a
+    `rg '/tmp'` sweep before the docs commit.
+
+55. **Comment-only diffs are provable, cheaply.** Python: ast.dump minus
+    docstrings, byte-compare vs baseline (276/276). QML/JS/GLSL/sh:
+    string-aware comment stripper (reuse check_architecture's TOKENS regex)
+    + whitespace normalization (167/167). This battery caught 3 real breaks
+    the agent had introduced while "only adding comments" — run it; do not
+    eyeball 445 files.

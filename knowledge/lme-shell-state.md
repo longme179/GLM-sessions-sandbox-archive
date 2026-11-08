@@ -1,11 +1,37 @@
 # lme-fedora-niri-qs — live state
 
 > UPDATE THIS FILE at the end of every work session. Last updated:
-> 2026-11-08 (evening session — island first-open jank + open/ESC "stuck"
-> look root-caused and fixed in PR #110 OPEN for owner review; #109 merged
-> earlier today, main @ 3074262; NOTE: this session ran from GLM's sandbox
-> directly against GitHub — no OpenCode desktop agent, credentials for the
-> gateway were NOT re-supplied this session).
+> 2026-11-09 (documentation pass on branch `docs/annotate-and-map` — 12
+> local commits, NOT pushed, awaiting owner review; PR #110 MERGED, main @
+> 6c1dc3c; ran through the OpenCode desktop agent with gateway creds
+> re-supplied by the owner).
+
+## Session 2026-11-09: codebase annotation + WORKSPACE_MAP (branch local, unpushed)
+
+Owner-authorized documentation-only pass, driven phase-by-phase via OpenCode
+(methodology + traps: `skills/SKILL-codebase-annotate-map/SKILL.md`).
+
+- **Branch `docs/annotate-and-map`** from main @ 6c1dc3c: 11 comment commits
+  + 1 docs commit (`53e2c15`). 445 files, +1515/−312. NOT pushed — owner
+  reviews and decides (per repo rule: no unauthorized push to main).
+- **Deliverables**: `docs/WORKSPACE_MAP.md` (246 lines, 11 sections, 105
+  [verified]/14 [inferred], 2 mermaid diagrams, 6 flows with file:line);
+  AGENTS.md got a 4-line pointer to the map; 108 REL / 26 INVARIANT /
+  10 GOTCHA tags greppable via `grep -rn "REL:"`.
+- **Zero-behavior proof**: ast.dump-minus-docstrings 276/276 identical;
+  string-aware comment-strip 167/167 identical; check.sh unittest `Ran 1073
+  OK (skipped=185)` matching baseline; G0 completed 888 passed/0 failed.
+- **Environmental flake recorded (map Finding)**: `tests/test_settings_
+  startup.py:153` reconnect test fails in SOME full-suite runs but passes
+  isolated; reproduced failing on UNMODIFIED baseline 6c1dc3c too. If the
+  owner sees it, it is not a regression — worth a timing look someday.
+- **Constrained files** (size-ratchet ceiling, trailing-comment-only):
+  shell.qml, ShellState.qml, Theme.qml, desktop_backend.py, battery_saver,
+  bluetooth_agent, clipboard, equalizer_actions, ControlDashboard,
+  BehaviorPage, TopBarPage, 18 large tests. Their deep documentation lives
+  in the map, not in headers.
+- Also this session: studied obra/superpowers → `knowledge/superpowers.md`;
+  annotation skill + wait2.py tool added to this archive.
 
 ## Session 2026-11-08 (evening): island prewarm + warm render + morph reversal (PR #110 OPEN)
 
