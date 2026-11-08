@@ -59,8 +59,15 @@ def tool_calls(msgs):
         if m.get("type") != "assistant":
             continue
         for p in (m.get("content") or [] if isinstance(m.get("content"), list) else []):
-            if p.get("type") == "tool-call":
-                out.append(f"{p.get('tool')} {json.dumps(p.get('input', {}), ensure_ascii=False)[:250]}")
+            if p.get("type") in ("tool-call", "tool"):
+                name = p.get("name") or p.get("tool") or "?"
+                state = p.get("state") if isinstance(p.get("state"), dict) else {}
+                inp = p.get("input") or state.get("input") or {}
+                try:
+                    args = json.dumps(inp, ensure_ascii=False)[:250]
+                except TypeError:
+                    args = str(inp)[:250]
+                out.append(f"{name} {args}")
     return out
 
 

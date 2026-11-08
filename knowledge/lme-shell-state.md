@@ -1,11 +1,77 @@
 # lme-fedora-niri-qs — live state
 
 > UPDATE THIS FILE at the end of every work session. Last updated:
-> 2026-11-08 (midday session — "why did PR#46 feel smoother than main"
-> investigation: full live A/B, root causes found, prewarm fix in PR #107
-> awaiting owner review; main restored and running).
+> 2026-11-08 (afternoon session — tab-accent race root-caused and FIXED in
+> merged PR #108; invisible GPU warm-up render in PR #109 OPEN for owner
+> review; main @ 2cf536b running).
 
-## Session 2026-11-08 (midday): PR46-vs-main A/B + prewarm PR #107 (OPEN, not merged)
+## Session 2026-11-08 (afternoon): tab accent race fix (#108 merged) + CC warm-up render (#109 OPEN)
+
+User report: (1) "consider optimizing further — cache more so things look
+visually smoother, animations run smoother"; (2) "the initially selected tab
+sometimes doesn't render its accent on first open" (Control Center).
+
+### (2) Root cause — CONFIRMED live, 5/5 traced incubations
+
+`Repeater.itemAt()` is NOT a notifiable dependency. The CC tree always
+incubates asynchronously (SlideLoader `asynchronous: true`; #107 prewarm at
+t≈4 s): `count` reaches 6 BEFORE delegate 0 exists → the StretchIndicator
+`targetItem` binding (`count ? itemAt(tabIndex) : null`) evaluates null and
+LATCHES; itemAdded fires later (observed order 5→0) but neither count nor
+tabIndex changes → binding never re-runs → indicator invisible forever. In
+animatedTabs mode the selected tab's plate is transparent — the indicator IS
+the accent. Recovery only when tabIndex changes (user switches tabs). Qt
+forum (mbrasser): methods can't NOTIFY when their return value changes.
+
+**Fix (PR #108, merged as 2cf536b)**: Repeater gains `property int
+population` bumped in onItemAdded/onItemRemoved; target binding references
+it (`tabRepeater.population; return ...itemAt(tabIndex)...`) + `tabIndex >=
+0` guard. Applied to ControlCenter.qml AND SettingsView.qml (same latent
+race in the settings sidebar). Regression test in test_selection_lens.py
+asserts the pattern + absence of the racy `count ? itemAt(` form.
+Validated: prewarm 6/6, cold 3/3, in-shell settings 3/3 (indicator visible
++ accent pixels), check.sh 1067 OK, zero binding loops. Live checkout
+verified post-merge (accent present on first tab, probe-free pixel check).
+
+**Gotcha found**: `toggle settings` IPC in non-demo starts the STANDALONE
+settings app (settingsProcess), not the in-shell SettingsPanel — both use
+SettingsView so the fix covers both, but in-shell verification needs
+`panelKind="settings"; settingsOpen=true` (temp IPC).
+
+### (1) GPU warm-up render (PR #109 `perf/cc-warmup-render` @ 0e7bee4, OPEN)
+
+After prewarm incubation parks the tree it has NEVER rendered → first open
+pays glyph raster + atlas/texture uploads mid-flight. PR #109 adds a
+once-per-session INVISIBLE render pass: viewport reserves the CC open frame
+(viewport ONLY — surfaceLive/scrim/blur/mask/focus stay inactive), tree at
+open geometry in `layer` at opacity 0, ≥3 forced frames (FrameAnimation),
+then exact park restore (verified: mounted/dormant/warmupDone=true,
+surfaceLive=false, exitX≈1262). Skips when !Theme.animations or panel open.
+Ratchets shell.qml cap 271→269. SlideLoader gained
+controlWarmupPending/warmupActive/controlWarmupDone + warmupShow/warmupPark.
+
+Measured (qt.scenegraph.time.*): first-open glyph 10→6, atlas 398→238,
+upload 403→241; warm-up burst at t≈4–5 s with no panel open (atlastexture
+18×18…203×90); invisible (wf-recorder CC-region diffs flat); RSS +0.9 MB
+noise; island↔CC swap fine. Flight smoothness: arrival 467→417 ms,
+mid-flight discontinuities 6→3. HONEST limits: partial effectiveness
+(layer+opacity-0 ≠ full on-screen path; pure opacity-0 does NOTHING — the
+layer is essential); render>4ms not eliminated (3–5 frames, 7–8 ms);
+shader/canvas-FBO attribution unverified; dim→arrival not re-timed.
+
+### Machine state after session
+
+- Live checkout: **main @ 2cf536b** (PR #108 merged), clean, shell running
+  (PID 136920, setsid restart with own stderr wrapper /tmp/qs_phase_d.log),
+  IPC verified.
+- PR #109 open, NOT merged, NOT checked out (owner review).
+- Artifacts on desktop /tmp: gap1_set*.png (settings indicator), gap2_*.log/
+  mkv (warm-up profiling + flights), c1_*.json (flight analysis), phase_d_*
+  (merged-main smoke). pra_*/prb_* from phase B.
+- OpenCode session this topic: ses_e4624e17fffeRaAe635CCj7j3b.
+
+
+## Session 2026-11-08 (midday): PR46-vs-main A/B + prewarm PR #107 (since MERGED by owner)
 
 User premise: "shell dạo này khựng, chắp vá, chưa mượt; PR #46 era was
 smooth/stable — find out why the new one is less optimized."

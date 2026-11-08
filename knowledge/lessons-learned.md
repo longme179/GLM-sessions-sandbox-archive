@@ -339,3 +339,30 @@
     at first open anyway). Watch the Loader semantics: assigning the
     SAME Component to sourceComponent is a no-op (no reload), so a
     prewarmed tree survives the later real open unchanged.
+
+45. **Repeater.itemAt() is not notifiable — pair it with a population
+    revision.** Under async incubation (Loader `asynchronous: true`,
+    including the #107 prewarm), `count` reaches its final value BEFORE the
+    delegates are instantiated (itemAdded observed firing in REVERSE order,
+    5→0). Any binding like `count ? itemAt(i) : null` latches null and never
+    re-runs — neither count nor the index changes when the delegate finally
+    exists. Symptom class: "indicator/accent missing on first open until
+    the user switches tabs". Fix pattern (PR #108): `property int
+    population` bumped in onItemAdded/onItemRemoved, referenced as a
+    statement inside the binding body to create the dependency. Related
+    trap: verify WHICH component your IPC path instantiates before calling a
+    probe "not firing" — `toggle settings` in non-demo starts the standalone
+    settingsProcess, not the in-shell SettingsPanel (both use SettingsView).
+
+46. **Invisible GPU warm-up: layer + opacity 0, viewport-only expansion.**
+    A parked dormant tree has never rendered, so the first open pays glyph
+    raster + atlas/texture uploads mid-flight. A once-per-session warm pass
+    (reserve the open frame in the viewport ONLY — surfaceLive/scrim/blur/
+    mask/focus stay false — tree at open geometry inside `layer.enabled`
+    with opacity 0, ≥3 forced frames, then exact park restore) is invisible
+    (wf-recorder region diffs flat) and free (RSS +0.9 MB noise). Measured
+    (PR #109): glyph 10→6, atlas 398→238, flight arrival 467→417 ms,
+    discontinuities 6→3. Honest limits: PARTIAL — a pure `opacity: 0`
+    without the layer does NOTHING; even with the layer it does not equal a
+    real on-screen render (does not reach reopen-class, render>4ms frames
+    remain). Set expectations accordingly and say so in the PR body.
