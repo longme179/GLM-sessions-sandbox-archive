@@ -1,0 +1,3127 @@
+{
+ "rel": [
+  {
+   "file": "deploy.sh",
+   "line": 4,
+   "raw": "# REL: scripts/deploy.py – implementation; docs/WORKSPACE_MAP.md – deployment flow map (Phase 3).",
+   "claims": [
+    {
+     "raw": "scripts/deploy.py",
+     "resolved": "scripts/deploy.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "docs/WORKSPACE_MAP.md",
+     "resolved": "docs/WORKSPACE_MAP.md",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/components/GlassMaterial.qml",
+   "line": 3,
+   "raw": "// REL: qml/components/GlassOptics.qml, qml/components/shaders/liquid-glass.frag(.qsb) – uniforms/effects.",
+   "claims": [
+    {
+     "raw": "qml/components/GlassOptics.qml",
+     "resolved": "qml/components/GlassOptics.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "qml/components/shaders/liquid-glass.frag(.qsb)",
+     "resolved": "qml/components/shaders/liquid-glass.frag",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/components/GlassPanel.qml",
+   "line": 2,
+   "raw": "// REL: qml/theme/Theme.qml, qml/components/GlassMaterial.qml – role/color/blur semantics.",
+   "claims": [
+    {
+     "raw": "qml/theme/Theme.qml",
+     "resolved": "qml/theme/Theme.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "qml/components/GlassMaterial.qml",
+     "resolved": "qml/components/GlassMaterial.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/components/JellyGeometry.js",
+   "line": 5,
+   "raw": "// REL: qml/components/shaders/popup-jelly.vert – mesh layout (16x16) and vertex semantics must match.",
+   "claims": [
+    {
+     "raw": "qml/components/shaders/popup-jelly.vert",
+     "resolved": "qml/components/shaders/popup-jelly.vert",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/components/LabelText.qml",
+   "line": 3,
+   "raw": "// REL: qml/components/ShellText.qml – underlying text rendering/font roles must stay compatible.",
+   "claims": [
+    {
+     "raw": "qml/components/ShellText.qml",
+     "resolved": "qml/components/ShellText.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/components/LiquidButton.qml",
+   "line": 2,
+   "raw": "// REL: qml/theme/Theme.qml, config/liquid-glass.json – visual roles/tokens must remain coherent.",
+   "claims": [
+    {
+     "raw": "qml/theme/Theme.qml",
+     "resolved": "qml/theme/Theme.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "config/liquid-glass.json",
+     "resolved": "config/liquid-glass.json",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/components/LiquidSlider.qml",
+   "line": 2,
+   "raw": "// REL: qml/theme/Theme.qml – slider metrics/colors; consumers expect standard Slider API.",
+   "claims": [
+    {
+     "raw": "qml/theme/Theme.qml",
+     "resolved": "qml/theme/Theme.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/components/MotionPopup.qml",
+   "line": 3,
+   "raw": "// REL: qml/theme/Theme.qml – motion tokens; popup consumers rely on stable Popup API/visibility lifecycle.",
+   "claims": [
+    {
+     "raw": "qml/theme/Theme.qml",
+     "resolved": "qml/theme/Theme.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/components/NotificationCard.qml",
+   "line": 3,
+   "raw": "// REL: qml/services/Notifications.qml – notification object shape/actions; qml/theme/Theme.qml – tokens.",
+   "claims": [
+    {
+     "raw": "qml/services/Notifications.qml",
+     "resolved": "qml/services/Notifications.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "qml/theme/Theme.qml",
+     "resolved": "qml/theme/Theme.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/components/PageHost.qml",
+   "line": 3,
+   "raw": "// REL: qml/settings/SettingsView.qml, qml/services/FeatureCatalog.qml – page IDs/entries/navigation.",
+   "claims": [
+    {
+     "raw": "qml/settings/SettingsView.qml",
+     "resolved": "qml/settings/SettingsView.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "qml/services/FeatureCatalog.qml",
+     "resolved": "qml/services/FeatureCatalog.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/components/PageNavigation.qml",
+   "line": 6,
+   "raw": "// REL: qml/settings/SettingsView.qml, qml/settings/SettingsApplication.qml – host handles page IDs.",
+   "claims": [
+    {
+     "raw": "qml/settings/SettingsView.qml",
+     "resolved": "qml/settings/SettingsView.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "qml/settings/SettingsApplication.qml",
+     "resolved": "qml/settings/SettingsApplication.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/components/ShellText.qml",
+   "line": 3,
+   "raw": "// REL: qml/components/LabelText.qml – shared text contract; qml/theme/Theme.qml – font/color tokens.",
+   "claims": [
+    {
+     "raw": "qml/components/LabelText.qml",
+     "resolved": "qml/components/LabelText.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "qml/theme/Theme.qml",
+     "resolved": "qml/theme/Theme.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/components/shaders/popup-jelly.frag",
+   "line": 4,
+   "raw": "// REL: qml/components/JellyGeometry.js::vertex – mesh/vertex semantics must match popup-jelly.vert. .qsb generated.",
+   "claims": [
+    {
+     "raw": "qml/components/JellyGeometry.js",
+     "resolved": "qml/components/JellyGeometry.js",
+     "how": "root",
+     "symbol": "vertex",
+     "path_ok": true,
+     "symbol_lines": [
+      4,
+      5,
+      6,
+      7,
+      21,
+      22,
+      23,
+      24
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "popup-jelly.vert",
+     "resolved": "qml/components/shaders/popup-jelly.vert",
+     "how": "dir:qml/components/shaders",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/components/shaders/popup-jelly.vert",
+   "line": 4,
+   "raw": "// REL: qml/components/JellyGeometry.js::vertex – 16x16 mesh/vertex layout; keep shaders+geometry in sync.",
+   "claims": [
+    {
+     "raw": "qml/components/JellyGeometry.js",
+     "resolved": "qml/components/JellyGeometry.js",
+     "how": "root",
+     "symbol": "vertex",
+     "path_ok": true,
+     "symbol_lines": [
+      4,
+      5,
+      6,
+      7,
+      21,
+      22,
+      23,
+      24
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/panels/ControlDashboard.qml",
+   "line": 96,
+   "raw": "LiquidButton { text: \"Lock\"; enabled: !root.editing; onClicked: { ShellState.closePanels(); ShellState.run(\"lock\"); } } // REL: scripts/lock_actions.py::provide – \"lock\" action",
+   "claims": [
+    {
+     "raw": "scripts/lock_actions.py",
+     "resolved": "scripts/lock_actions.py",
+     "how": "root",
+     "symbol": "provide",
+     "path_ok": true,
+     "symbol_lines": [
+      16
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/panels/ControlDashboard.qml",
+   "line": 159,
+   "raw": "onClicked: ShellState.run(\"bluetoothToggle\") // REL: scripts/audio_actions.py::provide – \"bluetoothToggle\"",
+   "claims": [
+    {
+     "raw": "scripts/audio_actions.py",
+     "resolved": "scripts/audio_actions.py",
+     "how": "root",
+     "symbol": "provide",
+     "path_ok": true,
+     "symbol_lines": [
+      22
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/panels/ControlDashboard.qml",
+   "line": 191,
+   "raw": "onClicked: ShellState.run(\"batterySaver\", {enabled: !ShellState.batterySaverActive}) // REL: scripts/saver_actions.py::provide",
+   "claims": [
+    {
+     "raw": "scripts/saver_actions.py",
+     "resolved": "scripts/saver_actions.py",
+     "how": "root",
+     "symbol": "provide",
+     "path_ok": true,
+     "symbol_lines": [
+      18
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/panels/ControlDashboard.qml",
+   "line": 217,
+   "raw": "onClicked: ShellState.run(\"powerProfile\", {value: profiles[(profile + 1) % profiles.length]}) // REL: scripts/audio_actions.py::provide – \"powerProfile\"",
+   "claims": [
+    {
+     "raw": "scripts/audio_actions.py",
+     "resolved": "scripts/audio_actions.py",
+     "how": "root",
+     "symbol": "provide",
+     "path_ok": true,
+     "symbol_lines": [
+      22
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/panels/Launcher.qml",
+   "line": 41,
+   "raw": "else if (item.kind === \"launchpad\") ShellState.run(\"launchpadRun\",{id:item.commandId}); // REL: scripts/launchpad_actions.py::provide",
+   "claims": [
+    {
+     "raw": "scripts/launchpad_actions.py",
+     "resolved": "scripts/launchpad_actions.py",
+     "how": "root",
+     "symbol": "provide",
+     "path_ok": true,
+     "symbol_lines": [
+      18
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/panels/PowerMenu.qml",
+   "line": 41,
+   "raw": "ShellState.run(\"lock\"); // REL: scripts/lock_actions.py::provide",
+   "claims": [
+    {
+     "raw": "scripts/lock_actions.py",
+     "resolved": "scripts/lock_actions.py",
+     "how": "root",
+     "symbol": "provide",
+     "path_ok": true,
+     "symbol_lines": [
+      16
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/panels/WifiWidget.qml",
+   "line": 50,
+   "raw": "LiquidButton { text: root.network.enabled ? \"Turn off\" : \"Turn on\"; enabled: !!root.network.available && !root.busy; onClicked: ShellState.run(\"wifiToggle\") } // REL: scripts/wifi_actions.py::provide",
+   "claims": [
+    {
+     "raw": "scripts/wifi_actions.py",
+     "resolved": "scripts/wifi_actions.py",
+     "how": "root",
+     "symbol": "provide",
+     "path_ok": true,
+     "symbol_lines": [
+      80,
+      106
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/panels/WifiWidget.qml",
+   "line": 51,
+   "raw": "LiquidButton { text: ShellState.pendingActions.wifiScan ? \"Scanning…\" : \"Scan\"; enabled: !!root.network.enabled && !root.busy; onClicked: ShellState.run(\"wifiScan\") } // REL: scripts/wifi_actions.py::provide",
+   "claims": [
+    {
+     "raw": "scripts/wifi_actions.py",
+     "resolved": "scripts/wifi_actions.py",
+     "how": "root",
+     "symbol": "provide",
+     "path_ok": true,
+     "symbol_lines": [
+      80,
+      106
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/services/ClipboardState.qml",
+   "line": 3,
+   "raw": "// REL: scripts/clipboard.py – JSON-lines worker commands; qml/panels/ClipboardPanel.qml – consumer UI.",
+   "claims": [
+    {
+     "raw": "scripts/clipboard.py",
+     "resolved": "scripts/clipboard.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "qml/panels/ClipboardPanel.qml",
+     "resolved": "qml/panels/ClipboardPanel.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/services/ControlRegistry.qml",
+   "line": 2,
+   "raw": "// REL: config/control-grid.json – layout/tile/tab IDs and defaults; scripts/feature_catalog.py::read_control_grid – parsing.",
+   "claims": [
+    {
+     "raw": "config/control-grid.json",
+     "resolved": "config/control-grid.json",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/feature_catalog.py",
+     "resolved": "scripts/feature_catalog.py",
+     "how": "root",
+     "symbol": "read_control_grid",
+     "path_ok": true,
+     "symbol_lines": [],
+     "symbol_ok": false
+    }
+   ],
+   "all_ok": false
+  },
+  {
+   "file": "qml/services/FeatureCatalog.qml",
+   "line": 2,
+   "raw": "// REL: config/features.json – canonical feature index/descriptors; scripts/feature_catalog.py::document – validation/catalog logic.",
+   "claims": [
+    {
+     "raw": "config/features.json",
+     "resolved": "config/features.json",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/feature_catalog.py",
+     "resolved": "scripts/feature_catalog.py",
+     "how": "root",
+     "symbol": "document",
+     "path_ok": true,
+     "symbol_lines": [
+      66,
+      113,
+      121,
+      132,
+      188,
+      211,
+      242
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/services/FeatureCatalog.qml",
+   "line": 3,
+   "raw": "// REL: qml/services/ShellState.qml::backend – catalog affects bootstrap/UI; implicit coupling #3 (IDs/paths).",
+   "claims": [
+    {
+     "raw": "qml/services/ShellState.qml",
+     "resolved": "qml/services/ShellState.qml",
+     "how": "root",
+     "symbol": "backend",
+     "path_ok": true,
+     "symbol_lines": [
+      159,
+      160,
+      171,
+      179,
+      183,
+      194,
+      201,
+      228,
+      230,
+      236,
+      241,
+      242,
+      247
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/services/Notifications.qml",
+   "line": 2,
+   "raw": "// REL: qml/panels/NotificationToasts.qml, NotificationCenter.qml – presentation; scripts/desktop_backend.py – persistence.",
+   "claims": [
+    {
+     "raw": "qml/panels/NotificationToasts.qml",
+     "resolved": "qml/panels/NotificationToasts.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "NotificationCenter.qml",
+     "resolved": "qml/panels/NotificationCenter.qml",
+     "how": "dir:qml/panels",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/services/ShellState.qml",
+   "line": 158,
+   "raw": "function run(action, payload) { // REL: scripts/desktop_backend.py::handle – sends {action,...} over stdin.",
+   "claims": [
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": "handle",
+     "path_ok": true,
+     "symbol_lines": [
+      490,
+      491,
+      493,
+      494,
+      495,
+      496,
+      1341,
+      1679
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/services/ShellState.qml",
+   "line": 230,
+   "raw": "property Process backend: Process { // REL: scripts/desktop_backend.py – long-lived Python backend (see Phase 3 map).",
+   "claims": [
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/settings/AboutPage.qml",
+   "line": 2,
+   "raw": "// REL: THIRD_PARTY.md – attribution details; qml/services/UpdateState.qml::run – version/inspect actions.",
+   "claims": [
+    {
+     "raw": "THIRD_PARTY.md",
+     "resolved": "THIRD_PARTY.md",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "qml/services/UpdateState.qml",
+     "resolved": "qml/services/UpdateState.qml",
+     "how": "root",
+     "symbol": "run",
+     "path_ok": true,
+     "symbol_lines": [
+      23,
+      31,
+      47
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/settings/BehaviorPage.qml",
+   "line": 28,
+   "raw": "ShellState.run(\"batterySaver\", {enabled: requested}); // REL: scripts/saver_actions.py::provide",
+   "claims": [
+    {
+     "raw": "scripts/saver_actions.py",
+     "resolved": "scripts/saver_actions.py",
+     "how": "root",
+     "symbol": "provide",
+     "path_ok": true,
+     "symbol_lines": [
+      18
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/settings/SettingsApplication.qml",
+   "line": 2,
+   "raw": "// REL: qml/settings/SettingsView.qml, settings.qml – host composition; scripts/settings.sh – launch entry.",
+   "claims": [
+    {
+     "raw": "qml/settings/SettingsView.qml",
+     "resolved": "qml/settings/SettingsView.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "settings.qml",
+     "resolved": "settings.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/settings.sh",
+     "resolved": "scripts/settings.sh",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/settings/SettingsRegistry.qml",
+   "line": 2,
+   "raw": "// REL: config/features.json, qml/services/FeatureCatalog.qml::publication – settings page descriptors/IDs.",
+   "claims": [
+    {
+     "raw": "config/features.json",
+     "resolved": "config/features.json",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "qml/services/FeatureCatalog.qml",
+     "resolved": "qml/services/FeatureCatalog.qml",
+     "how": "root",
+     "symbol": "publication",
+     "path_ok": true,
+     "symbol_lines": [
+      12,
+      14,
+      15,
+      26,
+      33,
+      49,
+      93,
+      101,
+      163
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/settings/SettingsRegistry.qml",
+   "line": 3,
+   "raw": "// REL: qml/settings/SettingsView.qml::openPage – navigation; preserve legacyIndex/integer routes.",
+   "claims": [
+    {
+     "raw": "qml/settings/SettingsView.qml",
+     "resolved": "qml/settings/SettingsView.qml",
+     "how": "root",
+     "symbol": "openPage",
+     "path_ok": true,
+     "symbol_lines": [],
+     "symbol_ok": false
+    }
+   ],
+   "all_ok": false
+  },
+  {
+   "file": "qml/settings/SettingsView.qml",
+   "line": 2,
+   "raw": "// REL: qml/settings/SettingsRegistry.qml – page resolution; qml/components/PageNavigation.qml – local routing.",
+   "claims": [
+    {
+     "raw": "qml/settings/SettingsRegistry.qml",
+     "resolved": "qml/settings/SettingsRegistry.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "qml/components/PageNavigation.qml",
+     "resolved": "qml/components/PageNavigation.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "qml/settings/TopBarPage.qml",
+   "line": 29,
+   "raw": "if (styleZone) ShellState.run(\"setting\", {key: \"barIslandStyles\", token: styleZone, value: Object.assign({}, selectedStyle, {[field]: value})}); // REL: config/control-grid.json, qml/bar/BarRegistry.qml::defaults",
+   "claims": [
+    {
+     "raw": "config/control-grid.json",
+     "resolved": "config/control-grid.json",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "qml/bar/BarRegistry.qml",
+     "resolved": "qml/bar/BarRegistry.qml",
+     "how": "root",
+     "symbol": "defaults",
+     "path_ok": true,
+     "symbol_lines": [
+      9,
+      35
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/action_pending.py",
+   "line": 5,
+   "raw": "REL: qml/services/ShellState.qml::run,::backend – pending/sequence protocol; scripts/desktop_backend.py::handle,::finish_features.",
+   "claims": [
+    {
+     "raw": "qml/services/ShellState.qml",
+     "resolved": "qml/services/ShellState.qml",
+     "how": "root",
+     "symbol": "run",
+     "path_ok": true,
+     "symbol_lines": [
+      47,
+      66,
+      68,
+      148,
+      156,
+      158,
+      207,
+      262
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": "handle",
+     "path_ok": true,
+     "symbol_lines": [
+      490,
+      491,
+      493,
+      494,
+      495,
+      496,
+      1341,
+      1679
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/appearance_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/settings/AppearancePage.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/settings/AppearancePage.qml",
+     "resolved": "qml/settings/AppearancePage.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/audio_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/panels/ControlDashboard.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/panels/ControlDashboard.qml",
+     "resolved": "qml/panels/ControlDashboard.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/audio_device_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/panels/AudioHardware.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/panels/AudioHardware.qml",
+     "resolved": "qml/panels/AudioHardware.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/backend_actions.py",
+   "line": 5,
+   "raw": "REL: qml/services/ShellState.qml::run – UI dispatch contract; scripts/backend_providers.py – catalog provider resolution.",
+   "claims": [
+    {
+     "raw": "qml/services/ShellState.qml",
+     "resolved": "qml/services/ShellState.qml",
+     "how": "root",
+     "symbol": "run",
+     "path_ok": true,
+     "symbol_lines": [
+      47,
+      66,
+      68,
+      148,
+      156,
+      158,
+      207,
+      262
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/backend_providers.py",
+     "resolved": "scripts/backend_providers.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/backend_providers.py",
+   "line": 6,
+   "raw": "REL: scripts/backend_actions.py::ActionRegistry.provide; scripts/feature_catalog.py::CatalogError/resource.",
+   "claims": [
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry.provide",
+     "path_ok": true,
+     "symbol_partial": true,
+     "symbol_lines": [
+      3,
+      51,
+      75
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/feature_catalog.py",
+     "resolved": "scripts/feature_catalog.py",
+     "how": "root",
+     "symbol": "CatalogError",
+     "path_ok": true,
+     "symbol_lines": [
+      18,
+      30,
+      36,
+      42,
+      49,
+      50,
+      57,
+      63,
+      70,
+      76,
+      78,
+      90,
+      93,
+      108,
+      124,
+      129,
+      130,
+      134,
+      139,
+      142,
+      145,
+      146,
+      149,
+      153,
+      156,
+      159,
+      161,
+      164,
+      172,
+      175,
+      176,
+      178,
+      180,
+      182,
+      188,
+      193,
+      214,
+      218,
+      222,
+      245,
+      248,
+      258,
+      267,
+      270
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/battery_saver.py",
+   "line": 13,
+   "raw": "from display_layout import apply_layout, current_layout, validate_layout  # REL: scripts/display_layout.py",
+   "claims": [
+    {
+     "raw": "scripts/display_layout.py",
+     "resolved": "scripts/display_layout.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/battery_saver.py",
+   "line": 14,
+   "raw": "from storage import locked, write_json  # REL: scripts/storage.py::locked,write_json – saver state journal",
+   "claims": [
+    {
+     "raw": "scripts/storage.py",
+     "resolved": "scripts/storage.py",
+     "how": "root",
+     "symbol": "locked",
+     "path_ok": true,
+     "symbol_lines": [
+      6,
+      33,
+      66
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/capture_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/panels/ScreenshotEditor.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/panels/ScreenshotEditor.qml",
+     "resolved": "qml/panels/ScreenshotEditor.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/charge_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/panels/ChargingWidget.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/panels/ChargingWidget.qml",
+     "resolved": "qml/panels/ChargingWidget.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/charge_control.py",
+   "line": 6,
+   "raw": "REL: docs/WORKSPACE_MAP.md – charging owner/callers (Phase 3 graph; see config/architecture.json).",
+   "claims": [
+    {
+     "raw": "docs/WORKSPACE_MAP.md",
+     "resolved": "docs/WORKSPACE_MAP.md",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "config/architecture.json",
+     "resolved": "config/architecture.json",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/check-architecture.sh",
+   "line": 3,
+   "raw": "# REL: scripts/check_architecture.py, config/architecture.json – dependency/cycle/size policy.",
+   "claims": [
+    {
+     "raw": "scripts/check_architecture.py",
+     "resolved": "scripts/check_architecture.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "config/architecture.json",
+     "resolved": "config/architecture.json",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/check.sh",
+   "line": 3,
+   "raw": "# Role: fast repo checks (architecture/catalog, unittest discovery, bash syntax, demo JSON). REL: tests/, migration gates.",
+   "claims": [],
+   "all_ok": false
+  },
+  {
+   "file": "scripts/check_architecture.py",
+   "line": 7,
+   "raw": "REL: config/architecture.json::largeFiles,legacyEdges,cycleEdges – policy source of truth.",
+   "claims": [
+    {
+     "raw": "config/architecture.json",
+     "resolved": "config/architecture.json",
+     "how": "root",
+     "symbol": "largeFiles",
+     "path_ok": true,
+     "symbol_lines": [
+      56
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/clipboard.py",
+   "line": 159,
+   "raw": "def capture(kind: str, directory: Path):  # REL: qml/services/ClipboardState.qml – spawned worker JSON-lines protocol",
+   "claims": [
+    {
+     "raw": "qml/services/ClipboardState.qml",
+     "resolved": "qml/services/ClipboardState.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/command_runner.py",
+   "line": 6,
+   "raw": "REL: scripts/managed_command.py – supervised process patterns; scripts/command_output.py – output limits/redaction.",
+   "claims": [
+    {
+     "raw": "scripts/managed_command.py",
+     "resolved": "scripts/managed_command.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/command_output.py",
+     "resolved": "scripts/command_output.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/deploy.py",
+   "line": 5,
+   "raw": "REL: scripts/deploy_runtime.py, deploy_state.py, deploy_files.py, deploy_niri.py, deploy_niri_tree.py.",
+   "claims": [
+    {
+     "raw": "scripts/deploy_runtime.py",
+     "resolved": "scripts/deploy_runtime.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "deploy_state.py",
+     "resolved": "scripts/deploy_state.py",
+     "how": "dir:scripts",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "deploy_files.py",
+     "resolved": "scripts/deploy_files.py",
+     "how": "dir:scripts",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "deploy_niri.py",
+     "resolved": "scripts/deploy_niri.py",
+     "how": "dir:scripts",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "deploy_niri_tree.py",
+     "resolved": "scripts/deploy_niri_tree.py",
+     "how": "dir:scripts",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/deploy_files.py",
+   "line": 5,
+   "raw": "REL: scripts/deploy_state.py – publication and rollback of file changes.",
+   "claims": [
+    {
+     "raw": "scripts/deploy_state.py",
+     "resolved": "scripts/deploy_state.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/deploy_niri.py",
+   "line": 5,
+   "raw": "REL: scripts/deploy_niri_tree.py::parse/validate paths; scripts/deploy_state.py – journal/rollback artifacts.",
+   "claims": [
+    {
+     "raw": "scripts/deploy_niri_tree.py",
+     "resolved": "scripts/deploy_niri_tree.py",
+     "how": "root",
+     "symbol": "parse",
+     "path_ok": true,
+     "symbol_lines": [],
+     "symbol_ok": false
+    },
+    {
+     "raw": "scripts/deploy_state.py",
+     "resolved": "scripts/deploy_state.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": false
+  },
+  {
+   "file": "scripts/deploy_niri_tree.py",
+   "line": 5,
+   "raw": "REL: scripts/deploy_niri.py::planning; scripts/deploy_state.py – staged artifacts before publication.",
+   "claims": [
+    {
+     "raw": "scripts/deploy_niri.py",
+     "resolved": "scripts/deploy_niri.py",
+     "how": "root",
+     "symbol": "planning",
+     "path_ok": true,
+     "symbol_lines": [
+      4
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/deploy_state.py",
+     "resolved": "scripts/deploy_state.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/deploy_runtime.py",
+   "line": 5,
+   "raw": "REL: scripts/deploy_state.py – apply/rollback depends on verified runtime outcomes.",
+   "claims": [
+    {
+     "raw": "scripts/deploy_state.py",
+     "resolved": "scripts/deploy_state.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/deploy_state.py",
+   "line": 5,
+   "raw": "REL: scripts/deploy_files.py, deploy_niri.py – staged artifacts and publication state.",
+   "claims": [
+    {
+     "raw": "scripts/deploy_files.py",
+     "resolved": "scripts/deploy_files.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "deploy_niri.py",
+     "resolved": "scripts/deploy_niri.py",
+     "how": "dir:scripts",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/desktop_backend.py",
+   "line": 34,
+   "raw": "from action_pending import acknowledge, emit as publish, handle_line  # REL: scripts/action_pending.py::handle_line/emit – JSON-lines ack/snapshot protocol",
+   "claims": [
+    {
+     "raw": "scripts/action_pending.py",
+     "resolved": "scripts/action_pending.py",
+     "how": "root",
+     "symbol": "handle_line",
+     "path_ok": true,
+     "symbol_lines": [
+      35
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/desktop_backend.py",
+   "line": 553,
+   "raw": "self.actions = ActionRegistry(start_feature=lambda action, operation, **options: self.start_feature(action, operation, **options))  # REL: scripts/backend_actions.py::ActionRegistry",
+   "claims": [
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/desktop_backend.py",
+   "line": 554,
+   "raw": "self.action_state = self.actions.provide([  # REL: scripts/backend_providers.py::provide (factories) – narrow capabilities per provider",
+   "claims": [
+    {
+     "raw": "scripts/backend_providers.py",
+     "resolved": "scripts/backend_providers.py",
+     "how": "root",
+     "symbol": "provide",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      6
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/desktop_backend.py",
+   "line": 1679,
+   "raw": "error = handle_line(backend.handle, line)   # REL: scripts/action_pending.py::handle_line – stdin JSON-lines",
+   "claims": [
+    {
+     "raw": "scripts/action_pending.py",
+     "resolved": "scripts/action_pending.py",
+     "how": "root",
+     "symbol": "handle_line",
+     "path_ok": true,
+     "symbol_lines": [
+      35
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/display_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/settings/DisplayPage.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/settings/DisplayPage.qml",
+     "resolved": "qml/settings/DisplayPage.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/equalizer_actions.py",
+   "line": 294,
+   "raw": "def provide(capabilities):  # REL: qml/services/EqualizerState.qml, scripts/desktop_backend.py::actions.provide",
+   "claims": [
+    {
+     "raw": "qml/services/EqualizerState.qml",
+     "resolved": "qml/services/EqualizerState.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": "actions.provide",
+     "path_ok": true,
+     "symbol_lines": [
+      554
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/feature_catalog.py",
+   "line": 6,
+   "raw": "REL: qml/services/FeatureCatalog.qml, qml/services/ControlRegistry.qml; scripts/check_architecture.py::owners – ownership model.",
+   "claims": [
+    {
+     "raw": "qml/services/FeatureCatalog.qml",
+     "resolved": "qml/services/FeatureCatalog.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "qml/services/ControlRegistry.qml",
+     "resolved": "qml/services/ControlRegistry.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/check_architecture.py",
+     "resolved": "scripts/check_architecture.py",
+     "how": "root",
+     "symbol": "owners",
+     "path_ok": true,
+     "symbol_lines": [
+      92,
+      135
+     ],
+     "symbol_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/file_search_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/panels/Launcher.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/panels/Launcher.qml",
+     "resolved": "qml/panels/Launcher.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/gowall_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/settings/GowallSettings.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/settings/GowallSettings.qml",
+     "resolved": "qml/settings/GowallSettings.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/idle_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/settings/IdlePage.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/settings/IdlePage.qml",
+     "resolved": "qml/settings/IdlePage.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/ime_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/bar/ImeModule.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/bar/ImeModule.qml",
+     "resolved": "qml/bar/ImeModule.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/keybind_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/settings/KeybindsPage.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/settings/KeybindsPage.qml",
+     "resolved": "qml/settings/KeybindsPage.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/launchpad_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/panels/Launcher.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/panels/Launcher.qml",
+     "resolved": "qml/panels/Launcher.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/local_content_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/services/ShellState.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/services/ShellState.qml",
+     "resolved": "qml/services/ShellState.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/lock_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/panels/PowerMenu.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/panels/PowerMenu.qml",
+     "resolved": "qml/panels/PowerMenu.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/managed_command.py",
+   "line": 7,
+   "raw": "REL: scripts/idle_control.py::PR_SET_PDEATHSIG; scripts/command_runner.py – external command execution boundaries.",
+   "claims": [
+    {
+     "raw": "scripts/idle_control.py",
+     "resolved": "scripts/idle_control.py",
+     "how": "root",
+     "symbol": "PR_SET_PDEATHSIG",
+     "path_ok": true,
+     "symbol_lines": [
+      19,
+      159
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/command_runner.py",
+     "resolved": "scripts/command_runner.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/mirror_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/components/MirrorControls.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/components/MirrorControls.qml",
+     "resolved": "qml/components/MirrorControls.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/night_light_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/settings/NightLightPage.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/settings/NightLightPage.qml",
+     "resolved": "qml/settings/NightLightPage.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/palette_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/settings/AppearancePage.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/settings/AppearancePage.qml",
+     "resolved": "qml/settings/AppearancePage.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/recording_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/panels/RecorderWidget.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/panels/RecorderWidget.qml",
+     "resolved": "qml/panels/RecorderWidget.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/run-gates.sh",
+   "line": 3,
+   "raw": "# REL: tests/migration_checks.py – gate flags/cases; uses isolated XDG/Sway/D-Bus (AGENTS.md).",
+   "claims": [
+    {
+     "raw": "tests/migration_checks.py",
+     "resolved": "tests/migration_checks.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "AGENTS.md",
+     "resolved": "AGENTS.md",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/saver_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/settings/BehaviorPage.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/settings/BehaviorPage.qml",
+     "resolved": "qml/settings/BehaviorPage.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/settings_schema.py",
+   "line": 6,
+   "raw": "REL: qml/services/ShellState.qml – preferences consumers; scripts/storage.py – persistence remains with owners.",
+   "claims": [
+    {
+     "raw": "qml/services/ShellState.qml",
+     "resolved": "qml/services/ShellState.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/storage.py",
+     "resolved": "scripts/storage.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/shell_update.py",
+   "line": 6,
+   "raw": "REL: docs/WORKSPACE_MAP.md – update owner/callers (Phase 3 graph; see config/architecture.json).",
+   "claims": [
+    {
+     "raw": "docs/WORKSPACE_MAP.md",
+     "resolved": "docs/WORKSPACE_MAP.md",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "config/architecture.json",
+     "resolved": "config/architecture.json",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/storage.py",
+   "line": 6,
+   "raw": "REL: scripts/desktop_backend.py::Preferences/save paths; scripts/clipboard.py, battery_saver.py – locked/write_json.",
+   "claims": [
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": "Preferences",
+     "path_ok": true,
+     "symbol_lines": [
+      419,
+      526,
+      535,
+      1467,
+      1494,
+      1562
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/clipboard.py",
+     "resolved": "scripts/clipboard.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "battery_saver.py",
+     "resolved": "scripts/battery_saver.py",
+     "how": "dir:scripts",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/wallpaper_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/settings/WallpaperPage.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/settings/WallpaperPage.qml",
+     "resolved": "qml/settings/WallpaperPage.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/weather.py",
+   "line": 6,
+   "raw": "REL: docs/WORKSPACE_MAP.md – weather owner/callers (Phase 3 graph; see config/architecture.json).",
+   "claims": [
+    {
+     "raw": "docs/WORKSPACE_MAP.md",
+     "resolved": "docs/WORKSPACE_MAP.md",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "config/architecture.json",
+     "resolved": "config/architecture.json",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/weather_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/panels/WeatherWidget.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/panels/WeatherWidget.qml",
+     "resolved": "qml/panels/WeatherWidget.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/wifi_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/panels/WifiWidget.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/panels/WifiWidget.qml",
+     "resolved": "qml/panels/WifiWidget.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "scripts/window_actions.py",
+   "line": 4,
+   "raw": "# REL: qml/panels/Launcher.qml – ActionSpec dispatch via scripts/backend_actions.py::ActionRegistry; scripts/desktop_backend.py host.",
+   "claims": [
+    {
+     "raw": "qml/panels/Launcher.qml",
+     "resolved": "qml/panels/Launcher.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    },
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": "ActionRegistry",
+     "path_ok": true,
+     "symbol_lines": [
+      3,
+      32
+     ],
+     "symbol_ok": true
+    },
+    {
+     "raw": "scripts/desktop_backend.py",
+     "resolved": "scripts/desktop_backend.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/action_pending_fixture.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for action_pending_fixture.py. REL: scripts/action_pending.py.",
+   "claims": [
+    {
+     "raw": "scripts/action_pending.py",
+     "resolved": "scripts/action_pending.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/action_registry_async.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for action_registry_async.py. REL: scripts/backend_actions.py (async/worker contracts).",
+   "claims": [
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/action_registry_workers.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for action_registry_workers.py. REL: scripts/backend_actions.py (worker contracts).",
+   "claims": [
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/action_test_helpers.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for action_test_helpers.py. REL: scripts/backend_actions.py (test helpers).",
+   "claims": [
+    {
+     "raw": "scripts/backend_actions.py",
+     "resolved": "scripts/backend_actions.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/bluez_fixture.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for bluez_fixture.py. REL: scripts/bluetooth_agent.py.",
+   "claims": [
+    {
+     "raw": "scripts/bluetooth_agent.py",
+     "resolved": "scripts/bluetooth_agent.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/catalog_admission_fixture.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for catalog_admission_fixture.py. REL: scripts/feature_catalog.py.",
+   "claims": [
+    {
+     "raw": "scripts/feature_catalog.py",
+     "resolved": "scripts/feature_catalog.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/catalog_benchmark.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for catalog_benchmark.py. REL: scripts/feature_catalog.py.",
+   "claims": [
+    {
+     "raw": "scripts/feature_catalog.py",
+     "resolved": "scripts/feature_catalog.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/catalog_end_state.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for catalog_end_state.py. REL: scripts/feature_catalog.py.",
+   "claims": [
+    {
+     "raw": "scripts/feature_catalog.py",
+     "resolved": "scripts/feature_catalog.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/catalog_failure_fixture.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for catalog_failure_fixture.py. REL: scripts/feature_catalog.py.",
+   "claims": [
+    {
+     "raw": "scripts/feature_catalog.py",
+     "resolved": "scripts/feature_catalog.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/catalog_fixture.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for catalog_fixture.py. REL: scripts/feature_catalog.py.",
+   "claims": [
+    {
+     "raw": "scripts/feature_catalog.py",
+     "resolved": "scripts/feature_catalog.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/catalog_measurement.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for catalog_measurement.py. REL: scripts/feature_catalog.py.",
+   "claims": [
+    {
+     "raw": "scripts/feature_catalog.py",
+     "resolved": "scripts/feature_catalog.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/catalog_round3.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for catalog_round3.py. REL: scripts/feature_catalog.py.",
+   "claims": [
+    {
+     "raw": "scripts/feature_catalog.py",
+     "resolved": "scripts/feature_catalog.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/catalog_round4.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for catalog_round4.py. REL: scripts/feature_catalog.py.",
+   "claims": [
+    {
+     "raw": "scripts/feature_catalog.py",
+     "resolved": "scripts/feature_catalog.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/catalog_statistics.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for catalog_statistics.py. REL: scripts/feature_catalog.py.",
+   "claims": [
+    {
+     "raw": "scripts/feature_catalog.py",
+     "resolved": "scripts/feature_catalog.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/clipboard_measurement.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for clipboard_measurement.py. REL: scripts/clipboard.py.",
+   "claims": [
+    {
+     "raw": "scripts/clipboard.py",
+     "resolved": "scripts/clipboard.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/clipboard_slice_fixture.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for clipboard_slice_fixture.py. REL: scripts/clipboard.py.",
+   "claims": [
+    {
+     "raw": "scripts/clipboard.py",
+     "resolved": "scripts/clipboard.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/launchpad_fixture.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for launchpad_fixture.py. REL: scripts/launchpad.py.",
+   "claims": [
+    {
+     "raw": "scripts/launchpad.py",
+     "resolved": "scripts/launchpad.py",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/migration_checks.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for migration_checks.py. REL: tests/ (gate cases); scripts/run-gates.sh.",
+   "claims": [
+    {
+     "raw": "scripts/run-gates.sh",
+     "resolved": "scripts/run-gates.sh",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/migration_startup.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for migration_startup.py. REL: scripts/start.sh startup path.",
+   "claims": [
+    {
+     "raw": "scripts/start.sh",
+     "resolved": "scripts/start.sh",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  },
+  {
+   "file": "tests/mpris_fixture.py",
+   "line": 3,
+   "raw": "Contract/helper: test infrastructure for mpris_fixture.py. REL: qml/services/ActivityState.qml (MPRIS consumers).",
+   "claims": [
+    {
+     "raw": "qml/services/ActivityState.qml",
+     "resolved": "qml/services/ActivityState.qml",
+     "how": "root",
+     "symbol": null,
+     "path_ok": true
+    }
+   ],
+   "all_ok": true
+  }
+ ],
+ "invariant": [
+  {
+   "file": "qml/components/PageNavigation.qml",
+   "line": 7,
+   "raw": "// INVARIANT: Settings page IDs are shared across standalone/inline hosts; keep IDs/catalog in sync.",
+   "claim": "Settings page IDs are shared across standalone/inline hosts; keep IDs/catalog in sync."
+  },
+  {
+   "file": "qml/services/ClipboardState.qml",
+   "line": 2,
+   "raw": "// INVARIANT: worker lifecycle stays main-shell scoped; Settings/demo must not start capture worker.",
+   "claim": "worker lifecycle stays main-shell scoped; Settings/demo must not start capture worker."
+  },
+  {
+   "file": "qml/services/ControlRegistry.qml",
+   "line": 3,
+   "raw": "// INVARIANT: control IDs/tab legacyIndex routing must stay aligned with panels and settings (implicit coupling #5).",
+   "claim": "control IDs/tab legacyIndex routing must stay aligned with panels and settings (implicit coupling #5)."
+  },
+  {
+   "file": "qml/services/ShellState.qml",
+   "line": 50,
+   "raw": "property var pendingActions: ({}) // INVARIANT: action ownership/pending state tracks JSON-lines requests/results.",
+   "claim": "action ownership/pending state tracks JSON-lines requests/results."
+  },
+  {
+   "file": "qml/settings/SettingsView.qml",
+   "line": 3,
+   "raw": "// INVARIANT: page IDs/legacyIndex routes remain compatible with CLI/catalog (implicit coupling #3/#5).",
+   "claim": "page IDs/legacyIndex routes remain compatible with CLI/catalog (implicit coupling #3/#5)."
+  },
+  {
+   "file": "scripts/action_pending.py",
+   "line": 4,
+   "raw": "INVARIANT: clientSerial/acknowledged/active owner projection must stay consistent with coordinator jobs (F3 contract).",
+   "claim": "clientSerial/acknowledged/active owner projection must stay consistent with coordinator jobs (F3 contract)."
+  },
+  {
+   "file": "scripts/backend_actions.py",
+   "line": 4,
+   "raw": "INVARIANT: action names/contexts are unique per registry; worker completion/state installation remains host-coordinated.",
+   "claim": "action names/contexts are unique per registry; worker completion/state installation remains host-coordinated."
+  },
+  {
+   "file": "scripts/backend_providers.py",
+   "line": 5,
+   "raw": "INVARIANT: factory resolution/registration errors must not fall back to unsafe execution; preserve narrow capability bindings.",
+   "claim": "factory resolution/registration errors must not fall back to unsafe execution; preserve narrow capability bindings."
+  },
+  {
+   "file": "scripts/check_architecture.py",
+   "line": 6,
+   "raw": "INVARIANT: nonblank-line size count includes comments (source-size ratchet constrains this doc pass); literals-only import/URL scan.",
+   "claim": "nonblank-line size count includes comments (source-size ratchet constrains this doc pass); literals-only import/URL scan."
+  },
+  {
+   "file": "scripts/command_runner.py",
+   "line": 5,
+   "raw": "INVARIANT: command whitelist/argv execution boundaries prevent shell injection; timeouts/errors surface as CommandError.",
+   "claim": "command whitelist/argv execution boundaries prevent shell injection; timeouts/errors surface as CommandError."
+  },
+  {
+   "file": "scripts/deploy.py",
+   "line": 4,
+   "raw": "INVARIANT: owner-invoked apply may patch niri only with backup, staged validation, diff, and rollback path (AGENTS.md).",
+   "claim": "owner-invoked apply may patch niri only with backup, staged validation, diff, and rollback path (AGENTS.md)."
+  },
+  {
+   "file": "scripts/deploy_files.py",
+   "line": 4,
+   "raw": "INVARIANT: target admission is conservative; preserve existing user data/launchers per deploy safety rules.",
+   "claim": "target admission is conservative; preserve existing user data/launchers per deploy safety rules."
+  },
+  {
+   "file": "scripts/deploy_niri.py",
+   "line": 4,
+   "raw": "INVARIANT: planning stage is non-executing; applied niri edits require staged validation and rollback safety chain.",
+   "claim": "planning stage is non-executing; applied niri edits require staged validation and rollback safety chain."
+  },
+  {
+   "file": "scripts/deploy_niri_tree.py",
+   "line": 4,
+   "raw": "INVARIANT: bounded traversal and staged validation preserve logical include bases; supports backup/rollback safety chain.",
+   "claim": "bounded traversal and staged validation preserve logical include bases; supports backup/rollback safety chain."
+  },
+  {
+   "file": "scripts/deploy_runtime.py",
+   "line": 4,
+   "raw": "INVARIANT: runtime capability verification must reflect actual API behavior before publication/apply decisions.",
+   "claim": "runtime capability verification must reflect actual API behavior before publication/apply decisions."
+  },
+  {
+   "file": "scripts/deploy_state.py",
+   "line": 4,
+   "raw": "INVARIANT: journal/rollback preserve user files and enable recovery after failed publication (niri patch safety chain).",
+   "claim": "journal/rollback preserve user files and enable recovery after failed publication (niri patch safety chain)."
+  },
+  {
+   "file": "scripts/desktop_backend.py",
+   "line": 1172,
+   "raw": "def start_feature(self, action, operation, *, metadata=None):  # INVARIANT: host owns worker admission/executor; registry delegates",
+   "claim": "host owns worker admission/executor; registry delegates"
+  },
+  {
+   "file": "scripts/desktop_backend.py",
+   "line": 1182,
+   "raw": "self.result_sequence += 1; spec = self.actions.get(action)  # INVARIANT: one completion published per cycle (sequence)",
+   "claim": "one completion published per cycle (sequence)"
+  },
+  {
+   "file": "scripts/desktop_backend.py",
+   "line": 1209,
+   "raw": "# Deliver each completion separately so every pending QML action clears.  # INVARIANT: pending/sequence",
+   "claim": "pending/sequence"
+  },
+  {
+   "file": "scripts/display_control.py",
+   "line": 6,
+   "raw": "INVARIANT: preview state is scoped to NIRI_SOCKET/session; revert/confirm decisions must not apply stale sessions.",
+   "claim": "preview state is scoped to NIRI_SOCKET/session; revert/confirm decisions must not apply stale sessions."
+  },
+  {
+   "file": "scripts/feature_catalog.py",
+   "line": 5,
+   "raw": "INVARIANT: index/descriptor consistency and validation errors must fail closed without shadowing legacy registrations.",
+   "claim": "index/descriptor consistency and validation errors must fail closed without shadowing legacy registrations."
+  },
+  {
+   "file": "scripts/launchpad.py",
+   "line": 5,
+   "raw": "INVARIANT: execution is explicit (no shell for argv commands; bash only when kind=bash); literal argv/cwd validated.",
+   "claim": "execution is explicit (no shell for argv commands; bash only when kind=bash); literal argv/cwd validated."
+  },
+  {
+   "file": "scripts/managed_command.py",
+   "line": 6,
+   "raw": "INVARIANT: owned process groups are terminated on parent/supervision events; avoids orphaned helper processes.",
+   "claim": "owned process groups are terminated on parent/supervision events; avoids orphaned helper processes."
+  },
+  {
+   "file": "scripts/niri_events.py",
+   "line": 5,
+   "raw": "INVARIANT: unknown/malformed/out-of-order events invalidate cache; callers reseed/fallback to CLI polling path.",
+   "claim": "unknown/malformed/out-of-order events invalidate cache; callers reseed/fallback to CLI polling path."
+  },
+  {
+   "file": "scripts/settings_schema.py",
+   "line": 5,
+   "raw": "INVARIANT: schema/validator/default bindings are Python-owned; JSON contains no executable code (AGENTS/architecture).",
+   "claim": "schema/validator/default bindings are Python-owned; JSON contains no executable code (AGENTS/architecture)."
+  },
+  {
+   "file": "scripts/storage.py",
+   "line": 4,
+   "raw": "INVARIANT: writes are atomic (temp+fsync+os.replace+dir fsync); locks are advisory/exclusive with bounded wait.",
+   "claim": "writes are atomic (temp+fsync+os.replace+dir fsync); locks are advisory/exclusive with bounded wait."
+  }
+ ],
+ "gotcha": [
+  {
+   "file": "qml/components/GlassMaterial.qml",
+   "line": 4,
+   "raw": "// GOTCHA: Shader/material changes affect many surfaces; keep fallbacks for unsupported/backdrop cases.",
+   "claim": "Shader/material changes affect many surfaces; keep fallbacks for unsupported/backdrop cases."
+  },
+  {
+   "file": "qml/components/JellyGeometry.js",
+   "line": 6,
+   "raw": "// GOTCHA: Changing vertex order/fields breaks shader deformation; update both sides together.",
+   "claim": "Changing vertex order/fields breaks shader deformation; update both sides together."
+  },
+  {
+   "file": "scripts/audio_devices.py",
+   "line": 7,
+   "raw": "# GOTCHA: pactl/pw-dump/wpctl output formats vary by PipeWire/Pulse versions; parse bounded shapes defensively.",
+   "claim": "pactl/pw-dump/wpctl output formats vary by PipeWire/Pulse versions; parse bounded shapes defensively."
+  },
+  {
+   "file": "scripts/audio_pipewire.py",
+   "line": 5,
+   "raw": "GOTCHA: refuses ambiguous/mismatched core/node identity to avoid routing the wrong stream/sink.",
+   "claim": "refuses ambiguous/mismatched core/node identity to avoid routing the wrong stream/sink."
+  },
+  {
+   "file": "scripts/bluetooth_agent.py",
+   "line": 62,
+   "raw": "Gio.DBusCallFlags.NONE, 120000 if method == 'Pair' else 10000, None, done)  # GOTCHA: Pair timeout 120s",
+   "claim": "Pair timeout 120s"
+  },
+  {
+   "file": "scripts/clipboard.py",
+   "line": 230,
+   "raw": "def serve(directory: Path):  # GOTCHA: local-only history; respects CLIPBOARD_STATE/XDG paths (see module docstring).",
+   "claim": "local-only history; respects CLIPBOARD_STATE/XDG paths (see module docstring)."
+  },
+  {
+   "file": "scripts/lyrics.py",
+   "line": 6,
+   "raw": "GOTCHA: network/cache/parsing are bounded; failures return no-lyrics results rather than crashing the UI worker.",
+   "claim": "network/cache/parsing are bounded; failures return no-lyrics results rather than crashing the UI worker."
+  },
+  {
+   "file": "scripts/network_inventory.py",
+   "line": 4,
+   "raw": "# GOTCHA: nmcli output/terse formatting varies; parse defensively and never expose secrets in labels.",
+   "claim": "nmcli output/terse formatting varies; parse defensively and never expose secrets in labels."
+  },
+  {
+   "file": "scripts/niri_events.py",
+   "line": 58,
+   "raw": "# GOTCHA: bounded buffer; oversized/malformed stream invalidates instead of unbounded growth.",
+   "claim": "bounded buffer; oversized/malformed stream invalidates instead of unbounded growth."
+  },
+  {
+   "file": "scripts/screen_capture.py",
+   "line": 5,
+   "raw": "GOTCHA: image paths/sizes are bounded; annotation uses argv paths (not shell interpolation).",
+   "claim": "image paths/sizes are bounded; annotation uses argv paths (not shell interpolation)."
+  }
+ ],
+ "summary": {
+  "rel_total": 108,
+  "rel_lines_all_ok": 104,
+  "rel_bad_path_claims": 0,
+  "rel_bad_symbol_claims": 3,
+  "rel_lines_with_no_path_claim": 1,
+  "invariant_total": 26,
+  "gotcha_total": 10,
+  "map_refs_total": 34,
+  "map_refs_bad": 0
+ },
+ "map_refs": [
+  {
+   "map_line": 15,
+   "path": "scripts/check_architecture.py",
+   "lineno": 1,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "#!/usr/bin/env python3"
+  },
+  {
+   "map_line": 23,
+   "path": "qml/services/ShellState.qml",
+   "lineno": 158,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "    function run(action, payload) { // REL: scripts/desktop_backend.py::handle – sends {action,...} over stdin."
+  },
+  {
+   "map_line": 23,
+   "path": "scripts/desktop_backend.py",
+   "lineno": 553,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "        self.actions = ActionRegistry(start_feature=lambda action, operation, **options: self.start_feature(action, operation, **options))  # REL: scripts/backend_actions.py::ActionRegistry"
+  },
+  {
+   "map_line": 25,
+   "path": "scripts/run-gates.sh",
+   "lineno": 2,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "# Run migration checks only inside a disposable compositor/session."
+  },
+  {
+   "map_line": 107,
+   "path": "qml/services/FeatureCatalog.qml",
+   "lineno": 154,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "        path: Quickshell.shellPath(\"config/features.json\")"
+  },
+  {
+   "map_line": 114,
+   "path": "scripts/feature_catalog.py",
+   "lineno": 121,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "    index = document(resource(root, 'config/features.json', '.json'))"
+  },
+  {
+   "map_line": 131,
+   "path": "qml/services/ShellState.qml",
+   "lineno": 230,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "    property Process backend: Process { // REL: scripts/desktop_backend.py – long-lived Python backend (see Phase 3 map)."
+  },
+  {
+   "map_line": 132,
+   "path": "qml/services/ShellState.qml",
+   "lineno": 158,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "    function run(action, payload) { // REL: scripts/desktop_backend.py::handle – sends {action,...} over stdin."
+  },
+  {
+   "map_line": 133,
+   "path": "qml/services/FeatureCatalog.qml",
+   "lineno": 154,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "        path: Quickshell.shellPath(\"config/features.json\")"
+  },
+  {
+   "map_line": 133,
+   "path": "qml/services/ControlRegistry.qml",
+   "lineno": 26,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "    function positionForIndex(index) { return tabs.findIndex(tab => tab.legacyIndex === index); }"
+  },
+  {
+   "map_line": 134,
+   "path": "scripts/desktop_backend.py",
+   "lineno": 553,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "        self.actions = ActionRegistry(start_feature=lambda action, operation, **options: self.start_feature(action, operation, **options))  # REL: scripts/backend_actions.py::ActionRegistry"
+  },
+  {
+   "map_line": 135,
+   "path": "scripts/desktop_backend.py",
+   "lineno": 1638,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "        while True:  # main event loop: stdin JSON-lines + niri events + feature completions -> emit snapshots"
+  },
+  {
+   "map_line": 138,
+   "path": "qml/services/ShellState.qml",
+   "lineno": 158,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "    function run(action, payload) { // REL: scripts/desktop_backend.py::handle – sends {action,...} over stdin."
+  },
+  {
+   "map_line": 139,
+   "path": "qml/services/ShellState.qml",
+   "lineno": 171,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "        backend.write(JSON.stringify(request) + \"\\n\"); // Protocol: JSON-lines request; result carries ok/action/message/sequence/pending."
+  },
+  {
+   "map_line": 140,
+   "path": "scripts/desktop_backend.py",
+   "lineno": 1679,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "                    error = handle_line(backend.handle, line)   # REL: scripts/action_pending.py::handle_line – stdin JSON-lines"
+  },
+  {
+   "map_line": 141,
+   "path": "scripts/desktop_backend.py",
+   "lineno": 1341,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "    def handle(self, request: Any) -> dict[str, Any]:  # JSON-lines request dispatch; reply: action/ok/message/sequence/pending"
+  },
+  {
+   "map_line": 142,
+   "path": "scripts/backend_actions.py",
+   "lineno": 54,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "            specs, project = factory(capabilities)"
+  },
+  {
+   "map_line": 143,
+   "path": "scripts/desktop_backend.py",
+   "lineno": 1172,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "    def start_feature(self, action, operation, *, metadata=None):  # INVARIANT: host owns worker admission/executor; registry delegates"
+  },
+  {
+   "map_line": 144,
+   "path": "scripts/desktop_backend.py",
+   "lineno": 1182,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "            self.result_sequence += 1; spec = self.actions.get(action)  # INVARIANT: one completion published per cycle (sequence)"
+  },
+  {
+   "map_line": 145,
+   "path": "scripts/desktop_backend.py",
+   "lineno": 504,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "def emit(backend: DesktopBackend) -> None:  # publishes snapshot+actionPending/lastResult via action_pending.py"
+  },
+  {
+   "map_line": 146,
+   "path": "qml/services/ShellState.qml",
+   "lineno": 182,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "            const ownership = Pending.received(pendingState, next.actionPending, resultChanged ? next.lastResult : null);"
+  },
+  {
+   "map_line": 149,
+   "path": "qml/services/FeatureCatalog.qml",
+   "lineno": 154,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "        path: Quickshell.shellPath(\"config/features.json\")"
+  },
+  {
+   "map_line": 149,
+   "path": "scripts/feature_catalog.py",
+   "lineno": 121,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "    index = document(resource(root, 'config/features.json', '.json'))"
+  },
+  {
+   "map_line": 150,
+   "path": "scripts/feature_catalog.py",
+   "lineno": 121,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "    index = document(resource(root, 'config/features.json', '.json'))"
+  },
+  {
+   "map_line": 152,
+   "path": "qml/services/FeatureCatalog.qml",
+   "lineno": 154,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "        path: Quickshell.shellPath(\"config/features.json\")"
+  },
+  {
+   "map_line": 153,
+   "path": "qml/services/ControlRegistry.qml",
+   "lineno": 26,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "    function positionForIndex(index) { return tabs.findIndex(tab => tab.legacyIndex === index); }"
+  },
+  {
+   "map_line": 154,
+   "path": "scripts/check_architecture.py",
+   "lineno": 86,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "                for v in value: visit(v)"
+  },
+  {
+   "map_line": 158,
+   "path": "qml/settings/SettingsView.qml",
+   "lineno": 3,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "// INVARIANT: page IDs/legacyIndex routes remain compatible with CLI/catalog (implicit coupling #3/#5)."
+  },
+  {
+   "map_line": 170,
+   "path": "scripts/clipboard.py",
+   "lineno": 1,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "#!/usr/bin/env python3"
+  },
+  {
+   "map_line": 179,
+   "path": "scripts/feature_catalog.py",
+   "lineno": 121,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "    index = document(resource(root, 'config/features.json', '.json'))"
+  },
+  {
+   "map_line": 185,
+   "path": "scripts/check_architecture.py",
+   "lineno": 152,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "    for label, recorded, current in [('legacy', allowed, violations), ('cycle', cycles, current_cycles)]:"
+  },
+  {
+   "map_line": 212,
+   "path": "qml/services/FeatureCatalog.qml",
+   "lineno": 154,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "        path: Quickshell.shellPath(\"config/features.json\")"
+  },
+  {
+   "map_line": 230,
+   "path": "scripts/check_architecture.py",
+   "lineno": 33,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "    for base in (source.parent, root):"
+  },
+  {
+   "map_line": 234,
+   "path": "tests/test_settings_startup.py",
+   "lineno": 153,
+   "path_ok": true,
+   "in_range": true,
+   "target_line": "    def test_backend_reconnect_keeps_the_loaded_window_and_theme(self):"
+  }
+ ]
+}

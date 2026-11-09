@@ -1,10 +1,43 @@
 # lme-fedora-niri-qs — live state
 
 > UPDATE THIS FILE at the end of every work session. Last updated:
-> 2026-11-09 (documentation pass on branch `docs/annotate-and-map` — 12
-> local commits, NOT pushed, awaiting owner review; PR #110 MERGED, main @
-> 6c1dc3c; ran through the OpenCode desktop agent with gateway creds
-> re-supplied by the owner).
+> 2026-11-09 late (annotation hallucination AUDIT — Route 1 GLM self-audit
+> COMPLETE, Route 2 Beam audit PENDING new tunnel URL; documentation pass on
+> branch `docs/annotate-and-map` — 12 local commits, NOT pushed, awaiting
+> owner review; PR #110 MERGED, main @ 6c1dc3c; now via Command Code bridge
+> at a trycloudflare quick tunnel — URL changes when the worker restarts).
+
+## Session 2026-11-09 late: annotation hallucination dual audit (Route 1 done, Route 2 blocked)
+
+Owner: "audit that the annotations are not hallucinations — BOTH yourself +
+Agent Beam, compare results". Connection switched from OpenCode gateway to a
+Command Code HTTP bridge (POST /chat {message, async, yolo:true} → job_id →
+GET /jobs/<id>; sessions auto-created on first /chat, resume by session_id).
+
+- **Method (Route 1)**: byte-identical patch replay into a local sandbox
+  clone (md5-verified xz+base64 chunked transfer through the chat bridge),
+  then LOCAL verification: tolerant REL-grammar parser, symbol grep, map
+  anchor content checks, independent no-behavior battery. Full report:
+  `audits/2026-11-09-annotation-audit/route1_report.md`.
+- **Route 1 verdict**: paths 180/180 real; 5 defective REL claims
+  (ControlRegistry.qml:2 invented symbol `read_control_grid`; SettingsRegistry
+  .qml:3 `openPage` lives in SettingsApplication.qml not SettingsView;
+  deploy_niri.py:5 `parse` nonexistent (real: graph/validate); check.sh:3
+  vague REL; ControlDashboard.qml:217 `powerProfile` is desktop_backend's,
+  not audio_actions'); map check_architecture.py anchors 152-155/1-164 are
+  BASELINE-pinned (branch reality: 159-161/170). No-behavior-change proven
+  again independently: 276 py AST-identical, 153 qmljs stripped-identical,
+  14 sh comment-only, check_architecture + compileall PASS.
+- **Route 2 (Beam)**: job `edcfca5e-44a1-4c7b-b0bf-bed7d55d9241` submitted,
+  then the quick tunnel died (HTTP 530 → DNS gone). Per owner protocol:
+  stopped, no URL guessing. RESUME when owner sends new URL: poll that job
+  id first (bridge may have kept it), else resubmit the brief saved at
+  GLM-sandbox `/home/z/my-project/audit/beam_brief.txt`; hands session was
+  `1e23f2bc-35b4-4fe6-9564-7d54e299271b`. Then do the đối chiếu (compare).
+- Worker-side sandbox clone has orphan local commit `d3f935f` (patch+
+  numstat; its push 403'd — stored credential lacks sandbox scope). This
+  archive now carries the same artifacts pushed from the GLM side; when the
+  tunnel returns, reset the worker clone to origin/main to drop the orphan.
 
 ## Session 2026-11-09: codebase annotation + WORKSPACE_MAP (branch local, unpushed)
 

@@ -432,3 +432,37 @@
     + whitespace normalization (167/167). This battery caught 3 real breaks
     the agent had introduced while "only adding comments" — run it; do not
     eyeball 445 files.
+
+56. **Audit annotation "hallucinations" with a tolerant grammar parser, not
+    the spec grammar.** Real REL tags drift from the spec (`pathA, pathB –
+    reason`, `::sym1,::sym2`, `(.qsb)` suffixes, bare filenames inheriting a
+    sibling's directory, root-level files like THIRD_PARTY.md). A strict
+    parser reports false "parse errors"; a tolerant one resolves every
+    reference (repo-root → tagging-file dir → comma-list dir inheritance →
+    unique basename) and only then judges. The hallucinations that remain
+    are semantic: invented symbol names, right relationship pinned to the
+    WRONG file, action attributed to the wrong provider — catch those by
+    grepping the claimed symbol/action inside the claimed file, not by
+    checking path existence (paths were 180/180 real while 5 claims were
+    still wrong).
+
+57. **Verify map file:line anchors by CONTENT at the line, in the state the
+    map claims to describe.** "Path exists + line in range" passes for
+    stale anchors. The 2026-11-09 map pinned check_architecture.py refs to
+    the BASELINE (pre-annotation) line numbers even though the annotation
+    pass itself had shifted that file +6 lines — internally inconsistent
+    with every other anchor. Rule: after a self-modifying pass (comments
+    shift lines), re-pin ALL map anchors against the final tree, or state
+    explicitly which tree the numbers refer to.
+
+58. **Quick tunnels + agent bridges: submit-then-poll, never background-
+    poll.** A local `python3 bridge.py ask ... &` poller dies with the
+    sandbox shell (tool calls don't keep processes alive), losing the
+    job_id when the tunnel later drops. Submit async, print+persist the
+    job_id IMMEDIATELY, then poll in short foreground calls — when the
+    tunnel dies (HTTP 530 → DNS gone) the server-side job may survive and
+    be retrievable by job_id once a new URL arrives. For payload transfer
+    through chat: xz -9 | base64 -w76, ~30-48KB chunks between explicit
+    markers, whitespace-stripped reassembly + md5 of the DECODED artifact
+    (chunk-level md5 can differ on trailing-newline position while content
+    is still byte-identical).
