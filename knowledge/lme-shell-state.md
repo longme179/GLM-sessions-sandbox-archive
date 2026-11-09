@@ -1,10 +1,62 @@
 # lme-fedora-niri-qs — live state
 
 > UPDATE THIS FILE at the end of every work session. Last updated:
-> 2026-11-09 evening (QML-first migration plan written + PR #113 OPEN
-> awaiting owner review; main @ 8ebc597 after #111 annotation + #112 README
-> 6.0.0; quickshell capability snapshot added at knowledge/quickshell.md;
-> OpenCode gateway back at an opentunnel.xyz URL supplied per-session).
+> 2026-11-09 night (QML-first migration Q0 DELIVERED: PR #114 OPEN, stacked
+> on plan PR #113 OPEN; main still @ 8ebc597; direct GitHub work from the
+> GLM sandbox — push via PAT-embedded origin URL worked, no remote agent).
+
+## Session 2026-11-09 night: Q0 delivered — PR #114 OPEN (stacked on #113)
+
+Owner approved starting phase 1: "tôi duyệt cho bạn bắt đầu phase đầu tiên"
+(= Q0: decision, metric automation, baselines — docs + checks only).
+
+- **PR #114** `qml/q0-metric-baseline`, base = `docs/qml-first-migration-plan`
+  (stacked; after #113 merges, retarget #114 to main — the plan commit
+  collapses out of the diff). 3 commits, tests→impl→docs:
+  - `f1f42e2` tests first (3 new cases in tests/test_architecture.py):
+    toolingFiles classification pinned to the plan §1 list (12 files),
+    slice arithmetic with wc -l parity (unterminated tail ≠ line;
+    unlisted scripts/ defaults to runtime; counting needs no ownership),
+    CLI prints "Architecture: language mix". Committed red, then green.
+  - `23ed827` impl: config/architecture.json gains `toolingFiles` (surgical
+    7-line insert after the inline hosts array — json.dumps would reformat
+    the whole file); check_architecture.py 170→205 lines gains
+    language_mix()/mix_line(), printed after the check output, exit code
+    UNCHANGED (no new gates, plan §4). Nonblank 177/250 cap OK.
+  - `fec3a7d` docs: STATE QML-first section (frozen 8ebc597 baseline:
+    16,228 QML+JS / 9,277 py runtime / 1,637 tooling / 26,161 tests,
+    whole-repo 69.5% py; post-Q0 actual 69.6% — Q0's own +35 tooling/+37
+    test lines), plan status → owner-accepted, WORKSPACE_MAP tooling rows
+    refreshed (module edges unchanged), MIGRATION_LOG + CHANGELOG entries.
+- **Verification**: check.sh G0 — architecture green WITH the mix line;
+  catalog green; 1,076 tests (1,073 baseline + 3 new; 3 errors = the
+  documented quickshell-absent environmental failures, identical on clean
+  main in GLM sandbox: test_clipboard_integration / test_pending_reducer /
+  test_selection_lens); demo snapshot valid; bash -n green. set -e aborts
+  check.sh at those 3 errors — run the remaining steps manually when in
+  the sandbox.
+- **Counter output to quote**: `Architecture: language mix (wc -l): runtime
+  QML/JS 16,228 · Python 9,277 (63.6% QML-side) · tooling Python 1,672 ·
+  tests Python 26,198 · whole-repo Python 69.6%`
+
+### Next-session notes
+
+- Q0 exit needs the owner to accept T1/T2 in PR #114 (or amend). Then Q1.
+- **Q1 NEEDS A6 approval** (event-driven wake model): audio, battery/AC,
+  power profiles, bluetooth, network read-only native state — 1,134 py
+  lines across 9 modules; new qml/services singletons expose EXISTING
+  snapshot property names (panels unchanged); backend keeps emitting the
+  sections one phase for live A/B; characterization tests first. Use
+  knowledge/quickshell.md (Pipewire/UPower/Bluetooth/Networking sections)
+  for the native APIs. Report measured before/after wake rates.
+- GLM sandbox repo state: local clone at
+  /home/z/my-project/repos/lme-fedora-niri-qs @ qml/q0-metric-baseline;
+  core.fileMode false BOTH repos (sandbox flips 644→755 — always check
+  `git diff` is content-only before committing).
+- Archive push hygiene: pull --rebase first (the audit session pushed
+  aa8aed6.. concurrently); never `git checkout -- .` blindly after a soft
+  reset — it discards the edit you meant to keep (lost one state-file
+  rewrite this session; redone).
 
 ## Session 2026-11-09 evening: QML-first migration plan — PR #113 OPEN
 
