@@ -536,3 +536,38 @@
     provider.no-route history). Used for the Q1 battery audit:
     ses_e3f9c7448ffeOmmA2GvCyVyPto, worked first try, high reasoning
     quality (correctly cross-checked D-Bus, log, backend, source).
+
+64. **Target-engine API surface is a contract too (Q2, lme PR #117): the
+    sandbox CANNOT catch V4-engine gaps.** Two blockers surfaced only on
+    the owner's real machine (quickshell 0.3.2 fc44): (a) `native` is a
+    RESERVED QML identifier — `readonly property bool native:` is a
+    parse error that breaks the whole singleton import chain (ES3
+    future-reserved words still rejected by V4 even though desktop JS
+    engines allow them); (b) `Object.fromEntries` (ES2019) does not
+    exist in V4 — runtime TypeError at load. Sandbox has no quickshell
+    binary and Node/V8 have ES2019, so both passed locally. Mitigations
+    now in the repo: `scripts/check_qml_reserved.py` (sandbox scanner,
+    all 164 QML files) + a source-contract test banning `fromEntries`
+    and reserved-word property names across `qml/services` (comments
+    excluded — the scanner's own explanatory comment tripped the first
+    version). ES2017 (`padStart`, `Object.values`) is proven fine on the
+    live shell; assume ≤ES2017 + explicit greps for anything newer.
+
+65. **Real-machine QML test/probe harness patterns (Q2 rounds 1–4):**
+    (a) `finish()`/`Qt.quit()` must fire from a Timer, never from
+    `Component.onCompleted` (no receiver → hangs to the 15 s timeout) —
+    same lesson as eb5f2db, re-learned in a new test; (b) readiness-poll
+    async sources instead of fixed waits: DesktopEntries scan, FileView
+    loads and backend snapshots all took >1.2 s on the real machine
+    (deadline 8 s inside run_qml's 15 s timeout; the Q1 `backendReady`
+    phase-gate pattern is the reference); (c) standalone probes must
+    live INSIDE the worktree with a RELATIVE import
+    (`import "qml/services"`) — absolute paths are "not a valid import
+    URL" in 0.3.2; (d) probe `console.log` needs
+    `QT_LOGGING_RULES=qml.debug=true` or it is suppressed; capture
+    stdout+stderr combined; (e) a probe that sets XDG_DATA_HOME for
+    isolation hides user-local ~/.local/share/applications entries —
+    11-app "backend-only" diff was an artifact, compare against the
+    un-isolated backend view or unset it; (f) cleanup order matters when
+    the probe is inside the worktree: rm the probe BEFORE
+    `git worktree remove` (untracked files make it refuse).
