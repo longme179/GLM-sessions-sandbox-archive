@@ -571,3 +571,32 @@
     un-isolated backend view or unset it; (f) cleanup order matters when
     the probe is inside the worktree: rm the probe BEFORE
     `git worktree remove` (untracked files make it refuse).
+
+66. **First write-family port (Q3, lme PR #118): settle pending locally, never
+    fake a backend round-trip.** The router reserves the action's pending slot
+    with Pending.sent, executes natively, and settles with a NEW
+    ActionPending.settled primitive — because received() only un-pends actions
+    the backend acknowledges, a locally-served action would hang pending
+    forever. Results surface through the same lastResult/wifiResult/status
+    path so widget UX (awaitingConnection, busy flags, dialog close) is
+    unchanged. Fallback ordering matters: fixture modes keep the demo
+    registry; real sessions without quickshell's NetworkManager backend or
+    adapter fall back for the backend's canonical error strings. Probe lesson
+    (round 1): dispatching a native action at t=0 falls back — the devices
+    model loads async, so canRoute() is false until it lands; probe AFTER
+    canRoute() && section.device, and give RequestScan its full ~10 s
+    rate-limit window before comparing lists.
+67. **quickshell 0.3.2 wifi write API — verified semantics (Q3 source
+    reading + real-machine parity):** WifiDevice.networks is SSID-deduped
+    (matches nmcli first-seen dedupe); Network.nmSettings attaches saved
+    profiles per-SSID, so the saved list = union of network.nmSettings
+    (hotspot ap-mode profiles are SKIPPED — quickshell TODO); connect() on a
+    network with settings activates that profile, with an AP add-and-activates
+    otherwise; connectWithPsk on a saved network UPDATES the profile's psk
+    then activates (no duplicate profiles), on a new SSID add-and-activates;
+    Network.forget() drops EVERY profile on the SSID — forget one uuid via
+    NMSettings.forget() on the specific object; scannerEnabled false->true
+    re-arms RequestScan (rate-limited 10001 ms; a retry timer fires later);
+    WifiSecurityType enum maps to display strings (Wpa2Eap = enterprise);
+    ConnectionFailReason drives the auth-failure UX. Backend parity achieved:
+    identical SSID sets and 0 strength deltas vs nmcli on the owner's machine.
