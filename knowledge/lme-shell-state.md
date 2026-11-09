@@ -791,3 +791,37 @@ Recent history (newest first):
   worktree runs are the behavioral verification path while that holds.
 - Next: owner merges #116 + restarts shell (bar should show ~80);
   Q1 wake-rate delta measurement still pending; then Q2 ask.
+
+## Session 2026-11-09 (later) — Q2 delivered: PR #117
+
+- Owner: "GREAT RESULTS, Q2 can start now" (after #116 validation). #116
+  merged into main as f0226ee.
+- Q2 branch `qml/q2-native-files`, 7 commits: b6e7dbb tests (16) ->
+  aa269f4 impl (LauncherState DesktopEntries+FileView store, MonitorState
+  /proc sampling at 2s, NativeState gates, A/B compares) -> 7eae53f docs
+  -> 0f1e40e nativeMode rename -> 6f1e30b fromPairs + harness fixes ->
+  1d42f4d readiness-polls -> 67ece5b verification docs. PR #117 open.
+- Real-machine verification took FOUR rounds (crouton-alpha-free high,
+  ses_e3f9c7448ffeOmmA2GvCyVyPto, worktrees /tmp/q2-verif{,2,3,4}; live
+  checkout f0226ee + shell PID 289308 untouched all rounds; real
+  launcher.json md5 unchanged):
+  R1: `native` = reserved QML identifier, parse error kills the singleton
+      chain (5/5 QML fail + 2 Q1 QML regress). Probe absolute-path import
+      also invalid ("not a valid import URL").
+  R2: rename verified, Q1 green again — but `Object.fromEntries` missing
+      from V4 (TypeError); probe count 0 (DesktopEntries async, console.log
+      needs qml.debug).
+  R3: fromPairs verified; 3/5 pass (monitor_parsers, native_apps,
+      record_round_trip); parity probe WORKED: native 51 / backend 57 /
+      overlap 46; native-only = predicted OnlyShowIn/NotShowIn/TryExec
+      superset; backend-only 11 = XDG_DATA_HOME isolation artifact.
+  R4: 18/18 test_native_files (5/5 QML running), Q1 26 OK. GREEN.
+- Language mix after Q2: runtime QML/JS 17,009 = 64.7% (Q1 16,582/64.1%,
+  Q0 16,228/63.6%). G0: 1105 tests, 3 known quickshell-absent errors.
+- New repo guardrails: contract test banning Object.fromEntries +
+  reserved-word property names in qml/services; sandbox scanner
+  scripts/check_qml_reserved.py (in GLM sandbox scripts dir, not the repo).
+- Pending owner: merge #117 + shell restart, then GUI+terminal launch,
+  monitor values, a day of apps-count/memoryTotalGiB drift logs. Q1
+  wake-rate delta measurement still open (A6 condition). Next: Q3 ask
+  (per plan §5 Q3 — wifi networks/saved lists move natively).
