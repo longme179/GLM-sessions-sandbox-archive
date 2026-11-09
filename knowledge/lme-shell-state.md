@@ -761,3 +761,33 @@ Recent history (newest first):
 - #77: hover/glint feel (ydotool missing on the machine)
 
 ## Update protocol
+
+## Session 2026-11-09 night: Q1 battery hotfix (PR #116) + crouton-alpha audit route
+
+- Owner reported post-Q1 regression: battery reads 1% at ~80%; asked whether
+  later phases would fix it, and set a standing preference: for remote
+  OpenCode audits on the real machine use `crouton-alpha-free` (opencode
+  provider, free) instead of `iceman-free` (recorded as lesson 63).
+- Root cause found in the quickshell 0.3.2 tag BEFORE the remote round:
+  `DBusDataTransform<PowerPercentage>::fromWire` = `wire * 0.01` —
+  `UPowerDevice.percentage` is a 0-1 FRACTION (only `Percentage` is
+  transformed; `healthPercentage` <- D-Bus `Capacity` stays 0-100). Q1 had
+  applied *100 to Pipewire volume / wifi signalStrength / Bluetooth battery
+  but not UPower percent: `Math.round(0.79)` = 1%.
+- Real-machine audit (crouton-alpha-free high, ses_e3f9c7448ffeOmmA2GvCyVyPto):
+  D-Bus 79 vs native 1 on all 27 battery A/B drift lines; ZERO drift for
+  audio/mic/bluetooth/powerProfile/peripherals; network only ±2 strength
+  sampling jitter (expected A/B-window transient). Answer to "other
+  issues?": none real.
+- PR #116 `fix/q1-upower-percentage-scale` (4 commits: tests -> impl ->
+  docs -> test-timing fix): percent100() helper on both UPower read sites;
+  source-contract test + behavioral QML test. Round-2 remote verification
+  caught `Qt.quit()` inside Component.onCompleted having no receiver
+  (timeout despite correct values) — fixed with a one-shot 100ms Timer;
+  round-3: 11/11 PASS, 0 skipped, on the owner's machine (worktree under
+  /tmp; live checkout + shell PID untouched).
+- Sandbox drift: quickshell binary GONE after recycle (Debian trixie, no
+  cmake/ninja, no distro pkg) — QML tests skip locally now; real-machine
+  worktree runs are the behavioral verification path while that holds.
+- Next: owner merges #116 + restarts shell (bar should show ~80);
+  Q1 wake-rate delta measurement still pending; then Q2 ask.
