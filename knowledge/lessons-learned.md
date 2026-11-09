@@ -600,3 +600,20 @@
     WifiSecurityType enum maps to display strings (Wpa2Eap = enterprise);
     ConnectionFailReason drives the auth-failure UX. Backend parity achieved:
     identical SSID sets and 0 strength deltas vs nmcli on the owner's machine.
+
+68. **Remote audits review semantics, not JS arity — self-review every
+    callback call site (Q3 part 2, lme PR #119).** The crouton audit round
+    PASSed `finish(evaluate())` where finish(ok, message) expected two args —
+    the [ok, message] array bound to `ok`, message undefined; only a
+    line-by-line call-signature re-read after pushing caught it (fix 72af7ce,
+    verified round 2). Rule: after writing any done/callback flow, re-read
+    every call site checking arity + types against the signature, and prefer
+    test pins over prose audits for shape bugs. Same round taught three more
+    ports rules: Python round() is ties-to-even while JS Math.round is
+    half-up — port numeric helpers with tie-case tests (50.5→50, -99.5→-100);
+    quickshell Process FailedToStart emits runningChanged but NEVER exited,
+    so one-shot tools need an armed+exit-seen guard plus a watchdog that is
+    stopped in the settle path (else it kills the next queued run); and
+    native writes to PwNodeAudioIface.volume are the same scale wpctl prints
+    (write 80% read back 0.80 in wpctl, A/B drift stayed 0) — the Q1 read
+    parity argument extends to the write path.

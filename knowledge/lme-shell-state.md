@@ -854,3 +854,48 @@ Recent history (newest first):
   connect, disconnect, forget, radio toggle, a day of [Q3 A/B] drift. Q1
   wake-rate delta still open. Next asks: the REST of plan-Q3 (audio/power/
   bluetooth writes, network plans/profiles) or jump to Q4 per plan.
+
+## Session 2026-11-09 (night) — Q3 part 2 delivered: PR #119 merged
+
+- Owner approved the REST of Q3 ("duyệt phần còn lại của Q3") with fresh A/B
+  logs (Q3 wifi drift: backend 1 vs native 6 networks — scan timing +
+  hotspot edge, as documented; #118 confirmed live). Delivered the native-API
+  write families as `qml/q3-write-families`, PR #119, MERGED as e59d09f.
+- Scope decision (told to owner): plan §5 Q3's mechanism list = native-API
+  families (audio controls, bluetooth writes, charge mode) — delivered; the
+  inventory-based families (audioDevicesRefresh/Port/Profile/Route over
+  pactl/pw-dump, network plans/profiles over nmcli/busctl ≈ 680 lines of
+  defensive parsing) remain as the LAST Q3 leg — they need the Q4
+  Process/allowlist port style and did not fit this session.
+- 6 commits: d6fc4b2 tests (test_native_controls, 8 contract + 5 QML) →
+  00e56ef impl (AudioState PwNodeAudioIface writes + brightnessctl one-shot
+  Process w/ queue; BluetoothState adapter.enabled/device.connected writes +
+  rfkill-fallback routing via toggleRoutes; PowerState chargeMode via the
+  same pkexec helper argv + JSON verify; ShellState nativeOwner fan-out +
+  canRoute(action,payload,context) + context{system,status} so services keep
+  no ShellState.system backrefs; routineActions extraction so native results
+  toast-suppress the same names; closePanels guard moved ahead of both
+  paths) → 6d1d762 docs → 72af7ce fix (finish(evaluate()) arity bug —
+  audit missed it, self-review caught it) → 663f75c hardening (ties-to-even
+  round(), watchdog stop in finish, available check) → 6a6e137 verify docs.
+- Architecture: new recorded cycle edge ShellState→BluetoothState (router
+  fan-out); ShellState ratchet 296→312; test_native_controls 273. Language
+  mix 17,629 = 65.5% (Q3 wifi 65.1%).
+- Real-machine verification (crouton-alpha-free, worktrees /tmp/q3p2-audit +
+  /tmp/q3p2-r2; live checkout b54bf4d clean, shell PID 289308 unchanged
+  both rounds): full discover 1134 OK (185 env skips); probe — six
+  validation strings exact, volume 75→80→75 vs wpctl 0.75 with
+  abMismatches.audio staying 0, mute round-trip, brightness Process settled
+  (panel was at 100% so ±5 clamp-degenerate — real slider drag left to the
+  owner), charge error toasted while routine controls stayed toast-silent
+  (status keeps the previous toast until its 4.5 s timer — backend parity),
+  canRoute all true, charging.canSet true (helper installed), BT radio off.
+  Probe design note: settle-detection by lastResult raced the backend
+  "ready" result once (stale attribution, harmless — the same string was
+  covered by another action).
+- Remaining Q3 leg (next session): audio device actions + network
+  plans/profiles (Process+parser ports, tests first, freeze the inventory
+  model shapes from tests/test_audio_devices.py + network_fixture.py).
+  Owner post-merge checklist for #119: volume/mic/brightness sliders, BT
+  toggle + device connect/disconnect, charge switch (polkit → "Charge mode
+  updated · …"), a day of drift lines. Q1 wake-rate delta still open.
