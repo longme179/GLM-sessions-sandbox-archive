@@ -511,3 +511,28 @@
     redesigned the whole phase structure in ~20 minutes. Snapshot now
     lives at knowledge/quickshell.md; keep it stamped with the version
     floor (0.3.2) and re-verify before each new design cycle.
+
+62. **Quickshell 0.3.2 normalizes UPower `percentage` to a 0–1 fraction —
+    and units are a contract, not a detail.** Q1 (lme PR #115) rescaled
+    Pipewire volume, wifi signalStrength and Bluetooth battery by 100 but
+    read `UPowerDevice.percentage` as 0–100, so an 80% battery rendered as
+    `Math.round(0.8)` = 1% — owner-visible regression, invisible to every
+    sandbox test because the native path only engages in real sessions.
+    Two structural fixes: (a) the A/B drift log DID catch it same-day
+    (`backend 79 vs native 1`, 27/27 lines) — keep A/B windows on every
+    native port and actually READ them on the real machine; (b) grep the
+    dependency source for `DBusDataTransform`/unit transforms at every
+    service boundary BEFORE writing the QML side, not after the bug
+    report. knowledge/quickshell.md row 5 now carries the gotcha; fixed
+    in PR #116 (percent100() helper + source-contract + behavioral tests).
+63. **Owner model preference for remote audits (2026-11-09): use
+    `crouton-alpha-free` (provider `opencode`, variants up to `max`,
+    free) — NOT `iceman-free`** — when driving the OpenCode gateway agent
+    on the real machine ("ưu tiên models tốt như crouton alpha ... thay
+    vì iceman free"). Same switching mechanics as lesson 60: POST
+    /api/session/{id}/model {"model":{"id":"crouton-alpha-free",
+    "providerID":"opencode","variant":"high"}}; verify via the session's
+    model field AND the assistant message `model` field (silent
+    provider.no-route history). Used for the Q1 battery audit:
+    ses_e3f9c7448ffeOmmA2GvCyVyPto, worked first try, high reasoning
+    quality (correctly cross-checked D-Bus, log, backend, source).
