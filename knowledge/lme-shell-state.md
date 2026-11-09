@@ -7,6 +7,31 @@
 > owner review; PR #110 MERGED, main @ 6c1dc3c; now via Command Code bridge
 > at a trycloudflare quick tunnel — URL changes when the worker restarts).
 
+## Session 2026-11-09 latest: REL fix commit applied — branch READY FOR MERGE
+
+Owner approved: "1 commit comment-only nhỏ sửa 5 thẻ REL + refresh anchor map".
+DONE as commit **c5231d2** on `docs/annotate-and-map` (NOT pushed, per rule).
+
+- Changes: 6 files, 12 insertions/12 deletions (same-line replacements only).
+  5 REL tags fixed (read_control_grid→legacy_ids/load_catalog;
+  openPage→SettingsApplication.qml; powerProfile→desktop_backend.py::handle;
+  parse→graph; planning→plan) + 8 map anchor spots re-pinned
+  (check_architecture.py 1-170, :6, :158, 158-161, 92-162, 39-80 — was
+  baseline-pinned 1-164/:4/:152/152-155/86-156/33-74).
+- Proof chain: edits made on GLM replica first → battery (ast 276/276,
+  strip 153/153, sh 14/14, ratchet, symbol greps, map refs 34/34, REL
+  verifier 0 bad) → patch md5 4fae2f3a8e6a9d8897959e62a0f7d457 → applied on
+  worker via OpenCode /shell (byte-exact) → worker `git diff` md5 identical
+  → ratchet+compileall pass on worker → committed → final symbol/anchor
+  greps on worker all green; `read_control_grid` now 0 occurrences.
+- Branch now: 53e2c15 + c5231d2 = ready for owner review/merge.
+- Open items for owner: (a) merge docs/annotate-and-map when satisfied;
+  (b) cosmetic only: check.sh:3 REL tag is intentionally vague
+  ("tests/, migration gates"); map Findings row cites `phase2-log.md`
+  which was a disposable session log, not in-repo.
+- Worker sandbox clone reset to origin/main (orphan d3f935f dropped;
+  same content had been pushed from GLM side as d5eee21).
+
 ## Session 2026-11-09 late: annotation hallucination dual audit — COMPLETE
 
 Owner: "audit that the annotations are not hallucinations — BOTH yourself +

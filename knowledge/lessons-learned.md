@@ -487,3 +487,14 @@
     "ollama-cloud","variant":"max"}}. Always verify the model actually used
     via the assistant message's `model` field — the first run silently
     executed on iceman-free and produced a valid-looking report.
+
+61. **Bulk payload transfer through an LLM-proxy bridge corrupts; a direct
+    shell endpoint does not.** Sending a 20KB base64 patch inside a chat
+    message to the Command Code worker made the worker LLM re-type the
+    heredoc — md5 mismatch (silently corrupted; the md5 gate caught it,
+    tree stayed clean). Same machine, OpenCode gateway POST
+    /api/session/{id}/shell {"command": ...} executes DIRECTLY (no LLM),
+    output readable from the resulting shell message (type=shell,
+    status=exited, output.output) — the printf-base64 pipe arrived md5-
+    identical. Rule: pass artifacts through the direct-execution path and
+    md5-gate BOTH ends; never ask an LLM to re-type kilobyte payloads.
