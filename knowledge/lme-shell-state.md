@@ -825,3 +825,32 @@ Recent history (newest first):
   monitor values, a day of apps-count/memoryTotalGiB drift logs. Q1
   wake-rate delta measurement still open (A6 condition). Next: Q3 ask
   (per plan §5 Q3 — wifi networks/saved lists move natively).
+
+## Session 2026-11-09 (evening) — Q3 delivered: PR #118 (wifi scope)
+
+- Owner approved Q3 scoped to "wifi networks/saved lists" (the network leg of
+  plan §5 Q3; audio/power/bluetooth writes + network plans/profiles still
+  need separate authorization). #117 had merged as 1e38cd1; the shell
+  hot-reloaded (PID 289308 unchanged) — Q2 A/B logs confirmed the expected
+  apps superset (57 vs 62 = +5 predicted) and network strength jitter only.
+- Branch `qml/q3-wifi-lists`, 4 commits: fb2018b tests (16) -> 0a29365 impl
+  (NetworkState lists/actions, ShellState router + ActionPending.settled,
+  NativeState overlay drop + [Q3 A/B] counts, DEPRECATED(Q3->Q6) markers,
+  ShellState ratchet 261->296) -> e98a872 docs -> d7f6749 verification docs.
+  PR #118 open, mergeable.
+- Real-machine verification (crouton-alpha-free high,
+  ses_e3f9c7448ffeOmmA2GvCyVyPto, worktrees /tmp/q3-verif{,2}; READ-ONLY
+  probes — only wifiScan + a validation-error connect were dispatched):
+  R1: 16/16 test_native_wifi (4/4 QML running), regressions OK; probe caught
+  1/5 networks (3 s window < scan rate limit) and its t=0 dispatch fell back
+  before the devices model loaded — both probe-timing artifacts.
+  R2 (15 s window, dispatch after canRoute && device): FULL PARITY — native 7
+  = nmcli 7 SSID-deduped, identical SSID sets, 0 strength deltas, identical
+  saved UUIDs; validation connect -> exact pinned message; wifiScan ->
+  "Wi-Fi scan requested" with pending settled synchronously.
+- Language mix after Q3: runtime QML/JS 17,274 = 65.1% (Q2 64.7%). G0: 1121
+  tests, 3 known quickshell-absent errors.
+- Pending owner: merge #118, then wrong+right password connect, saved
+  connect, disconnect, forget, radio toggle, a day of [Q3 A/B] drift. Q1
+  wake-rate delta still open. Next asks: the REST of plan-Q3 (audio/power/
+  bluetooth writes, network plans/profiles) or jump to Q4 per plan.
