@@ -466,3 +466,24 @@
     markers, whitespace-stripped reassembly + md5 of the DECODED artifact
     (chunk-level md5 can differ on trailing-newline position while content
     is still byte-identical).
+
+59. **Dual-model audits catch different defect classes — run both when the
+    stakes justify it.** The 2026-11-09 annotation audit: GLM caught the
+    wrong-provider attribution (`powerProfile` in audio_actions vs
+    desktop_backend) that Beam missed; Beam caught the misnamed function
+    (`::planning` vs `plan`) that GLM's word-level grep accepted. Two
+    independent routes converged on 103/108 identical PASSes and the same
+    2 hard FAILs — the value of the second route was exactly the 2 items
+    they disagreed on, both resolved by arbitration against the real repo.
+    Single-auditor confidence is a ceiling; disagreement is a signal, not
+    noise.
+
+60. **OpenCode gateway model routing: read /api/model for providerID, and
+    "Max" is a VARIANT not a model id.** `beam` (Beam 1.0 501B A23B) is
+    served by provider `ollama-cloud`, not the default `opencode` provider;
+    POSTing {"modelID":"beam"} or provider `opencode` fails with a SILENT
+    provider.no-route (session outcome "failed", error only visible in the
+    context idle entry). Correct body: {"model":{"id":"beam","providerID":
+    "ollama-cloud","variant":"max"}}. Always verify the model actually used
+    via the assistant message's `model` field — the first run silently
+    executed on iceman-free and produced a valid-looking report.

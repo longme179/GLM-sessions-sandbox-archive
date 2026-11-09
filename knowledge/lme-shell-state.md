@@ -7,6 +7,40 @@
 > owner review; PR #110 MERGED, main @ 6c1dc3c; now via Command Code bridge
 > at a trycloudflare quick tunnel — URL changes when the worker restarts).
 
+## Session 2026-11-09 late: annotation hallucination dual audit — COMPLETE
+
+Owner: "audit that the annotations are not hallucinations — BOTH yourself +
+Agent Beam, compare results". DONE via two independent routes + arbitration.
+
+- **Route 1 (GLM)**: byte-identical local replica, tolerant REL parser, map
+  anchor content checks, independent no-behavior battery. 108 tags: 103 clean,
+  5 defective (2 FAIL + 3 symbol); INVARIANT 26/26 + GOTCHA 10/10 true;
+  map 34/34 refs in bounds; comments-only PROVEN (AST 276/276, stripper
+  153/153, sh 14/14).
+- **Route 2 (Agent Beam Max)**: OpenCode gateway — IMPORTANT: model `beam`
+  lives at provider `ollama-cloud` (NOT `opencode`), "Max" = variant `max`;
+  correct switch body: POST /api/session/{id}/model {"model":{"id":"beam",
+  "providerID":"ollama-cloud","variant":"max"}}. Wrong provider = silent
+  provider.no-route failure. Session ses_e40ba3b11ffetYsL1bdSeobvHg.
+  Beam: 108 tags — 103 PASS, 2 FAIL, 3 PARTIAL; all else clean.
+- **RECONCILIATION (arbitration on the real machine via bridge)**: Beam
+  missed `powerProfile` (ControlDashboard.qml:217 → really desktop_backend,
+  not audio_actions); GLM was too lenient on `::planning` (function is
+  `plan`). Final: 5 confirmed REL defects + 1 stale map anchor cluster
+  (check_architecture.py 152-155 pinned to baseline; branch reality
+  156-161/170 lines). Full report: audits/2026-11-09-annotation-audit/
+  RECONCILED_AUDIT_REPORT.md.
+- **Verdict**: hallucination rate 5/108 REL tags (~4.6%), ALL are
+  wrong-symbol/wrong-file — no invented relationships; paths 180/180 real;
+  INVARIANT/GOTCHA 0 hallucinations; map trustworthy modulo one anchor
+  refresh. Proposed follow-up (NOT executed, awaiting owner): one
+  comment-only commit fixing the 5 REL tags + map anchors.
+- Connection trivia this session: cmd-bridge tunnel died mid-run (530→DNS),
+  user supplied new URL; bridge job store is in-memory (jobs lost on
+  restart); OpenCode /api/session/{id}/model requires Model.Ref shape;
+  OpenCode message list is NEWEST-FIRST and tool/reasoning-only messages
+  have no text — poll session.time.idle > busy for true completion.
+
 ## Session 2026-11-09 late: annotation hallucination dual audit (Route 1 done, Route 2 blocked)
 
 Owner: "audit that the annotations are not hallucinations — BOTH yourself +
