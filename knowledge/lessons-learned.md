@@ -498,3 +498,16 @@
     status=exited, output.output) — the printf-base64 pipe arrived md5-
     identical. Rule: pass artifacts through the direct-execution path and
     md5-gate BOTH ends; never ask an LLM to re-type kilobyte payloads.
+
+61. **Refresh the dependency snapshot BEFORE designing a plan against it —
+    the plan's value is the grounding, not the prose.** The QML-first
+    migration plan (lme PR #113) hinged on "what can Quickshell 0.3.2 do
+    natively"; training memory said "no Bluetooth API, no NetworkManager
+    bindings" — both WRONG (0.2.0 added full BlueZ incl. per-device battery
+    and pair/connect/forget; 0.3.0 added NM bindings incl. connectWithPsk
+    and NMSettings.read/write). A plan written from memory would have kept
+    nmcli/bluetoothctl wrapping in Python forever. One shallow clone +
+    `rpm -q` on the user's machine + Q_PROPERTY greps over the headers
+    redesigned the whole phase structure in ~20 minutes. Snapshot now
+    lives at knowledge/quickshell.md; keep it stamped with the version
+    floor (0.3.2) and re-verify before each new design cycle.

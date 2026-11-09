@@ -1,11 +1,49 @@
 # lme-fedora-niri-qs — live state
 
 > UPDATE THIS FILE at the end of every work session. Last updated:
-> 2026-11-09 late (annotation hallucination AUDIT — Route 1 GLM self-audit
-> COMPLETE, Route 2 Beam audit PENDING new tunnel URL; documentation pass on
-> branch `docs/annotate-and-map` — 12 local commits, NOT pushed, awaiting
-> owner review; PR #110 MERGED, main @ 6c1dc3c; now via Command Code bridge
-> at a trycloudflare quick tunnel — URL changes when the worker restarts).
+> 2026-11-09 evening (QML-first migration plan written + PR #113 OPEN
+> awaiting owner review; main @ 8ebc597 after #111 annotation + #112 README
+> 6.0.0; quickshell capability snapshot added at knowledge/quickshell.md;
+> OpenCode gateway back at an opentunnel.xyz URL supplied per-session).
+
+## Session 2026-11-09 evening: QML-first migration plan — PR #113 OPEN
+
+Owner: "Giai đoạn tiếp theo là lên kế hoạch di chuyển dần qua QML làm
+majority của codebase thay vì phần lớn là python như hiện giờ. Pull main
+để có context mới nhất." DONE as docs-only PR #113 (OPEN; owner merges).
+
+- Pulled main first: PR #112 (README 6.0.0 refresh) had landed; the real
+  baseline is `8ebc597`. Measured: runtime QML+JS 16,228 vs Python runtime
+  9,277 lines (63.6/36.4 — runtime is ALREADY QML-majority); whole repo
+  Python 69.5% because tests/ = 26,161 lines dominate; scripts/ dev tooling
+  = 1,637 (deploy chain 693, checks 170, catalog/schema 460, memory_report
+  178, niri_keybinds 136).
+- Refreshed Quickshell knowledge FIRST (no snapshot existed before):
+  `knowledge/quickshell.md` — 0.3.2 floor verified against the installed
+  rpm AND the upstream clone @9b0f339. Training data was WRONG about
+  Bluetooth (full BlueZ API since 0.2.0: pair/connect/forget, per-device
+  battery) and Networking (NetworkManager bindings since 0.3.0:
+  connectWithPsk, NMSettings.read/write for hotspots/saved connections).
+  Also native: DesktopEntries, Io.Socket (unix path), FileView
+  (atomicWrites + watchChanges + JSON adapter), UPower + PowerProfiles,
+  Wayland idle-inhibit/notify + ScreencopyView(live). Still missing:
+  generic D-Bus client, HTTP object (use QML XMLHttpRequest).
+- Deliverable: `docs/QML_FIRST_MIGRATION_PLAN.md` in the lme repo (165
+  lines, 9 sections) — 8 phases Q0–Q7 (metric automation → native read
+  state → read-only files → first write families → media/capture/display
+  → content families → storage + backend retirement → optional test
+  rebalance), family sizes verified with wc -l (sum = 9,277 exactly),
+  capability matrix with clone file:line sources, 7 open questions (A6
+  wake model, Preferences cross-process safety, Process SIGKILL orphans,
+  real-hardware checks, worker shape, demo contexts, 250-line cap).
+- Gates: docs-only → G0 only, per AGENTS. G0 = 888 passed / 0 failed /
+  185 skipped (155 s) — identical to the known-good baseline. PR #113:
+  OPEN, MERGEABLE, +165/-0, 1 file. NOT merged (owner merges review
+  branches).
+- Sandbox tooling this session: `scripts/oc_shell.py` (shell endpoint
+  returns 204 with empty body; output arrives as session messages — poll
+  type=shell / status=exited / output.output) and `scripts/oc_transfer.py`
+  (byte-exact base64 upload with md5 gate on both ends).
 
 ## Session 2026-11-09 latest: REL fix commit applied — branch READY FOR MERGE
 

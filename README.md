@@ -14,7 +14,7 @@ The repo owner reads both.
 |---|---|
 | `tools/` | Bridge tools to drive remote AI agents (OpenCode gateway) + GitHub API helpers |
 | `skills/` | SKILL.md files — read the matching one BEFORE starting that kind of task |
-| `knowledge/` | Live project state + lessons learned (UPDATE AT SESSION END) + dependency capability snapshots (`niri.md`) |
+| `knowledge/` | Live project state + lessons learned (UPDATE AT SESSION END) + dependency capability snapshots (`niri.md`, `quickshell.md`) |
 | `FUTURE-SELF.md` | Lời nhắn nhủ bản thân tương lai — read this first, every session |
 
 ## Quick start (fresh session, after a reset)
