@@ -1,14 +1,71 @@
 # lme-fedora-niri-qs — live state
 
 > UPDATE THIS FILE at the end of every work session. Last updated:
-> 2026-11-09 night (QML-first migration Q0 DELIVERED: PR #114 OPEN, stacked
-> on plan PR #113 OPEN; main still @ 8ebc597; direct GitHub work from the
-> GLM sandbox — push via PAT-embedded origin URL worked, no remote agent).
+> 2026-11-09 late night (Q1 DELIVERED + LIVE-VALIDATED: PR #115 OPEN vs main,
+> carries the Q0 re-land; G0 on the owner's desktop 900/0/185 green via the
+> remote OpenCode agent — gateway was ALIVE; main @ 89317b2 post-#113).
 
-## Session 2026-11-09 night: Q0 delivered — PR #114 OPEN (stacked on #113)
+## Session 2026-11-09 late night: Q1 native read-only state — PR #115 OPEN, live-validated
 
-Owner approved starting phase 1: "tôi duyệt cho bạn bắt đầu phase đầu tiên"
-(= Q0: decision, metric automation, baselines — docs + checks only).
+Owner approved Q1 + **A6** (polling -> event-driven). PR #115
+`qml/q1-native-read-state` -> main @ b2803ea (+822/-26, 19 files).
+
+- **STACKING ARTIFACT**: #114 (Q0) merged into docs/qml-first-migration-plan
+  AFTER #113 squash-merged to main -> main lacked Q0. Q1 branch rebased onto
+  the plan tip (a3897ad) so PR #115 carries the Q0 re-land; owner merges once.
+- **Design**: 4 state singletons (AudioState/Pipewire+PwObjectTracker+OSD
+  signal; PowerState/UPower incl. battery_info aggregate port + PowerProfiles +
+  peripherals; BluetoothState.sectionFor/Quickshell.Bluetooth — agent logic
+  untouched; NetworkState/Networking summary) + NativeState (gating, merge
+  compose, peripheral merge, rate-limited A/B compareSections) + SystemMerge.js
+  (reference-stable cache replacing the system Identity.keep line) +
+  PeripheralIdentity.js (port of peripheral_values.py). ShellState.system =
+  NativeState.merge(snapshot.system); consumers unchanged (shapes frozen by
+  tests/test_native_state.py, 9 cases incl. gated LocalQmlCase).
+- **Fixture modes PASS THROUGH** (demo/preview, LME_SHELL_BACKEND_DEMO=1,
+  settingsApp): the demo backend is STATEFUL (audio/power/network actions
+  mutate its snapshot) and many suites inject via snapshot.system — native
+  sections engage ONLY in real sessions; baseSections null in fixture modes
+  (no service connections in demo/tests/Settings).
+- **Transitional backend-fed keys** (NativeState.compose): bluetooth rfkill
+  soft/hardBlocked (no native API) + wifi networks/saved (bssid-keyed connect
+  in wifi_actions.py:64 — Q3 moves them). batterySaver re-homed to write
+  phases (state machine + toggle move together). Known edges: PowerProfiles
+  default-enum without ppd; Networking always-available.
+- **4 cycle edges recorded** in architecture.json (NativeState composition,
+  runtime-safe different-properties); ShellState kept at its 261 cap.
+
+### LIVE-VALIDATION LOOP (the important part — sandbox has NO quickshell)
+
+Remote agent session ses_e3fc9c511ffenB5BZGv1rwp1uS (gateway ALIVE at the
+opentunnel URL; repo checkout /home/kimhoanglong/lme-fedora-niri-qs, restored
+to docs/qml-first-migration-plan after; evidence /tmp/q1-gate-G0):
+
+1. First gated run: 897/3 — caught (a) bare `Connections` child inside
+   QtObject = QML COMPILE ERROR "Cannot assign to non-existent default
+   property" (pattern: declare `property Connections x: Connections{}` like
+   the file's Timer/Process props); (b)+(c) static demo fixtures froze the
+   stateful demo backend + stomped BACKEND_DEMO injection (bar_gestures
+   phase hang; peripheral suites).
+2. Second run: 845/55 — my pass-through rewrite had a QML PARSE error:
+   `prop: cond ? null : { statements }` — after a ternary `{` is an OBJECT
+   LITERAL. Block bindings need `prop: { if (...) return null; ... }`.
+   LESSON: **never trust sandbox-green QML; the parse/compile only happens
+   with quickshell — ALWAYS live-validate QML via the agent before PR**.
+3. Third run: **900 passed / 0 failed / 185 skipped, qmllint 0** ✓.
+
+### Ops notes
+
+- Remote agent quirk: reported stale outputs once (git log/test from before
+  its own pull) — always ask for `git rev-parse HEAD` + file content (`sed
+  -n Np`) to verify what actually ran before believing a failure.
+- run-gates.sh --output dir: a timed-out prior run leaves the dir; rm -rf
+  before rerun (agent hit "File exists" twice).
+- G0 sandbox count on this branch: 1085 collected (3 quickshell-absent
+  errors); on the desktop gate: 900/0/185 green.
+- Next: Q2 (system monitor, brightness read, launcher apps+history) needs NO
+  A6. Q1 owner-side checks remain: day of [Q1 A/B] warnings, value parity,
+  volume-key OSD, wake-rate delta. Backend sections die at Q6.
 
 - **PR #114** `qml/q0-metric-baseline`, base = `docs/qml-first-migration-plan`
   (stacked; after #113 merges, retarget #114 to main — the plan commit
