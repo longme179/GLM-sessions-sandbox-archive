@@ -30,3 +30,24 @@ echo them into files, commits, issues, PRs, or this archive.
 - `POST /api/session/{sid}/shell` `{"command": ...}` — result appears as a message `type=="shell"` with `status=="exited"` and `output.output`; visible to the agent, avoid in live agent sessions
 - `POST /api/shell` `{"command": ..., "timeout": ms}` (global, agent-free) → `data.id`; `GET /api/shell/{id}` (status); `GET /api/shell/{id}/output?cursor=&limit=` (incremental)
 - End of an agent run: a message `{"type":"idle","outcome":"succeeded"|"failed"|"interrupted"}`; the long final assistant text (>= 300 chars) is the report; short lines are progress narration.
+
+## oc.sh + oc-poll.sh (added Q4, 2026-11-10)
+
+Thin curl wrappers for the OpenCode gateway API. Credentials NEVER live in
+these files: both source `${OC_ENV:-$HOME/.oc-env}` (chmod 600) which must
+define `OC_URL`, `OC_AUTH` (the full `Authorization: Basic ...` header value)
+and optionally `OC_SID` (the active session id — VERIFY it before prompting;
+a stale id silently sends tasks to the wrong session).
+
+- `oc.sh models|agents|info` — read-only listings.
+- `oc.sh new DIR` — create a session (prints the id; append it to the env file).
+- `oc.sh set-model provider/model` — switch (Model.Ref object form; Q4 default
+  `opencode/deepseek-v4.1-flash`, fallback `-free` variant on 402 quota).
+- `oc.sh prompt TEXT` — send a task (`$(cat file)` for long prompts).
+- `oc.sh wait [SEC]` — block until the current run finishes.
+- `oc.sh msgs` — message list (plain array or `{messages:[...]}`).
+- `oc.sh abort` — interrupt the current run.
+- `oc-poll.sh AFTER_TIMESTAMP [TIMEOUT]` — poll until a new assistant
+  `finish=stop` message appears after the given epoch-ms timestamp; prints
+  the final report. Get the timestamp from the last user message before
+  your prompt (`oc.sh msgs`).

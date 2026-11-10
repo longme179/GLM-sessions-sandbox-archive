@@ -20,7 +20,7 @@ report. Never store or echo credentials.
      for git, file transfer (base64), quick probes.
 - Tools live in this repo under `tools/` (see `tools/README.md`).
 
-## Agent-channel protocol (proven across PRs #73–#90)
+## Agent-channel protocol (proven across PRs #73–#125)
 
 1. `POST /api/session` → `data.id`; reuse one session per topic.
 2. `POST /api/session/{sid}/prompt` with body `{"text": ...}` — the key is
@@ -31,6 +31,29 @@ report. Never store or echo credentials.
 4. `GET /api/session/{sid}/diff` returns `[]` after changes are committed —
    for review, prompt: "output `git show HEAD --stat` then the full `git show
    HEAD` diff verbatim, all hunks, no truncation".
+
+### Model selection & switching (Q4 lessons, 2026-11-10)
+
+- List: `GET /api/model` → `data` is a flat array of
+  `{id, modelID, providerID, ...}`. The owner's preferred model is
+  **`opencode/deepseek-v4.1-flash`** (family `deepseek-flash`).
+- Switch: `POST /api/session/{sid}/model` with
+  `{"model":{"id":"deepseek-v4.1-flash","providerID":"opencode"}}` — a
+  Model.Ref **object**; a plain string 400s with "Expected Model.Ref".
+- Rate limit/quota: the paid variant can 402 "Insufficient balance";
+  switch to the same model's free variant (`opencode/deepseek-v4.1-flash-free`)
+  — same family, same tool quality, worked all round.
+- Session hygiene: copy session ids FULL-LENGTH (truncating →
+  SessionNotFoundError); keep the active id in a local env file
+  (`~/.oc-env`, chmod 600, sourced by the helper scripts) and VERIFY which
+  session a prompt landed in before waiting — a stale id silently sends the
+  task elsewhere (recover with `POST /api/session/{sid}/interrupt`, returns
+  `{"interrupted":true}`). Reuse one verify session across rounds: it
+  remembers its worktree/venv/pointer setup; just `reset --hard` the worktree.
+- Message list: `GET /api/session/{sid}/message` returns `data` as a plain
+  array (older builds wrapped `{messages:[...]}`) — parse both. Progress =
+  assistant messages with `finish:"tool-calls"`; done = `finish:"stop"`;
+  failures show `finish:"error"` + `error.type` (e.g. `provider.quota`).
 
 ### Prompt patterns that worked (keep using them)
 

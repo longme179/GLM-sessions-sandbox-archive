@@ -899,3 +899,39 @@ Recent history (newest first):
   Owner post-merge checklist for #119: volume/mic/brightness sliders, BT
   toggle + device connect/disconnect, charge switch (polkit → "Charge mode
   updated · …"), a day of drift lines. Q1 wake-rate delta still open.
+
+## Q4 — session families delivered + hotfix rounds (2026-11-10/11, PRs #123/#124/#125)
+
+- Owner approved Q4 ("duyệt Q4"). Leg 1 (session/compositor: window/workspace/
+  overview actions, NiriIpc socket client, NiriState event stream, KeybindsKdl/
+  Model/State, ImeState) delivered as test→impl→docs on `qml/q4-session-families`,
+  merged as #124 (+#123, squash). Remaining Q4 legs await owner: display/mirror
+  (346), night-light/idle (369); capture/recording proposed backend-fed
+  transitional (quickshell 0.3.2 lacks mkdir/stat/chmod/binary-read) — decision
+  requested at PR review.
+- Ratchet after #124: ShellState 337, NativeState 218, test_native_session 480;
+  language mix 19,842 = 68.1% QML-side. Three ImeState cycle edges recorded.
+- **Hotfix #125 (`qml/q4-session-hotfix`)** — the first engine run anywhere
+  (real machine, quickshell 0.3.2 / niri 26.04) found 3 bugs the sandbox could
+  not see: (1) NiriIpc reused one Socket across requests → lost writes + engine
+  SIGSEGV; fix = fresh socket per request (Component.createObject + destroy(1000)
+  + per-socket settled guards), commit 9f9372d; (2) two fixture parities (bad.kdl
+  corpus key; expect read-pair "a" not event "app" — seed() overwrites pre-seed
+  events, backend replay verified), commit ead1471; (3) NiriState never WROTE the
+  "EventStream" subscribe (silent socket, section degraded to 2 s polling) — fix
+  = write `"EventStream"\n` from connectedChanged(true), contract now pins the
+  real call (comment-only match hid it), ratchet 496, commit ef1da05.
+- Real-machine verify of 9f9372d: engine 16 cases → 15 pass + round-trip 0.25 s
+  (was crash/timeout), no new crash reports; full suite 983 pass/1 fail (the
+  EventStream assertion — led to fix 3); G1–G6 failures identical on pre-Q4
+  baseline (machine lacks PipeWire/audio/capture; G2 flaky) — NOT
+  branch-attributable; startup medians 0.78/0.94 s; qmllint 178 files 0/0.
+- Verify-session ops (OpenCode ses_e3b0c3cb…): worktree /tmp/q4-verify, venv
+  /tmp/q4-venv, pointer helpers /tmp/lme-dev (self-built zwlr_virtual_pointer C
+  client — wlrctl not packaged; env-file sets QML_IMPORT_PATH=/usr/lib64/qt6/qml).
+  ef1da05 round: 16/16 pass incl. the EventStream assertion; full suite +
+  crash-dir check in flight at session cutoff.
+- Next: finish #125 re-verify (full suite + no new crashes) → merge → owner
+  live checklist (workspace switching, focus/move, overview, Keybindings page,
+  IME indicator, a day of [Q4 A/B] drift lines) → then Leg 2 display/mirror and
+  Leg 3 night-light/idle per owner approval. Q1 wake-rate delta still open.

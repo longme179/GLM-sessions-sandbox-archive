@@ -617,3 +617,41 @@
     native writes to PwNodeAudioIface.volume are the same scale wpctl prints
     (write 80% read back 0.80 in wpctl, A/B drift stayed 0) — the Q1 read
     parity argument extends to the write path.
+
+69. **OpenCode gateway API shapes (Q4 rounds, 2026-11-10):** model switching
+    is `POST /api/session/{sid}/model` with `{"model":{"id":"...",
+    "providerID":"..."}}` — a Model.Ref OBJECT, not a string (a string 400s
+    with "Expected Model.Ref"). The owner's preferred model is
+    `opencode/deepseek-v4.1-flash`; it can 402 "Insufficient balance" — the
+    fallback that worked is the same model's free variant
+    `opencode/deepseek-v4.1-flash-free` (same family, same tool quality).
+    Session IDs from `GET /api/session` must be copied FULL-LENGTH (a
+    truncated id returns SessionNotFoundError). The message list endpoint
+    returns `data` as a plain array (older builds wrapped `{messages:[...]}`)
+    — parse both. Keep the active session id in a local env file (e.g.
+    `~/.oc-env`, chmod 600) and ALWAYS verify which session a prompt went to
+    before waiting on it — a stale id silently sends the task to the wrong
+    session (interrupt it immediately: `POST .../interrupt` returns
+    `{"interrupted":true}`). Reusing one long-lived verify session across
+    rounds is efficient: the agent remembers its worktree/venv/pointer
+    setup; just `reset --hard` the worktree each round.
+
+70. **Q4 engine-first-run socket lessons (lme PR #124/#125):** three bugs
+    the sandbox rounds could not see, all caught only when the engine cases
+    first ran on quickshell 0.3.2: (a) reusing ONE `Socket` across requests
+    loses writes — flipping `connected` false→true while the previous
+    connection still tears down never re-emits `connectedChanged`, the
+    queued line is never written and the abandoned teardown SIGSEGVs the
+    engine; build one fresh Socket per request (inline Component +
+    createObject + deferred destroy(1000) + per-socket settled guards).
+    (b) The niri IPC protocol NEVER speaks first — a long-lived stream
+    socket must WRITE the subscribe line (`"EventStream"\n`, quoted JSON
+    string) from inside `connectedChanged(true)`; setting `connected=true`
+    alone opens a silent socket and the section silently degrades to the
+    polled reads. (c) A contract test that asserts a string like
+    `"EventStream"` in the source matches COMMENTS too — the bug hid behind
+    the REL header's prose for two sandbox rounds. Pin the real call
+    (`assertIn("write('\"EventStream\"\\n')", code)`) so prose cannot
+    satisfy the contract. Rule: every ported protocol write needs an engine
+    case that observes the wire (the fake-socket fixture pattern), and every
+    source-string contract must assert the call shape, not the token.
