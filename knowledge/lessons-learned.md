@@ -655,3 +655,32 @@
     satisfy the contract. Rule: every ported protocol write needs an engine
     case that observes the wire (the fake-socket fixture pattern), and every
     source-string contract must assert the call shape, not the token.
+
+71. **Q4 legs 2-3 engine-first-run lessons (lme PRs #126/#127):** the families that
+    own LONG-LIVED daemons (wl-mirror/wlsunset/swayidle) hit a new defect class:
+    (a) A snapshot-hook call MUST match the service's signature — the hook called
+    `MirrorState.recheck(preferences)` while recheck took `(done)`, so accept()
+    threw a TypeError on EVERY real-session snapshot, silently skipping backendReady,
+    toasts, catalog validation and stayAwake (only the real-session engine fixture
+    caught it; contract tests pin the call shape now). (b) Section `running` must
+    track the SPAWNED COMMAND (cleared synchronously in close()), not the QProcess
+    property (which only flips on the actual exit) — the backend's child-is-None is
+    synchronous; same for stopMirror's command clear, else restart-after-stop says
+    "busy". (c) A start IN FLIGHT must count as busy (`starting` flag) because the
+    native router runs dispatches concurrently where the backend's request loop
+    serialized them. (d) quickshell 0.3.2's real `niri msg` CLI sends a Version
+    handshake after Outputs reads — a fake unix socket cannot serve it (protocol
+    hash check); use a PATH-injected fake niri SCRIPT for engine cases instead,
+    and keep live-socket parity as a real-machine probe. (e) A PATH block CANNOT
+    hide an installed binary — shutil.which and execvp CONTINUE past a directory
+    or non-executable entry (verified: which('wlsunset') still found /usr/bin one);
+    missing-tool engine cases must skipIf(shutil.which(tool)). (f) Engine fixtures
+    that override environment from os.environ under the migration gates inherit
+    QT_QPA_PLATFORM=wayland — pin offscreen/software explicitly when the case also
+    overrides XDG_RUNTIME_DIR (the gate's Sway socket lives there). (g) Engine
+    tests must NOT subclass LocalQmlCase (double collection — borrow
+    `run_qml = qml_tests.LocalQmlCase.run_qml` on a unittest.TestCase instead),
+    must insert scripts/ on sys.path themselves, and spawn-marker tests need a
+    settle phase (~3 s) before stopping — the PDEATHSIG helper's exec is not
+    instant. The verification cadence that worked: suite → regression case → full
+    suite → live parity probe → crash-dir counts → gates, re-run per hotfix.

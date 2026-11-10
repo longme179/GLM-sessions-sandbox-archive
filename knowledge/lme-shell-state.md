@@ -938,3 +938,41 @@ Recent history (newest first):
   live checklist (workspace switching, focus/move, overview, Keybindings page,
   IME indicator, a day of [Q4 A/B] drift lines) → then Leg 2 display/mirror and
   Leg 3 night-light/idle per owner approval. Q1 wake-rate delta still open.
+
+## Q4 legs 2-3 — display/mirror + night-light/idle delivered & merged (2026-11-11, PR #126 + #127)
+
+- Owner approved both legs ("Duyệt Leg 2 và Leg 3"). Branch `qml/q4-display-idle-families`
+  (8b5256c test → 01d8c49 impl → c3a27a4 docs → 0b609b9 hotfix1 → 15d89e0 hotfix2), merged
+  as #126 (b655246); the owner merged mid-verification after the suite went green and
+  RESTARTED the shell — the families are live. Follow-up #127 (qml/q4-display-idle-gate-fix,
+  b2bcbcc) fixes the G0 fixture clash (offscreen platform pin).
+- Delivered: DisplayState/DisplayModel (displayRefresh + the socket-scoped preview journal
+  via watching FileView), MirrorState (wl-mirror child ownership), NightLightState/
+  NightLightModel (wlsunset + the Almanac solar math verbatim), IdleState (swayidle +
+  idle_command's shlex-joined argv). First spontaneous-ownership split: the shell's backend
+  spawns with --no-session-daemons (its night/idle syncs skip); both daemon spawns ride
+  idle_control.py's client path (PDEATHSIG vs the shell pid); the helper gained a probe
+  subcommand (which() discovery — quickshell 0.3.2 has none) + execvp for plain names.
+  Sync driver: ShellState.accept (2 s poll hook) → NightLightState.sync(prefs, weather
+  place), IdleState.sync(prefs, acOnline), MirrorState.recheck(prefs).
+- Two hotfix rounds (engine first-runs, mirroring the Leg 1 pattern): r1 = the recheck
+  signature TypeError in accept() (REAL blocker: backendReady/toasts/catalog validation
+  skipped on every real snapshot), mirror busy parity (starting flag), synchronous section
+  clears (command-based running), 5 fixture defects (Version handshake → fake niri script;
+  PATH-only broke the harness's own quickshell; helper-path normalization; same-tick stop
+  before exec; LocalQmlCase double collection). r2 = stopMirror's synchronous command
+  clear (restart-after-stop busy), skipIf-installed for the 3 missing-tool cases (PATH
+  blocks cannot hide installed binaries), phase-counter settles, sys.path self-insertion.
+- Final verification at 15d89e0: test_native_display_idle 21/3 skips/0 fail; full suite
+  1005/188/0; live DisplayState parity field-for-field identical vs the real socket;
+  qmllint 182 files 0/0; startup medians 0.757/0.900 s; crashes 16→16 across everything.
+  G1-G6 deltas = the machine's known pre-existing classes (no PipeWire/audio/capture;
+  NativePersonalizationCase flaky). G0's last 2 = the #127 fixture clash (fixed).
+- Ratchets after #126: ShellState 355, NativeState 240, test_native_session 496,
+  test_native_display_idle 673 (after #127), desktop_backend 1624. Language mix 68.9%
+  QML-side (20,658). Q4 now complete except capture/recording (backend-fed per the
+  review-stop proposal — needs the owner's close-out decision).
+- Owner checklist for the live families: Displays page + dashboard mirror controls, a
+  real mirror round trip (needs a second output — machine has only eDP-1 right now),
+  Night Light enable/schedule/sunset, idle profiles on AC/battery, stayAwake,
+  pgrep wlsunset/swayidle owned by the shell + no orphans after restart, a day of drift.
