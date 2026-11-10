@@ -929,8 +929,11 @@ Recent history (newest first):
 - Verify-session ops (OpenCode ses_e3b0c3cb…): worktree /tmp/q4-verify, venv
   /tmp/q4-venv, pointer helpers /tmp/lme-dev (self-built zwlr_virtual_pointer C
   client — wlrctl not packaged; env-file sets QML_IMPORT_PATH=/usr/lib64/qt6/qml).
-  ef1da05 round: 16/16 pass incl. the EventStream assertion; full suite +
-  crash-dir check in flight at session cutoff.
+  ef1da05 round (final): 16/16 pass incl. the EventStream assertion (event-stream
+  case 2.66 s → 0.67 s — section fills from the ack, not the poll tick); full suite
+  984/185/0 failures; no new crash reports; verification posted as PR #125 comment
+  (issuecomment-6775074413). Branch is review-ready — awaiting owner merge; then
+  shell restart + the owner real-session checklist.
 - Next: finish #125 re-verify (full suite + no new crashes) → merge → owner
   live checklist (workspace switching, focus/move, overview, Keybindings page,
   IME indicator, a day of [Q4 A/B] drift lines) → then Leg 2 display/mirror and
