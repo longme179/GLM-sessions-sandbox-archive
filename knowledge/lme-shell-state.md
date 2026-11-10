@@ -944,8 +944,12 @@ Recent history (newest first):
 - Owner approved both legs ("Duyệt Leg 2 và Leg 3"). Branch `qml/q4-display-idle-families`
   (8b5256c test → 01d8c49 impl → c3a27a4 docs → 0b609b9 hotfix1 → 15d89e0 hotfix2), merged
   as #126 (b655246); the owner merged mid-verification after the suite went green and
-  RESTARTED the shell — the families are live. Follow-up #127 (qml/q4-display-idle-gate-fix,
-  b2bcbcc) fixes the G0 fixture clash (offscreen platform pin).
+  RESTARTED the shell — the families are live. Follow-up #127 (qml/q4-display-idle-gate-fix)
+  fixes the G0 fixture clash (offscreen platform pin) AND re-lands hotfix 2 on merged main
+  (topology: the owner merged #126 while it stood at hotfix 1 — ecd4a29 + d271fa4, ratchet
+  690). Final machine verification of #127: display/idle suite 21/3 skips/0 fail; G0
+  1003/0/188 completed-with-skips; qmllint 182 files 0/0; crashes 16→16. Ready to merge;
+  the live shell needs one more restart after it to pick up the mirror stop clear.
 - Delivered: DisplayState/DisplayModel (displayRefresh + the socket-scoped preview journal
   via watching FileView), MirrorState (wl-mirror child ownership), NightLightState/
   NightLightModel (wlsunset + the Almanac solar math verbatim), IdleState (swayidle +
