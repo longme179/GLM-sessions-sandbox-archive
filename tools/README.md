@@ -14,6 +14,7 @@ echo them into files, commits, issues, PRs, or this archive.
 
 | Tool | Channel | Use |
 |---|---|---|
+| `qw.py sh "cmd" [sec]` | `POST /api/shell` + `/output` paging (pure python, no curl) | Same job as `rsh.sh` but works in sandboxes WITHOUT curl (the Qwen sandbox). Also `qw.py sessions/new/prompt/msgs/wait/api`. Reads `OC_URL` + `OC_AUTH` (raw `user:pass`). |
 | `rsh.sh "cmd"` | `POST /api/shell` (global, session-less) | Run one raw shell command on the user's desktop; prints full output. Best for git & file transfer. |
 | `oc.py new` / `run` / `bg` / `poll` | `POST /api/session/$OC_SID/shell` | Session-scoped shell: create sessions, run tagged commands, background jobs with log polling (`OCJOB_DONE`). |
 | `oc_prompt.py <sid> <file>` | `POST /api/session/{sid}/prompt` | Send a task prompt (body key is **`text`**) to the coding agent. |
@@ -51,3 +52,24 @@ a stale id silently sends tasks to the wrong session).
   `finish=stop` message appears after the given epoch-ms timestamp; prints
   the final report. Get the timestamp from the last user message before
   your prompt (`oc.sh msgs`).
+
+## qw.py (added 2026-11-11, Qwen handover session)
+
+Pure-python bridge for sandboxes where `curl` is not installed (the curl-based
+`oc.sh` / `rsh.sh` wrappers fail there with "curl: command not found").
+
+```bash
+export OC_URL=... OC_AUTH='opencode:<password>'
+python3 tools/qw.py sessions                 # id / updated / outcome / title
+python3 tools/qw.py sh 'git -C ~/repo log --oneline -3' 90
+python3 tools/qw.py new /home/kimhoanglong   # create a session
+python3 tools/qw.py prompt <sid> task.txt    # body key is "text"
+python3 tools/qw.py msgs <sid> 6             # chronological tail
+python3 tools/qw.py wait <sid> 600           # block until idle
+python3 tools/qw.py api GET /api/model
+```
+
+Notes: `sh` submits to the global agent-free shell and pages `/output` by
+cursor, so long outputs are not truncated; it prints `[status=... exit=N]`.
+Guard empty variables in remote one-liners — a failed `$(grep -l ...)` once
+turned `dirname ""` into `.` and listed the owner's home (lesson #77.7).

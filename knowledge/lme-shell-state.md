@@ -1,9 +1,91 @@
 # lme-fedora-niri-qs — live state
 
 > UPDATE THIS FILE at the end of every work session. Last updated:
-> 2026-11-09 late night (Q1 DELIVERED + LIVE-VALIDATED: PR #115 OPEN vs main,
-> carries the Q0 re-land; G0 on the owner's desktop 900/0/185 green via the
-> remote OpenCode agent — gateway was ALIVE; main @ 89317b2 post-#113).
+> 2026-11-11 evening (Qwen handover session — PLANNING ONLY, no code.
+> #126 AND #127 are both MERGED and the live shell already runs them;
+> Q4 legs 2-3 are runtime-healthy for 16 h but their FUNCTIONAL owner
+> checklist has never been exercised. New Qt6 capability findings change
+> the Q5 blocker list. Plan: plans/2026-11-11-lme-q4-closeout-q5-plan.md).
+
+## Session 2026-11-11 evening (Qwen) — handover + Q4 close-out / Q5 plan, no code
+
+Owner: "truy cập repo, xem phiên làm việc trên máy tôi để tiếp quản — bước này
+chưa code, chỉ planning". Everything below was measured on the desktop through
+the gateway's global shell channel (agent-free, read-only) plus one offscreen
+capability probe in /tmp/lme-cap-probe. Nothing in the repo or prefs was touched.
+
+### State of record (supersedes the "next: merge #127" note below)
+
+- **main = a1bc941**; #126 merged 02:44 +07, **#127 merged 03:50:49 +07**, machine
+  pulled 03:50:49 and the shell was **restarted 03:51:03** (PID 1960309, ~16 h
+  uptime) → the live shell ALREADY carries hotfix-2. The previous session's
+  "merge #127 + restart" to-do is DONE.
+- Backend PID 1960326 runs `--no-session-daemons` ✓ (the Q4 ownership split is live).
+- **Health: 0 new crashes** (16 crash dirs, newest 00:35 = pre-restart), **0 ERROR /
+  TypeError / QML errors** in 16 h of live log. PSS 208.06 MB (QS 159.2 + backend
+  31.1 + clipboard worker 7.1 + helpers) vs the 400 MB budget.
+- **Drift over 16 h**: 948x `[Q2 A/B] apps 57 vs 62` (the known OnlyShowIn/TryExec
+  superset) + 116x `[Q1 A/B] network` strength jitter 65<->70 (poll lag). No Q3/Q4
+  categories, no battery lines. The `native [true,1,false,true]` battery lines in
+  the old state log are PRE-#116 history, not an open bug.
+- **WHERE THE EVIDENCE LIVES**: the shell was launched by hand (`quickshell -c
+  lme-shell` from fish), so `~/.local/state/lme-shell/log/lme-shell.log` is STALE
+  (last write Nov 9). The live plain-text log is
+  `/run/user/1000/quickshell/by-id/<instance>/log.log` — find the instance via
+  `ls -l /proc/<shellpid>/fd | grep quickshell`. Current instance: 1l0614l0bot.
+  (`log.qslog` next to it is the binary/structured one.)
+- **Leg 2/3 FUNCTIONAL checklist NEVER RAN**: `nightLightEnabled=false`,
+  `idleEnabled=false`, so no wlsunset/swayidle child exists and the 16 h log has
+  zero mentions of them. `mirroringEnabled=true` but the machine has only
+  **eDP-1** → no real mirror round trip possible. `niri msg` 26.04 has NO
+  virtual-output command (output = off/on/mode/scale/transform/position/vrr).
+- Tooling: wlsunset/swayidle/wl-mirror/grim/wf-recorder/wl-paste/wl-copy/gowall/
+  awww present; **satty MISSING** (the capture annotation chain cannot be
+  verified on this machine as-is).
+- Leftovers needing owner OK: **3 stale offscreen gate shells** (PIDs 1760540 /
+  1761126 / 1764612, started 00:35-00:38, QT_QPA_PLATFORM=offscreen,
+  XDG_CONFIG_HOME=/tmp/tmp*, ~25 MB RSS each) + worktrees /tmp/q4-verify (d271fa4)
+  and ~/lme-q4-verify (81bd66d).
+
+### NEW capability facts (probed, they contradict the plan's blocker list)
+
+Offscreen `quickshell -p` probe, results written via FileView (console.log does
+not reliably reach stdout):
+
+- **`Qt.labs.folderlistmodel` IS installed and works**: /sys/class/backlight → 1
+  (`amdgpu_bl1`), /sys/class/hwmon → 8, /proc numeric dirs → 414. So the
+  "quickshell 0.3.2 has no directory-listing API" blocker (Q2 transitional
+  tempC/brightness/processes, Q5 file_search/wallpaper) is **false**.
+- **`QtQuick.LocalStorage` (SQLite) IS installed and works**: CREATE/INSERT/SELECT
+  verified; DB lands at `$XDG_DATA_HOME/quickshell/QML/OfflineStorage/Databases/
+  <hash>.sqlite` (fixed path — a clipboard migration would have to move data).
+- **`FileView.setText` creates missing parent directories** (nested/deeper/
+  file.json created from nothing, content exact) → the "no mkdir" wording in the
+  capture/recording backend-fed proposal is no longer accurate.
+- STILL UNVERIFIED: binary read/write (PNG signature), chmod, exclusive-create,
+  stat. Those remain the honest reason to keep capture/recording backend-fed.
+- Gotchas: `/usr/bin/qml` is **Qt5** (qt5-qtdeclarative-devel) → Qt6 probes must
+  use `quickshell -p`; FolderListModel `nameFilters:["thermal_zone*"]` with
+  `showDirs:false` returns 0 (symlinks-to-dirs count as dirs).
+- Upstream quickshell is still **v0.3.2** (release 2026-10-08; master 9b0f339
+  2026-10-17) — nothing newer to wait for.
+
+### Proposed next steps (awaiting owner decisions, see the plan file)
+
+1. Hygiene H1/H2 (kill the 3 offscreen shells, prune the 2 worktrees) — needs OK.
+2. **Q4 close-out**: agent-run checklist C1-C9 (backup prefs → enable Night Light
+   manual/schedule → idle AC/battery → stayAwake → restart orphan check →
+   Displays page + mirror refusal parity → restore prefs), owner confirms the
+   visual part; then a docs-only "Q4 closed" PR like #122.
+3. capture/recording: recommend **keep backend-fed**, revisit at Q6.
+4. Optional "Q4.5": port the 3 Q2 transitional keys via FolderListModel (measure
+   /proc scan cost honestly; keep Python if it is worse).
+5. **Q5 re-scoped into 4 legs** (1,760 py lines measured): A weather+lyrics 393
+   (XHR; embedded-tag binary read stays), B wallpaper+file_search 558
+   (FolderListModel + awww/gowall/find via Process; fcntl lock semantics), C
+   equalizer+visualizer 494 (ctl + cava child via the PDEATHSIG helper; `wave`
+   tone generation stays), D clipboard 315 (LocalStorage + watchers — riskiest,
+   defer or keep Python). Order A→B→C, D decided separately.
 
 ## Session 2026-11-09 late night: Q1 native read-only state — PR #115 OPEN, live-validated
 

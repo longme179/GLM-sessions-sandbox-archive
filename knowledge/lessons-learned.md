@@ -838,3 +838,51 @@
 6. **pkill -f self-match**: `pkill -f fakejava` killed the gateway shell
    running it (its own cmdline matched the pattern). Use the bracket trick
    (`pkill -f "fake[j]ava"`) or exact-name `pkill -x`.
+
+## #77 — LME handover session (2026-11-11 evening, Qwen): planning before coding
+
+1. **Re-verify the handover to-do list before executing it.** The previous
+   session's summary said "next: merge PR #127 + restart the shell". Both were
+   already done: `git reflog main --date=iso` showed the pull at 03:50:49 and
+   `ps -o lstart` showed the shell restarted 03:51:03. Acting on the summary
+   would have meant a pointless restart of the owner's live session. Rule:
+   reflog + process start time + GitHub `merged_at` BEFORE believing any
+   "next steps" list written by a past session.
+2. **"Tests green" ≠ "feature exercised".** Q4 legs 2-3 shipped with 21 engine
+   cases and a clean 16 h runtime, yet `nightLightEnabled=false` and
+   `idleEnabled=false` in the owner's prefs — no wlsunset/swayidle ever spawned.
+   Always read the actual prefs/feature flags before claiming a family is
+   live-validated; a disabled feature produces silence that looks like success.
+3. **Quickshell keeps its own per-instance logs**:
+   `/run/user/1000/quickshell/by-id/<id>/log.log` (plain text, timestamps) and
+   `log.qslog` (binary). Find the live one with
+   `ls -l /proc/<pid>/fd | grep quickshell`. This is where A/B drift evidence
+   lives when the shell was started by hand — `~/.local/state/lme-shell/log/`
+   only gets written by `scripts/start.sh` (it exec-redirects stderr).
+   Don't conclude "no drift data" from a stale state log.
+4. **Never design from a blocker list you inherited — probe it.** The plan said
+   "quickshell 0.3.2 has no directory-listing API / no mkdir". Both are wrong in
+   practice: `Qt.labs.folderlistmodel` and `QtQuick.LocalStorage` are installed
+   Qt6 modules that work inside quickshell, and `FileView.setText` creates
+   missing parent directories. Three "blocked" families were portable all
+   along. The capability snapshot must cover **Qt modules**, not just the
+   Quickshell namespace.
+5. **`/usr/bin/qml` is Qt5 on Fedora** (qt5-qtdeclarative-devel) — a Qt6 probe
+   run through it dies with "Did not load any objects, exiting." (same family
+   of trap as lesson 19's Qt5 qmllint). Probe Qt6/Quickshell QML with
+   `quickshell -p file.qml`, offscreen, disposable XDG.
+6. **Probe results must be written to a FILE, not console.log.** Quickshell
+   routes QML console output into its instance log, not reliably to stdout;
+   grepping every `by-id/*/log.qslog` dumps megabytes of binary noise from old
+   sessions. Have the probe `FileView.setText()` its findings to /tmp and cat
+   that file — one clean read.
+7. **A shell command that fails can silently turn a probe into a home-directory
+   listing**: `D=$(grep -l ... )` returned empty, `dirname ""` → `.`, and the
+   follow-up `ls -la "$ID"` printed the owner's whole home. Guard empty
+   variables (`[ -n "$D" ] || exit 1`) in remote one-liners.
+8. **Test leftovers accumulate on the owner's machine**: 3 offscreen gate
+   quickshell processes survived 19 h after the Q4 verification runs and show
+   up as "Unattributed Quickshell PIDs" in memory_report. End-of-verification
+   hygiene (kill your own offscreen instances, prune worktrees) belongs in the
+   verify checklist — with the owner's OK, and after checking
+   /proc/<pid>/environ so you never kill the user's real shell.

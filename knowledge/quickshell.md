@@ -8,6 +8,32 @@
 > Purpose: ground truth for `lme-fedora-niri-qs`'s QML-first migration plan
 > (`docs/QML_FIRST_MIGRATION_PLAN.md` §3).
 
+## 0. CORRECTIONS 2026-11-11 (probed on the owner's desktop, offscreen quickshell)
+
+The "still missing" list below was written from the Quickshell namespace only.
+**Qt6's own QML modules are installed too and work inside quickshell** — three
+plan blockers fell:
+
+| Capability | Verdict | Evidence (probe E, /tmp/lme-cap-probe) |
+|---|---|---|
+| Directory listing | **AVAILABLE** via `Qt.labs.folderlistmodel` (`FolderListModel`: folder/nameFilters/showDirs/showFiles/count/get(i,role)) | /sys/class/backlight → 1 (`amdgpu_bl1`), /sys/class/hwmon → 8, /proc `[0-9]*` dirs → 414 |
+| SQLite | **AVAILABLE** via `QtQuick.LocalStorage` (`openDatabaseSync`, `transaction`, `executeSql`) | CREATE/INSERT/SELECT round trip; DB at `$XDG_DATA_HOME/quickshell/QML/OfflineStorage/Databases/<hash>.sqlite` (fixed path, no custom file) |
+| mkdir | **AVAILABLE implicitly**: `FileView.setText()` creates missing parent directories | wrote `/tmp/lme-cap-probe/nested/deeper/file.json` from nothing, content exact |
+| binary read/write, chmod, exclusive-create, stat | **STILL UNVERIFIED** (not proven absent) | FileView exposes a `data` property + `setData()` — untested for binary |
+
+Gotchas found the same round:
+- `FolderListModel` is **async and single-level**; recursion needs nested models
+  or `find` through `Process`. `nameFilters:["thermal_zone*"]` with
+  `showDirs:false` returns **0** — sysfs thermal_zone entries are symlinks to
+  directories, so they count as dirs.
+- **`/usr/bin/qml` is Qt5** on Fedora (`qt5-qtdeclarative-devel`): a Qt6 probe
+  through it prints "Did not load any objects, exiting." Use `quickshell -p`.
+- QML `console.log` in a probe goes to the instance log
+  (`/run/user/1000/quickshell/by-id/<id>/log.log`), not reliably to stdout —
+  write probe results with FileView to a file instead.
+- Upstream releases: still **v0.3.2** (2026-10-08), master `9b0f339`
+  (2026-10-17) — re-checked 2026-11-11 via the GitHub API.
+
 ## 1. Facts my training data gets WRONG
 
 | Training belief | Reality (verified) | Evidence |
