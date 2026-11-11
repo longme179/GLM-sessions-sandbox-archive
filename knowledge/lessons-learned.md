@@ -937,3 +937,47 @@
 4. **Background stubs need explicit stdin.** `cmd &` in bash gives the
    child /dev/null stdin, so a console-command stub never receives `stop`
    — pipe a FIFO/cat into it (the G3 fakejava-echo fix).
+
+## #80 — Minewrap session 8: Gate-3 close-out (2026-11-12)
+
+1. **A passing build log can still ship a broken app**: build.sh printed
+   vite/cargo success, dist mtime preceded the binary — yet the GUI showed
+   WebKit "Could not connect to localhost". Cause: bare `cargo build` never
+   enables tauri's `custom-protocol` feature, so release binaries serve
+   devUrl :5173, NOT the embedded ui/dist. Every earlier "render OK" run
+   had a :5173 http server running (round 1's "workaround" was load-bearing,
+   not a workaround). Rule: verify the DELIVERED binary standalone — no dev
+   server, no leftovers — before declaring a build path fixed.
+2. **Vision-review the agent's screenshots even when the agent reports
+   PASS.** 2b/2c claimed "GUI alive, REST PASS" — the screenshots they took
+   (but couldn't read) contained the WebKit error page proving the GUI never
+   rendered. The evidence was on disk the whole time; only GLM's vision pass
+   surfaced it. Agent self-reports describe what they verified, not what
+   they missed.
+3. **Free-tier models fail in new ways — probe before dispatching work.**
+   nemotron-3-ultra:free returned token-salad reasoning (5 s idle, zero
+   work); nemotron-3.5-super-vl:free 422'd on "content safety screening"
+   the moment a PNG entered its context. Two mitigations that worked: a
+   PONG smoke-test in a throwaway session before real work, and a hard
+   "never read images into context" rule (grim saves files; GLM does all
+   vision).
+4. **Input-tool availability is session-state, not a machine property.**
+   `wtype -k Tab` worked all of round 1 (deepseek) and was silently dead
+   the next day (text typing still worked; BackSpace/End/Return no-ops —
+   proven twice by screenshot diff). 2b then misdiagnosed "wtype is
+   text-only" and 2c inherited the wrong constraint from GLM's prompt.
+   Rule: re-verify the tool contract with a 30-second empirical test each
+   session; never forward a previous session's diagnosis as fact.
+5. **When the agent can't drive the UI, GLM can — via the same machine
+   channels.** The winning loop: agent parks → GLM runs focus/click_abs/
+   wtype/grim through the agent-free global shell → vision-reads each
+   screenshot → computes exact coordinates → clicks → verifies. niri's
+   scrollable tiling hides absolute window coords, but a grim screenshot IS
+   the coordinate system (screen pixels = click_abs pixels); pin the window
+   with move-column-to-first and expect ±15 px drift between steps — aim at
+   field CENTERS and re-measure after any form reflow (Scan grew the form
+   and moved Next by ~150 px).
+6. **/proc/PID/cmdline misses relative-path launches** (binary run as
+   `./target/release/minewrap-tauri` with cwd in the repo): the
+   "grep dev-memtest" guard silently skipped the kill and a duplicate test
+   GUI accumulated. Verify ownership by `readlink /proc/PID/cwd`.

@@ -81,3 +81,42 @@ the -gui worktree only).
   DEBUG gray), sidebar "This machine — connected", no defects.
 - shot-overview-c (from the #19 flow): Properties tab, raw textarea with
   comments preserved, `motd=G3 renamed motd`, Reload/Save present.
+
+---
+
+# Round 2 + 2C (2026-11-12, session 8) — Gate-3 closed: READY FOR MERGE
+
+Round 1 left: BUG-1/BUG-2 machine re-verify, #2-#4, #23. Three sub-rounds:
+
+1. **2a/2b (agent, nemotron-3.5-super-vl:free)**: REST layer all PASS
+   (BUG-1 epoch-ms+seq logs; BUG-2 201 {id,name}; #23 TERM→restart→
+   reconnect; build.sh clean). BUT the GUI never rendered — window showed
+   WebKit "Could not connect to localhost". Root cause (GLM, via vision
+   review of agent screenshots): build.sh compiles the GUI with bare
+   cargo → tauri `custom-protocol` feature never enabled → release
+   binary serves devUrl :5173 instead of embedded ui/dist. ALL earlier
+   "rendered" GUI verifications had silently relied on a local http
+   server on :5173. **Fixed by GLM in `bda8a76`** (feature declared in
+   src-tauri/Cargo.toml + build.sh passes --features custom-protocol).
+2. **2c (agent)**: rebuilt via fixed build.sh → GUI renders standalone
+   (C1 PASS); BUG-1 UI PASS (console 246 lines, [HH:MM:SS]+level tags,
+   no decode banner, SLP data live "online · 0/20 · 1.21.1"); #23 PASS.
+   C3 wizard failed blind (no absolute window coords in niri scrollable
+   layout; `wtype -k` keys silently no-op that day — only text typing
+   works; text-only diagnosis from 2b was wrong in the other direction).
+3. **C3 finish (GLM-driven via raw shell)**: vision-read screenshots →
+   exact click_abs coords → wtype text, verified each step by screenshot:
+   wizard 4 steps filled through the real UI → Add → 201 decoded, NO
+   decode banner, instance in sidebar → Remove via UI → gone. Evidence:
+   g3r2-added.png / g3r2-removed.png / g3r2-bug1-console.png /
+   g3r2-wizard-review.png + full set on the machine
+   (~/dev-memtest/results/g3-checklist-round2/).
+
+**Final Gate-3 verdict: READY FOR MERGE (YES)** — pending user approval:
+merge p0-daemon-first → main, tag v1.10.0. Honest caveat: #2/#3/#4
+(add/remove/retry node) UNVERIFIABLE — no Nodes UI exists (dead component
+since v1.9.3; P1 chunk 3 scope). Not a P0 regression.
+
+Side findings: duplicate-GUI hygiene (two test GUIs accumulated across
+retries); process cmdline does NOT contain dev-memtest when launched with
+relative binary path — verify via /proc/PID/cwd, not cmdline.

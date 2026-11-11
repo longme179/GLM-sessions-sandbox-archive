@@ -326,3 +326,69 @@ yếu hơn, từ provider: OpenRouter."
 merge p0 → main + tag v1.10.0; then dispatch P1-C2. Remaining backlog
 unchanged: P1 chunks 3–4 (properties/mods/nodes/notifications + theme
 tokens; packaging switch, retire src-tauri + ui/).
+
+## Session 8 results (same day, evening) — Gate-3 CLOSED: READY FOR MERGE
+
+Three agent sub-rounds + GLM direct driving; full evidence trail in
+`spikes/2026-11-toolkit/g3-checklist-evidence/CHECKLIST-RESULT.md` (round-2
+section) and on the machine `~/dev-memtest/results/g3-checklist-round2/`
+(REPORT.md + REPORT-2C.md with GLM addendum).
+
+1. **Model chain reality**: `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free`
+   (user's primary) is BROKEN via the gateway — returns multi-language
+   token-salad in the reasoning field, no text/tool-calls, even in a fresh
+   session (PONG test). Fallback `nemotron-3.5-super-vl:free` works well
+   (ran 2a/2b/2c). Session `ses_e3425015effe3Md9vo0lYKBTqO` (ultra,
+   abandoned), `ses_e341ea0fdffeUL5BMb8cMAh8nf` (2a, died on Nvidia 422
+   "input rejected by content safety screening" after it READ a PNG into
+   context — super-vl is multimodal so images go to the provider), fresh
+   sessions for 2b (`ses_e3402a3a2ffeDp1uuW7rlq1n1O`) and 2c
+   (`ses_e33db493effeTnuOjgtvW5mZg5`). Anti-422 rule that worked: NEVER
+   read images into agent context; grim saves only; keep tool outputs
+   trimmed.
+2. **REAL P0 BUILD BUG found & fixed (GLM, commit `bda8a76` on
+   p0-daemon-first, pushed)**: build.sh GUI step used bare
+   `cargo build --release` → tauri `custom-protocol` feature never
+   enabled → EVERY release binary served devUrl http://localhost:5173
+   instead of embedded ui/dist. All prior "rendering" GUI runs (session 5
+   vision-verify, round-1 19 PASS) silently depended on a local http
+   server on :5173. Fix: `[features] custom-protocol =
+   ["tauri/custom-protocol"]` in src-tauri/Cargo.toml + `--features
+   custom-protocol` in build.sh. Verified: GUI renders standalone (C1).
+3. **Gate-3 final matrix**: build.sh PASS · BUG-1 PASS (REST + UI: 246
+   console lines with [HH:MM:SS] + level tags, no decode banner, SLP
+   live) · BUG-2 PASS (REST + UI: full 4-step wizard driven through the
+   real GUI, 201 decoded, no banner, sidebar entry, UI remove works) ·
+   #23 PASS (TERM daemon → disconnected → relaunch reconnect) · #2/#3/#4
+   UNVERIFIABLE (no Nodes UI exists — dead component since v1.9.3, P1
+   chunk 3 scope; NOT a regression).
+4. **GLM-as-UI-driver pattern (new, proven)**: when the agent can't drive
+   forms (no reliable keyboard that day + no absolute window coords under
+   niri scrollable tiling), GLM drives directly via the global raw shell:
+   vision-read each grim screenshot → exact `click_abs X Y` → `wtype
+   "text"` → screenshot-verify each step. `wtype -k` special keys were
+   silently dead this day (text worked; BackSpace/End/Return no-ops —
+   verified empirically twice), while round-1's transcript shows -k
+   working the previous night: re-test before trusting either way.
+   click_abs = /dev/uinput kernel clicks (reliable); verify processes by
+   /proc/PID/cwd (cmdline lacks dev-memtest when launched via relative
+   path). fetch_global.py (scripts/, sandbox) = byte-exact file pull via
+   the agent-free global shell — oc_fetch.py conflicts with live agent
+   sessions.
+5. **Machine state after cleanup**: no dev-memtest processes, ports
+   8097/8391/5173 free, worktree clean @ bda8a76 (`?? binaries/` only).
+   Leftover g3r2c/ZZTEST artifacts: none (instance removed; config
+   scratch only).
+6. **PENDING USER GATE 3**: merge p0-daemon-first (bda8a76) → main, tag
+   v1.10.0. P1-C2 dispatched after this (see below).
+
+## Session 8b — P1 chunk 2 dispatched
+
+P1-C2 prompt (`prompts/2026-11-12-p1-chunk2.md`) sent to a fresh session
+on `nemotron-3.5-super-vl:free` after Gate-3 closed (display free).
+Scope: merge origin/p0-daemon-first into p1-slint-gui (keep epoch-ms on
+LogLineDto conflict; confirm BUG-2 mapping) → wizard + settings + remove
+in crates/minewrap-gui → tests → visual verify (real display, pgrep guard)
+→ PSS ×3 → commit [P1-C2] + push. Machine-side notes for the agent
+included: wtype -k may be dead (re-test), click_abs path, no image reads
+(422 rule).
