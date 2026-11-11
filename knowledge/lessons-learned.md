@@ -713,3 +713,33 @@
 7. User-mandated clean-repo policy (Q8) is a standing constraint: app repo =
    docs + app code + build script only; measurement tooling lives outside
    (user machine `~/dev-memtest/` + archive repo `tools/memtest/`).
+
+## Lesson 73 — Minewrap Phase A completion (2026-11-11, session 2 cont.)
+
+1. **Terminal display layer can EAT the substring "[mi"** from tool outputs
+   (seen with both rg and remote-shell cat): "median [min–max]" rendered as
+   "median in–max]" — which triggered a false "typo still broken" spiral.
+   Rule: before "fixing" mangled text seen through ANY display layer, dump
+   the bytes (`od -c`) or read via python. The file was correct all along.
+2. **`str.replace` fix verification must not use a substring of the
+   replacement**: '[min–max]' CONTAINS 'in–max]', so `"in–max]" not in s`
+   reports False even after a successful fix — verify with an unambiguous
+   marker ('[min' with the bracket) instead.
+3. **opencode paid model 402 (Insufficient balance) is the default failure
+   now** — `deepseek-v4.1-flash` paid is out of credits; the `-free`
+   variant of the same family handled the full A2 run (clone + build +
+   14-scenario measurement + honest STOP-gate report) without issues.
+4. **oc_prompt.py truncates its JSON echo at 400 chars** — piping that
+   through `json.load` fails on the truncation point; treat its output as
+   fire-and-forget and verify via `GET /message` instead.
+5. **One-off memory step-downs during idle sampling are real system
+   events** (S0#1 dropped 5.85→4.10 MiB RSS at t=24 s, never reproduced in
+   3 later runs): don't chase them as harness bugs — reproduce first;
+   median-of-runs absorbs them; note them in the report.
+6. **Agent-vs-GLM cross-verification protocol works**: re-measuring 3
+   scenarios directly via raw-shell agreed with the agent's numbers within
+   0.01–0.20 MiB — that's the evidence bar for trusting the rest.
+7. Baseline drift is expected between measurement campaigns on a desktop
+   machine (WebKitGTK version bump moved GUI PSS +13.72 while RSS moved
+   +2.43): always re-baseline with the SAME harness before optimizing, and
+   compare KPIs against the fresh numbers, not the historical report.

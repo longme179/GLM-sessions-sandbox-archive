@@ -119,21 +119,29 @@ report/toolkit → merge.
 
 ## Next actions (when session resumes)
 
-1. Phase A approved (with Q8 repo-cleanliness amendment, 2026-11-11) —
-   EXECUTING. Status 2026-11-11 late: **A1 DONE** (harness at `tools/memtest/`
-   here, master; verified end-to-end against a real minewrapd release build
-   in-sandbox: S0/S1/S3/SR/SW/SW2 + GUI-tree mechanics; artifacts in
-   `tools/memtest/results/sandbox-verify/`), **A3-sandbox DONE** (rustup
-   1.99.1; release build 1m47s; 47/47 headless tests; GUI build impossible
-   in sandbox — no sudo — so GUI builds go via agent per R7), **GapF found**
-   (daemon panics on spawn failure — see survey findings).
-2. **A2/A4 blocked on OpenCode gateway credentials**: the sandbox /tmp
-   (where `.oc-env` lived) was wiped between sessions → the user must re-send
-   gateway URL + Basic-Auth password; then recreate `~/.oc-env` (600) and
-   drive the agent: deploy harness to `~/dev-memtest/` (base64 per file,
-   `sha256sum -c MANIFEST`), verify user-machine env, build release binaries
-   @ bfde421, run `run_baseline.sh`, fetch results back, review vs §15.4.
-   Deployment prompt drafted in `tools/memtest/README.md` § "Triển khai".
-3. Branch `p0-daemon-first` + Phase B/C kickoff only after Phase A lands
-   and the user sees the baseline numbers.
+1. **Phase A COMPLETE (2026-11-11, session 2)** — all four tasks done:
+   - A1 harness at `tools/memtest/` (master) + deployed to user machine
+     `~/dev-memtest/` (byte-exact, MANIFEST sha256 verified).
+   - A3: rustup 1.99.1 sandbox; daemon release build OK (1m47s); 47/47
+     headless tests; GUI builds go via agent on user machine (no sudo in
+     sandbox, R7). User machine env: rustc 1.99.1 Fedora, pnpm 12.18.0,
+     tauri-cli 2.12.4, Wayland direct (NO Xvfb installed — C4 must adapt:
+     install Xvfb or use a Wayland headless protocol), webkit2gtk 2.54.2.
+   - A4: gateway verified end-to-end. Model `opencode/deepseek-v4.1-flash`
+     hits 402 Insufficient balance → **use `deepseek-v4.1-flash-free`**
+     (worked all round, same family).
+   - A2: agent session (free model) ran the full baseline on the user
+     machine (Fedora 44, 12 cores, Wayland direct). Results in
+     `tools/memtest/results/baseline-2026-11-11/` (39 files + VERIFY-A2.md).
+     GLM re-measured S0×2 + SR×1 directly — agrees with agent within
+     0.01–0.20 MiB. Official P0 comparison baseline (new):
+     S0 3.48 / S1 4.14 / S3 4.40 / SR 4.67 / SW 5.38 / SW2 3.44 PSS,
+     GUI 209.32 PSS / 438.75 RSS. Old-report drift: SR +0.48, SW2 +0.21,
+     GUI PSS +13.72 (RSS +2.43) — all environment drift, methodology
+     verified sound (static scenarios match +0.10..+0.18).
+2. **Next: propose Phase B/C kickoff to the user** (branch
+   `p0-daemon-first`, tasks B1–B9; C0 spec → 3 spike agent sessions).
+   A2 session id (reusable, topic=scoped): see `/tmp/a2-sid` in that
+   session — for a NEW session always create fresh + set free model.
+3. GapF fix belongs in B1/B5 (daemon panic on spawn failure).
 4. End of session: append lessons to `knowledge/lessons-learned.md`.

@@ -1,0 +1,61 @@
+{
+  "label": "S0-verify1",
+  "root_pid": 2325811,
+  "seconds": 30.0,
+  "interval": 1.0,
+  "markers": [
+    "fakejava"
+  ],
+  "samples": 30,
+  "columns": [
+    "t",
+    "rss",
+    "pss",
+    "uss",
+    "swap",
+    "threads",
+    "procs",
+    "vmpeak",
+    "hwm"
+  ],
+  "median": {
+    "t": 14.5,
+    "rss": 5.746,
+    "pss": 3.496,
+    "uss": 3.465,
+    "swap": 0.0,
+    "threads": 13.0,
+    "procs": 1.0,
+    "vmpeak": 141.39,
+    "hwm": 5.75
+  },
+  "min": {
+    "t": 0.0,
+    "rss": 5.746,
+    "pss": 3.495,
+    "uss": 3.465,
+    "swap": 0.0,
+    "threads": 13,
+    "procs": 1,
+    "vmpeak": 141.39,
+    "hwm": 5.75
+  },
+  "max": {
+    "t": 29.0,
+    "rss": 5.746,
+    "pss": 3.496,
+    "uss": 3.465,
+    "swap": 0.0,
+    "threads": 13,
+    "procs": 1,
+    "vmpeak": 141.39,
+    "hwm": 5.75
+  },
+  "stable_rss_mib": 0.0,
+  "kind": "daemon",
+  "config": "configs/idle0.toml",
+  "port": 8081,
+  "started_instance": null,
+  "ws_attached": false,
+  "daemon_binary_sha256_16": "f0b1ea2349c19459"
+}
