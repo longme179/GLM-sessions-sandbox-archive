@@ -119,52 +119,40 @@ report/toolkit → merge.
 
 ## Next actions (when session resumes)
 
-1. **Phase B COMPLETE (2026-11-11, session 3)** — branch
-   `p0-daemon-first` (2 commits `e2edb92` + `189ddad`, pushed to
-   GitHub; target v1.10.0, NOT merged — user gate 3 pending):
-   - B1 state keeper, B2 SLP poller (also FIXED the dead
-     `request_status` happy path — v1.9.3 offset math was wrong),
-     B3 Discord service (leading+trailing debounce, periodic push,
-     shared client D5), B4 REST additions + `/events` log batching
-     (100/40ms, seq) + instances_changed, B5 SIGTERM graceful stop-all,
-     GapF fix (spawn failure = same-state event, no owner panic).
-   - B6 GUI pure client: src-tauri dropped minewrap-core; NodeService
-     = registry (local from `[daemon]` table via
-     `minewrap_remote::load_local_settings`, token from
-     `{data_dir}/token`; remotes in `~/.config/minewrap/nodes.json`
-     0600 — fixes the "not wired" stub); 22 commands route REST; DTOs
-     in minewrap-remote; `events_connect` now sends proper WS headers
-     (v1.9.3 could never authenticate).
-   - B7 auto-spawn (setsid, daemon.log, ≤10 s health wait), per-node
-     `/events` forwarder on tauri::async_runtime (no extra runtime
-     thread — G3), reconnect + since_seq backfill, exit = disconnect,
-     `retry_node` command + Nodes UI retry button.
-   - B8 D2-lite lazy owners + autostart honoured + restart waits for
-     settle; systemd TOKIO_WORKER_THREADS=2 + MALLOC_ARENA_MAX=2.
-   - B9 build.sh (--daemon-only), ARCHITECTURE/README/remote-access/
-     RELEASE_NOTES (breaking change + migration), versions → 1.10.0.
-   - Tests: **60 passing** (core 46 + daemon 10 lib + 1 integration +
-     remote 3), `warnings = deny` clean (K3 met). GUI binary itself
-     NOT buildable in sandbox (no GTK, R7) — scratch crate
-     `scripts/gui-check/` type-checks node_service.rs + registry test.
-2. **In flight (session 3)**: agent on user machine — (a) background
-   build main-vs-p0 GUI + `pnpm run check` (log /tmp/mw-p0-build.log,
-   poll via rsh); (b) 3 spike sessions (C1 slint
-   `ses_e36412d91ffeuGJ5PB2oXfyPLA`, C2 iced
-   `ses_e364119f9ffe3zjW6wy3lQEN4U`, C3 gtk4
-   `ses_e364106d3ffe8FTJu4al892NJ6`, model
-   `opencode/deepseek-v4.1-flash-free` — flash paid variant 402s).
-   Spec deployed byte-exact to `~/dev-memtest/spikes/SPEC.md`
-   (master: archive `spikes/2026-11-toolkit/SPEC.md`; prompts in
-   sandbox `scripts/c{1,2,3}-prompt-*.md`; helpers `scripts/oc-fire.sh`
-   + `oc-report.sh` — note `tools/oc.sh` header form broken with the
-   current user:pass env; use `curl -u` like rsh.sh).
-   NOTE: sandbox recycle kills agent runs? No — sessions run on the
-   gateway (user machine), sandbox only polls. If /tmp/oc-sid-* lost,
-   SIDs are in this file.
-3. **Then**: GLM review spike diffs verbatim + re-measure ≥1
-   scenario/toolkit → C5 comparison table + license check (Slint
-   GPLv3 vs AGPL) → C6 go/no-go → SPIKE REPORT → user gate 2.
-   Then K1/K2 measurement (A2 harness scenarios on p0 daemon), demo
-   end-to-end, user gate 3 (merge v1.10.0).
-4. End of session: append lessons to `knowledge/lessons-learned.md`.
+1. **P0 + spike COMPLETE & VERIFIED (2026-11-11, session 4)** — branch
+   `p0-daemon-first` @ `920de1e` (3 commits; 920de1e fixed a rustc-1.99.1
+   unused-binding warning found on the user machine). Deliverable:
+   `download/Minewrap_P0_Verification_and_Spike_Report_v1.{md,pdf}` +
+   archive `spikes/2026-11-toolkit/SPIKE_REPORT.md`. All verified on the
+   user machine with release binaries:
+   - **K1 6.53 MiB PSS** ≤ 8 (1 server + WS console + Discord service
+     live: POST state-change ×3 + PATCH periodic edit-in-place, same
+     message id). K2 209.83 ≤ 219.8 (GUI tree, same-day baseline
+     209.32). K3 60/60 tests re-run in sandbox. K5 svelte-check 0/0.
+   - S0/S1/S3-p0: 4.31/4.33/4.21 PSS — D2-lite flat. Binary GUI
+     10.39→8.83 MiB. B4 CRUD 201/409/200/404 + /java + /scan-workdir.
+     B5 SIGTERM: exit 0.0 s idle; 60.5 s with stdin-deaf stub (design:
+     stdin stop → TERM → KILL; real MC servers stop via stdin in s).
+     B7 auto-spawn + close-GUI→server-survives + relaunch + backfill
+     (seq 1539+) all demonstrated; leftover pids cleaned.
+   - Spike C5: GLM re-measured all 3 toolkits same-session (niri
+     wayland, floated 1280×800): slint-tuned 13.35 / gtk4 24.13 /
+     iced 554.90 PSS idle — matches agent numbers ≤0.33 MiB. iced
+     DISQUALIFIED (9× over budget). License: GPLv3↔AGPLv3 compatible
+     (FSF §13) — Slint usable free under GPLv3 option for AGPL
+     Minewrap; iced/gtk4-rs MIT. Raw: `~/dev-memtest/results/
+     {verify-glm,csv_K1.csv,S0/S1/S3-p0,p0-demo}` on user machine +
+     archive `spikes/2026-11-toolkit/`.
+2. **WAITING USER GATE 2** — toolkit choice: A) gtk4-rs (only one
+   meeting Q3 native-selection hard requirement, 24 MiB PSS, GLM
+   recommendation) vs B) Slint tuned (lowest RAM 13.4 MiB + lightest
+   deployment, but line-granularity selection violates Q3 sub-line).
+3. **WAITING USER GATE 3** — merge `p0-daemon-first` → main, tag
+   v1.10.0. Before merge: user should hand-run the 22-command UI
+   checklist (5–10 min; everything beneath the UI is machine-verified).
+4. **P1 (round 2, after gate 2)** — port 12 Svelte components to the
+   winning toolkit; order: Console → Dashboard → Settings/Wizard →
+   Properties/Mods → Nodes/Notifications. Spike source trees stay on
+   the user machine `~/dev-memtest/spikes/{slint,iced,gtk4}/` (full
+   code not yet copied into archive — do it when toolkit chosen).
+5. End of session: append lessons to `knowledge/lessons-learned.md`.

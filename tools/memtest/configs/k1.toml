@@ -1,0 +1,24 @@
+# K1 — P0 daemon KPI: 1 instance RUNNING + 1 WS console client + Discord service.
+# Reference baseline (v1.9.3 SW): RSS 7.43 / PSS 5.06 / USS 5.03 — p0 adds
+# state keeper + SLP poller + Discord service + /events batching.
+[daemon]
+host = "127.0.0.1"
+port = 8090
+data_dir = "../work/k1-data"
+status_poll_interval = 15.0
+unresponsive_after_failures = 2
+
+[[instances]]
+id = "survival"
+name = "Survival"
+work_dir = "../work/server1"
+java_path = "./fakejava"
+
+[instances.discord]
+enabled = true
+webhook_url = "http://127.0.0.1:9999/webhook"
+mode = "edit-in-place"
+interval_seconds = 15.0
+first_push_delay_seconds = 5.0
+state_change_posts = true
+state_change_debounce_seconds = 1.0

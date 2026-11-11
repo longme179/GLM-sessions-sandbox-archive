@@ -777,3 +777,34 @@
    function (double `}` at EOF). Fix pattern: locate the free fn marker,
    split there, never trust `rfind` on the whole file. Better: use the
    Edit tool with exact anchors.
+
+## #75 — Minewrap session 4: verify-everything round (gate 2/3 evidence)
+
+1. **rsh.sh auth forms**: `tools/oc.sh` uses the Basic header form, `rsh.sh`
+   uses `curl -u` — keep `OC_AUTH` as RAW `user:pass` and a separate
+   `OC_BASIC` (base64) export; mixing them silently turns every poll into a
+   401 loop that looks like a "gateway hang" (240 s of sleep-2s polling).
+2. **Sandbox background jobs get reaped**: `nohup cmd &` from a Bash tool
+   call died twice mid-download; `setsid nohup ... < /dev/null & disown`
+   survived. Foreground `timeout 560 cargo fetch` then `cargo test` is the
+   reliable pattern on the 2-core sandbox (deps for 3 headless crates fit
+   in one 10-min window after a fetch pass).
+3. **Demo scripts: header bugs hide as app bugs** — `-H "$TOK"` instead of
+   `-H "Authorization: Bearer $TOK"` produced 401s that looked like "start
+   not working / server died". Evidence-first debugging caught it in the
+   log ({"detail":"invalid or missing bearer token"}); re-ran with fixed
+   headers before drawing conclusions. Always print the raw error body in
+   acceptance scripts.
+4. **Timed-exit checks are racy with pgrep**: "daemon still alive after
+   SIGTERM" was twice a false alarm (pgrep matched an older unrelated
+   daemon / a dying process). Measure with `kill -0 $PID` on the exact pid
+   and a monotonic clock, and print the elapsed seconds — real number was
+   0.0 s idle.
+5. **UI assets are not built by `cargo build`**: a Tauri GUI built via bare
+   `cargo build -p minewrap-tauri` without `pnpm build` (ui/dist) compiles
+   fine but ships an empty frontend — build via the repo's `build.sh` or
+   stage `pnpm build` first, else K2/GUI measurements measure a blank page.
+6. **Same-day re-baselining matters**: PSS shared-page accounting drifted
+   +13.7 MiB on the GUI between the v1.9.3 report and today's re-measure
+   (WebKitGTK 2.54.2 upgrade) — always compare against same-day baselines
+   when the KPI is a delta.

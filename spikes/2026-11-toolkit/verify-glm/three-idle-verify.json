@@ -1,0 +1,157 @@
+{
+  "label": "gtk4-idle-glm",
+  "root_pid": 2514120,
+  "seconds": 60.0,
+  "interval": 1.0,
+  "markers": [],
+  "samples": 60,
+  "columns": [
+    "t",
+    "rss",
+    "pss",
+    "uss",
+    "swap",
+    "threads",
+    "procs",
+    "vmpeak",
+    "hwm"
+  ],
+  "median": {
+    "t": 29.5,
+    "rss": 57.734,
+    "pss": 24.127,
+    "uss": 14.426,
+    "swap": 0.0,
+    "threads": 5.0,
+    "procs": 1.0,
+    "vmpeak": 438.72,
+    "hwm": 57.73
+  },
+  "min": {
+    "t": 0.0,
+    "rss": 57.668,
+    "pss": 23.887,
+    "uss": 14.422,
+    "swap": 0.0,
+    "threads": 5,
+    "procs": 1,
+    "vmpeak": 438.72,
+    "hwm": 57.67
+  },
+  "max": {
+    "t": 59.0,
+    "rss": 57.742,
+    "pss": 24.143,
+    "uss": 14.434,
+    "swap": 0.0,
+    "threads": 7,
+    "procs": 1,
+    "vmpeak": 438.72,
+    "hwm": 57.74
+  },
+  "stable_rss_mib": 0.074
+}{
+  "label": "slint-tuned-glm",
+  "root_pid": 2514764,
+  "seconds": 60.0,
+  "interval": 1.0,
+  "markers": [],
+  "samples": 60,
+  "columns": [
+    "t",
+    "rss",
+    "pss",
+    "uss",
+    "swap",
+    "threads",
+    "procs",
+    "vmpeak",
+    "hwm"
+  ],
+  "median": {
+    "t": 29.5,
+    "rss": 27.398,
+    "pss": 13.354,
+    "uss": 10.859,
+    "swap": 0.0,
+    "threads": 5.0,
+    "procs": 1.0,
+    "vmpeak": 377.7,
+    "hwm": 27.4
+  },
+  "min": {
+    "t": 0.0,
+    "rss": 27.391,
+    "pss": 13.346,
+    "uss": 10.852,
+    "swap": 0.0,
+    "threads": 5,
+    "procs": 1,
+    "vmpeak": 377.7,
+    "hwm": 27.39
+  },
+  "max": {
+    "t": 59.0,
+    "rss": 27.402,
+    "pss": 13.357,
+    "uss": 10.863,
+    "swap": 0.0,
+    "threads": 5,
+    "procs": 1,
+    "vmpeak": 377.7,
+    "hwm": 27.4
+  },
+  "stable_rss_mib": 0.011
+}{
+  "label": "iced-idle-glm",
+  "root_pid": 2515435,
+  "seconds": 60.0,
+  "interval": 1.0,
+  "markers": [],
+  "samples": 60,
+  "columns": [
+    "t",
+    "rss",
+    "pss",
+    "uss",
+    "swap",
+    "threads",
+    "procs",
+    "vmpeak",
+    "hwm"
+  ],
+  "median": {
+    "t": 29.5,
+    "rss": 563.902,
+    "pss": 554.903,
+    "uss": 549.773,
+    "swap": 0.0,
+    "threads": 16.0,
+    "procs": 1.0,
+    "vmpeak": 3085.12,
+    "hwm": 563.9
+  },
+  "min": {
+    "t": 0.0,
+    "rss": 563.902,
+    "pss": 554.903,
+    "uss": 549.773,
+    "swap": 0.0,
+    "threads": 16,
+    "procs": 1,
+    "vmpeak": 3085.12,
+    "hwm": 563.9
+  },
+  "max": {
+    "t": 59.0,
+    "rss": 563.902,
+    "pss": 554.903,
+    "uss": 549.773,
+    "swap": 0.0,
+    "threads": 16,
+    "procs": 1,
+    "vmpeak": 3085.12,
+    "hwm": 563.9
+  },
+  "stable_rss_mib": 0.0
+}
