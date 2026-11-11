@@ -274,3 +274,55 @@ main as v1.10.0. P1 chunk 2 (add-instance dialog + settings/wizard forms on
 `p1-slint-gui`) is SPEC'D AND UNBLOCKED but NOT DISPATCHED — blocked on model
 quota (org-wide free limit; paid balance empty). Re-dispatch when quota
 resets or the user tops up / connects a provider.
+
+## Session 8 (2026-11-12) — quota restored via OpenRouter; G3-round2 + P1-C2 dispatch
+
+User message: "Quota cho subagents đã có lại, bạn có thể dùng Nemotron 3
+Ultra free và fallback về các models khác theo thứ tự từ mạnh vê code đến
+yếu hơn, từ provider: OpenRouter."
+
+1. **Model chain (user-mandated)**: gateway now carries OpenRouter models
+   (420 total). PRIMARY = `openrouter/nvidia/nemotron-3-ultra-550b-a55b:free`
+   (1M ctx, $0). Fallback order (strongest→weakest at code, free-first):
+   `openrouter/nvidia/nemotron-3.5-super-vl:free` → `openrouter/nvidia/
+   nemotron-3.5-lightning:free` → paid cheap proven
+   `openrouter/deepseek/deepseek-v4.1-flash`. Set via
+   `POST /api/session/{sid}/model` `{"model":{"id":"nvidia/nemotron-3-ultra-
+   550b-a55b:free","providerID":"openrouter"}}` (Model.Ref object; GET on
+   that path 404s — verify via `GET /api/session/{sid}` instead).
+2. **Sandbox state**: fresh sandbox again; /tmp survives only within a
+   single bash call chain — env vars do NOT persist across calls (export in
+   call 1 was gone by call 3). Fix: `/tmp/ocenv.sh` (chmod 600) sourced per
+   call. Lesson: always re-source before OC tool calls.
+3. **Recon before dispatch (raw shell, agent-free)**: no Xvfb on the machine
+   (only ImageMagick convert/import; wtype present); round-1 G3 assets live
+   (work/g3*: fakejava-echo, slp_stub.py, g3-data token, daemon was
+   127.0.0.1:8097); Minewrap-p0 @ e5e7555 clean; Minewrap-p0-gui worktree @
+   29e8e5f + `?? binaries/` (needs reset to 201675e); NO leftover
+   minewrap/fakejava processes; user's real app NOT running;
+   ~/.config/minewrap/ = {data, minewrap.toml} (no nodes.json yet).
+   `nodes_json_path()` honors XDG_CONFIG_HOME → node tests run with
+   `XDG_CONFIG_HOME=~/dev-memtest/work/g3-config` (round-1 convention) to
+   isolate from the user's real registry.
+4. **Dispatched GATE-3 ROUND 2** (session `ses_e3425015effe3Md9vo0lYKBTqO`,
+   nemotron-3-ultra:free): build.sh rebuild → BUG-1/BUG-2 E2E → #2/#3/#4
+   (second daemon port 8391, data g3r2-node2) → #23 disconnect path →
+   cleanup + REPORT.md + "GATE-3 READY FOR MERGE: YES/NO". Prompt:
+   `prompts/2026-11-12-g3-round2.md`. Sequential-first policy: single agent
+   on the real display at a time (no Xvfb fallback available).
+5. **P1 CHUNK 2 prompt drafted** (`prompts/2026-11-12-p1-chunk2.md`, to
+   dispatch after G3-R2 collects): merge origin/p0-daemon-first into
+   p1-slint-gui (expected LogLineDto conflict — keep epoch-ms; confirm BUG-2
+   mapping), implement wizard (Wizard.svelte fields: id/name/work-dir+Scan/
+   JavaPicker/min-max RAM/preset/launch-mode/args/autostart) + Settings
+   (Settings.svelte: instance/probe/restart groups, dirty tracking) +
+   Remove-with-confirm; tests; visual verify on real display WITH pgrep
+   guard (ports 8390/25590, p1c2-* dirs, XDG override); PSS ×3; commit
+   [P1-C2] + push. Chunk-1 reference inventory recorded: minewrap-gui src
+   6 files + main.slint = 1743 LOC; Slint 1.18 no-default-features =
+   measured config; deps already include arboard/tokio-tungstenite.
+
+**State after session 8 dispatch**: G3-R2 running; on PASS → ask user to
+merge p0 → main + tag v1.10.0; then dispatch P1-C2. Remaining backlog
+unchanged: P1 chunks 3–4 (properties/mods/nodes/notifications + theme
+tokens; packaging switch, retire src-tauri + ui/).
