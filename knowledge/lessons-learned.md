@@ -913,3 +913,27 @@
    the battle-tested master (deployed to the user's machine, results already
    produced with it) already lived in `tools/memtest/`. The rewrite was
    discarded; the archive copy is the single source of truth.
+
+## #79 — Minewrap session 7: autonomous checklist + quota wall (2026-11-11)
+
+1. **A failed `idle` message never goes away.** After a quota-failed run,
+   re-dispatching in the same session leaves the old `{type:"idle",
+   outcome:"failed"}` in the message list; `oc_report.py wait` scans
+   newest→oldest for ANY idle and declares the new run dead instantly.
+   Fix (sandbox `scripts/oc_wait2.py`, promote to archive tools): the run
+   is over only when the NEWEST message is an idle.
+2. **The OpenCode free limit is ORG-WIDE, not per-model.** After one long
+   autonomous run on deepseek-v4.1-flash-free, switching to glm/minimax/…
+   free variants all 402/free-limit instantly. When the wall hits near the
+   end of a task, don't burn turns hopping models: finish via the raw
+   `/api/shell` channel (cleanup, evidence collection) and fix code locally
+   in the sandbox — the agent is not the only executor.
+3. **An agent-driven UI checklist works when every interaction is wrapped
+   in focus→act→screenshot.** The Gate-3 run verified 19/23 IPC commands
+   through the real GUI and caught two real contract bugs (epoch-ms vs
+   RFC3339 `ts`; `201 {id,name}` decoded as `Action`) that every
+   process-level check had passed. Budget model quota for it: UI driving
+   costs many small tool-calls.
+4. **Background stubs need explicit stdin.** `cmd &` in bash gives the
+   child /dev/null stdin, so a console-command stub never receives `stop`
+   — pipe a FIFO/cat into it (the G3 fakejava-echo fix).

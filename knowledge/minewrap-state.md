@@ -234,3 +234,43 @@ succeeded) via `oc_report.py`; cross-verified everything independently:
 Bridge state this session: fresh tunnel URL (user-supplied) worked unchanged
 with `qw.py` / `oc_fetch.py`; GLM-side vision via `z-ai vision -o json` (parse
 `choices[0].message.content`, NOT a bare `{content}` key).
+
+## Session 7 (2026-11-11 night) — Slint locked; Gate-3 checklist run; 2 bugs fixed
+
+User's two-line instruction: "**Chốt Slint**" + "**agent tự chạy checklist rồi
+báo**" (agent runs the checklist itself, then reports).
+
+1. **Gate 2 FINAL: Slint.** The gtk4-rs swap option is closed. Full answer to
+   Q1 "GUI Rust thuần 100%?": yes with Slint when using the software or
+   femtovg renderer (avoid the `renderer-skia` feature — C++); iced was
+   disqualified on RAM (554.90 MiB); gtk4-rs rejected (C stack); GPLv3↔AGPLv3
+   combining is explicitly permitted (GPLv3 §13), so the license is fine.
+2. **Gate-3 23-command UI checklist** dispatched to a fresh OpenCode session
+   (`ses_e34e987b7ffebuYr7JsMKqNE1Z`), model fallback chain burned through:
+   deepseek-v4.1-flash 402 (no balance) → -free ran the whole checklist →
+   org-wide `provider.free-limit` during wrap-up (glm/minimax free also hit
+   it — the free limit is ORG-WIDE, not per-model). Result collected + GLM
+   cross-verified: **19/23 PASS, #2/#3/#4 (add/remove/retry node) UNVERIFIED,
+   #23 partial**; vision 3/3 RENDER-OK. Durable summary + shots:
+   `spikes/2026-11-toolkit/g3-checklist-evidence/CHECKLIST-RESULT.md`; raw
+   evidence on the machine `~/dev-memtest/results/g3-checklist/`.
+3. **Both blocking bugs FIXED by GLM directly** (sandbox, no agent needed —
+   quota was dead): commit `201675e` on `p0-daemon-first` (pushed):
+   LogLineDto ts epoch-ms serde + frontend `ts: number` (BUG-1), and
+   add_instance 201 `{id,name}` → Action mapping (BUG-2).
+   `cargo check` clean (core/daemon/remote), 14 tests green. Sandbox cannot
+   check src-tauri (no GTK dev libs) — machine build will confirm.
+4. **Machine cleanup done** via raw shell (exact-PID kills; user's AppImage
+   app verified untouched).
+5. **Tooling**: `oc_report.py wait` has a stale-idle bug (a failed idle from
+   an earlier quota error ends the wait prematurely after re-dispatch) —
+   sandbox `scripts/oc_wait2.py` only trusts an idle that is the NEWEST
+   message. Copy it into archive tools when convenient.
+
+**State after session 7**: P0 code-complete + checklist-run + 2 bugs fixed;
+remaining for Gate 3 = machine E2E re-verify of the two fixed decode flows +
+`#2-#4` + `#23` disconnect path (one agent run) → ask user to merge p0 →
+main as v1.10.0. P1 chunk 2 (add-instance dialog + settings/wizard forms on
+`p1-slint-gui`) is SPEC'D AND UNBLOCKED but NOT DISPATCHED — blocked on model
+quota (org-wide free limit; paid balance empty). Re-dispatch when quota
+resets or the user tops up / connects a provider.
