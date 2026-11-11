@@ -1,7 +1,7 @@
 # KẾ HOẠCH MINEWRAP RAM COMPACT — ĐỢT 1: P0 (DAEMON-FIRST) + SPIKE TOOLKIT
 
-**Trạng thái:** DRAFT v1.0 — chờ duyệt
-**Ngày:** 2026-11-11
+**Trạng thái:** v1.1 — Phase A đã duyệt (kèm sửa đổi Q8: chính sách repo sạch); Phase B/C khởi động sau khi A xong
+**Ngày:** 2026-11-11 (v1.1 cùng ngày — user duyệt Phase A)
 **Repo:** `github.com/longme179/Minewrap` @ `main` `bfde421` (v1.9.3)
 **Người thực hiện:** GLM (Z.ai) viết code daemon/core + review toàn bộ; OpenCode agent (`deepseek-v4.1-flash`, fallback `deepseek-v4-pro` / `-free`) chạy spike + đo số trên máy user; user giữ review-gate
 **Phạm vi (đã chốt):** P0 daemon-first + spike 3 toolkit GUI Rust. Port UI thật sự (P1) thuộc đợt sau.
@@ -19,6 +19,7 @@
 | Q5 | Ngân sách RAM GUI (PSS toàn cây) | **< 60 MB** — chốt chính thức sau spike |
 | Q6 | Mức chi tiết plan | **Task-level**: file, việc, acceptance criteria, effort, dependency |
 | Q7 | Phân công | **Agent làm spike** (3 mini-app song song); GLM review code + kiểm chứng số đo; P0 do GLM viết chính |
+| Q8 | **Chính sách repo sạch** (user bổ sung khi duyệt Phase A) | Repo GitHub Minewrap **chỉ chứa**: tài liệu, code app, build script build-from-source. **Cấm commit** tool chẩn đoán / memtest / spike / test ngoài lề app vào repo. Harness + spike + kết quả đo lưu riêng trên máy user tại `~/dev-memtest/` (bản gốc/master: archive repo GLM `tools/memtest/`, `spikes/`) |
 
 ---
 
@@ -28,7 +29,7 @@
 
 Đưa RAM của Minewrap từ **~196 MiB PSS (cây GUI Tauri/WebKit)** xuống: (a) khi không mở GUI — chỉ còn daemon ~6–8 MiB PSS; (b) sau P1 (đợt sau) — GUI Rust thuần < 60 MiB PSS. Đợt này hoàn thành (a) và cung cấp bằng chứng đo để chọn toolkit cho (b).
 
-### 1.2 KPI (đo bằng harness `tools/memtest/`, máy user, cùng phương pháp báo cáo v1.9.3 §12)
+### 1.2 KPI (đo bằng harness `~/dev-memtest/` trên máy user — NGOÀI repo Minewrap, cùng phương pháp báo cáo v1.9.3 §12)
 
 | KPI | Chỉ số | Ngưỡng pass |
 |---|---|---|
@@ -40,7 +41,7 @@
 
 ### 1.3 Định nghĩa hoàn thành
 
-- **P0 done** = mọi task B1–B9 pass AC + demo end-to-end trên máy user (mở GUI → daemon tự dậy → start server → đóng GUI → server vẫn chạy, Discord vẫn push, mở lại GUI → reconnect + backfill log không gap) + số đo K1/K2 ghi vào `tools/memtest/results/`.
+- **P0 done** = mọi task B1–B9 pass AC + demo end-to-end trên máy user (mở GUI → daemon tự dậy → start server → đóng GUI → server vẫn chạy, Discord vẫn push, mở lại GUI → reconnect + backfill log không gap) + số đo K1/K2 ghi vào `~/dev-memtest/results/` (lưu riêng ngoài repo — Q8; bản sao archive repo).
 - **Spike done** = bảng so sánh C5 + khuyến nghị toolkit + khuyến nghị ngân sách chính thức + xác minh license, user duyệt.
 
 ---
@@ -113,22 +114,23 @@ Nguyên tắc bất biến: wire format API v1.0 **giữ nguyên** (chỉ additi
 
 > Mục đích: bộ số đo "trước" đáng tin + công cụ đo dùng lại được cho P0 và mọi đợt sau. Số liệu phải đo **trên máy user** (Fedora 44, 12 lõi — cùng máy với báo cáo) thì mới so được với baseline.
 
-**A1 — Port harness đo vào `tools/memtest/` của repo Minewrap**
-- *Files (mới):* `tools/memtest/memsample.py`, `scenario.py`, `scenario_env.py`, `wsclient.py`, `configs/*.toml`, `fakejava` (stub bash in burst 2000 dòng → "Done" → stream 0,5 s/dòng), `README.md`.
+**A1 — Port harness đo thành toolkit độc lập `~/dev-memtest/` (NGOÀI repo Minewrap — Q8)**
+- *Vị trí:* working copy trên máy user `~/dev-memtest/`; bản gốc (master) trong archive repo GLM `tools/memtest/` — **không bao giờ commit vào repo Minewrap**. Toolkit tự chứa (không phụ thuộc repo app).
+- *Files (mới):* `memsample.py`, `scenario.py`, `scenario_env.py`, `wsclient.py`, `configs/*.toml`, `fakejava` (stub bash in burst 2000 dòng → "Done" → stream 0,5 s/dòng), `run_baseline.sh`, `README.md`.
 - *Việc:* tái tạo đúng thuật toán mô tả ở báo cáo §12.2: sampler duyệt cây process theo `PPid`, đọc `smaps_rollup` 1 Hz (RSS/PSS/USS/Swap + Threads/VmHWM), **loại subtree của stub** theo cmdline marker; runner spawn daemon release với port/data_dir riêng, đợi `/health`, chạy sampler N giây, xuất CSV; `wsclient.py` giữ 1 WS console + trả pong.
 - *AC:* chạy S0 trên máy user cho số trong ngưỡng ±0,2 MiB so báo cáo (5,56 MiB RSS / 3,30 PSS); CSV đầy đủ cột như báo cáo.
 - *Effort:* 0,25 ngày (GLM viết, agent chạy verify trên máy user).
 - *Phụ thuộc:* không.
 
 **A2 — Đo lại baseline đầy đủ (máy user, agent chạy theo protocol A1)**
-- *Việc:* 6 kịch bản S0/S1/S3/SR/SW + GUI tree 30 s idle; ghi `tools/memtest/results/baseline-v1.9.3.md` (bảng median [min–max]).
+- *Việc:* 6 kịch bản S0/S1/S3/SR/SW + GUI tree 30 s idle; ghi `~/dev-memtest/results/baseline-v1.9.3.md` (bảng median [min–max]).
 - *AC:* chênh lệch mỗi kịch bản trong ngưỡng §15.4 của báo cáo (S0 ±0,2 … GUI ±10 MiB PSS). Nếu lệch lớn → dừng, tìm nguyên nhân môi trường trước khi làm P0.
 - *Effort:* 0,25 ngày. *Phụ thuộc:* A1.
 
 **A3 — Setup môi trường build**
 - *Sandbox GLM:* cài rustup stable; `cargo test --workspace` (phần headless: core + daemon + remote) phải 47/47 pass; thử `apt-get install libwebkit2gtk-4.1-dev libsoup-3.0-dev` cho build GUI — nếu sandbox không dựng nổi thì build GUI qua agent trên máy user (code vẫn GLM viết, gửi patch base64 byte-exact).
 - *Máy user (qua agent):* xác nhận cargo + pnpm + tauri CLI sẵn sàng (đã từng build v1.9.3).
-- *AC:* cả hai môi trường build được; log test lưu `tools/memtest/results/env-check.md`.
+- *AC:* cả hai môi trường build được; log test lưu `~/dev-memtest/results/env-check.md` (bản sao archive repo).
 - *Effort:* 0,25 ngày. *Phụ thuộc:* không.
 
 **A4 — Kiểm chứng bộ tool điều phối agent (đã có sẵn, không viết mới)**
@@ -217,9 +219,10 @@ Nguyên tắc bất biến: wire format API v1.0 **giữ nguyên** (chỉ additi
 - *AC:* đo S3 (3 instance offline) sau đổi: RSS ≈ S0 + ≤ 0,2 MiB (bỏ +0,75×N MiB); threads daemon 3–5; kịch bản S1/SR/SW không regression so baseline (>±0,3 MiB → điều tra).
 - *Effort:* 0,5 ngày. *Phụ thuộc:* B1–B4 xong (đo trên daemon hoàn chỉnh).
 
-### B9 — Docs & parity & version
+### B9 — Docs & parity & version + build script (Q8)
 
-- *Files:* `ARCHITECTURE.md` (sơ đồ + chính sách mới: daemon-first, GUI = client, đường "dừng hẳn" = SIGTERM/systemctl), `README.md`, `docs/remote-access.md` (bổ sung: GUI giờ cũng là client — kiến trúc đồng nhất), `docs/RELEASE_NOTES.md` (v1.10.0: breaking — đóng GUI không dừng server; hướng dẫn migrate hành vi cũ: `systemctl --user stop minewrapd` hoặc `kill -TERM`), PARITY note API 1.0 additive.
+- *Files:* `ARCHITECTURE.md` (sơ đồ + chính sách mới: daemon-first, GUI = client, đường "dừng hẳn" = SIGTERM/systemctl), `README.md`, `docs/remote-access.md` (bổ sung: GUI giờ cũng là client — kiến trúc đồng nhất), `docs/RELEASE_NOTES.md` (v1.10.0: breaking — đóng GUI không dừng server; hướng dẫn migrate hành vi cũ: `systemctl --user stop minewrapd` hoặc `kill -TERM`), PARITY note API 1.0 additive, **`build.sh` (mới, root repo)**.
+- *Việc (thêm theo Q8):* viết `build.sh` ở root — build từ source toàn phần (cài deps nếu thiếu → `cargo build --release` daemon + `pnpm install && pnpm tauri build` GUI), kèm `--daemon-only`. Rà soát repo trước release: **không chứa** tool chẩn đoán/memtest/spike (đã nằm ngoài theo Q8); unit-test cargo của app (K3) vẫn giữ trong repo vì là một phần code app.
 - *AC:* docs mô tả đúng hành vi mới; release notes nêu rõ breaking change + đường lùi.
 - *Effort:* 0,5 ngày. *Phụ thuộc:* B1–B8.
 
@@ -229,7 +232,7 @@ Nguyên tắc bất biến: wire format API v1.0 **giữ nguyên** (chỉ additi
 
 ## 6. PHASE C — SPIKE 3 TOOLKIT (2–3 ngày, chạy song song với B sau khi A1 xong)
 
-> Thực hiện bởi **3 session OpenCode agent song song** (model `deepseek-v4.1-flash`), code đẩy vào archive repo `spikes/2026-11-toolkit/{slint,iced,gtk4}/` (GLM review qua diff verbatim — protocol STOP-gate), **số đo chạy trên máy user** (cùng máy baseline) theo protocol C4 do GLM soạn. GLM tái đo ngẫu nhiên ≥1 kịch bản/toolkit để kiểm chứng (rule: không tin số chưa verify).
+> Thực hiện bởi **3 session OpenCode agent song song** (model `deepseek-v4.1-flash`), working copy code trên máy user `~/dev-memtest/spikes/{slint,iced,gtk4}/`, master đẩy vào archive repo `spikes/2026-11-toolkit/{slint,iced,gtk4}/` (GLM review qua diff verbatim — protocol STOP-gate) — **không đụng repo Minewrap** (Q8); **số đo chạy trên máy user** (cùng máy baseline) theo protocol C4 do GLM soạn. GLM tái đo ngẫu nhiên ≥1 kịch bản/toolkit để kiểm chứng (rule: không tin số chưa verify).
 
 ### C0 — Spec mini-app chung (GLM viết, đính kèm prompt agent)
 
@@ -258,7 +261,7 @@ Một app duy nhất, replicate đúng "hình thù" Minewrap hôm nay:
 ### C4 — Protocol đo chuẩn (GLM soạn, agent thực thi trên máy user)
 
 - **Hiển thị:** `Xvfb :99 -screen 0 1280x800x24` (đồng nhất, software path — đúng mục tiêu không GPU); xác nhận window mapped bằng `xwininfo`; screenshot `xwd` lưu làm bằng chứng.
-- **Đo:** `tools/memtest/memsample.py` (từ A1) trên **cây process app**, 1 Hz.
+- **Đo:** `~/dev-memtest/memsample.py` (từ A1) trên **cây process app**, 1 Hz.
 - **Kịch bản mỗi app:** (1) idle 60 s; (2) burst: đo 30 s quanh thời điểm burst 2000 dòng; (3) stream 2 dòng/s trong 60 s. **3 runs/kịch bản**, báo cáo median [min–max].
 - **Thêm:** cold-start (exec → frame đầu: instrument event-loop-ready + timestamp vào stderr + xác nhận bằng xwd); binary size (release, strip như workspace); build time; LOC; danh sách dependency hệ thống (ldd top-level).
 - *AC:* jitter run-to-run ≤ 0,15 MiB; số ghi kèm environment (kernel, Xvfb, font, locale).
@@ -327,10 +330,12 @@ Cuối đợt    ── DEMO P0 end-to-end + số K1/K2/K3 → USER GATE 3 (merg
    - *Agent (máy user, `deepseek-v4.1-flash`):* chạy harness đo (A2, C4), build + xác minh GUI (B6/B7 AC), viết 3 spike app (C1–C3) theo spec C0.
    - *User:* 3 review gates (plan — spike report — merge).
 3. **STOP-gate mỗi task:** diff verbatim + output test + số đo (nếu có) → GLM review → mới tính done. Không bao giờ tin vào tuyên bố "đã xong" không kèm bằng chứng.
-4. **Số đo:** mọi con số công bố phải từ `tools/memtest/` output; GLM tái đo ngẫu nhiên để kiểm chứng; gì chưa verify thì ghi "unverified".
+4. **Số đo:** mọi con số công bố phải từ harness `~/dev-memtest/` output; GLM tái đo ngẫu nhiên để kiểm chứng; gì chưa verify thì ghi "unverified". Repo Minewrap không chứa số đo/tool đo (Q8) — kết quả lưu `~/dev-memtest/results/` + archive repo.
 5. **Bảo mật:** PAT/token chỉ qua env/prompt per-session (`tools/README.md` contract); không bao giờ vào commit/repo/output; 401 → dừng, báo cáo.
 6. **Cập nhật archive:** cuối session cập nhật `knowledge/minewrap-state.md` + `lessons-learned.md` (theo update protocol sẵn có).
 
 ---
 
 *Plan này dựa trên: khảo sát code trực tiếp @ bfde421 (2026-11-11), báo cáo kiến trúc v1.9.3, tài liệu phương án giảm RAM, và bộ tool/skill đã kiểm chứng trong archive repo. Mọi số baseline trích từ báo cáo sẽ được tái đo ở A2 trước khi dùng làm chuẩn so sánh.*
+
+*Changelog v1.1 (2026-11-11): user duyệt Phase A kèm sửa đổi — (1) harness memtest & spike & kết quả đo KHÔNG commit vào repo Minewrap, lưu riêng `~/dev-memtest/` trên máy user, master ở archive repo GLM; (2) repo Minewrap thêm `build.sh` build-from-source (giao cho B9); (3) mọi tham chiếu `tools/memtest/` trong plan đổi sang `~/dev-memtest/` (ngoài repo).*

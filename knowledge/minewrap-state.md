@@ -43,6 +43,14 @@ D1–D6/G1–G5 micro-optimizations save <1 MiB / few MiB → dead end. Strategy
 7. Delegation: **OpenCode agent builds the 3 spike mini-apps** (deepseek-v4.1-
    flash, fallback -pro / -free); GLM reviews code + re-measures; P0 coded by
    GLM.
+8. **Clean-repo policy** (user-mandated at Phase-A approval, 2026-11-11,
+   permanent): the Minewrap GitHub repo contains ONLY docs, app code, and a
+   build-from-source script (`build.sh`, task B9). NEVER commit diagnostic
+   tools, memtest harness, spikes, or measurement results to that repo. The
+   harness lives standalone on the user's machine at `~/dev-memtest/`
+   (working copy) with the master in this archive repo `tools/memtest/`;
+   spike code: `~/dev-memtest/spikes/` + archive `spikes/2026-11-toolkit/`.
+   In-repo cargo unit tests (K3) are app code and stay.
 
 ## Survey findings — 5 real gaps beyond the v1.9.3 report
 
@@ -71,16 +79,18 @@ D1–D6/G1–G5 micro-optimizations save <1 MiB / few MiB → dead end. Strategy
 Consequence: P0 is not just "make GUI a client" — it must complete the
 remote path for all 22 commands + move Discord + polling into the daemon.
 
-## The plan (awaiting user approval as of 2026-11-11)
+## The plan (v1.1 — Phase A approved 2026-11-11)
 
 See `plans/2026-11-11-minewrap-p0-spike-plan.md` (Vietnamese, canonical) and
-`download/Minewrap_P0_Spike_Plan_v1.{md,pdf}` delivered in that session.
-Structure: Phase A (baseline + tools/memtest harness port, A1–A4), Phase B
+`download/Minewrap_P0_Spike_Plan_v1.1.{md,pdf}` delivered in that session.
+Structure: Phase A (baseline + standalone `~/dev-memtest/` harness, A1–A4), Phase B
 (P0 daemon-first, tasks B1–B9, ~6.25 dev-days, branch `p0-daemon-first`,
-target v1.10.0), Phase C (3 parallel spike mini-apps + measurement protocol
-C4 on the user's machine, Xvfb :99 1280x800, median [min-max] of 3 runs).
+target v1.10.0; B9 now also writes `build.sh` per Q8), Phase C (3 parallel
+spike mini-apps + measurement protocol C4 on the user's machine, Xvfb :99
+1280x800, median [min-max] of 3 runs; spike code outside the Minewrap repo).
 KPIs: PSS with GUI closed ≤ 8 MiB (K1); ≥60 tests (K3); spike report (K4);
-UI Svelte unchanged (K5). 3 user gates: plan → spike report/toolkit → merge.
+UI Svelte unchanged (K5). 3 user gates: plan ✓(Phase A) → spike
+report/toolkit → merge.
 
 ## Environment facts
 
@@ -95,13 +105,19 @@ UI Svelte unchanged (K5). 3 user gates: plan → spike report/toolkit → merge.
   WebKitGTK/GTK3 present, built v1.9.3 before). Baseline numbers must be
   re-measured there (task A2) before any comparison.
 - Old memtest scripts lived in `/tmp/opencode/memtest/` on the user's
-  machine (may be gone — /tmp). Recreate via task A1 into the Minewrap repo
-  `tools/memtest/` so they survive.
+  machine (may be gone — /tmp). Recreated 2026-11-11 as the STANDALONE
+  toolkit `tools/memtest/` in THIS archive repo (master) — deployed to the
+  user's machine at `~/dev-memtest/` (Q8: never inside the Minewrap repo).
 
 ## Next actions (when session resumes)
 
-1. If plan approved → start A1 (harness) + A3 (rustup in sandbox), branch
-   `p0-daemon-first`; agent sessions for C1–C3 after C0 spec is sent.
-2. If user amends → update plan file in both places (download/ + this repo),
-   bump version suffix.
-3. End of session: append lessons to `knowledge/lessons-learned.md`.
+1. Phase A approved (with Q8 repo-cleanliness amendment, 2026-11-11) —
+   EXECUTING. Harness master at `tools/memtest/` here; deploy to user
+   machine `~/dev-memtest/` via agent (rsh.sh base64 transfer).
+2. A2/A4 need the OpenCode gateway: the sandbox /tmp (where `.oc-env`
+   lived) was wiped between sessions → ask the user to re-send gateway URL
+   + Basic-Auth password, then re-create `~/.oc-env` (600) before driving
+   the agent. GitHub PATs embedded in both repo remotes still work.
+3. Branch `p0-daemon-first` + Phase B/C kickoff only after Phase A lands
+   and the user sees the baseline numbers.
+4. End of session: append lessons to `knowledge/lessons-learned.md`.
