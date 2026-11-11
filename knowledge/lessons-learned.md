@@ -744,7 +744,7 @@
    +2.43): always re-baseline with the SAME harness before optimizing, and
    compare KPIs against the fresh numbers, not the historical report.
 
-## #73 — Minewrap Phase B/C session (2026-11-11, session 3)
+## #74 — Minewrap Phase B/C session (2026-11-11, session 3)
 
 1. **Dead code hides broken code**: the v1.9.3 SLP client
    (`request_status`) had wrong read-offset math — its happy path had
