@@ -1,0 +1,40 @@
+GLM vision cross-verification of P1 chunk 1 (session 6, 2026-11-11)
+Model: z-ai vision (VLM skill CLI), 3 screenshots fetched byte-exact via oc_fetch.py
+Source: ~/dev-memtest/results/p1-c1/ on the user machine (agent ses_e355fa791ffeZAK9j7rQXWTB8y)
+
+**Image 1**
+(a) Window title: "Minewrap"-style dark panel; title bar not visible but layout shows left sidebar, main console area, footer/status bar at bottom. Yes: sidebar left, console center, status bar bottom.
+(b) Sidebar instances:
+- Survival — "survival · offline" with gray dot
+- Colored Demo — "colored · online" with green dot
+(c) Console: readable monospace, only [INFO] level visible (white/gray), all "session tick 123…151: players 0, tps 20.0" lines, ~30 lines, "Live" tag top-right.
+(d) Footer: "daemon connected" (green dot, sidebar bottom); status bar: "daemon 1.10.0 · api 1.0 | console: connected | daemon already running", right: "ring 500/1000".
+(e) No rendering problems: no blanks, no tofu, no overlap, Start/Stop buttons aligned.
+
+IMAGE 1: RENDER-OK
+
+**Image 2**
+(a) Same layout: left sidebar, console area, status bar bottom.
+(b) Sidebar:
+- Survival — "survival · offline" (gray dot)
+- Colored Demo — "colored · unresponsive" (red dot)
+(c) Console: readable, all four log levels with distinct colors: [ERROR] red ("scheduler deadline missed"), [WARN] yellow/orange ("can't keep up! 63ms behind"), [INFO] white, [DEBUG] blue/cyan ("gc young 12ms"), ~30 lines, timestamps 13:19:52–13:20:06.
+(d) Footer: "daemon connected"; status bar "daemon 1.10.0 · api 1.0 | console: connected | daemon already running", right "ring 510/1000".
+(e) No rendering problems; Stop button disabled-looking but consistent, header shows "unresponsive" in red correctly.
+
+IMAGE 2: RENDER-OK
+
+**Image 3**
+(a) Same layout: sidebar left, console area, status bar bottom.
+(b) Sidebar:
+- Survival — "survival · online" (green dot)
+- Colored Demo — "colored · unresponsive" (red dot)
+(c) Console: readable, only [INFO] lines, ~30 lines of "Preparing spawn area: 0%…97%" (out-of-order percentages, a content quirk, not rendering), then "Done (1.234s)! For help type 'help'", then session ticks 0–6.
+(d) Footer: "daemon connected"; status bar "daemon 1.10.0 · api 1.0 | console: connected | start: accepted", right "ring 1000/1000".
+(e) No rendering problems; no blank areas or garbled text. Buttons Start/Stop present (Start appears dimmed — consistent with already-running instance).
+
+IMAGE 3: RENDER-OK
+
+SUMMARY: 3/3 RENDER-OK. Claims in the agent report verified: sidebar state dots,
+4 log-level colors, derived unresponsive state, start:accepted after UI Start,
+ring counter. No tofu, no blank areas, no error page.

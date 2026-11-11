@@ -183,3 +183,54 @@ report/toolkit → merge.
    4 = packaging switch (AppImage main binary = minewrap-gui; drop
    WebKitGTK), retire src-tauri + ui/ last.
 5. End of session: append lessons to `knowledge/lessons-learned.md`.
+
+## Session 6 (2026-11-11 evening) — P1 chunk 1 collected + GLM cross-verified
+
+Fresh sandbox (recycled again). The conversation summary lagged far behind this
+file (it still described Phase B as "not started"); reading the archive FIRST
+prevented a duplicate branch + duplicate chunk-1 dispatch.
+
+Collected the session-5 agent (`ses_e355fa791ffeZAK9j7rQXWTB8y`, outcome
+succeeded) via `oc_report.py`; cross-verified everything independently:
+
+- **Git**: `p1-slint-gui` @ `e5e7555` pushed (on `920de1e`); working checkout
+  `~/dev-memtest/build/Minewrap-p0` clean & in sync with origin.
+- **Vision (GLM, `z-ai vision` on 3 fetched screenshots)**: 3/3 RENDER-OK —
+  sidebar state dots (gray offline / green online / red unresponsive), 4 level
+  colors in console (ERROR red, WARN yellow, INFO white, DEBUG blue),
+  "start: accepted" + ring 1000/1000 after UI Start, no tofu/blank/garble.
+  Evidence: `spikes/2026-11-toolkit/p1-c1-evidence/`.
+- **PSS CSVs**: run1 t=0→59 s, pss 16.98–17.01 MiB — consistent with the
+  claimed median 17.03 [17.00–17.08] MiB over 3 runs (target < 60 met with
+  ~3.5× headroom).
+- **Tests**: `/tmp/opencode/p1-c1-tests-netns.log` exists on the machine;
+  agent reports 75/75 under `unshare -Urn` (1 pre-existing daemon test fails
+  on the live desktop only because the user's real server holds
+  127.0.0.1:25565).
+- **Machine hygiene**: no leftover demo daemons / fakejava processes; user's
+  real `minewrap-tauri` untouched. Stub FILES remain in `~/dev-memtest/work/`
+  (outside the repo, per clean-repo policy — fine).
+- **Code review (GLM, all 4 new Rust files ~940 LOC)**: PASS. Architecture
+  sound: Tokio on a dedicated thread + std mpsc drained by a 50 ms Slint timer
+  (400 lines/tick, pending cap 5000); `since_seq` backfill + seq-guard ring;
+  daemon auto-spawn setsid + bounded 10 s probe, token re-read per probe.
+  Minor non-blocking notes: `VecModel::remove(0)` per evicted line is O(n)
+  per line (fine at measured loads); startup auto-spawn blocks the UI ≤ ~11 s
+  (splash later).
+
+**State after collection**: P1 chunk 1 = DONE + verified. Remaining gates:
+
+1. **Chunk 2 dispatch BLOCKED on user confirming Slint** (vs swapping to
+   gtk4-rs for Q3 sub-line selection). Recommendation: stay Slint — 17 MiB
+   PSS, line selection + Ctrl+A/Ctrl+C proven live; swap only if the user
+   finds sub-line selection essential.
+2. **Gate 3** (merge p0 → main, tag v1.10.0): build.sh fixed & pushed
+   (29e8e5f); visual layer vision-verified; remaining = 22-command UI
+   checklist (hand-run 5–10 min, or automate) → ask the user to merge.
+3. **P1 chunks 2–4** per the session-5 plan (chunk 2 = add-instance dialog +
+   settings/wizard forms; 3 = properties/mods/nodes/notifications + theme
+   tokens; 4 = packaging switch to minewrap-gui, retire src-tauri + ui/).
+
+Bridge state this session: fresh tunnel URL (user-supplied) worked unchanged
+with `qw.py` / `oc_fetch.py`; GLM-side vision via `z-ai vision -o json` (parse
+`choices[0].message.content`, NOT a bare `{content}` key).

@@ -886,3 +886,30 @@
    hygiene (kill your own offscreen instances, prune worktrees) belongs in the
    verify checklist — with the owner's OK, and after checking
    /proc/<pid>/environ so you never kill the user's real shell.
+
+## #78 — Minewrap session 6: collect-and-verify round (2026-11-11)
+
+1. **The conversation summary lags the archive repo.** The handed-over summary
+   still said "Phase B not started"; the archive showed P0 verified + P1
+   chunk 1 already dispatched and pushed to origin. On a recycled sandbox,
+   clone and read `knowledge/minewrap-state.md` BEFORE doing anything else —
+   otherwise you re-create branches and re-dispatch work that is already
+   done. (Corollary of #77.1: probe the state, don't trust the handover
+   text, whichever direction it errs.)
+2. **Verify the agent's evidence, don't transcribe it.** The collect round is
+   cheap: `oc_report.py` for the final text, `qw.py sh` ls/tail of the
+   artifact dirs, fetch 2–3 screenshots, run VLM on them, read the new source
+   files. Every claim in the P1-c1 report checked out (git / vision / PSS
+   CSVs / test log / process hygiene) — that is what earns a "succeeded"
+   outcome its trust. Skipping it repeats session 4's mistake of trusting
+   process-level evidence.
+3. **In the GLM web sandbox, `Read` cannot open images** ("current model
+   cannot view images"). Use the VLM skill CLI — `z-ai vision -p "..." -i
+   img.png -o out.json` — and parse `choices[0].message.content`; the output
+   JSON is an OpenAI-style envelope, not a bare `{content}` (a `json.load
+   (...)['content']` probe fails with KeyError and looks like a CLI failure).
+4. **Don't stage your own replacement for an established tool before checking
+   the archive**: this session drafted a fresh `memtest.sh` from memory while
+   the battle-tested master (deployed to the user's machine, results already
+   produced with it) already lived in `tools/memtest/`. The rewrite was
+   discarded; the archive copy is the single source of truth.
