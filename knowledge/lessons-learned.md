@@ -684,3 +684,32 @@
     settle phase (~3 s) before stopping — the PDEATHSIG helper's exec is not
     instant. The verification cadence that worked: suite → regression case → full
     suite → live parity probe → crash-dir counts → gates, re-run per hotfix.
+
+## Lesson 72 — Minewrap Phase A (2026-11-11, session 2)
+
+1. **Sandbox /tmp is wiped between sessions** — anything live there (`.oc-env`
+   gateway credentials, `/tmp/.ghtoken`) is gone even when `/home/z/my-project`
+   survives. Persistent secrets must be re-requested from the user at session
+   start; git remotes with embedded PATs DO survive (in `.git/config`).
+2. **Minewrap config path semantics bit twice**: (a) TOML relative paths
+   resolve against the CONFIG FILE's dir (`resolve_paths`, config.rs) — not
+   the daemon cwd; (b) `java_path` resolves against the SPAWNED SERVER's cwd
+   (= work_dir) — a stub `./fakejava` must be symlinked into each work_dir.
+   Harness encodes both rules (`resolve_cfg_path` + `ensure_stub_links`).
+3. **Never trust tool-side partial failures**: the Edit/MultiEdit tools can
+   report "no replacement performed" while earlier edits in the batch still
+   landed (non-atomic in practice). After any reported edit failure, re-read
+   the file and diff intent vs content before re-applying.
+4. **rg display mangles `[min…]` bracket sequences** in some outputs — verify
+   disputed file bytes with `od -c`/python before "fixing" a non-bug.
+5. Waiting on a daemon's REST state field only works if something updates it:
+   v1.9.3 minewrapd `combined_state` is dead-stale (GapB) — the harness waits
+   on `/logs` (Done line + growing last_seq) instead, and RECORDS the stale
+   state as runtime evidence.
+6. **New defect class confirmed (GapF)**: state machines with `assert!` on
+   allowed transitions panic on error paths (spawn_failed from Offline) —
+   error paths need explicit transition handling, and memtest harnesses that
+   intentionally trigger spawn failures are good fuzzers for this.
+7. User-mandated clean-repo policy (Q8) is a standing constraint: app repo =
+   docs + app code + build script only; measurement tooling lives outside
+   (user machine `~/dev-memtest/` + archive repo `tools/memtest/`).
