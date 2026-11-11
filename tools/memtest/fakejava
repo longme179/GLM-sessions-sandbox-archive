@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# fakejava — Minecraft server stub for the memtest harness (STANDALONE, Q8).
+#
+# Simulates a Minecraft server's log behaviour for memory scenarios:
+#   1. startup BURST of FAKE_BURST log lines (default 2000),
+#   2. the "Done (...)" line — matches minewrap's done_regex
+#      `Done \(\d+(\.\d+)?s\)! For help`  ->  state flips to "online",
+#   3. then one "session" log line every FAKE_STREAM_EVERY seconds (0.5).
+#
+# The daemon spawns:  <java_path> <jvm_args...> <launch_args...>  — every
+# argument is ignored. stdin (console commands) is drained so pipes never
+# block. The sampler excludes this whole subtree by the cmdline marker
+# "fakejava" (children like `sleep`/subshells are cut with the subtree).
+#
+# Env knobs: FAKE_BURST (2000)  FAKE_STREAM_EVERY (0.5)  FAKE_NO_STREAM=1
+set -u
+
+burst="${FAKE_BURST:-2000}"
+every="${FAKE_STREAM_EVERY:-0.5}"
+
+# drain stdin (console commands) without forking per line
+( while IFS= read -r _; do :; done ) &
+
+# burst (printf '%(...)T' is a bash builtin — no date(1) fork per line)
+for ((i = 1; i <= burst; i++)); do
+  printf '[%(%H:%M:%S)T] [INFO] Preparing spawn area: %d%%\n' -1 "$(( (i * 37) % 100 ))"
+done
+
+echo 'Done (1.234s)! For help type "help"'
+
+[[ "${FAKE_NO_STREAM:-0}" == "1" ]] && exit 0
+
+n=0
+while :; do
+  printf '[%(%H:%M:%S)T] [INFO] session tick %d: players 0, tps 20.0\n' -1 "$n"
+  n=$((n + 1))
+  sleep "$every"
+done

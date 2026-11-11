@@ -1,0 +1,12 @@
+# S1 — daemon + 1 instance offline (never started).
+# Reference: RSS 6.31 / PSS 4.04 / USS 4.01 / 13 threads.
+[daemon]
+host = "127.0.0.1"
+port = 8082
+data_dir = "../work/s1-data"
+
+[[instances]]
+id = "survival"
+name = "Survival"
+work_dir = "../work/server1"
+java_path = "./fakejava"

@@ -1,0 +1,61 @@
+{
+  "label": "S3-smoke",
+  "root_pid": 5384,
+  "seconds": 8.0,
+  "interval": 1.0,
+  "markers": [
+    "fakejava"
+  ],
+  "samples": 8,
+  "columns": [
+    "t",
+    "rss",
+    "pss",
+    "uss",
+    "swap",
+    "threads",
+    "procs",
+    "vmpeak",
+    "hwm"
+  ],
+  "median": {
+    "t": 3.5,
+    "rss": 7.152,
+    "pss": 5.248,
+    "uss": 4.953,
+    "swap": 0.0,
+    "threads": 3.0,
+    "procs": 1.0,
+    "vmpeak": 206.11,
+    "hwm": 5.86
+  },
+  "min": {
+    "t": 0.0,
+    "rss": 7.152,
+    "pss": 5.248,
+    "uss": 4.953,
+    "swap": 0.0,
+    "threads": 3,
+    "procs": 1,
+    "vmpeak": 206.11,
+    "hwm": 5.86
+  },
+  "max": {
+    "t": 7.0,
+    "rss": 7.152,
+    "pss": 5.248,
+    "uss": 4.953,
+    "swap": 0.0,
+    "threads": 3,
+    "procs": 1,
+    "vmpeak": 206.11,
+    "hwm": 5.86
+  },
+  "stable_rss_mib": 0.0,
+  "kind": "daemon",
+  "config": "configs/idle3.toml",
+  "port": 8083,
+  "started_instance": null,
+  "ws_attached": false,
+  "daemon_binary_sha256_16": "dbac59ae61c8e401"
+}

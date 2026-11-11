@@ -1,0 +1,61 @@
+{
+  "label": "S3#1",
+  "root_pid": 5432,
+  "seconds": 8.0,
+  "interval": 1.0,
+  "markers": [
+    "fakejava"
+  ],
+  "samples": 8,
+  "columns": [
+    "t",
+    "rss",
+    "pss",
+    "uss",
+    "swap",
+    "threads",
+    "procs",
+    "vmpeak",
+    "hwm"
+  ],
+  "median": {
+    "t": 3.5,
+    "rss": 7.082,
+    "pss": 5.182,
+    "uss": 4.941,
+    "swap": 0.0,
+    "threads": 3.0,
+    "procs": 1.0,
+    "vmpeak": 206.11,
+    "hwm": 6.21
+  },
+  "min": {
+    "t": 0.0,
+    "rss": 7.082,
+    "pss": 5.182,
+    "uss": 4.941,
+    "swap": 0.0,
+    "threads": 3,
+    "procs": 1,
+    "vmpeak": 206.11,
+    "hwm": 6.21
+  },
+  "max": {
+    "t": 7.0,
+    "rss": 7.082,
+    "pss": 5.182,
+    "uss": 4.941,
+    "swap": 0.0,
+    "threads": 3,
+    "procs": 1,
+    "vmpeak": 206.11,
+    "hwm": 6.21
+  },
+  "stable_rss_mib": 0.0,
+  "kind": "daemon",
+  "config": "configs/idle3.toml",
+  "port": 8083,
+  "started_instance": null,
+  "ws_attached": false,
+  "daemon_binary_sha256_16": "dbac59ae61c8e401"
+}

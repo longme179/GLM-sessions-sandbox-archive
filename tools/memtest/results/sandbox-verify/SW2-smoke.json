@@ -1,0 +1,61 @@
+{
+  "label": "SW2-smoke",
+  "root_pid": 5363,
+  "seconds": 8.0,
+  "interval": 1.0,
+  "markers": [
+    "fakejava"
+  ],
+  "samples": 8,
+  "columns": [
+    "t",
+    "rss",
+    "pss",
+    "uss",
+    "swap",
+    "threads",
+    "procs",
+    "vmpeak",
+    "hwm"
+  ],
+  "median": {
+    "t": 3.5,
+    "rss": 5.691,
+    "pss": 3.858,
+    "uss": 3.555,
+    "swap": 0.0,
+    "threads": 3.0,
+    "procs": 1.0,
+    "vmpeak": 205.22,
+    "hwm": 4.5
+  },
+  "min": {
+    "t": 0.0,
+    "rss": 5.691,
+    "pss": 3.858,
+    "uss": 3.555,
+    "swap": 0.0,
+    "threads": 3,
+    "procs": 1,
+    "vmpeak": 205.22,
+    "hwm": 4.5
+  },
+  "max": {
+    "t": 7.0,
+    "rss": 5.691,
+    "pss": 3.858,
+    "uss": 3.555,
+    "swap": 0.0,
+    "threads": 3,
+    "procs": 1,
+    "vmpeak": 205.22,
+    "hwm": 4.5
+  },
+  "stable_rss_mib": 0.0,
+  "kind": "daemon",
+  "config": "configs/idle0.toml",
+  "port": 8081,
+  "started_instance": null,
+  "ws_attached": false,
+  "daemon_binary_sha256_16": "dbac59ae61c8e401"
+}

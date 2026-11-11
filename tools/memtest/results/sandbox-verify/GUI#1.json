@@ -1,0 +1,59 @@
+{
+  "label": "GUI#1",
+  "root_pid": 5513,
+  "seconds": 30.0,
+  "interval": 1.0,
+  "markers": [
+    "fakejava"
+  ],
+  "samples": 30,
+  "columns": [
+    "t",
+    "rss",
+    "pss",
+    "uss",
+    "swap",
+    "threads",
+    "procs",
+    "vmpeak",
+    "hwm"
+  ],
+  "median": {
+    "t": 14.5,
+    "rss": 8.516,
+    "pss": 1.308,
+    "uss": 0.574,
+    "swap": 0.0,
+    "threads": 4.0,
+    "procs": 4.0,
+    "vmpeak": 13.04,
+    "hwm": 6.35
+  },
+  "min": {
+    "t": 0.0,
+    "rss": 8.516,
+    "pss": 1.308,
+    "uss": 0.574,
+    "swap": 0.0,
+    "threads": 4,
+    "procs": 4,
+    "vmpeak": 13.04,
+    "hwm": 6.35
+  },
+  "max": {
+    "t": 29.0,
+    "rss": 8.516,
+    "pss": 1.308,
+    "uss": 0.574,
+    "swap": 0.0,
+    "threads": 4,
+    "procs": 4,
+    "vmpeak": 13.04,
+    "hwm": 6.35
+  },
+  "stable_rss_mib": 0.0,
+  "kind": "gui",
+  "config": "configs/gui.toml",
+  "display": "",
+  "wayland_display": ""
+}

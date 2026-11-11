@@ -1,0 +1,13 @@
+# SR — daemon + 1 instance RUNNING (fakejava: burst 2000 lines -> Done -> stream 0.5 s).
+# Started via POST /api/v1/instances/survival/start after /health.
+# Reference: RSS 6.51 / PSS 4.19 / USS 4.16 / 13 threads.
+[daemon]
+host = "127.0.0.1"
+port = 8084
+data_dir = "../work/sr-data"
+
+[[instances]]
+id = "survival"
+name = "Survival"
+work_dir = "../work/server1"
+java_path = "./fakejava"

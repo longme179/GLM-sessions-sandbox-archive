@@ -1,0 +1,59 @@
+{
+  "label": "GUI-smoke",
+  "root_pid": 5401,
+  "seconds": 6.0,
+  "interval": 1.0,
+  "markers": [
+    "fakejava"
+  ],
+  "samples": 6,
+  "columns": [
+    "t",
+    "rss",
+    "pss",
+    "uss",
+    "swap",
+    "threads",
+    "procs",
+    "vmpeak",
+    "hwm"
+  ],
+  "median": {
+    "t": 2.5,
+    "rss": 8.633,
+    "pss": 1.592,
+    "uss": 0.578,
+    "swap": 0.0,
+    "threads": 4.0,
+    "procs": 4.0,
+    "vmpeak": 13.04,
+    "hwm": 6.14
+  },
+  "min": {
+    "t": 0.0,
+    "rss": 8.633,
+    "pss": 1.592,
+    "uss": 0.578,
+    "swap": 0.0,
+    "threads": 4,
+    "procs": 4,
+    "vmpeak": 13.04,
+    "hwm": 6.14
+  },
+  "max": {
+    "t": 5.0,
+    "rss": 8.633,
+    "pss": 1.592,
+    "uss": 0.578,
+    "swap": 0.0,
+    "threads": 4,
+    "procs": 4,
+    "vmpeak": 13.04,
+    "hwm": 6.14
+  },
+  "stable_rss_mib": 0.0,
+  "kind": "gui",
+  "config": "configs/gui.toml",
+  "display": "",
+  "wayland_display": ""
+}

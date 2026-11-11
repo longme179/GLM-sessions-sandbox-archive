@@ -1,0 +1,6 @@
+# S0 — daemon + 0 instances (memtest harness, standalone per Q8).
+# Reference (v1.9.3 report §13.1): RSS 5.56 / PSS 3.30 / USS 3.27 / 13 threads.
+[daemon]
+host = "127.0.0.1"
+port = 8081
+data_dir = "../work/s0-data"

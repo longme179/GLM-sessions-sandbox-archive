@@ -1,0 +1,13 @@
+# GUI — minewrap-tauri with 1 offline instance, idle Dashboard (report §13.2).
+# Used by gui_scenario.py with MINEWRAP_CONFIG pointing here (isolated data_dir).
+# Reference (whole tree, 3 procs): RSS 436.32 / PSS 195.60 / 87 threads.
+[daemon]
+host = "127.0.0.1"
+port = 8085
+data_dir = "../work/gui-data"
+
+[[instances]]
+id = "survival"
+name = "Survival"
+work_dir = "../work/server1"
+java_path = "./fakejava"

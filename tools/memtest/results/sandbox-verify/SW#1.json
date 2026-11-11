@@ -1,0 +1,69 @@
+{
+  "label": "SW#1",
+  "root_pid": 5471,
+  "seconds": 10.0,
+  "interval": 1.0,
+  "markers": [
+    "fakejava"
+  ],
+  "samples": 10,
+  "columns": [
+    "t",
+    "rss",
+    "pss",
+    "uss",
+    "swap",
+    "threads",
+    "procs",
+    "vmpeak",
+    "hwm"
+  ],
+  "median": {
+    "t": 4.5,
+    "rss": 7.469,
+    "pss": 5.565,
+    "uss": 5.363,
+    "swap": 0.0,
+    "threads": 3.0,
+    "procs": 1.0,
+    "vmpeak": 205.35,
+    "hwm": 6.79
+  },
+  "min": {
+    "t": 0.0,
+    "rss": 7.469,
+    "pss": 5.563,
+    "uss": 5.363,
+    "swap": 0.0,
+    "threads": 3,
+    "procs": 1,
+    "vmpeak": 205.35,
+    "hwm": 6.79
+  },
+  "max": {
+    "t": 9.0,
+    "rss": 7.469,
+    "pss": 5.566,
+    "uss": 5.363,
+    "swap": 0.0,
+    "threads": 3,
+    "procs": 1,
+    "vmpeak": 205.35,
+    "hwm": 6.79
+  },
+  "stable_rss_mib": 0.0,
+  "kind": "daemon",
+  "config": "configs/run.toml",
+  "port": 8084,
+  "started_instance": "survival",
+  "ws_attached": true,
+  "daemon_binary_sha256_16": "dbac59ae61c8e401",
+  "rest_combined_state_after_start": "offline",
+  "ws": {
+    "duration": "13.1s",
+    "messages": "29",
+    "log_events": "28",
+    "bytes": "46816",
+    "pings_answered": "0"
+  }
+}

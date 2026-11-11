@@ -1,0 +1,62 @@
+{
+  "label": "SR-smoke",
+  "root_pid": 5265,
+  "seconds": 12.0,
+  "interval": 1.0,
+  "markers": [
+    "fakejava"
+  ],
+  "samples": 12,
+  "columns": [
+    "t",
+    "rss",
+    "pss",
+    "uss",
+    "swap",
+    "threads",
+    "procs",
+    "vmpeak",
+    "hwm"
+  ],
+  "median": {
+    "t": 5.5,
+    "rss": 7.32,
+    "pss": 5.421,
+    "uss": 5.152,
+    "swap": 0.0,
+    "threads": 3.0,
+    "procs": 1.0,
+    "vmpeak": 205.35,
+    "hwm": 6.33
+  },
+  "min": {
+    "t": 0.0,
+    "rss": 7.32,
+    "pss": 5.42,
+    "uss": 5.152,
+    "swap": 0.0,
+    "threads": 3,
+    "procs": 1,
+    "vmpeak": 205.35,
+    "hwm": 6.33
+  },
+  "max": {
+    "t": 11.0,
+    "rss": 7.32,
+    "pss": 5.422,
+    "uss": 5.152,
+    "swap": 0.0,
+    "threads": 3,
+    "procs": 1,
+    "vmpeak": 205.35,
+    "hwm": 6.33
+  },
+  "stable_rss_mib": 0.0,
+  "kind": "daemon",
+  "config": "configs/run.toml",
+  "port": 8084,
+  "started_instance": "survival",
+  "ws_attached": false,
+  "daemon_binary_sha256_16": "dbac59ae61c8e401",
+  "rest_combined_state_after_start": "offline"
+}
