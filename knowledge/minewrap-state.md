@@ -75,6 +75,14 @@ D1–D6/G1–G5 micro-optimizations save <1 MiB / few MiB → dead end. Strategy
 - **GapE (missing REST)**: no POST /instances, no DELETE /instances/{id}, no
   /java, no /scan-workdir; WS `/events` **drops** LogLine and RestartLoop
   events (`api.rs:505-530`).
+- **GapF (daemon panic on spawn failure)** — found 2026-11-11 while verifying
+  the memtest harness: `Control::Start` with a failing `spawn_server` (bad
+  java_path / missing work_dir) hits `process.rs:433`
+  `transition(Crashed, "spawn_failed")` from state `Offline` → `assert!` at
+  `process.rs:368` panics (`invalid transition Offline -> Crashed`) → owner
+  task dies, instance stops responding to control while the daemon lives on.
+  Fix belongs in B1/B5 with a unit test. Evidence:
+  `tools/memtest/results/sandbox-verify/` + `results/env-check.md`.
 
 Consequence: P0 is not just "make GUI a client" — it must complete the
 remote path for all 22 commands + move Discord + polling into the daemon.
@@ -112,12 +120,20 @@ report/toolkit → merge.
 ## Next actions (when session resumes)
 
 1. Phase A approved (with Q8 repo-cleanliness amendment, 2026-11-11) —
-   EXECUTING. Harness master at `tools/memtest/` here; deploy to user
-   machine `~/dev-memtest/` via agent (rsh.sh base64 transfer).
-2. A2/A4 need the OpenCode gateway: the sandbox /tmp (where `.oc-env`
-   lived) was wiped between sessions → ask the user to re-send gateway URL
-   + Basic-Auth password, then re-create `~/.oc-env` (600) before driving
-   the agent. GitHub PATs embedded in both repo remotes still work.
+   EXECUTING. Status 2026-11-11 late: **A1 DONE** (harness at `tools/memtest/`
+   here, master; verified end-to-end against a real minewrapd release build
+   in-sandbox: S0/S1/S3/SR/SW/SW2 + GUI-tree mechanics; artifacts in
+   `tools/memtest/results/sandbox-verify/`), **A3-sandbox DONE** (rustup
+   1.99.1; release build 1m47s; 47/47 headless tests; GUI build impossible
+   in sandbox — no sudo — so GUI builds go via agent per R7), **GapF found**
+   (daemon panics on spawn failure — see survey findings).
+2. **A2/A4 blocked on OpenCode gateway credentials**: the sandbox /tmp
+   (where `.oc-env` lived) was wiped between sessions → the user must re-send
+   gateway URL + Basic-Auth password; then recreate `~/.oc-env` (600) and
+   drive the agent: deploy harness to `~/dev-memtest/` (base64 per file,
+   `sha256sum -c MANIFEST`), verify user-machine env, build release binaries
+   @ bfde421, run `run_baseline.sh`, fetch results back, review vs §15.4.
+   Deployment prompt drafted in `tools/memtest/README.md` § "Triển khai".
 3. Branch `p0-daemon-first` + Phase B/C kickoff only after Phase A lands
    and the user sees the baseline numbers.
 4. End of session: append lessons to `knowledge/lessons-learned.md`.
