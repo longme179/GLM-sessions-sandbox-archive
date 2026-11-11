@@ -119,29 +119,52 @@ report/toolkit → merge.
 
 ## Next actions (when session resumes)
 
-1. **Phase A COMPLETE (2026-11-11, session 2)** — all four tasks done:
-   - A1 harness at `tools/memtest/` (master) + deployed to user machine
-     `~/dev-memtest/` (byte-exact, MANIFEST sha256 verified).
-   - A3: rustup 1.99.1 sandbox; daemon release build OK (1m47s); 47/47
-     headless tests; GUI builds go via agent on user machine (no sudo in
-     sandbox, R7). User machine env: rustc 1.99.1 Fedora, pnpm 12.18.0,
-     tauri-cli 2.12.4, Wayland direct (NO Xvfb installed — C4 must adapt:
-     install Xvfb or use a Wayland headless protocol), webkit2gtk 2.54.2.
-   - A4: gateway verified end-to-end. Model `opencode/deepseek-v4.1-flash`
-     hits 402 Insufficient balance → **use `deepseek-v4.1-flash-free`**
-     (worked all round, same family).
-   - A2: agent session (free model) ran the full baseline on the user
-     machine (Fedora 44, 12 cores, Wayland direct). Results in
-     `tools/memtest/results/baseline-2026-11-11/` (39 files + VERIFY-A2.md).
-     GLM re-measured S0×2 + SR×1 directly — agrees with agent within
-     0.01–0.20 MiB. Official P0 comparison baseline (new):
-     S0 3.48 / S1 4.14 / S3 4.40 / SR 4.67 / SW 5.38 / SW2 3.44 PSS,
-     GUI 209.32 PSS / 438.75 RSS. Old-report drift: SR +0.48, SW2 +0.21,
-     GUI PSS +13.72 (RSS +2.43) — all environment drift, methodology
-     verified sound (static scenarios match +0.10..+0.18).
-2. **Next: propose Phase B/C kickoff to the user** (branch
-   `p0-daemon-first`, tasks B1–B9; C0 spec → 3 spike agent sessions).
-   A2 session id (reusable, topic=scoped): see `/tmp/a2-sid` in that
-   session — for a NEW session always create fresh + set free model.
-3. GapF fix belongs in B1/B5 (daemon panic on spawn failure).
+1. **Phase B COMPLETE (2026-11-11, session 3)** — branch
+   `p0-daemon-first` (2 commits `e2edb92` + `189ddad`, pushed to
+   GitHub; target v1.10.0, NOT merged — user gate 3 pending):
+   - B1 state keeper, B2 SLP poller (also FIXED the dead
+     `request_status` happy path — v1.9.3 offset math was wrong),
+     B3 Discord service (leading+trailing debounce, periodic push,
+     shared client D5), B4 REST additions + `/events` log batching
+     (100/40ms, seq) + instances_changed, B5 SIGTERM graceful stop-all,
+     GapF fix (spawn failure = same-state event, no owner panic).
+   - B6 GUI pure client: src-tauri dropped minewrap-core; NodeService
+     = registry (local from `[daemon]` table via
+     `minewrap_remote::load_local_settings`, token from
+     `{data_dir}/token`; remotes in `~/.config/minewrap/nodes.json`
+     0600 — fixes the "not wired" stub); 22 commands route REST; DTOs
+     in minewrap-remote; `events_connect` now sends proper WS headers
+     (v1.9.3 could never authenticate).
+   - B7 auto-spawn (setsid, daemon.log, ≤10 s health wait), per-node
+     `/events` forwarder on tauri::async_runtime (no extra runtime
+     thread — G3), reconnect + since_seq backfill, exit = disconnect,
+     `retry_node` command + Nodes UI retry button.
+   - B8 D2-lite lazy owners + autostart honoured + restart waits for
+     settle; systemd TOKIO_WORKER_THREADS=2 + MALLOC_ARENA_MAX=2.
+   - B9 build.sh (--daemon-only), ARCHITECTURE/README/remote-access/
+     RELEASE_NOTES (breaking change + migration), versions → 1.10.0.
+   - Tests: **60 passing** (core 46 + daemon 10 lib + 1 integration +
+     remote 3), `warnings = deny` clean (K3 met). GUI binary itself
+     NOT buildable in sandbox (no GTK, R7) — scratch crate
+     `scripts/gui-check/` type-checks node_service.rs + registry test.
+2. **In flight (session 3)**: agent on user machine — (a) background
+   build main-vs-p0 GUI + `pnpm run check` (log /tmp/mw-p0-build.log,
+   poll via rsh); (b) 3 spike sessions (C1 slint
+   `ses_e36412d91ffeuGJ5PB2oXfyPLA`, C2 iced
+   `ses_e364119f9ffe3zjW6wy3lQEN4U`, C3 gtk4
+   `ses_e364106d3ffe8FTJu4al892NJ6`, model
+   `opencode/deepseek-v4.1-flash-free` — flash paid variant 402s).
+   Spec deployed byte-exact to `~/dev-memtest/spikes/SPEC.md`
+   (master: archive `spikes/2026-11-toolkit/SPEC.md`; prompts in
+   sandbox `scripts/c{1,2,3}-prompt-*.md`; helpers `scripts/oc-fire.sh`
+   + `oc-report.sh` — note `tools/oc.sh` header form broken with the
+   current user:pass env; use `curl -u` like rsh.sh).
+   NOTE: sandbox recycle kills agent runs? No — sessions run on the
+   gateway (user machine), sandbox only polls. If /tmp/oc-sid-* lost,
+   SIDs are in this file.
+3. **Then**: GLM review spike diffs verbatim + re-measure ≥1
+   scenario/toolkit → C5 comparison table + license check (Slint
+   GPLv3 vs AGPL) → C6 go/no-go → SPIKE REPORT → user gate 2.
+   Then K1/K2 measurement (A2 harness scenarios on p0 daemon), demo
+   end-to-end, user gate 3 (merge v1.10.0).
 4. End of session: append lessons to `knowledge/lessons-learned.md`.

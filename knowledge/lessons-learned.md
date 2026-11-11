@@ -743,3 +743,37 @@
    machine (WebKitGTK version bump moved GUI PSS +13.72 while RSS moved
    +2.43): always re-baseline with the SAME harness before optimizing, and
    compare KPIs against the fresh numbers, not the historical report.
+
+## #73 — Minewrap Phase B/C session (2026-11-11, session 3)
+
+1. **Dead code hides broken code**: the v1.9.3 SLP client
+   (`request_status`) had wrong read-offset math — its happy path had
+   NEVER run (poller had zero callers, gap G3). When reviving dead
+   features, assume the happy path is broken until a live test proves
+   otherwise; the fake-SLP-server unit test found it in seconds.
+2. **`#[tokio::test]` runs a current-thread runtime**: `std::thread::sleep`
+   inside such tests freezes every other task (state keeper never folds
+   events → probes skip → `server.await` hangs forever). Always
+   `tokio::time::sleep().await` in async tests, even for "just let the
+   background task catch up" waits.
+3. **tungstenite 0.24 `connect_async` requires the caller to supply the
+   full handshake header set** (Host/Connection/Upgrade/Version/Key) when
+   passing a prebuilt `http::Request` — a bare URI request fails with
+   `InvalidHeader("sec-websocket-key")`. `handshake::client::generate_key()`
+   is public; build the headers explicitly (see minewrap-remote
+   `ws_request`). This also means the v1.9.3 `events_connect` (string URL,
+   no headers) could never have authenticated even with a caller.
+4. **Sandbox without GTK can still verify GUI-adjacent code**: a scratch
+   crate that `#[path]`-includes the tauri-free `node_service.rs`
+   (`scripts/gui-check/`) type-checks + integration-tests the registry
+   round-trip. Cheap insurance before shipping the real build to the
+   remote machine.
+5. **`tools/oc.sh` breaks with a user:pass `OC_AUTH` env** (passes it as a
+   header via `-H`); `rsh.sh` works because it uses `curl -u`. When the env
+   file holds `opencode:<pass>`, use `curl -u` helpers (`scripts/oc-fire.sh`
+   / `oc-report.sh`), not `oc.sh`.
+6. **Python-scripted brace surgery on Rust files is fragile** — inserting
+   methods "before the last `}`" landed them after a trailing free
+   function (double `}` at EOF). Fix pattern: locate the free fn marker,
+   split there, never trust `rfind` on the whole file. Better: use the
+   Edit tool with exact anchors.
