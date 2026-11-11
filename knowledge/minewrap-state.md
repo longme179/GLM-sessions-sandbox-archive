@@ -119,40 +119,49 @@ report/toolkit → merge.
 
 ## Next actions (when session resumes)
 
-1. **P0 + spike COMPLETE & VERIFIED (2026-11-11, session 4)** — branch
-   `p0-daemon-first` @ `920de1e` (3 commits; 920de1e fixed a rustc-1.99.1
-   unused-binding warning found on the user machine). Deliverable:
+1. **P0 + spike COMPLETE & VERIFIED (session 4, 2026-11-11)** — branch
+   `p0-daemon-first` @ `920de1e` pushed. K1 6.53 / K2 209.83 / K3 60/60 /
+   K5 0-0; spike C5 GLM cross-verified (slint-tuned 13.35 / gtk4 24.13 /
+   iced 554.90 → iced disqualified; GPLv3↔AGPLv3 compatible). Deliverables:
    `download/Minewrap_P0_Verification_and_Spike_Report_v1.{md,pdf}` +
-   archive `spikes/2026-11-toolkit/SPIKE_REPORT.md`. All verified on the
-   user machine with release binaries:
-   - **K1 6.53 MiB PSS** ≤ 8 (1 server + WS console + Discord service
-     live: POST state-change ×3 + PATCH periodic edit-in-place, same
-     message id). K2 209.83 ≤ 219.8 (GUI tree, same-day baseline
-     209.32). K3 60/60 tests re-run in sandbox. K5 svelte-check 0/0.
-   - S0/S1/S3-p0: 4.31/4.33/4.21 PSS — D2-lite flat. Binary GUI
-     10.39→8.83 MiB. B4 CRUD 201/409/200/404 + /java + /scan-workdir.
-     B5 SIGTERM: exit 0.0 s idle; 60.5 s with stdin-deaf stub (design:
-     stdin stop → TERM → KILL; real MC servers stop via stdin in s).
-     B7 auto-spawn + close-GUI→server-survives + relaunch + backfill
-     (seq 1539+) all demonstrated; leftover pids cleaned.
-   - Spike C5: GLM re-measured all 3 toolkits same-session (niri
-     wayland, floated 1280×800): slint-tuned 13.35 / gtk4 24.13 /
-     iced 554.90 PSS idle — matches agent numbers ≤0.33 MiB. iced
-     DISQUALIFIED (9× over budget). License: GPLv3↔AGPLv3 compatible
-     (FSF §13) — Slint usable free under GPLv3 option for AGPL
-     Minewrap; iced/gtk4-rs MIT. Raw: `~/dev-memtest/results/
-     {verify-glm,csv_K1.csv,S0/S1/S3-p0,p0-demo}` on user machine +
-     archive `spikes/2026-11-toolkit/`.
-2. **WAITING USER GATE 2** — toolkit choice: A) gtk4-rs (only one
-   meeting Q3 native-selection hard requirement, 24 MiB PSS, GLM
-   recommendation) vs B) Slint tuned (lowest RAM 13.4 MiB + lightest
-   deployment, but line-granularity selection violates Q3 sub-line).
-3. **WAITING USER GATE 3** — merge `p0-daemon-first` → main, tag
-   v1.10.0. Before merge: user should hand-run the 22-command UI
-   checklist (5–10 min; everything beneath the UI is machine-verified).
-4. **P1 (round 2, after gate 2)** — port 12 Svelte components to the
-   winning toolkit; order: Console → Dashboard → Settings/Wizard →
-   Properties/Mods → Nodes/Notifications. Spike source trees stay on
-   the user machine `~/dev-memtest/spikes/{slint,iced,gtk4}/` (full
-   code not yet copied into archive — do it when toolkit chosen).
+   archive `spikes/2026-11-toolkit/`. Raw: `~/dev-memtest/results/` on the
+   user machine. NOTE (session 5): all "GUI opens" evidence in that report
+   was process-level; the pixel layer had never been checked (see below).
+2. **Session 5 (2026-11-11 evening) — P1 opened + vision pipeline proven.**
+   User: start next phase; Q1 "GUI Rust thuần 100%?" (=> Slint direction:
+   iced out on RAM, gtk4-rs rejected to avoid the C stack); Q2 sanctioned
+   agent debug/testing/screenshots+vision on the machine.
+   - **Gate 2 taken as Slint (tuned)** per the user's pure-Rust leaning.
+     Swap to gtk4-rs still possible before P1 chunk 2 if the user insists
+     on Q3 sub-line selection (Slint console selection is line-granular).
+   - **P1 chunk 1 dispatched** to an OpenCode agent
+     (deepseek-v4.1-flash-free): branch `p1-slint-gui` from
+     `origin/p0-daemon-first`, new crate `crates/minewrap-gui` (Slint,
+     `--no-default-features`, dark, Noto Sans 10 pt), sidebar instance
+     list (2 s poll), live console (WS + `since_seq` backfill, ring 1000,
+     per-level colors, per-line selection), start/stop, daemon auto-spawn,
+     screenshots + PSS. Working checkout: `~/dev-memtest/build/Minewrap-p0`
+     (git credential store + identity configured on the machine by GLM).
+   - **Vision-caught P0 bug (Gate 3 blocker)**: the on-machine release
+     binary's webview shows "Could not connect to localhost: Connection
+     refused" — it was rebuilt with bare `cargo build` (empty `ui/dist`),
+     so no frontend was embedded. Fix = `pnpm build` (fills ui/dist) THEN
+     `cargo build --release -p minewrap-tauri`. Rebuild running in git
+     worktree `~/dev-memtest/build/Minewrap-p0-gui` (bg job, log
+     `~/dev-memtest/results/p0-gui-build.log`).
+   - **build.sh (B9) GUI path is broken**: references `ui/src-tauri`
+     (doesn't exist) and `pnpm tauri` (no such script in ui/package.json).
+     Fix on `p0-daemon-first` in the worktree once the manual sequence
+     verifies.
+   - UICHECK artifacts: `~/dev-memtest/results/uicheck/` (shot1–6 + logs);
+     B7b (server survives GUI close) re-confirmed on the real GUI, and
+     `niri msg` window-list/focus flow established (see lessons #76).
+3. **Gate 3 (merge p0 → main, tag v1.10.0)** — blocked only on the visual
+   layer now: rebuild → capture window (niri focus + grim) → vision-verify →
+   22-command UI checklist (hand-run 5–10 min, or automate next session) →
+   fix build.sh → ask the user to merge.
+4. **P1 next chunks**: 2 = add-instance dialog + settings/wizard forms;
+   3 = properties/mods/nodes/notifications + theme tokens from tokens.css;
+   4 = packaging switch (AppImage main binary = minewrap-gui; drop
+   WebKitGTK), retire src-tauri + ui/ last.
 5. End of session: append lessons to `knowledge/lessons-learned.md`.

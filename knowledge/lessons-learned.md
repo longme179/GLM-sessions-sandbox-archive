@@ -808,3 +808,33 @@
    +13.7 MiB on the GUI between the v1.9.3 report and today's re-measure
    (WebKitGTK 2.54.2 upgrade) — always compare against same-day baselines
    when the KPI is a delta.
+
+## #76 — Minewrap session 5: P1 kickoff + vision pipeline (2026-11-11)
+
+1. **Process-level "GUI works" proves nothing about pixels.** The P0 GUI
+   binary on the machine showed a WebKit error page ("Could not connect to
+   localhost: Connection refused") while EVERY process-level check was green
+   (pgrep alive, auto-spawn log, REST state, server-survives). Session 4's
+   "GUI opens" evidence was all process-level. Bar for GUI verification:
+   focus the real window, screenshot it, and look at it (VLM) — anything
+   less is unverified.
+2. **niri full-screen shots hide off-viewport windows** (scrollable tiling):
+   plain `grim` "verified" nothing because the window sat outside the
+   viewport. Sequence that works: `niri msg --json windows` (NOTE: returns a
+   BARE ARRAY, not {"windows": [...]}) → `niri msg action focus-window --id
+   N` → `grim` → refocus the user's previous window (be a polite guest).
+   NIRI_SOCKET may need to be derived from `$XDG_RUNTIME_DIR/niri*.sock`.
+3. **Tauri release binary + empty ui/dist = "Could not connect to
+   localhost"**: frontend embedding happens at compile time
+   (generate_context!, frontendDist ../ui/dist); bare `cargo build
+   --release` without a prior `pnpm build` silently ships an error page.
+   Always build the frontend first, or use the tauri CLI.
+4. **build.sh was shipped untested** (B9): its GUI path references
+   ui/src-tauri (doesn't exist) and `pnpm tauri` (no such script). Every
+   script that is itself a deliverable must be executed end-to-end at least
+   once, in every mode it advertises.
+5. **Gateway bg-launcher + `~` paths don't mix**: oc.py bg's redirect fails
+   on `~/...` logfiles — use absolute paths in both command and logfile.
+6. **pkill -f self-match**: `pkill -f fakejava` killed the gateway shell
+   running it (its own cmdline matched the pattern). Use the bracket trick
+   (`pkill -f "fake[j]ava"`) or exact-name `pkill -x`.
