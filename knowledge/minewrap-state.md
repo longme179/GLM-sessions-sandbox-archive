@@ -156,6 +156,24 @@ report/toolkit → merge.
    - UICHECK artifacts: `~/dev-memtest/results/uicheck/` (shot1–6 + logs);
      B7b (server survives GUI close) re-confirmed on the real GUI, and
      `niri msg` window-list/focus flow established (see lessons #76).
+   - **CLOSED same session**: GUI rebuilt in worktree (pnpm build -> sidecar
+     at src-tauri/binaries/minewrapd-<triple> -> cargo) — vision-verified
+     full render + live console. build.sh fixed (3 bugs) and PUSHED as
+     `29e8e5f` on p0-daemon-first (E2E-tested, MINEWRAP_NO_SUDO=1).
+   - **Machine-side git pushes fixed** by embedding the PAT in the remote
+     URLs of ~/dev-memtest/build/Minewrap-p0 and the -gui worktree
+     (credential-store path 403'd; URL-embedded works — same token).
+   - **P1 chunk 1 near done**: crates/minewrap-gui ~1.7k LOC (1.247 RS +
+     497 .slint), vision-verified renders (sidebar/console/status bar,
+     derived 'unresponsive' state correct), agent also fixed a real
+     minewrap-remote contract bug (LogLineDto ts: RFC3339 vs epoch-ms).
+     STILL RUNNING at session close: clipboard/Ctrl+C polish, then PSS x3,
+     workspace tests, commit + push of p1-slint-gui.
+   - **NEXT SESSION: collect the agent** — session id `ses_e355fa791ffeZAK9j7rQXWTB8y`
+     (oc_report.py <sid> report; ledger /tmp/opencode/p1-c1-ledger.md on
+     the machine; check git log on ~/dev-memtest/build/Minewrap-p0 and
+     ~/dev-memtest/results/p1-c1/ for CSVs). Then dispatch chunk 2 after
+     the user confirms Slint (or swaps to gtk4-rs).
 3. **Gate 3 (merge p0 → main, tag v1.10.0)** — blocked only on the visual
    layer now: rebuild → capture window (niri focus + grim) → vision-verify →
    22-command UI checklist (hand-run 5–10 min, or automate next session) →
