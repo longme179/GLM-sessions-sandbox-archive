@@ -905,3 +905,34 @@ User đổi logo (svg) → build lại AppImage + upload release.
 
 NOTE kỹ thuật: grep -oP '"id":\s*\K[0-9]+(?=,"name":…)' trượt vì JSON
 pretty in trên nhiều dòng — lấy id bằng cách list assets thô rồi đọc.
+
+## Session 21 (2026-11-12 ~23:50) — "còn 1 process khi đóng hết" = đúng thiết kế
+
+User hỏi: đóng toàn bộ AppImage nhưng system-monitor vẫn thấy 1 process
+Minewrap-x86_64.AppImage — có bình thường không?
+
+Định danh (không đoán): pid 3667916 STAT Ssl WCHAN fuse_dev_do_read —
+đây là FUSE RUNTIME của AppImage (serve squashfs nén), KHÔNG phải cửa
+sổ app. Nó sống vì minewrapd 3667922 (con nó spawn, port 8080) đang
+chạy TỪ TRONG mount /tmp/.mount_MinewrFPldME. GUI minewrap-gui đã thoát
+thật (không có process nào).
+
+Code chứng minh chủ đích: crates/minewrap-gui/src/daemon.rs:144-146 —
+spawn daemon với process_group(0) (setsid) + comment nguyên văn
+"outlive the GUI (closing it stops nothing)". ensure_daemon: nếu daemon
+đã chạy thì GUI chỉ attach (lần mở app thứ 2 không spawn thêm). Daemon
+KHÔNG có route tự tắt (chỉ /instances/{id}/stop cho MC server) — đúng
+triết lý daemon-first từ P0: đóng GUI không làm chết server/discord.
+
+Hệ quả AppImage: FUSE runtime + daemon ở lại → system monitor hiện
+"1 process AppImage" sau khi đóng hết cửa sổ = BÌNH THƯỜNG. Cách thoát
+hẳn: chạy thêm lần nữa rồi thoát thường sẽ tái hiện (đơn giản nhất:
+pkill -x minewrapd; mount tự unmount khi không ai giữ) — hoặc để đó,
+daemon idle ~6 MiB RSS.
+
+Cũng dọn rác /tmp do các lần SIGKILL trước: unmount 2 FUSE mồ côi
+(EMhKed/FAIchG), rmdir 5 thư mục .mount_Minewr* cũ 11-10. Chỉ còn đúng
+1 mount = app user đang mở. Nếu sau này muốn "đóng hết = thoát hẳn":
+thêm cờ idempotent (GUI hỏi daemon pidfile ai spawn → gửi SIGTERM khi
+GUI cuối cùng đóng), nhưng KHÔNG đổi mặc định (vi phạm tinh thần P0).
+
