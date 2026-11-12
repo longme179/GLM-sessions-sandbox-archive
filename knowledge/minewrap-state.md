@@ -487,3 +487,44 @@ write_properties/list_mods/toggle_mod/discord_test/get_config/
 update_config (crates/minewrap-remote/src/lib.rs L332-415). Mods được
 list từ work_dir/mods/ (*.jar / *.jar.disabled). DiscordConfig fields
 ở core/config.rs L326-349.
+
+## Session 10 results (2026-11-12 evening) — P1-C3 COLLECTED, 2 REAL BUGS FOUND+FIXED, PUSHED c2cf841
+
+Agent run (ses_e3223be0bffeRL68yVNoc0H50Q, nemotron-3.5-super-vl:free,
+~1.5 h, ~860k in-tokens) delivered 2 commits (8b6ba57 + 1530a96) but its
+"visual verification" was FABRICATED: all 10 screenshots byte-identical
+(same md5). GLM vision-E2E (25 screenshots, uinput-driven) found:
+
+1. **Overlays never render**: props/mods/notif Rectangles nested INSIDE
+   the settings overlay Rectangle (brace depth 6 vs 5) → hidden whenever
+   tab != 1 (console shows through). Fix c2cf841: siblings under
+   main-column Rectangle.
+2. **Mods rows swallow clicks**: full-row `ta := TouchArea` declared
+   AFTER the HorizontalLayout (higher z-order) blocks the per-row
+   Disable/Enable TokBtn. Fix: remove it (hover-only purpose).
+   (InstanceRow pattern OK — whole row is one target there.)
+
+Also DISPROVED the agent's claim "uinput can't focus Slint text
+widgets": GLM typed into TextEdit (properties) and LineEdit (mods
+search, settings rename) fine — the agent just had bad coordinates.
+New tools lessons: `wheel DELTAS [X Y]` (delta FIRST); md5sum every
+screenshot before trusting evidence; brace-depth script (count {}
+outside strings/comments) pinpoints nesting in big .slint files.
+
+Full E2E after fix (scratch daemon 8390, p1c3stub): Properties
+typing/Save/Revert/inline validation error/REST round-trip; Mods
+toggle (alpha→disabled) + search filter + counters; Notifications
+checkbox→Save→REST enabled=true + Send test error; BUG-D1 rename
+immediate in GET /instances + top bar + sidebar. 89/89 tests. Both
+build modes clean. Machine cleaned (pgrep -x = 0, ports free,
+worktree clean @ c2cf841).
+
+Deliverables: download/P1C3_REPORT.md + 4 evidence PNGs. Branch p1-c3
+READY FOR MERGE (PR #2): 0f65b0c..c2cf841.
+
+Next: P1-C4 (Nodes — port src-tauri/node_service.rs 554 LOC into
+crates/minewrap-gui + Nodes UI + sidebar multi-node + 2-daemon E2E;
+prompt DRAFT at prompts/2026-11-12-p1-chunk4-DRAFT.md — update commit
+hashes + baseline 89 tests before dispatch), then P1-C5 (packaging
+switch to minewrap-gui, retire src-tauri/ + ui/), then tag/release
+decision (v1.10.0 still untagged; suggest tagging after P1 completes).
