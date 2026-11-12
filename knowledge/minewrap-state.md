@@ -453,3 +453,37 @@ the conversation summary still described Phase B as un-dispatched).
   retire src-tauri + ui/.
 - User Gate 3 (merge p0 → main, tag v1.10.0) still pending user
   approval — bda8a76 is the merge candidate.
+
+## Session 10 (2026-11-12, sau merge) — P1 CHUNK 3 DISPATCHED
+
+User đã tự merge: PR #1 `p1-slint-gui` → main (`0f65b0c`) = P0 + P1-C1 +
+P1-C2. Workspace version 1.10.0 trên mọi crate. **v1.10.0 tag CHƯA có**
+(tags dừng ở v1.9.3) — để user quyết (đề xuất: tag sau khi P1 xong).
+
+Recon máy (ses_e32284c25ffe6aY5eG2fXJhsKO): worktree
+`~/dev-memtest/build/Minewrap-p0` sạch @ dfcd6f6; không process minewrap;
+ports 8390/8391/8080/25590/5173 free; click_abs/click_multi/wheel còn
+nguyên; display trống.
+
+Phạm vi còn lại được tái chia (backlog cũ "chunk 3 = props/mods/nodes/
+notifications + tokens" tách làm đôi vì 1 chunk 4 tab + NodeService port
+quá lớn cho 1 agent run):
+- **P1-C3** (đã dispatch, prompt `prompts/2026-11-12-p1-chunk3.md`,
+  branch `p1-c3` off origin/main): BUG-D1 (daemon summary/snapshot name
+  từ config) + Properties tab (raw editor) + Mods tab (list/filter/
+  toggle) + Notifications tab (Discord form + webhook write-only +
+  test) + theme tokens (global Theme). Model: nemotron-3.5-super-vl:free
+  (ultra vẫn broken qua gateway; chain: super-vl → 3.5-lightning:free →
+  deepseek-v4.1-flash-free).
+- **P1-C4** (sau): Nodes — port src-tauri/node_service.rs (554 LOC,
+  nodes.json 0600, RemoteClient per node, health poll) vào
+  crates/minewrap-gui + Nodes UI + sidebar multi-node; revive G3 items
+  #2-#4 (second daemon 8391, g3r2-node2 data, disconnect path).
+- **P1-C5** (cuối): packaging switch (AppImage main binary =
+  minewrap-gui), retire src-tauri/ + ui/; rồi mới tính tag/release.
+
+Remote client đã có sẵn mọi method C3 cần: read_properties/
+write_properties/list_mods/toggle_mod/discord_test/get_config/
+update_config (crates/minewrap-remote/src/lib.rs L332-415). Mods được
+list từ work_dir/mods/ (*.jar / *.jar.disabled). DiscordConfig fields
+ở core/config.rs L326-349.
