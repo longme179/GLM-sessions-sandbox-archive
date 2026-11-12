@@ -707,3 +707,38 @@ shot-s5 ↑ recalled "say hello world" after Enter cleared it. 93/93
 tests PASS + both build modes clean (warnings=deny) on p1-c6.
 
 NEXT for user: merge PR p1-c6 (ed3539d), then tag v1.10.0.
+
+## Session 15 (2026-11-12 late) — FINAL MEMTEST + TAG v1.10.0
+
+User merged PR#4 (P1-C6). Final measurement round on user machine,
+harness rules §12.2 unchanged (1 Hz tree sampler, smaps_rollup,
+fakejava subtree cut, ≥2 runs, clean data_dir each run):
+
+v1.9.3 → v1.10.0 PSS MiB (median [min–max]):
+S0 3.48 → 4.31 · S1 4.14 → 4.33 · S3 4.40 → 4.21 ·
+SR 4.67 → 5.22/5.47 · SW 5.38 → 5.85/5.85 ·
+SW2 3.74 → 3.73/3.78 (TOKIO_WORKER_THREADS=2 still 3 threads, works)
+GUI 208.75 [200.94–210.65] → 24.95/24.93 (tree = Slint GUI ~22 +
+spawned minewrapd; 91→18 threads, 4→2 procs, RSS 437.98→42.09).
+
+GUI PSS -88.1%, RSS -90.4%. Daemon +0.2–0.8 MiB per scenario (REST+WS
++poller+keyring+Discord layers) — K1 (wrapper PSS with GUI closed ≤8)
+comfortably met (SW2 3.73).
+
+Measurement gotchas (record for future):
+- gui_scenario.py waits for WebKitWebProcess — useless for Slint GUI;
+  used memsample directly (gui_new_scenario.py in scripts/, sent to
+  ~/dev-memtest/). GUI scenario MUST count the GUI-spawned daemon
+  (tree from GUI root) → 2 procs is CORRECT for "open app" context;
+  orphan minewrapd from a previous run makes later runs 401+1-proc
+  (wrong) — kill leftover daemon + rm gui-data before each run.
+- scenario.py overwrites results/<label>.json on same label — use
+  distinct labels per run (SR-new run1 5.22 lost to run2 5.47; kept
+  both from stdout).
+
+Tag v1.10.0 pushed (9eec365). Machine left clean: no minewrapd/
+minewrap-gui procs, ports 8081–8085 free; user's real server on
+25565 untouched all along.
+
+PROJECT CLOSED: P0 + P1-C1..C6 done. Reports: PARITY_AUDIT_REPORT,
+MINEWRAP_V1100_FINAL_REPORT (+ earlier P1_FINAL_REPORT) in download/.
