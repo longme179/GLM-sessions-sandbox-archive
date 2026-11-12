@@ -1084,3 +1084,30 @@
    encountered while reading a file", no workaround found) — write
    `Authorization: Basic <b64>` into a chmod-600 file and use
    `curl --header @file` (see tools/oc-shell.sh).
+
+## Lesson 75 — lme blur forensics: means lie, gates hide, probes decide (2026-11-13, PR #129)
+
+1. **Screenshot metrics: the scrim poisons brightness means.** A .13-.40 dim shifts
+   means/StdDev exactly like blur; only edge-energy on a TEXT region separates them —
+   and even that needs a no-blur control state (scrim-only vs scrim+blur). niri's blur
+   `noise 0.02` ADDS high-frequency energy: blurred states can score HIGHER edge-sd.
+   Always capture a popupBlur-OFF open state as the control.
+2. **Check every gate before reproducing "broken" visuals.** Battery saver (active in
+   battery-saver.json, read by every snapshot) silently disables ALL blur flags — hours
+   of "the mechanism doesn't work" was a gate, not a bug. Enumerate the flag chain
+   (ShellState.popupBlurEnabled) and verify EACH input live before blaming the protocol.
+3. **Standalone layer-shell probes settle compositor-vs-shell questions in minutes.**
+   A 20-line PanelWindow with namespace lme-overlay + explicit Region + blurRegion,
+   run against the LIVE session, proves the compositor path; then vary one factor
+   (region shape, dynamic flip, the branch's real SurfaceBlurRegion.qml via a probe
+   placed inside the worktree so relative imports resolve). This is the template for
+   verifying any compositor-dependent QML change without touching the live shell.
+4. **zwlr_virtual_pointer works on live niri** (motion_absolute+frame; verify with
+   `grim -c` — cursors render — crop max=255 at the hotspot). But bar module positions
+   must be found by hover-diff or IPC (`quickshell -p <config> ipc call shell toggle
+   <panel>`) — never blind-click; pkill -f patterns must not appear in the driving
+   script's own cmdline (it kills itself — run from a script file).
+5. **A test class failing identically on a main-worktree baseline in the same session
+   = environmental, not your regression.** LiquidNativeCase (3/7 fail on this machine,
+   green history is cloud-only) never runs in the on-machine gates G0-G6 — always
+   baseline-compare before chasing "your change broke the gates".
