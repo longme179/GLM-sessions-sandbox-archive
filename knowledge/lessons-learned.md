@@ -1047,3 +1047,9 @@
     runner. Fix: resolve the registry path ONCE at load, add a
     `load_at(config, explicit_path)` seam, tests pass their own
     scratch path — never touch process-global env.
+14b. **set-model id must be the FULL listing id** (refines #12):
+    `nvidia/nemotron-3.5-super-vl:free` routes, but the shortened
+    `nemotron-3.5-super-vl:free` → `provider.no-route` "Model
+    unavailable". The `/api/model` entries with providerID `opencode`
+    (no `:free`, e.g. `nemotron-3.5-super-vl-free`) are a DIFFERENT
+    route family — do not mix. Always copy id verbatim from the listing.
