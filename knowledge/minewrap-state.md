@@ -659,3 +659,16 @@ GLM independent verification (remote + vision):
 
 Next session: user merge confirmation → final memtest run + closing
 report + tag suggestion.
+
+## Session 13b (2026-11-12 afternoon) — deliverables packaged
+
+P1 closing deliverables in GLM download/: P1_FINAL_REPORT.docx + .pdf
+(5 sections: mục tiêu/kết quả, phạm vi C1–C5, 3 lớp bug vision-bắt
+được, hướng dẫn merge/tag 5-phút, giới hạn trung thực) +
+P1C5_AGENT_REPORT.md + 3 vision-verified screenshots (S1/S2/S3).
+Script: scripts/p1_final_report.py (sandbox).
+Tất cả session-state đã đẩy archive repo (87b757f + commits này).
+
+CHỜ USER: merge PR p1-c5 → main (c02f6ba đã chứa p1-c4 9af9a93),
+tag v1.10.0, rồi báo lại để GLM chạy final memtest + bảng so sánh
+chốt hạ v1.9.3 vs v1.10.0.
