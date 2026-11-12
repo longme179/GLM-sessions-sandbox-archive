@@ -1021,3 +1021,29 @@
     parse the session id with grep -oP 'ses_[A-Za-z0-9]+' instead of
     json.load. `qw.py api GET` also truncates at ~6 kB — use plain
     curl for big endpoints like /api/model (421 models).
+
+## Minewrap P1-C4 collect (2026-11-12 morning)
+
+14. **Never probe a fixed localhost port in tests** — the user's own
+    REAL Minecraft server (fabric 1.21.1, 5G heap) listens on
+    127.0.0.1:25565 and answers SLP handshakes, so
+    `offline_instances_are_not_probed_and_unresponsive_derives`
+    ("2 failed probes ⇒ unresponsive") flipped to PASS-ok probes and
+    FAILED. Deterministic fix: `bind("127.0.0.1:0")`, note the port,
+    `drop()` the listener, then probe that (closed) port — no other
+    test can race into it. Same fix applied to
+    `probe_of_closed_port_fails_gracefully` (was fixed 25499).
+    Corollary: before blaming flaky code, `ss -tlnp | grep <port>`
+    — the environment may own the port.
+15. **Slint row-hover TouchArea z-order is a recurring bug class**
+    (2nd occurrence): a full-row `TouchArea` declared AFTER the row's
+    `HorizontalLayout` stacks ON TOP and swallows every click meant
+    for per-row buttons (Retry/Remove). Declare the hover TouchArea
+    BEFORE the layout. P1-C3 mods rows + P1-C4 nodes rows both hit
+    it. Only GLM vision-E2E catches it — the agent's REST-level
+    tests pass because the callbacks exist.
+16. **Test seams beat env mutation**: nodes tests flaked because
+    `set_var("XDG_CONFIG_HOME")` in one test races the parallel test
+    runner. Fix: resolve the registry path ONCE at load, add a
+    `load_at(config, explicit_path)` seam, tests pass their own
+    scratch path — never touch process-global env.

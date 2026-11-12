@@ -563,3 +563,50 @@ root Cargo.toml members, icon copy FIRST, refs sweep, AppImage E2E S1–S3
 Gateway model-list note: 421 models; `qw.py api GET` truncates at 6 kB —
 use plain curl for /api/model. set-model worked via POST
 `/api/session/{sid}/model` `{"model":{"id","providerID"}}`.
+
+## Session 12 (2026-11-12 morning) — P1-C4 COLLECTED, 3 FIXUPS, READY FOR MERGE
+
+Agent run (ses_e319e3598ffefZmIyKYXxGeMtq, nemotron-3.5-super-vl:free)
+delivered `[P1-C4]` f0a7a5d on `origin/p1-c4`: NodeService port
+(nodes.json 0600, RemoteClient per node, health poll, 401-refresh,
+local auto-spawn) into crates/minewrap-gui + Slint multi-node sidebar +
+NodesWindow (lazy-created; deviation: in-place tab impossible under
+winit-wayland+software — same window rule as lessons 7c). 93/93 tests
+(4 new nodes tests), median PSS 24.05 MiB — budget PASS. Honest
+deviations listed (s4/s5 clicks unreliable under tiled niri; verified
+machine-wise instead).
+
+GLM vision-E2E (glm-5.3-flash on grim screenshots) found 1 REAL bug +
+2 test-environment holes, all fixed as fixups on p1-c4:
+
+1. **NodesWindow row TouchArea z-order bug** (2nd occurrence of the
+   P1-C3 mods-row class): row-hover TouchArea declared AFTER the
+   HorizontalLayout swallowed Retry/Remove clicks — vision saw Remove
+   clicks produce zero UI change (no row removal, no confirm state,
+   button coords verified). Fix 66cd28f: declare BEFORE the layout.
+2. **nodes tests XDG race**: `set_var("XDG_CONFIG_HOME")` raced the
+   parallel runner (roundtrip test read token "tok" from a sibling).
+   Fix 7a9a1ae (agent, during run): `nodes_path` resolved once at
+   load + `load_at(config, path)` seam; tests own scratch dirs.
+3. **Poller test flipped by the user's REAL server**: 127.0.0.1:25565
+   is the user's live fabric-1.21.1 server (5G heap) — SLP probe
+   SUCCEEDS, so "2 failures ⇒ unresponsive" FAILED. Fix 9af9a93:
+   bind ephemeral listener, note port, drop, probe the closed port;
+   same for `probe_of_closed_port_fails_gracefully` (was 25499).
+
+Verification (remote shell, user's server STILL running on 25565):
+`cargo test --workspace` = **93/93 PASS**; `cargo check --workspace`
+clean (warnings=deny); release build no-default-features OK (2m40s).
+`origin/p1-c4 @ 9af9a93` = f0a7a5d + 7a9a1ae + 66cd28f + 9af9a93 —
+**READY FOR MERGE (PR #3)**. Leftover test daemons killed by exact
+PID (3367714/3367728); the user's java PID 3421556 NOT touched.
+
+Branch p1-c4 merge order: ac338e0 → f0a7a5d → 7a9a1ae → 66cd28f →
+9af9a93. After merge: dispatch P1-C5 (packaging switch — draft
+`prompts/2026-11-12-p1-chunk5-DRAFT.md`, update base hash + baseline
+93 tests + scratch-dir names), then memtest v1.9.3 vs main + tag
+v1.10.0 decision.
+
+New lessons #14-16 (lessons-learned.md): fixed-port probes vs real
+servers; recurring Slint row TouchArea z-order class; test seams vs
+env mutation.
