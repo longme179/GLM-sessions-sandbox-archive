@@ -672,3 +672,38 @@ Tất cả session-state đã đẩy archive repo (87b757f + commits này).
 CHỜ USER: merge PR p1-c5 → main (c02f6ba đã chứa p1-c4 9af9a93),
 tag v1.10.0, rồi báo lại để GLM chạy final memtest + bảng so sánh
 chốt hạ v1.9.3 vs v1.10.0.
+
+## Session 14 (2026-11-12 evening) — PARITY AUDIT v1.9.3 vs v1.10.0 + P1-C6
+
+User merged PR#3 (main @ 03c35f7) then asked: "đảm bảo port TOÀN BỘ tính
+năng bản cũ, không chỉ nhẹ hơn". Full parity audit done:
+
+OLD inventory: 22 tauri commands + IpcAdapter (26 methods) + 12 Svelte
+components (2636 LOC) read file-by-file @ v1.9.3 tag.
+NEW inventory: 29 slint callbacks + settings/props/mods/notif props +
+wizard 4-step + NodesWindow + daemon REST 14 routes + remote client
+26 methods @ 03c35f7.
+
+Result: 24/29 feature groups FULL parity; 4 REAL gaps (fixed in P1-C6
+ed3539d on origin/p1-c6, pushed):
+1. Restart button missing (daemon route existed; GUI never exposed it).
+2. Header stats strip (players online/max · version) missing — DTO
+   carried the fields all along.
+3. Console "Filter logs" missing (old had toolbar filter).
+4. Command input ↑/↓ history missing (old had 50-entry history).
+5. /events WS push → replaced by 2 s REST polling: ACCEPTED deviation
+   (state changes visible within 2 s; console itself still WS push).
+
+Intentional drops (documented, not regressions): native browse-folder
+dialogs (typed path + Scan button covers it; Slint software renderer
+has no native file dialog), browser/mock dev mode (webview-only
+concept), dark-only theme (same in both), rcon UI (was never in old
+ConfigView either — only TOML-level).
+
+E2E evidence (GLM vision, all md5-distinct): shot-s1 buttons+filter
+render; shot-s2 "0/20 players · 1.21.1" + live console ring 1000/1000;
+shot-s3 Filter "WARN" → only WARN lines visible (27, ring live 335);
+shot-s5 ↑ recalled "say hello world" after Enter cleared it. 93/93
+tests PASS + both build modes clean (warnings=deny) on p1-c6.
+
+NEXT for user: merge PR p1-c6 (ed3539d), then tag v1.10.0.
