@@ -981,3 +981,27 @@
    `./target/release/minewrap-tauri` with cwd in the repo): the
    "grep dev-memtest" guard silently skipped the kill and a duplicate test
    GUI accumulated. Verify ownership by `readlink /proc/PID/cwd`.
+
+## Minewrap P1-C2 (2026-11-12)
+
+7. **Slint layout semantics that cost hours** (verified live, Slint
+   1.18): (a) `visible: false` does NOT remove layout space — only
+   `if cond: Element {}` does (slint#7377); (b) layout children of a
+   non-layout parent (Rectangle) do NOT auto-fill — they take their
+   preferred size; give them explicit `width/height: parent.*` or make
+   them direct children of a layout; (c) a second Window created
+   hidden before the event loop runs NEVER maps on winit-wayland +
+   renderer-software (`show()` returns Ok, no buffer committed) —
+   create secondary windows lazily inside a callback.
+8. **MultiEdit is NOT atomic despite its docs** — a failing edit leaves
+   earlier edits applied. Verify the file state after every failed
+   MultiEdit before retrying (brace-depth check catches it).
+9. **`pgrep -f` matches the wrapper bash of `setsid cmd &`** — pin PIDs
+   with `pgrep -x`/exact names when sampling process trees or killing.
+10. **`unshare -Urn cargo test` went flaky** on the daemon tests
+    (discord FAILED + poller hang); bare runs pass when 25565 is free.
+    Probe both ways before blaming code.
+11. **uinput toolbox that unlocks Slint forms**: click_abs (click),
+    click_multi X Y N (double/triple = select-all in LineEdit), wheel
+    DELTAS (scroll ScrollViews). wtype for text; special keys unreliable
+    — design UI-driving plans around click+type+wheel only.
