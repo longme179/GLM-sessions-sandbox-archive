@@ -870,3 +870,38 @@ Việc đã làm:
      remote-node wiring (credentials store, node_id, events_connect
      remote); systemd user unit + desktop integration cho AppImage;
      feature mới theo nhu cầu (backup, schedule, multiple servers…).
+
+## Session 20 (2026-11-12 late night) — logo v2 + rebuild AppImage + asset release
+
+User đổi logo (svg) → build lại AppImage + upload release.
+
+1) Icon: user xoá packaging/appimage/minewrap.png, đặt minewrap.svg
+   (md5 trùng minewrap-logo-v2.svg ở archive v1.9.3-repo — chính logo v2).
+   Build script cũ cp png (đã bị xoá) → patch build-linux.sh: render PNG
+   512 từ svg bằng magick → fallback rsvg-convert → convert; install -Dm644
+   vào hicolor + top-level. Repo giờ tự-contained icon (ai clone cũng build
+   được). Commit 446956a push main.
+
+2) Build lần 1 fail "Text file busy": user đang CHẠY AppImage cũ (pid
+   3644099 + daemon từ mount FUSE) → mksquashfs không ghi đè được.
+   Fix: unlink file cũ rồi rebuild (inode cũ vẫn sống cho process —
+   không cần giết app user đang mở). Build 2 OK: 12.556.792 B.
+
+3) Verify: icon trong AppImage pixel-identical với render svg mới
+   (magick compare AE=0, 512x512 srgba); smoke daemon isolated
+   (port 8095, /health daemon_version 1.10.0 OK); smoke cleanup
+   bằng pid; app user đang mở không bị đụng.
+
+4) Release draft 443130593: DELETE asset cũ 739981178 (204), POST
+   asset mới Minewrap-x86_64.AppImage id 740218018 state=uploaded
+   12.556.792 B. PATCH notes (đề "New Minewrap logo v2 icon") +
+   PATCH tag_name v1.10.0 (trước đó draft đang "untagged-…" — giờ
+   đúng tag). Vẫn draft — user bấm Publish là xong.
+
+5) AppImage về sandbox download/ qua split 12 chunks + base64 +
+   md5 từng chunk (kỹ thuật session 16; gateway timeout nếu chunk
+   1 lần — từng chunk + retry OK). md5 5a0d7bd9490c5287fe58de681922b5d4,
+   sha256 e2c4dc5f8c5ab1c6e27d81164641faa944d8a2aebb8b2da5dd13a6dc8bb5e899.
+
+NOTE kỹ thuật: grep -oP '"id":\s*\K[0-9]+(?=,"name":…)' trượt vì JSON
+pretty in trên nhiều dòng — lấy id bằng cách list assets thô rồi đọc.
