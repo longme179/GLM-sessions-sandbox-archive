@@ -809,3 +809,32 @@ lệnh đo tương lai (thay ~/dev-memtest cũ).
 Đề nghị dọn chờ user duyệt: archive/dup-builds 1.8G, các target/ cũ
 trong archive (12G + 1.8G + 1.8G), spikes/ 2G nếu không cần so sánh
 toolkit nữa → tổng có thể giải phóng tới ~18G.
+
+## Session 18 (2026-11-12 night) — dọn 19G + bảo tồn 2 file chưa commit
+
+User duyệt: "dọn và copy 2 files chưa commit vào archive của bạn và trên máy."
+
+1) 2 file chưa commit từ v1.9.3-repo (REPORT_KIENTRUC_v1.9.3.md 69,464B +
+"Minewrap phương án giảm RAM (từ WebKit sang Rust thuần).md" 7,548B):
+- copy → ~/minewrap/archive/reports/ (máy user, md5 khớp gốc)
+- pull base64 → sandbox archive repo knowledge/reports/ (md5 OK),
+  commit 5d8a35d pushed. Giờ an toàn cả 2 nơi.
+
+2) Dọn (104G → 85G, ~19G freed, df ~ còn 99G):
+- archive/dup-builds/Minewrap-main (1.8G clone trùng)
+- target/ cũ: v1.9.3-repo (12G), v1.9.3-repo-memtest (1.8G),
+  worktree Minewrap-p0-gui (1.9G)
+- spikes/{gtk4,iced,slint}/target (~1.9G) — evidence/results/src/SPEC.md giữ nguyên
+- Minewrap-p0/Minewrap.AppDir (tạm cho AppImage; dist/ AppImage còn)
+
+3) Verify sau dọn: p0 repo git sạch, 2 binaries còn, worktree list đúng,
+S0 smoke PSS 3.76 MiB đúng dải, không sót process.
+
+4) ANOMALY: ~/minewrap/Minewrap/ (390M, clone v1.10.0 tại 9eec365,
+git remote = longme179/Minewrap.git) xuất hiện lúc 22:42:53 — đúng
+khung giờ lệnh copy reports chạy, KHÔNG do bot (lệnh bot chỉ cp).
+Có thể user hoặc session khác clone. ĐÃ GHI CHÚ trong README, KHÔNG
+xóa — chờ user quyết (trùng p0, xóa được nếu không cần).
+
+~/minewrap/README.md cập nhật toàn trạng thái. Lệnh đo tương lai dùng:
+~/minewrap/harness/dev-memtest/build/Minewrap-p0/target/release/minewrapd
