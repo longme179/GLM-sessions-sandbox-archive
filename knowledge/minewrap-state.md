@@ -773,3 +773,39 @@ user machine (Fedora 44):
   orphan fix note, only for the daemon now.
 
 Files: download/Minewrap-x86_64.AppImage (+ earlier reports).
+
+## Session 17 (2026-11-12 night) — gom toàn bộ dev Minewrap về ~/minewrap/
+
+User: "Ở /home/ đang có rất nhiều folder dev của minewrap, hãy gom lại 1 nơi."
+
+Survey: 46G scattered — ~/dev-memtest (32G: harness + 4 repo clones),
+~/dev-MC-server-Wrapper (14G, repo gốc v1.9.3 + 2 file quan trọng chưa
+commit: REPORT_KIENTRUC_v1.9.3.md + "Minewrap phương án giảm RAM….md"),
+~/mcpanel + ~/data (legacy mcpanel daemon), ~/logs ~/libraries ~/mods
+~/versions ~/eula.txt (MC server 1.21.1 Fabric test scratch).
+~/dev-ing KHÔNG thuộc Minewrap — để nguyên. Pre-flight: không có
+minewrapd/java/mcpanel chạy, ports 8080/25565 sạch, không tham chiếu
+đường dẫn trong bashrc/systemd/desktop.
+
+Cấu trúc mới ~/minewrap/ (mv cùng fs, tức thời, không xóa gì):
+- harness/dev-memtest/ (27G) — build/Minewrap-p0 = repo chính v1.10.0
+- harness/Minewrap-p0-gui/ (1.9G) — worktree p0-daemon-first
+- archive/v1.9.3-repo/ (14G) — repo gốc v1.9.3 (bfde421, 2 file chưa commit)
+- archive/v1.9.3-repo-memtest/ (1.8G) + archive/dup-builds/Minewrap-main (1.8G)
+- misc/mcpanel-legacy/ + misc/mcpanel-legacy-data/ (536K)
+- misc/mc-server-scratch/ (60M)
+- README.md bản đồ đầy đủ
+
+Fix sau move: git worktree của p0-gui (gitdir绝对 path) — phải tạo lại
+.git/worktrees/<t>/gitdir (format: BARE path tới W/.git, KHÔNG prefix
+"worktree:"), HEAD ref, commondir; W/.git trỏ tới entry. git worktree
+list giờ đúng 2 entry.
+
+Verify từ vị trí mới: scenario S0 18s chạy OK (PSS 3.72 — đúng dải),
+Minewrap-p0 git sạch (chỉ ?? Minewrap.AppDir/ như cũ), không sót process.
+Sandbox side: ~/minewrap/harness/dev-memtest là đường dẫn MỚI cho mọi
+lệnh đo tương lai (thay ~/dev-memtest cũ).
+
+Đề nghị dọn chờ user duyệt: archive/dup-builds 1.8G, các target/ cũ
+trong archive (12G + 1.8G + 1.8G), spikes/ 2G nếu không cần so sánh
+toolkit nữa → tổng có thể giải phóng tới ~18G.
