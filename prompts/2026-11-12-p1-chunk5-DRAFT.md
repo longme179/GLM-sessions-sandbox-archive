@@ -12,9 +12,9 @@ screenshot + md5sum, số đo). Nghiêm cấm bịa số/kết quả.
 ## Bối cảnh
 
 - Minewrap: Rust workspace (edition 2024, AGPL-3.0-only, `warning = deny`),
-  origin/main @ <CẬP NHẬT SAU C4> = P0 daemon-first + P1-C1..C4 (Slint GUI
+  origin/main @ ac338e0 = P0 daemon-first + P1-C1..C4 (Slint GUI
   đầy đủ tính năng: console/settings/properties/mods/notifications/nodes).
-  GUI PSS ~20–23 MiB (budget < 60 MB). Tests baseline: <CẬP NHẬT SAU C4>.
+  GUI PSS ~20–23 MiB (budget < 60 MB). Tests baseline: 93/93 (46 core + 29 gui + 3 remote + 3 node2 + 10 daemon + 2 remote-e2e).
 - Working copy: `~/dev-memtest/build/Minewrap-p0`, branch `p1-c5` mới tạo
   off origin/main. KHÔNG đụng worktree khác.
 - Vấn đề: repo vẫn mang DI SẢN HEAVY chưa dùng — `src-tauri/` (Tauri 2 shell,
@@ -32,7 +32,7 @@ screenshot + md5sum, số đo). Nghiêm cấm bịa số/kết quả.
 ```
 cd ~/dev-memtest/build/Minewrap-p0
 git fetch origin
-git checkout -b p1-c5 origin/main   # <hash>
+git checkout -b p1-c5 origin/main   # ac338e0 (NOTE: nếu user đã merge PR#3 p1-c4 thì dùng hash main MỚI NHẤT: git fetch origin && git checkout -b p1-c5 origin/main)
 cargo test --workspace 2>&1 | tail -3   # baseline phải pass trước khi bắt đầu
 ```
 
@@ -123,3 +123,15 @@ cargo test --workspace 2>&1 | tail -3   # baseline phải pass trước khi bắ
 - KHÔNG sửa `crates/` (ngoài comment chết tối thiểu — tách commit nếu cần).
 - App thật của user: không đụng.
 - Nếu một mục không làm được — ghi rõ trong report, KHÔNG bịa.
+
+## Bổ sung machine-notes (sau P1-C4, 2026-11-12 sáng)
+
+- **Máy đang chạy MINECRAFT SERVER THẬT của user trên 127.0.0.1:25565**
+  (java fabric 1.21.1, PID riêng). TUYỆT ĐỐI không kill java, không dùng
+  port 25565 cho instance scratch (chọn 25592+), không đo/thắc mắc khi thấy
+  nó trong pgrep. `pgrep -x java` SẼ thấy nó — bình thường, bỏ qua.
+- Test suite đã fix port-agnostic (closes 25565-flake) — baseline 93/93
+  chạy được ngay cả khi server thật đang chạy.
+- Worktree `~/dev-memtest/build/Minewrap-p0` hiện đang ở branch `p1-c4`
+  @ 9af9a93 (ĐÃ PUSH, clean). Agent bước 0 sẽ checkout -b p1-c5 từ
+  origin/main — an toàn, không mất gì.
