@@ -1005,3 +1005,19 @@
     click_multi X Y N (double/triple = select-all in LineEdit), wheel
     DELTAS (scroll ScrollViews). wtype for text; special keys unreliable
     — design UI-driving plans around click+type+wheel only.
+
+## Minewrap P1-C4 dispatch (2026-11-12 night)
+
+12. **OpenCode set-model: `provider.no-route` when providerID is wrong.**
+    The `id` alone is not enough — `nvidia/nemotron-3.5-super-vl:free`
+    needs `providerID: "openrouter"` (NOT "nvidia", the model family).
+    The `/api/model` listing's `providerID` field is authoritative;
+    check it before POSTing `/api/session/{sid}/model`. A mis-routed
+    session fails instantly with an idle event `outcome: "failed"`,
+    `error.type: "provider.no-route"` — recover by creating a FRESH
+    session with the right providerID (the old prompt stays stuck in
+    the dead session's history).
+13. **`qw.py new` prints a Python repr (single quotes), not JSON** —
+    parse the session id with grep -oP 'ses_[A-Za-z0-9]+' instead of
+    json.load. `qw.py api GET` also truncates at ~6 kB — use plain
+    curl for big endpoints like /api/model (421 models).

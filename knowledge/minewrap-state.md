@@ -543,15 +543,22 @@ merged PR #2 content, normal); NO minewrap/fakejava procs; ports
 8390/8391/8097/5173/25590/25591 all free; uinput tools intact
 (click_abs, click_multi, wheel; g3r2-node2 2-daemon reference data).
 
-**P1-C4 dispatched** to fresh session `ses_e31a19c0fffekrwv4UF36e04tg`
-(model `nvidia/nemotron-3.5-super-vl:free`, still active on gateway;
-prompt `prompts/2026-11-12-p1-chunk4.md` — DRAFT updated with: base
+**P1-C4 dispatched** to fresh session `ses_e319e3598ffefZmIyKYXxGeMtq`
+(model `nvidia/nemotron-3.5-super-vl:free` via providerID **openrouter**
+— first attempt ses_e31a19c0fffekrwv4UF36e04tg died instantly with
+`provider.no-route` because providerID was set to "nvidia"; see lessons
+#12-13. prompt `prompts/2026-11-12-p1-chunk4.md` — DRAFT updated with: base
 origin/main ac338e0, baseline 89/89, g3r2-node2 reference, hardened
 machine-notes block: wtype -k re-test rule, md5sum screenshot rule,
 pgrep -x, no pkill -f, no image reads (422), Slint layout lessons
 (visible≠layout, sibling overlays, lazy window creation)). Scope:
 Nodes port + sidebar multi-node + Nodes panel + 2-daemon E2E (S1–S5) +
 PSS 3×60s idle + remote console. Expected ~1.5 h run like P1-C3.
+P1-C5 prompt already drafted: `prompts/2026-11-12-p1-chunk5-DRAFT.md`
+(packaging switch: AppImage = minewrap-gui no-default-features +
+minewrapd next-to-exe, build.sh rewrite, git rm src-tauri ui — 94 files,
+root Cargo.toml members, icon copy FIRST, refs sweep, AppImage E2E S1–S3
++ PSS; update hash/baseline after C4 lands).
 
 Gateway model-list note: 421 models; `qw.py api GET` truncates at 6 kB —
 use plain curl for /api/model. set-model worked via POST
