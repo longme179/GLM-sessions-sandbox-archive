@@ -528,3 +528,31 @@ prompt DRAFT at prompts/2026-11-12-p1-chunk4-DRAFT.md — update commit
 hashes + baseline 89 tests before dispatch), then P1-C5 (packaging
 switch to minewrap-gui, retire src-tauri/ + ui/), then tag/release
 decision (v1.10.0 still untagged; suggest tagging after P1 completes).
+
+## Session 11 (2026-11-12 night) — user merged PR #2; P1-C4 DISPATCHED
+
+User merged PR #2 (p1-c3 → main): **origin/main @ `ac338e0`** = B1–B9 +
+P1-C1/C2/C3 + BUG-D1. Sandbox survived intact this time (both repos,
+memtest results, spikes, work/ evidence). Local Minewrap clone had
+mode-only diffs (100644→100755, sandbox fs artifact) — fixed with
+`git config core.fileMode false` + ff-pull in BOTH repos.
+
+Machine recon (global shell): worktree `~/dev-memtest/build/Minewrap-p0`
+clean @ p1-c3 c2cf841 (git says "ahead 3" of old main — those 3 ARE the
+merged PR #2 content, normal); NO minewrap/fakejava procs; ports
+8390/8391/8097/5173/25590/25591 all free; uinput tools intact
+(click_abs, click_multi, wheel; g3r2-node2 2-daemon reference data).
+
+**P1-C4 dispatched** to fresh session `ses_e31a19c0fffekrwv4UF36e04tg`
+(model `nvidia/nemotron-3.5-super-vl:free`, still active on gateway;
+prompt `prompts/2026-11-12-p1-chunk4.md` — DRAFT updated with: base
+origin/main ac338e0, baseline 89/89, g3r2-node2 reference, hardened
+machine-notes block: wtype -k re-test rule, md5sum screenshot rule,
+pgrep -x, no pkill -f, no image reads (422), Slint layout lessons
+(visible≠layout, sibling overlays, lazy window creation)). Scope:
+Nodes port + sidebar multi-node + Nodes panel + 2-daemon E2E (S1–S5) +
+PSS 3×60s idle + remote console. Expected ~1.5 h run like P1-C3.
+
+Gateway model-list note: 421 models; `qw.py api GET` truncates at 6 kB —
+use plain curl for /api/model. set-model worked via POST
+`/api/session/{sid}/model` `{"model":{"id","providerID"}}`.
