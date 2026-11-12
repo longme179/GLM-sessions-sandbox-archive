@@ -742,3 +742,34 @@ minewrap-gui procs, ports 8081–8085 free; user's real server on
 
 PROJECT CLOSED: P0 + P1-C1..C6 done. Reports: PARITY_AUDIT_REPORT,
 MINEWRAP_V1100_FINAL_REPORT (+ earlier P1_FINAL_REPORT) in download/.
+
+## Session 16 (2026-11-12 evening) — AppImage build + draft release v1.10.0
+
+User asked to build & trial-release the v1.10.0 AppImage. All done on
+user machine (Fedora 44):
+
+- ./packaging/build-linux.sh: rebuilt both binaries from main (9eec365),
+  appimagetool continuous (11d54c9) fetched from GitHub, produced
+  dist/Minewrap-x86_64.AppImage — 12,474,872 bytes, sha256-16
+  98279806b8b246e3 (GUI 20 MB + daemon 6.3 MB inside).
+- Smoke tests (all PASS):
+  - AppRun --daemon with MINEWRAP_CONFIG env → /health on :8090
+    returns daemon_version 1.10.0 (note: minewrapd has NO --config
+    flag; config comes from MINEWRAP_CONFIG env only).
+  - GUI mode: GUI spawns bundled daemon from FUSE mount
+    (/tmp/.mount_Minewr…/usr/bin/minewrapd), /health OK on :8091.
+  - Cleanup verified: no leftover procs/ports; FUSE mounts unmounted.
+- GitHub draft release created via REST with the fine-grained PAT
+  (release id 443130593, tag v1.10.0, notes attached, asset
+  Minewrap-x86_64.AppImage 12,474,872 bytes uploaded, state=uploaded).
+  NOTE: `gh` CLI keyring token lacks releases scope (HTTP 403) — use the
+  git remote PAT with REST: POST /releases then PATCH + upload asset.
+  Draft URL is "untagged-…"; user must click Publish to make it public.
+- AppImage copied back to sandbox download/ (chunked base64 fetch,
+  1 MiB chunks — single-shot base64 truncates ~3 MB, and gateway shell
+  output flaked when writing file mid-loop; minimal loop + retry works).
+- Known behavior recorded: SIGKILL on GUI leaves its spawned daemon
+  alive (by design; normal GUI exit handles cleanup) — same as v1.9.3
+  orphan fix note, only for the daemon now.
+
+Files: download/Minewrap-x86_64.AppImage (+ earlier reports).
