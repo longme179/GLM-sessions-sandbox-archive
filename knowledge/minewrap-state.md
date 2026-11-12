@@ -610,3 +610,52 @@ v1.10.0 decision.
 New lessons #14-16 (lessons-learned.md): fixed-port probes vs real
 servers; recurring Slint row TouchArea z-order class; test seams vs
 env mutation.
+
+## Session 13 (2026-11-12 afternoon) — P1-C5 COLLECTED + VERIFIED, P1 COMPLETE
+
+Agent ses_e308438dfffekLNudqUCChDHBH (nvidia/nemotron-3.5-super-vl:free
+via openrouter — full listing id, see lesson 14b; first attempt with
+shortened id died `provider.no-route`) delivered `[P1-C5]` c02f6ba on
+`origin/p1-c5`, based on p1-c4 9af9a93 (NOT origin/main — smart
+deviation: ac338e0 baseline fails on this machine because the port-fix
+only exists on p1-c4; documented in its report).
+
+Scope delivered: packaging/build-linux.sh rewritten (Slint AppImage,
+cargo-only prereqs fontconfig/freetype, usr/bin/minewrap-gui +
+minewrapd side-by-side so the locator finds it without MINEWRAPD_BIN),
+build.sh GUI = target/release/minewrap-gui (--no-default-features
+tuned), src-tauri/ + ui/ git-rm'd (112 files, +328/−13,399), workspace
+members = 4 crates, docs rewritten (README/ARCHITECTURE/
+BUILD_APPIMAGE/RELEASE_NOTES v1.10.0), crates/ comment-only changes
+(verified by my own diff read: dead src-tauri references removed, zero
+logic changes).
+
+GLM independent verification (remote + vision):
+- cargo test --workspace rerun: **93/93 PASS** (my own run, not the
+  agent's claim); both build modes clean per report.
+- rg sweep: only docs/RELEASE_NOTES.md mentions svelte/pnpm (historical
+  release notes — acceptable per spec).
+- Vision-E2E on fetched screenshots (md5-verified distinct):
+  S1 AppImage GUI + "daemon connected" status ✓; S2 p1c5stub online,
+  console live ("Done (0.55s)! ... tick: players 0, tps 20.0",
+  ring 22/1000) ✓; S3 instance fully removed, clean empty state ✓.
+  Side observation: user's OWN daily Minewrap window (real instance
+  "cobbleverse") was open on the same desktop during the test — the
+  scratch XDG run did not disturb it (also good isolation evidence).
+- AppImage: 12,478,968 B, sha256 e97a0d6e...69edc9. PSS: GUI
+  **24.01 MiB** median (budget < 60 MB PASS), daemon 3.93 MiB.
+- Harness limit (honest): agent couldn't drive the wizard GUI by
+  keyboard (same as P1-C3) — instance lifecycle via REST + screenshots.
+  GLM did NOT re-drive the wizard this round (no new UI added in C5;
+  packaging-only chunk) — acceptable.
+
+**P1 IS NOW FEATURE-COMPLETE.** Remaining for user:
+1. Merge PR chain: p1-c4 (9af9a93) then p1-c5 (c02f6ba) → main
+   (p1-c5 already contains p1-c4; merging p1-c5 alone suffices).
+2. Then tag v1.10.0.
+3. Final memtest: v1.9.3 baseline vs main @ merge — full comparison
+   table (S0/S1/S3/SR/SW + GUI v1.9.3 Tauri vs Slint GUI now) for the
+   closing report.
+
+Next session: user merge confirmation → final memtest run + closing
+report + tag suggestion.
