@@ -392,3 +392,64 @@ in crates/minewrap-gui → tests → visual verify (real display, pgrep guard)
 → PSS ×3 → commit [P1-C2] + push. Machine-side notes for the agent
 included: wtype -k may be dead (re-test), click_abs path, no image reads
 (422 rule).
+
+## Session 9 (2026-11-12 midday) — P1 CHUNK 2 COLLECTED, FIXED, VERIFIED, PUSHED
+
+User: "tiếp tục code". Read the archive FIRST (again saved the session:
+the conversation summary still described Phase B as un-dispatched).
+
+1. **Collected the session-8b P1-C2 agent** (`ses_e338cb115ffeDoO86I2ftQyj7H`,
+   "succeeded"): merge c23099a done locally, ~1.6k LOC uncommitted,
+   NO tests evidence, NO PSS, NO screenshots, 2 daemons left running,
+   and its "all tests PASS" claim was FALSE (workspace run had
+   discord FAILED + poller hang under `unshare -Urn`). Tests PASS when
+   run bare (25565 free that day): 83/83. Lesson: unshare -Urn is now
+   FLAKY for the daemon tests — prefer bare runs when 25565 is free.
+2. **GLM vision-E2E found 6 real bugs in the agent's code** (all fixed
+   by GLM directly in the worktree, machine-side via base64 push):
+   - settings+console panels collapsed to preferred size (Slint:
+     `visible` does NOT affect layout — maintainer quote from
+     slint#7377; two stretch Rectangles split the space; ScrollView /
+     VerticalLayout children of a non-layout parent do NOT auto-fill).
+     Fix: console = direct layout children (chunk-1 style); Settings =
+     absolute overlay starting at y=92px (below top bar+tabs).
+   - status bar nested one level too deep (became a side column).
+   - **wizard window created hidden before `run()` NEVER maps on
+     winit-wayland + renderer-software (Slint 1.18)** — show() returns
+     Ok but no buffer is committed. This was the agent's "click_abs
+     doesn't work" mystery. Fix: lazy `ensure_wizard()` creation inside
+     the add-instance callback.
+   - RefCell double-borrow panic in wizard on_scan_workdir
+     (shadowing does not drop a live borrow).
+   - on_settings_scan_workdir read the WIZARD's work-dir property.
+   - Java ComboBox cleared when current-value not in model
+     (java_items_with() now prepends the configured path).
+3. **New UI-driver tools on the machine** (~/dev-memtest/work/):
+   `wheel` (uinput REL_WHEEL scroll helper, compiled from wheel.c) and
+   `click_multi X Y N` (double/triple-click for select-all). wtype -k
+   special keys were dead again (12/11) — click+type always works.
+4. **E2E S1–S5 all PASS** (wizard fill + real scan note; 201 ->
+   sidebar; settings load; rename+autostart save round-trip via REST;
+   remove + confirm + gone). 16 screenshots + PSS CSV/JSON in
+   `~/dev-memtest/results/p1-c2/` + REPORT.md.
+5. **PSS (GUI tree, no-default-features binary)**: idle 20.05
+   [19.66–20.05] MiB ×3, wizard open 22.42 MiB — budget < 60 MB met
+   with ~3× headroom (chunk-1 was 17.03; +3.0 for chunk-2).
+   CAUTION: `pgrep -f` matches the bash wrapper of a `setsid ... &`
+   launch — pin the pid with `pgrep -x` or the tree includes bash
+   (runs measured 20.16 with bash, 20.05 without).
+6. **PUSHED `dfcd6f6` [P1-C2]** on p1-slint-gui (6 files, +2347/−168;
+   config_view.rs new with 9 unit tests). 83/83 tests, both feature
+   modes build. Machine cleaned (no minewrap/fakejava procs, ports
+   free, worktree clean).
+
+**Remaining backlog**:
+- BUG-D1 (daemon): GET /instances still returns the OLD name after a
+  PUT /config rename (summary not rebuilt from patched config) — small
+  fix on p0-daemon-first; noticed during S4.
+- P1 chunk 3: properties/mods/nodes/notifications + theme tokens
+  (nodes UI = also revives the dead #2-#4 G3 items).
+- P1 chunk 4: packaging switch (AppImage main binary = minewrap-gui),
+  retire src-tauri + ui/.
+- User Gate 3 (merge p0 → main, tag v1.10.0) still pending user
+  approval — bda8a76 is the merge candidate.
