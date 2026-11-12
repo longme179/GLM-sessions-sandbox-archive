@@ -838,3 +838,35 @@ xóa — chờ user quyết (trùng p0, xóa được nếu không cần).
 
 ~/minewrap/README.md cập nhật toàn trạng thái. Lệnh đo tương lai dùng:
 ~/minewrap/harness/dev-memtest/build/Minewrap-p0/target/release/minewrapd
+
+## Session 19 (2026-11-12 late night) — workspace chính + docs + dọn tiếp 24G
+
+User quyết định: ~/minewrap/Minewrap/ (clone xuất hiện 22:42, chính là
+bản user clone) = REPO CHÍNH phát triển tiếp; ~/minewrap/ = workspace
+chung của GLM + mọi subagent — KHÔNG tản folder ra ~ nữa.
+
+Việc đã làm:
+1) Repo chính Minewrap/: nhúng PAT vào remote (origin), fetch OK, tag
+   v1.10.0 = 9eec365 đủ. NOTE: đang có WIP icon svg của user (png xoá,
+   minewrap.svg thêm 23:05) — ĐỪNG đụng khi làm việc.
+2) ~/minewrap/docs/ xây xong (18 files, 700K): reports/ (PARITY_AUDIT +
+   V1100_FINAL + P1_FINAL .docx/.pdf đẩy từ sandbox qua gzip+base64;
+   REPORT_KIENTRUC_v1.9.3 + "giảm RAM" + RELEASE_NOTES + BUILD_FROM_SOURCE
+   chuẩn hóa từ máy), p1-chunks/ (P1C2/C3/C5 reports), history/
+   (minewrap-state.md 19 sessions, lessons-learned, plans, results/
+   p0-v1.10.0.md + csvs). docs/README.md = index + quy ước workspace.
+   Gateway push: gzip trước (pdf 128K→72K) — chuỗi b64 lớn hay timeout.
+3) Dọn tiếp 24G: target/ 25G của build/Minewrap-p0 (sau khi verify
+   repo MỚI cargo build --release -p minewrapd OK — 6,285,216 B).
+   Disk 86G→62G used (còn 122G free). Harness giờ 287M.
+4) ROADMAP hiện tại (câu hỏi user cuối session):
+   - HOÀN THÀNH: P0 daemon-first (v1.10.0), P1 Slint GUI C1–C6 (parity
+     24/29 + 4 gap fix), final memtest (GUI PSS -88.1%), AppImage +
+     draft release, gom dọn workspace.
+   - ĐANG CHỜ USER: Publish draft release v1.10.0 trên GitHub (id
+     443130593); quyết định WIP icon-svg.
+   - CHƯA LÀM (ứng viên bước tiếp theo): P2 browser UI (kế hoạch gốc,
+     giờ tuy chọn/loại — Slint GUI đã đạt mục tiêu RAM); GapD
+     remote-node wiring (credentials store, node_id, events_connect
+     remote); systemd user unit + desktop integration cho AppImage;
+     feature mới theo nhu cầu (backup, schedule, multiple servers…).
