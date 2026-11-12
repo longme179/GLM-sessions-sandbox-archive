@@ -1053,3 +1053,34 @@
     unavailable". The `/api/model` entries with providerID `opencode`
     (no `:free`, e.g. `nemotron-3.5-super-vl-free`) are a DIFFERENT
     route family — do not mix. Always copy id verbatim from the listing.
+
+## Lesson 74 — lme Q4 close-out: live drift-day forensics (2026-11-12, PR #128)
+
+1. **Find the CURRENT shell's log through /proc, not the state log.** The
+   P-04 stderr redirect only applies to backend-launched shells: an owner
+   terminal launch sends qml warnings to /dev/pts/N and
+   $XDG_STATE_HOME/lme-shell/log goes STALE (last write days old). Trace the
+   live quickshell via /proc/<pid>/fd → /run/user/1000/quickshell/by-id/
+   <id>/log.qslog — binary format, pipe through `strings` before grep.
+2. **Read A/B drift lines as a day-long parity signal, then classify.**
+   Zero Q4-family lines over 12.5 h proved the merged event-stream/IPC
+   paths; strength-only [Q1] network lines (65 vs 71, every other field
+   equal) are cross-instant sampling noise between the backend's nmcli poll
+   and the live Networking model — band the compare (|Δ|>8 mismatches,
+   non-numbers strict) exactly like the Q2 cpu/memoryPercent non-compare,
+   keeping #116's scale class (65 vs 1) detectable. Annotated superset
+   lines (apps 57v62) are by-design and stay.
+3. **Sandbox regression triage: stash → check.sh → pop.** Only the diff
+   against the clean-main baseline counts (a direct pytest subset run made
+   three unrelated tests fail from isolation effects that check.sh never
+   showed). Ratchet pins live in tests too — grep the assertLessEqual
+   lines, not just config/architecture.json.
+4. **Keep the user's machine consolidated (owner's standing request).**
+   Two sessions left ~100 /tmp dirs (lme-q4-fakes-* per engine-case run,
+   lme-gates-*, q4-venv, worktrees in both /tmp and ~). Protocol now:
+   everything under one ~/glm-work/ (git worktree remove the stale ones
+   FIRST, then move venvs/tools/logs), sweep /tmp at session end.
+5. **curl -K config files can fail outright** (curl 8.14.1: "error
+   encountered while reading a file", no workaround found) — write
+   `Authorization: Basic <b64>` into a chmod-600 file and use
+   `curl --header @file` (see tools/oc-shell.sh).

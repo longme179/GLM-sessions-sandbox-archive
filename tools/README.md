@@ -73,3 +73,7 @@ Notes: `sh` submits to the global agent-free shell and pages `/output` by
 cursor, so long outputs are not truncated; it prints `[status=... exit=N]`.
 Guard empty variables in remote one-liners — a failed `$(grep -l ...)` once
 turned `dirname ""` into `.` and listed the owner's home (lesson #77.7).
+- `oc-shell.sh` — global /api/shell executor (no agent session); auth via a
+  600-mode `Authorization: Basic ...` header file (`curl --header @file`)
+  because `curl -K` breaks on some hosts (curl 8.14.1). Env: OC_URL, OC_HDR,
+  OC_CWD. Polls to exit + wall grace, mirrors rsh.sh with portable auth.

@@ -1062,3 +1062,34 @@ Recent history (newest first):
   real mirror round trip (needs a second output — machine has only eDP-1 right now),
   Night Light enable/schedule/sunset, idle profiles on AC/battery, stayAwake,
   pgrep wlsunset/swayidle owned by the shell + no orphans after restart, a day of drift.
+
+## Q4 close-out — capture/recording backend-fed, banded strength compare (2026-11-12, PR #128)
+
+- The owner advanced the project past Q4 ("Tiếp tục hoàn thành cho đến khi
+  trước khi chuyển sang Q5", 2026-11-12): capture/recording resolved BACKEND-FED
+  transitional keys (the #124 review-stop proposal; quickshell 0.3.2 lacks
+  mkdir/stat/chmod/exclusive-create/binary-read; revisit tracked for Q6's
+  retirement sweep). Every plan §5 Q4 family is now resolved.
+- Live drift day, merged main a1bc941 (owner restarted the shell ~11:28 Nov 12;
+  12.5 h real use): ZERO drift lines in every Q4 family (niri counts, battery,
+  Q3 lists), no new crash patterns. Two known signals only: the Q2 apps 57v62
+  superset (annotated, by design) and 92 strength-only [Q1] network lines —
+  cross-instant jitter (65v71, all other fields equal).
+- `qml/q4-closeout` (test → impl → docs, PR #128 awaiting owner merge): the
+  network strength compare gets an 8-point band (NativeState 240→249 in both
+  Q4 pins; #116's 0-1 scale class and flag/ssid/null transitions still
+  mismatch). Engine case pins jitter-silent/scale-mismatch/flag-mismatch/
+  null-null-silent. Sandbox G0 identical to clean main (1192 collected, 0
+  failures, 267 skips, same 3 quickshell-absent errors); real machine:
+  wifi 17 pass incl. the new case, session/display-idle/state 48 pass +
+  3 hardware skips, qmllint clean.
+- Remote machine consolidated per the owner's note: everything under
+  ~/glm-work/ (closeout worktree, venv, lme-dev pointer tool, lme-cap-probe,
+  old-tmp logs); stale worktrees removed via `git worktree remove`, ~100
+  /tmp fixture dirs swept. Repo + installed shell config both at a1bc941.
+  Owner after merge: restart, GUI checklist (Displays/mirror, Night Light,
+  idle profiles, stayAwake, Keybindings, IME) — the [Q1] network lines
+  should now stay silent through normal jitter.
+- Next: Q5 content families (weather, lyrics, wallpaper, file search,
+  equalizer, clipboard) — awaiting per-phase owner authorization; fileOpen
+  moves with Q5's search entries.
