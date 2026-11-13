@@ -1111,3 +1111,20 @@
    = environmental, not your regression.** LiquidNativeCase (3/7 fail on this machine,
    green history is cloud-only) never runs in the on-machine gates G0-G6 — always
    baseline-compare before chasing "your change broke the gates".
+
+## Lesson 76 — Q5 leg 1: triple-ratchet files, ast.parse blind spots, recycled sandboxes (2026-11-13, PR #130)
+
+1. **The size caps live in THREE places.** config/architecture.json largeFiles AND hardcoded
+   numbers inside tests (test_native_state's SERVICES blanket 250; test_native_session and
+   test_native_display_idle pin SHELL_STATE/NATIVE_STATE separately). Raising one leaves the
+   suite red — grep for the file name across tests/ before pushing a size ratchet.
+2. **ast.parse does not catch repeated keyword arguments** (`f(x=1, x=2)` parses fine, fails
+   at import). One duplicated `weather_fetch=` in the backend constructor errored 107 test
+   modules while sandbox spot-checks stayed green. Validate with py_compile.compile(doraise=True)
+   after any constructor-signature edit.
+3. **A recycled sandbox changes baselines.** /tmp credentials vanish (restore oc_auth from
+   /home/z/my-project/.oc-auth) and tool availability can shift — re-run the clean-main
+   baseline (git stash -u + ./scripts/check.sh) before trusting failure counts.
+4. **The 401 rule held its first real test**: both stored OpenCode credentials were rejected
+   (password rotated). Per policy: stop, report, never work around auth. The leg shipped with
+   sandbox verification and an explicit PENDING list instead of fabricated remote results.
