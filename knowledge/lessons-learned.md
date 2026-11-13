@@ -1128,3 +1128,22 @@
 4. **The 401 rule held its first real test**: both stored OpenCode credentials were rejected
    (password rotated). Per policy: stop, report, never work around auth. The leg shipped with
    sandbox verification and an explicit PENDING list instead of fabricated remote results.
+
+## Lesson 77 — Q5 legs 2-3a: engine-test hardening on the real machine (2026-11-13, PRs #131/#132)
+
+1. **Binding-position object literals need parentheses** — `property var x: ({...})`. Without
+   them QML parses a block statement (keys become labels) and quickshell exits 255. The same
+   trap hides in test fixture bodies.
+2. **Replacement scripts over test files must assert count == 1.** The files hold two-backslash
+   escapes (`\\n`); searching with one silently no-ops — the paren-format wallpaper fixtures
+   survived three "fix" commits before an on-machine probe caught them.
+3. **On-machine probes beat theorizing**: injecting dbg keys into the finish payload (or a
+   one-shot console.log patch in the remote worktree, reverted after) pinpointed the stale
+   binding read, the trailing paren in the parsed path, and the 17-value frame corpus faster
+   than any local re-derivation.
+4. **A deterministic section beats a binding for read-after-sync consumers**: WallpaperState's
+   section became a plain assigned property after a queued binding evaluation handed the test
+   the previous section (flaky autoDetect/geoKeepsData).
+5. Real format fixtures matter: the awww/swww query rows are `NAME: WxH, scale: 1, currently
+   displaying: image: /path` — invented "(...)" shapes parsed fine in the model but broke the
+   end-to-end expectations.
