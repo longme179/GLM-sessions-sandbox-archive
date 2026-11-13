@@ -1147,3 +1147,21 @@
 5. Real format fixtures matter: the awww/swww query rows are `NAME: WxH, scale: 1, currently
    displaying: image: /path` — invented "(...)" shapes parsed fine in the model but broke the
    end-to-end expectations.
+
+## Lesson 78 — stacked-PR merge direction and the extensionless qmldir (2026-11-13, PRs #133/#134)
+
+1. **GitHub merges a stacked PR into its current BASE branch** — the owner merging in list
+   order landed #131/#132 into `qml/q5-weather-lyrics`/`qml/q5-wallpaper`, never into main.
+   After a stack merge, verify where the merge commits actually live (`git branch -r
+   --contains <sha>`) and open the accumulator branch as the follow-up PR to main.
+2. **Conflict-marker sweeps must carry no extension filter.** The stack merge left markers in
+   `qml/services/qmldir` — extensionless, skipped by the `--include="*.py" *.json *.qml *.md`
+   sweep — and every QML directory import then failed with quickshell's misleading "a
+   component declaration requires two or three arguments" (reported at the import line, not
+   the broken file). Minimal-fixture repro + bisect (remove one file, retest) found it in
+   two rounds; a repo-wide `grep -rln "^<<<<<<< HEAD" . --exclude-dir=.git` catches it in one.
+3. **A missing binary in the sandbox turns lint greps false-green** — `qmllint | grep -c`
+   prints 0 when qmllint itself doesn't exist. Check the tool exists (`command -v`) before
+   trusting a zero.
+4. **Replies-ledger engine tests: count before indexing** — an inserted collect (the preset
+   reply) silently shifts every later index; assert on the reply's name tag, not its position.
