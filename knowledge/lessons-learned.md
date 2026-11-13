@@ -1221,3 +1221,18 @@
 6. **sqlite freelist bloat is silent**: a 42 MB history file held 13 entries (99.9% free pages
    from image churn). `PRAGMA freelist_count > 2048 → VACUUM` at History open self-heals it
    once, forever.
+
+## Lesson 81 — test the wiring, not the logic (2026-11-13, PR #142/#145)
+
+Round-1's clipboard tests validated the LOGIC but not the WIRING: the engine case set
+monitoring=true directly and called the event handler with a number — so all three
+wiring-level bugs were invisible (the dead onVisibleChanged hookup under SlideLoader's
+off-screen parking, the String(text)-vs-text() method shape, the inert watchChanges).
+When a feature's failure mode is "the event never arrives", tests must drive the
+OUTERMOST real seam: the property another object actually flips, the process pipe, the
+signal source. And probe the platform capability headlessly BEFORE building on it —
+both FileView.watchChanges and Quickshell.clipboardChanged proved dead on quickshell
+0.3.2 within minutes of probing (clipboardChanged needs a focused Wayland surface;
+hits=0 for text AND image copies). The channel that worked: wl-paste --watch forwards
+the watch-command's stdout, and the watchers are the shell's own children — one JSON
+event line per committed store rides the existing pipe.
