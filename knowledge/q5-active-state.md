@@ -1,68 +1,77 @@
 # Q5 ACTIVE STATE — read this FIRST on any new session
 
-Last updated: 2026-11-13 (session 5: PRs #133/#134 — legs 2+3a and 3b; #130 merged, #131/#132
-merged into base branches by the owner; qmldir marker bug caught and fixed)
-Owner approved Q5 on 2026-11-12: "duyệt Q5 (weather, lyrics, wallpaper, file search, equalizer,
-clipboard — fileOpen cũng chuyển theo entry search của Q5)". Standing rules: sub-agent prompts
-in English, opencode > openrouter, deepseek-v4.1-flash-free > nemotron-3-ultra-free, remote
-files under ~/glm-work/ only, owner merges PRs (never self-merge).
+Last updated: 2026-11-13 late (session 6: leg 4 clipboard delivered as PR #137 — Option A
+approved by the owner; tests policy PR #136; leg 3b delivered as PR #135 after the
+#134-into-branch merge trap)
+Owner approved Q5 on 2026-11-12: "duyệt Q5 (weather, lyrics, wallpaper, file search,
+equalizer, clipboard — fileOpen cũng chuyển theo entry search của Q5)". Standing rules:
+sub-agent prompts in English, opencode > openrouter, deepseek-v4.1-flash-free >
+nemotron-3-ultra-free, remote files under ~/glm-work/ only, owner merges PRs (never
+self-merge).
 
-## Status — two stacked PRs awaiting owner review (merge in order)
+## NEW STANDING POLICY (owner, 2026-11-13): tests stay local
 
-- [x] **#130 leg 1 weather+lyrics** — MERGED to main (a11fefa).
-- [x] **#131/#132** — merged by the owner into their stacked base branches; their content
-      rides **PR #133** (qml/q5-wallpaper → main): legs 2+3a + the merge of main after #130.
-      MERGE #133 FIRST.
-- [x] **PR #134 leg 3b equalizer** (qml/q5-equalizer, base = qml/q5-wallpaper): EqualizerModel.js
-      + the EqualizerState perform layer. Merge after #133, then retarget to main.
-- [ ] **Q5 leg 4: clipboard (clipboard.py, 315 lines) — REVIEW-STOP**: propose
-      Process.startDetached + PDEATHSIG (preExecCommand sets PR_SET_PDEATHSIG so the clip
-      helper dies with the shell; quickshell 0.3.2 Process may kill children on destroy —
-      the exact semantics need a probe) vs stays-Python until Quickshell fixes destroy
-      semantics. Owner picks before coding.
-- [ ] Q5 close-out + archive records + lessons.
+`tests/` is UNTRACKED and gitignored (PR #136): never push test files; the suite runs
+from the local working set (sandbox: /home/z/my-project/repos/lme-fedora-niri-qs/tests,
+remote: ~/glm-work/tests-local — restore into a worktree with `cp -r
+~/glm-work/tests-local/. <worktree>/tests/` after creating it, since fresh branches carry
+no tests). check.sh skips discovery where tests/ is absent. New tests are written to the
+local tests/ dir only and copied to the remote worktree via base64 for verification.
 
-## The qmldir lesson (session 5)
+## Status — three stacked PRs awaiting owner review (merge in order)
 
-The stack merge (#133) left conflict markers in **qml/services/qmldir** — the only conflicted
-file WITHOUT a known extension; the `*.py/*.json/*.qml/*.md` sweeps skipped it. Every QML
-directory import then failed with quickshell's misleading "a component declaration requires
-two or three arguments". Fixed in 849d682 + a contract guard sweeps the whole service
-directory (test_native_state.py). Sweep rule: `grep -rln "^<<<<<<< HEAD" . --exclude-dir=.git`
-with NO extension filter.
+- [x] #130 leg 1 weather+lyrics — merged to main.
+- [x] #133 legs 2+3a — merged to main (9ed7f43).
+- [x] **PR #135**: leg 3b equalizer → main (the #134 squash landed on qml/q5-wallpaper
+      after #133; this carries it the last hop). MERGE FIRST.
+- [x] **PR #136**: tests-local policy (base qml/q5-wallpaper, retargets to main after
+      #135). Then the owner's main checkout loses tests/ on pull — restore with
+      `cp -r ~/glm-work/tests-local/. ~/lme-fedora-niri-qs/tests/`.
+- [x] **PR #137**: Q5 leg 4 clipboard (base policy/local-tests-only → retargets after
+      #136). Engine-verified on the owner's machine: 33 passed ×2 + the full suite run.
+      The owner already ran the new code live (both wl-paste watchers up with the exact
+      clipboard_watch.py argv from their main checkout).
+- [ ] Q5 close-out (after the owner merges #135/#136/#137): the final summary, archive
+      records, and the Q6 proposal review-stop.
 
-## Session-5 deliverables (context for review)
+## Session-6 decisions and evidence (context for review)
 
-- PR #133: legs 2+3a to main + the stack merge (superset ratchets: ShellState 370, NativeState
-  257, desktop_backend 1627, wl-test 279) + the qmldir fix.
-- PR #134 leg 3b: EqualizerModel.js (PRESETS/normalize/stateFromDaemonLine/daemonSetArgs/
-  savedView/validators) + the EqualizerState perform layer (16 eq* actions routed natively;
-  staging machine exact; daemon runner = queued one-shot Process + watchdog with the
-  auto-start retry; eq_state reads via FileView, writes via scripts/json_store.py — 0o600,
-  fsync, atomic replace; test tone = assets/equalizer-test.wav via pw-play with pw-dump
-  targeting). equalizer_actions.py DEPRECATED. Cycle edges registered (Q4 router-fan-out
-  style). Ratchets: EqualizerState 442, ShellState 371, equalizer_actions 374.
-- Engine-verified on the owner's machine: leg 3b 18 passed ×2; legs 1+2+3a re-verified 68
-  passed on the fixed stack branch.
+- **The quickshell 0.3.2 kill-semantics probe** (live, on the owner's machine): normal
+  exit SIGKILLs direct Process children (no orphans); a `kill -9` crash leaves a plain
+  child ORPHANED, while the idle_control-style PR_SET_PDEATHSIG wrapper (armed against
+  the shell pid, `--parent` is only the early-death guard) dies clean on the kernel
+  SIGTERM. startDetached does NOT exist in 0.3.2 (documented deviation from the
+  option-A sketch; the owner approved the native direction, not the exact API).
+- **Leg 4 architecture**: the JSON-lines serve daemon retired (−123 lines);
+  ClipboardState.qml runs one-shot clipboard.py subcommands (--state/--search/--copy/
+  --pin/--delete/--clear/--pause/--configure, one JSON line per run, messages identical);
+  scripts/clipboard_watch.py = flock + PR_SET_PDEATHSIG + exec wl-paste --watch; the
+  panel gains one line (onVisibleChanged → monitoring gates a 2 s revision poll).
+- **The bug the test caught**: the flock fd must be os.set_inheritable — Python's
+  close-on-exec default drops the lock at execvp, re-enabling duplicate capture.
+- **Two test-harness traps this session**: (1) bash `sh -c 'single command'` EXECs
+  instead of forking, so `--parent $$` equals the child's own pid and the getppid guard
+  fires — spawn with `& wait` to force a real fork; (2) a fake argv matcher must use
+  argv.includes (—search takes two trailing args, positional probes misfire).
 
-## Engine-test lessons (cumulative — add the rest at close-out)
+## Cumulative engine-test lessons
 
-- Binding-position object literals need parentheses — `property var x: ({...})` — else a
-  block statement (quickshell exit 255).
-- finish() from a Timer tick only (quit before the receiver connects = 15 s timeout).
-- Replacement scripts over test files: assert count == 1 (the files hold two-backslash
-  escapes; one-backslash searches silently no-op).
-- Unquoted object keys with hyphens are syntax errors; count frame-corpus values (17 ≠ 16).
-- Test helpers that normalize prefs before each call: pass flags through the helper.
+- Binding-position object literals need parentheses — `property var x: ({...})`.
+- finish() from a Timer tick only; count ledger entries before indexing them.
+- Replacement scripts over test files: assert count == 1 (two-backslash escapes).
+- Unquoted object keys with hyphens are syntax errors; count frame-corpus values.
 - Size caps live in THREE places; cycle edges need registration in the Q4 style.
 - Conflict-marker sweeps must have NO extension filter (qmldir bit us).
-- Replies-ledger tests: count the ledger entries before indexing (the preset reply shifted
-  the error-surface indices by one).
+- bash sh -c exec-optimization breaks $$ parent tests — use `& wait`.
+- Fake transport matchers: argv.includes, not positional probes.
+- Test-first discipline catches real bugs: the flock fd close-on-exec (leg 4).
 
 ## Remote access
 
-oc.sh works (credential from the 2026-11-13 handoff, stored in /home/z/my-project/.oc-auth
-+ /tmp/oc_auth). Worktrees: ~/glm-work/q5leg1, q5leg2, q5leg3, q5leg3b (the full stack).
-The venv: ~/glm-work/venv. Journal: /home/kimhoanglong/agent-collab/journal.md (append-only,
-Agent-2 entries). qmllint exists ONLY on the remote (the sandbox has none — `grep -c` on a
-missing binary prints 0, a false green).
+oc.sh works (credential in /home/z/my-project/.oc-auth → /tmp/oc_auth). Worktrees:
+~/glm-work/q5leg1..q5leg4 (q5leg4 = the full stack + the local test set), venv
+~/glm-work/venv, tests backup ~/glm-work/tests-local. Journal:
+/home/kimhoanglong/agent-collab/journal.md (append-only, Agent-2 entries). qmllint only
+on the remote. base64 payloads through oc.sh need LOCAL expansion (single-quoted "$B64"
+arrives empty — the round-1 probe ran an empty fixture for two rounds before the
+"File is empty" error gave it away).

@@ -1165,3 +1165,29 @@
    trusting a zero.
 4. **Replies-ledger engine tests: count before indexing** — an inserted collect (the preset
    reply) silently shifts every later index; assert on the reply's name tag, not its position.
+
+## Lesson 79 — leg 4 clipboard: PDEATHSIG probe, close-on-exec flock, and shell exec-optimization (2026-11-13, PR #137)
+
+1. **Probe before porting process-lifecycle code.** The live quickshell-0.3.2 probe: a
+   normal shell exit SIGKILLs direct Process children (clean); a `kill -9` crash ORPHANS
+   a plain child. The kernel-level fix is PR_SET_PDEATHSIG armed against the shell pid
+   (the `idle_control.py client --parent <pid>` pattern — the `--parent` arg is only the
+   early-death guard; the kernel tracks the REAL parent). startDetached does not exist
+   in 0.3.2 — check the installed qmltypes (`Quickshell/Io/quickshell-io.qmltypes`), not
+   the docs sketch.
+2. **flock + execvp = os.set_inheritable.** Python opens fds close-on-exec by default
+   (PEP 446); a supervisor that flocks then execs wl-paste silently DROPS the lock —
+   every new shell becomes a duplicate capture instance. The regression test with a
+   faked wl-clipboard caught it before shipping.
+3. **`sh -c 'single command'` EXECs instead of forking** (bash at least): the child's
+   pid IS the shell's `$$`, so `--parent $$` self-references and getppid guards fire.
+   Force a real parent with `& wait`. Behavior differs across /bin/sh implementations —
+   a test that passes in one sandbox can fail on the target machine.
+4. **base64 through a remote-exec wrapper must expand LOCALLY.** A single-quoted
+   `"$B64"` inside the command string arrives empty on the remote (the fixture ran
+   empty for two rounds before "File is empty" exposed it). Expand into the command
+   string before sending: CMD="echo $B64 | base64 -d > file".
+5. **The stacked-PR merge trap repeats**: squash-merging a stacked PR into its BASE
+   branch (not main) strands the content. After every merge round, verify where the
+   merge commits actually live (`git branch -r --contains <sha>`) and open the
+   accumulator branch as the follow-up.
