@@ -1191,3 +1191,33 @@
    branch (not main) strands the content. After every merge round, verify where the
    merge commits actually live (`git branch -r --contains <sha>`) and open the
    accumulator branch as the follow-up.
+
+## Lesson 80 — the live-refresh session: one-shot QML Timers, engine-case fake green, and amend discipline (2026-11-13)
+
+1. **A QML `Timer` without `repeat: true` fires ONCE.** The clipboard panel's 2 s "revision
+   poll" was a one-shot: it fired 2 s after each panel open and died, so captured items only
+   appeared after a tab switch. With a `running:` binding the internal stop also breaks the
+   binding. Every polling Timer needs an explicit `repeat: true`, and a source-contract pin
+   (`assertIn("repeat: true")`) keeps it from regressing.
+2. **Sandbox green is fake green for engine cases.** The local suite skips every case needing
+   quickshell; the remote run failed because the new engine checks ran AFTER a step that had
+   replaced the injected runner with a failure stub. Rule: when a fixture mutates shared seams
+   mid-case (runner, loader, clock), re-arm them at the start of every new check block — and
+   never trust a local "OK (skipped=N)" as engine coverage.
+3. **Check the branch before `--amend` + push.** The amend landed on the stacked license branch
+   and the force-push overwrote the fix branch's remote with the wrong content. Recovery:
+   reset the wrong branch to its recorded sha, redo the amend on the right branch, rebase the
+   stack, force-push both. Print `git branch --show-current && git log --oneline -1` in every
+   push command.
+4. **The event-driven refresh pattern that works on quickshell 0.3.2**: the worker process
+   rewrites a tiny `revision.txt` after its DB commit; the QML side watches it with
+   `FileView { watchChanges: true }` (inotify) and searches immediately; while the panel is
+   hidden the event is skipped and reopening runs one refreshState. Copy → list update ≈ 150 ms
+   with zero idle cost (mirrors end4-pC's Cliphist signal+debounce with serpantinum's
+   dirty-flag deferral).
+5. **One-shot Python helpers cost ~80 ms (99% interpreter+imports); the DB work is ~0.1 ms.**
+   For latency-sensitive paths prefer file-watch events (zero spawns) over poll cadences;
+   consolidate into a persistent helper only when a feed is genuinely high-frequency.
+6. **sqlite freelist bloat is silent**: a 42 MB history file held 13 entries (99.9% free pages
+   from image churn). `PRAGMA freelist_count > 2048 → VACUUM` at History open self-heals it
+   once, forever.

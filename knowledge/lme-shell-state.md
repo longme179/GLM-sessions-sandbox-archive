@@ -1,11 +1,56 @@
 # lme-fedora-niri-qs — live state
 
 > UPDATE THIS FILE at the end of every work session. Last updated:
-> 2026-11-11 evening (Qwen handover session — PLANNING ONLY, no code.
-> #126 AND #127 are both MERGED and the live shell already runs them;
-> Q4 legs 2-3 are runtime-healthy for 16 h but their FUNCTIONAL owner
-> checklist has never been exercised. New Qt6 capability findings change
-> the Q5 blocker list. Plan: plans/2026-11-11-lme-q4-closeout-q5-plan.md).
+> 2026-11-13 night (Q6 session 2 — the clipboard live-refresh fix, the AGPL-3.0
+> relicense, the whole-shell optimization audit; three stacked PRs awaiting merge:
+> fix/clipboard-live-refresh 2d422db -> chore/agpl-relicense a0952e5 -> docs/optimization-audit 62f4bea).
+
+## Session 2026-11-13 night (GLM) — clipboard live refresh, AGPL relicense, optimization audit
+
+Owner merged #140/#141, pulled and restarted (both per-kind watchers live), then
+reported: "clipboard có lưu nhưng list cập nhật chậm — chỉ refresh sau khi tôi
+đổi tab". Asked for (a) a whole-codebase audit, (b) reference borrowing from
+github.com/pctrade/end4-pC and github.com/ilyamiro/serpantinum ("Nếu được hãy copy
+code của họ"), (c) authorization to relicense the repo to AGPL-3.0, (d) use
+subagents to debug live.
+
+### Root causes found (subagent live probes + code)
+
+1. The panel's revision poll Timer lacked `repeat: true` — one-shot: fired 2 s after
+   panel open, died. Captures never refreshed the visible list; only interactions
+   (tab switch -> search()) did. FIXED in 2d422db.
+2. Each clipboard.py spawn = ~80 ms (99% interpreter+import; DB work 0.1 ms). The
+   event path (revision.txt + FileView inotify) now refreshes an open list in ~150 ms.
+3. The live DB was 42 MB holding 13 entries (99.9% freelist from image churn).
+   History.__init__ now VACUUMs once when freelist > 2048 pages.
+
+### The three stacked PRs (merge in order)
+
+1. fix/clipboard-live-refresh (2d422db): repeat:true + revision.txt event channel +
+   onMonitoringChanged instant refresh + self-healing VACUUM. Remote engine case
+   green (25/25 live incl. the new event-flow checks); remote G0 rerun pending at tip.
+2. chore/agpl-relicense (a0952e5): LICENSE = AGPL-3.0 text, 71 SPDX headers swept,
+   README/THIRD_PARTY statements rewritten. G0 sandbox 1324/0/373.
+3. docs/optimization-audit (62f4bea): docs/OPTIMIZATION_PLAN.md — the measured audit
+   + 7 ranked legs (Motion.qml curve library first; single-progress OSD driver;
+   niri-stream hygiene; assign()+refcounting; FadeLoader; spawn consolidation pilot;
+   ListModel sync). end4-pC is GPL-3.0, serpantinum is AGPL-3.0 — the relicense
+   makes both families adoptable verbatim.
+
+### Standing notes
+
+- The owner already runs both per-kind watchers live (pid 299395/299396); the
+  per-kind capture locks and revision.txt land only after merging + restarting.
+- Reference-research facts live in docs/OPTIMIZATION_PLAN.md (measured numbers);
+  the subagent reports are in the session transcript, not the repo.
+- Next session likely: merge the 3 PRs, then start leg 1 of the optimization
+  roadmap (Motion.qml), or Q6 leg 1 step 2 (Settings IpcHandler forwarding) —
+  both are green-field, see the plan files.
+
+
+---
+
+
 
 ## Session 2026-11-11 evening (Qwen) — handover + Q4 close-out / Q5 plan, no code
 
