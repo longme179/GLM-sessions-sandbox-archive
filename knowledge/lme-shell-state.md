@@ -1,9 +1,42 @@
 # lme-fedora-niri-qs — live state
 
 > UPDATE THIS FILE at the end of every work session. Last updated:
-> 2026-11-13 night (Q6 session 2 — the clipboard live-refresh fix, the AGPL-3.0
-> relicense, the whole-shell optimization audit; three stacked PRs awaiting merge:
-> fix/clipboard-live-refresh 2d422db -> chore/agpl-relicense a0952e5 -> docs/optimization-audit 62f4bea).
+> 2026-11-15 ~23:45 +07 (Agent-2 session: c2c3 fix cycle fully landed — PRs
+> #168-#171 merged + deployed, main 7bc362d, shell 1621529; owner live checklist
+> + OQ-5 pending. Current read-first file: knowledge/a4-active-state.md.)
+
+## Session 2026-11-15 (Agent-2 + Agent-1) — A4c closeout, c2c3 fixes, verify-kép, deploy
+
+Highlights (full story in journal/agent-collab-journal-2026-11-15.md tail + the
+Agent-2 entries; plans + reports filed under plans/ and knowledge/reports/):
+
+- **A4c C1 (island radius, PR #167)**: merged 09:46Z `753dbc6`, promoted the 4
+  motion test modules to tests-local (flat root), deployed, restarted; G0
+  post-promote clean ×2 runs (1284/0/190 and 1283/1/190 — the 1 = backend_reconnect
+  flake, focused rerun green). Live §6 eyeball a/b/c/f PASS with 8 grim PNGs
+  (`~/agent-collab/artifacts/a4c/live/`); d/e needs the owner (no IPC setter for
+  animations/motionSpeed).
+- **C2 (G4 env diagnose)**: 24/35 → 11/11 failures named; recipe = pointer dir +
+  env file (reports/g4-env-diagnose.md). **C3 (L2 live)**: 4/4 native-path checks
+  PASS; found F1 (idle first-enable stall) + F2 (PowerMenu suspend pre-locked
+  swaylock — security ordering bug).
+- **c2c3 fix cycle** (plan: plans/2026-11-15-a4c-c2-c3-fixes.md, 779 lines): Agent-1
+  implemented tasks A→L→B→C→D→V in 4 worktrees with RED/GREEN + mutation probes;
+  an independent review round (0 Critical / 5 Important / 8 Minor) + fixes;
+  integration `d27ad71` verified: G4 35/35 (63 s), G0 1291/0/190 (1481 ran),
+  G1 6/3 = known audio baseline. Agent-2 verify-kép PASSED all 4 PRs (verbatim
+  diffs vs plan, independent G4 rerun, isolation/ratchet/caps audits).
+- **Merged + deployed**: #168 `fix/a4c-idle-first-enable` (probe-settled enable +
+  serialized restarts), #169 `fix/a4c-capture-fixture` (fixture grabToImage +
+  AnnotationCanvas export fix — Canvas.save broken on this Qt build), #170
+  `fix/a4c-clipboard` (previewBack focus + Escape-to-search + demo guard), #171
+  `fix/a4c-suspend-native` (prepare_sleep native handshake first, swaylock only
+  fallback, fail-closed). Deploy 23:24+07 → shell 1621529 / backend 1621546, md5
+  repo==live ×6 files, smoke green.
+- **Open**: owner live checklist (5 items + §6 d/e) + OQ-5 (tests-local promotion).
+  ROADMAP Tier A after this: A3 FadeLoader → A5 wallpaper → A6 StyledTextChange.
+- New lessons this session: 82 (lock/capture era), 83 (A4 era + verify-kép),
+  84 (overturned beliefs + bridge/sandbox hard limits) in lessons-learned.md.
 
 ## Session 2026-11-13 night (GLM) — clipboard live refresh, AGPL relicense, optimization audit
 

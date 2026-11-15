@@ -57,3 +57,43 @@ khi thiết kế gì dựa trên chúng: đọc snapshot trong `knowledge/` (nir
 giả thuyết. Đừng bao giờ tin trí nhớ của mình về một dự án di chuyển nhanh.
 
 Thân, tôi — của quá khứ.
+
+---
+
+## P.S. từ 2026-11-15 — era Agent-1, verify kép, và những giới hạn cứng
+
+Tôi của 2026-11-15 viết thêm cho bạn: công việc đã đổi hình dạng. Owner giờ
+làm việc qua MỘT agent OpenCode dài hạn trên máy họ (Agent-1, session
+`ses_e2cc73b20ffeBwzyf76e22dwdy`) và qua TÔI (Agent-2, GLM sandbox) như
+orchestrator + verifier độc lập. Bạn cần biết:
+
+1. **"Tiếp tục" giờ có nghĩa là lái toàn bộ pipeline**: viết plan số cứng →
+   steer Agent-1 → poll + verify kép (TỰ chạy lại gates, KHÔNG tin report) →
+   verdict → owner merge. Đừng dừng giữa chừng để hỏi — owner trả lời bằng
+   những prompt tối giản, họ tin bạn tự biết bước tiếp.
+2. **Owner cũng nói chuyện trực tiếp với Agent-1** (máy là của họ). Trước khi
+   đoán "chưa ai làm gì", đọc tail journal + `gh pr list` — giữa hai lượt của
+   bạn, thế giới đã chạy tiếp (hôm nay tôi quay lại thấy 4 PR đã merge).
+3. **Live checks là của owner, luôn**: suspend, khóa màn, idle, editor export,
+   d/e animations — không có IPC setter, cần mắt họ. Việc của bạn: checklist
+   rõ ràng + recipe 2 phút + escape hatch nếu hỏng.
+4. **Giới hạn cứng đã đo** (lessons 84): bridge oc.sh cắt response ở đúng
+   49152 bytes (PIL vẫn mở được PNG đứt — "decode OK" không phải "đầy đủ");
+   /tmp và cwd của sandbox reset giữa CÁC TURN, không chỉ giữa sessions; dòng
+   model này không xem được ảnh (Read trả "[Media omitted]") — verify ảnh
+   bằng code, phán quyết thị giác để owner/VLM.
+5. **Bài học sai phải bị triệt tiêu, không chỉ bổ sung**: tuần này lật đổ
+   swaylock-pre-lock (bằng timeline live), Canvas.save() (probe tối thiểu),
+   "backend PID đổi = crash" (log + parent PID), "G0 exit 1 = đỏ" (đọc gate
+   JSON). Khi bằng chứng chống lại một niềm tin trong archive này: đánh dấu
+   [RETIRED]/[OVERTURNED] ngay tại chỗ, dẫn evidence. Archive chết khi nó
+   thôi được sửa.
+6. **Kỷ luật báo cáo vẫn là mọi thứ**: liệt kê rõ machine-verified vs
+   owner-pending, không bao giờ bịa. Owner đã tin bạn qua 40+ PR vì điều đó.
+
+Bắt đầu session mới: đọc `knowledge/a4-active-state.md` (era hiện tại),
+`knowledge/lessons-learned.md` (cả phần RETIRED), rồi skill của việc định
+làm. Credentials đến từ tin nhắn bootstrap của owner — không bao giờ vào
+repo này.
+
+— tôi, của 2026-11-15

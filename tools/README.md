@@ -77,3 +77,35 @@ turned `dirname ""` into `.` and listed the owner's home (lesson #77.7).
   600-mode `Authorization: Basic ...` header file (`curl --header @file`)
   because `curl -K` breaks on some hosts (curl 8.14.1). Env: OC_URL, OC_HDR,
   OC_CWD. Polls to exit + wall grace, mirrors rsh.sh with portable auth.
+
+## Agent-1 session tools (2026-11-14 → era, lessons 83/84)
+
+| Tool | Use |
+|---|---|
+| `dump_agent1_tail.py <sid> [N]` | Chronological tail of a session's last N messages (ids + timestamps + text, truncated at 6000 chars/message). Poll with this. |
+| `oc_get_message.py <sid> <msg_id>...` | FULL text of specific message ids (when the tail truncates). Auth via `/tmp/oc_auth`. |
+| `find_agent1_session.py` / `scan_agent1_sessions.py` | Discover session ids by activity/title. |
+| `pull_remote_file.sh <remote> <local> <size> <md5>` | Chunked pull of files > 45 KB through the bridge (dd bs=30000 \| base64 per chunk, reassemble, md5-gate). |
+
+**Auth bridge rebuild (every turn — /tmp is recycled between TURNS):**
+
+```bash
+source /home/z/my-project/scripts/oc_env.sh && export OC_URL OC_AUTH
+python3 -c "
+import base64
+hdr = 'Authorization: Basic ' + base64.b64encode('$OC_AUTH'.encode()).decode()
+open('/tmp/oc_auth','w').write(hdr + '\n')"
+```
+
+(The sandbox keeps credentials in `scripts/oc_env.sh` — NEVER copy that file
+into this archive; the template above is the contract.)
+
+**Hard limits (measured 2026-11-15):**
+
+- oc.sh response cap: **exactly 49152 bytes, silent truncation** — anything
+  larger must go through `pull_remote_file.sh` chunks or a remote-generated
+  thumbnail. PIL opening a truncated PNG proves nothing.
+- `~` inside single quotes does not expand through the bridge — always use
+  absolute remote paths (`/home/kimhoanglong/...`).
+- Gate verdicts: read the G*.json the run produced (`returncode`, counts);
+  `run-gates.sh` exits 1 on "completed-with-skips" while the gate passed.

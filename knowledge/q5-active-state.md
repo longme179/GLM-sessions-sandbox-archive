@@ -1,4 +1,9 @@
-# Q5 ACTIVE STATE — read this FIRST on any new session
+# Q5 ACTIVE STATE — SUPERSEDED (2026-11-15)
+
+> Q5 (and Q6) closed long ago; everything merged. The current era's read-first file
+> is `knowledge/a4-active-state.md`. This file is kept for history (the Q5
+> tests-policy notes below are still valid: tests/ stays untracked,
+> ~/glm-work/tests-local is the shared local set).
 
 Last updated: 2026-11-13 late (session 6: leg 4 clipboard delivered as PR #137 — Option A
 approved by the owner; tests policy PR #136; leg 3b delivered as PR #135 after the

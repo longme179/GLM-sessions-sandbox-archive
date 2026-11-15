@@ -2,10 +2,13 @@
 
 Use this skill whenever work must happen on the user's machines (their shell
 repo, their desktop state) — GLM's own sandbox usually cannot reach GitHub
-(IP-blocked) and must not touch the user's machine directly. Everything goes
-through the OpenCode gateway; credentials arrive in the session bootstrap
-message (Basic Auth `opencode:<password>` + gateway URL). 401 → stop and
-report. Never store or echo credentials.
+(**[UPDATED 2026-11-15] that IP-block is history: sandbox→GitHub clone AND
+push over HTTPS+PAT work — see lesson 30 / lesson 8-RETIRED; only
+unauthenticated api.github.com still rate-limits**) and must not touch the
+user's machine directly. Everything goes through the OpenCode gateway;
+credentials arrive in the session bootstrap message (Basic Auth
+`opencode:<password>` + gateway URL). 401 → stop and report. Never store or
+echo credentials.
 
 ## Mental model
 
@@ -97,3 +100,63 @@ report. Never store or echo credentials.
   agent retype file contents from a prompt.
 - Fetch direction (desktop → sandbox): `tools/oc_fetch.py` (chunked base64
   through session shell + inbox).
+
+## The Agent-1 long-lived session era (2026-11-14 →, PRs #164–#171)
+
+The collaboration now runs through ONE long-lived OpenCode session on the
+owner's machine — "Agent-1" (`ses_e2cc73b20ffeBwzyf76e22dwdy`) — with GLM
+("Agent-2", the sandbox) as orchestrator + independent verifier. The old
+"fresh session per task" pattern is gone; the owner ALSO talks to Agent-1
+directly (it's their machine), so always re-read state before assuming.
+
+### Message API details (current gateway build)
+
+- `GET /api/session/{sid}/message` (singular) → `{"data": [...]}`, sorted
+  oldest-first. Message `role` is often `null` — use the `type` field:
+  `user` (your steers), `assistant` (text in `content[].text`), `idle`
+  (run outcome; the LAST idle only counts for the newest run — lesson 32),
+  `synthetic` (shell/tool notifications, `text` field).
+- `tools/dump_agent1_tail.py <sid> <N>` — chronological tail with ids;
+  `tools/oc_get_message.py <sid> <msg_id>...` — full text of specific
+  messages (the tail dump truncates at 6000 chars; thinking + final answer
+  are separate messages with the same id family).
+- Find sessions: `tools/find_agent1_session.py` / `scan_agent1_sessions.py`.
+- Steers go out via `tools/oc_prompt.py <sid> <file>`; a prompt with
+  `"delivery":"steer"` can also inject into a RUNNING session — Agent-1 used
+  that to "steer Agent-2" back (note: what it steers is its OWN internal
+  subagent session, not the GLM sandbox — GLM polls instead).
+
+### The cadence (proven across 8 PRs, zero post-merge regressions)
+
+1. GLM writes a numeric plan (§0 hardcoded numbers, §2 exact assertions,
+   §6 verify-kép checklist) and commits it to `~/agent-collab/plans/`.
+2. GLM steers Agent-1 (Write the directive to a FILE first — never inline
+   long text; Agent-1 reads the plan from its disk).
+3. Agent-1 implements with RED-on-main → GREEN → mutation probes, in
+   worktrees under `~/lme-worktrees/`, appending to the SDD ledger
+   (`.superpowers/sdd/<plan>/progress.md`) and journal
+   (`~/agent-collab/journal.md`).
+4. GLM polls (sleep 120-240 s between checks), then VERIFIES KÉP: verbatim
+   `git diff main...branch` against the plan, RERUNS the gates itself in the
+   integration worktree, audits caps/ratchets/test-isolation, reads the
+   evidence dirs under /tmp/opencode/.
+5. Verdict → Agent-1 opens PRs (body convention: source finding, RED→GREEN,
+   caps, integration numbers, "Owner live check" section) → owner merges →
+   one deploy + restart (see lesson 84.10: "0 file changes" is normal; verify
+   by md5 repo-vs-live) → owner's live checklist.
+
+### Bridge hard limits (measured 2026-11-15 — lesson 84)
+
+- **oc.sh response cap = 49152 bytes, silently.** Chunk > ~45 KB pulls with
+  `tools/pull_remote_file.sh` (dd bs=30000 | base64 per chunk + md5 both
+  ends) or generate a remote thumbnail and pull that. PIL opening a
+  truncated PNG is NOT completeness proof.
+- **The sandbox recycles /tmp AND cwd between TURNS.** Rebuild the auth
+  bridge every turn that touches the remote (source `scripts/oc_env.sh` →
+  write `Authorization: Basic <b64>` to /tmp/oc_auth), use absolute paths,
+  re-check cwd. Tilde (`~`) inside single quotes does NOT expand through the
+  bridge — always absolute remote paths.
+- Journal appends go through as base64: `echo "$B64" | base64 -d >> journal`.
+  Long steers/prompts: Write file locally → pass path to oc_prompt.py.
+- Gate verdicts come from the G*.json (`returncode`, counts), never the
+  run-gates.sh shell exit code (completed-with-skips exits 1).

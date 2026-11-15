@@ -40,10 +40,12 @@
 7. **Prompt body key is `text`** (`POST /api/session/{sid}/prompt`). Any
    other key (`prompt`, `message`) → 400 `Missing key ["text"]`.
 
-8. **Sandbox IP is GitHub-blocked; desktop is not.** Even public repos 403
-   from the Z.ai sandbox. Route ALL git through the gateway (raw shell or
-   agent). Verify PR state via remote `gh`, because api.github.com also
-   403s (rate limit) from the sandbox.
+8. **[RETIRED 2026-11-15 — overturned by lesson 30 + a week of direct use]** The
+   original claim "sandbox IP is GitHub-blocked; route ALL git through the gateway"
+   stopped being true on 2026-11-07: sandbox→GitHub clone AND push over HTTPS+PAT
+   work (reconfirmed 2026-11-13..15: archive repo cloned, bundled, pushed directly).
+   Still true from it: unauthenticated api.github.com calls rate-limit from the
+   sandbox — authenticate everything.
 
 9. **401 → stop and report.** Never guess or brute-force credentials. (Has
    not happened yet — keep it that way.)
@@ -499,7 +501,9 @@
     identical. Rule: pass artifacts through the direct-execution path and
     md5-gate BOTH ends; never ask an LLM to re-type kilobyte payloads.
 
-61. **Refresh the dependency snapshot BEFORE designing a plan against it —
+61. **(numbering bug: a second lesson was also numbered 61 — kept as-is so old
+    references stay stable; the next lesson is the dependency-snapshot rule)**
+    **Refresh the dependency snapshot BEFORE designing a plan against it —
     the plan's value is the grounding, not the prose.** The QML-first
     migration plan (lme PR #113) hinged on "what can Quickshell 0.3.2 do
     natively"; training memory said "no Bluetooth API, no NetworkManager
@@ -1236,3 +1240,155 @@ both FileView.watchChanges and Quickshell.clipboardChanged proved dead on quicks
 hits=0 for text AND image copies). The channel that worked: wl-paste --watch forwards
 the watch-command's stdout, and the watchers are the shell's own children — one JSON
 event line per committed store rides the existing pipe.
+
+## Lesson 82 — lock-screen port + capture-gate era (2026-11-13→14, PRs #146–#163)
+
+1. **When a perf change splits a property's meaning, grep EVERY reader in the same
+   commit.** c47a2c7 (Nov 8) changed overlay `visible` to mean "mapped" (idle = 1×1
+   sliver) and introduced `surfaceLive` for "actually showing" — but shell.qml:61
+   still bound `ShellState.overlayVisible = overlay.visible`, so Print capture/record
+   died silently for 6 days (captureDelay always cancelled at deadline). A regression
+   test existed at the IPC seam but was opt-in (G4) — nobody ran it. Opt-in tests are
+   dormant tests: wire the important ones into the default gate or accept they will
+   sleep.
+2. **MultiEffect `maskEnabled` on a WlSessionLock surface BLANKS the layer** (PR #160
+   shipped, card vanished live — G0 green, engine cases green, real screen blank).
+   The working mask on a lock surface is `GE.OpacityMask` (Qt5Compat
+   GraphicalEffects), the iNiR pattern; keep MultiEffect only for backdrop blur.
+   The render-probe fixture that proved it: sway headless + REAL WlSessionLock +
+   LockMediaWidget on magenta + grim — reproduced the #160 blank on main exactly.
+   (sway does NOT block grim when locked, headless/pixman — screencopy-deny was a
+   myth for this setup.)
+3. **Lock-surface fixture mechanics**: sway names its socket `wayland-N` — discover
+   by glob, never trust `WAYLAND_DISPLAY`; `WlSessionLock` default property is the
+   surface → exactly ONE child (readiness Timer inside it, more children = silent
+   "Aborting lock"); lock via a startup Timer (~800 ms) like the production IPC
+   rhythm, not `locked: true` at creation; `console.log` reaches stdout only with
+   `QT_LOGGING_RULES=qml.debug=true`.
+4. **QML id scope: `layer.effect:` ids are NOT in file scope.** A binding can read
+   ids of plain child objects but not ids declared inside a `layer.effect:` value —
+   seam through `root.layer.effect !== null` property chains. Debugged 2 rounds
+   (round 1 wrongly blamed document order — reorder still ReferenceError).
+5. **Print-while-locked**: niri refuses ALL screencopy while locked, so the notice
+   must ride ShellState attempt deadlines (bumped by takeScreenshot/startRecording =
+   instant, error-path-independent), and the Print keybinds need
+   `allow-when-locked=true` (media-keys pattern) + `if(LockState.locked) return;`
+   guards in the delay timers.
+6. **tests-local accumulation makes per-branch G0 cross-red** (tests of the sibling
+   stacked PR run against this branch's code) — expected; write it in the PR body and
+   close with one G0 on main after both merge. And the size caps live in 3+ places:
+   architecture.json largeFiles AND hardcoded `assertLessEqual` in OTHER test files
+   (ShellState pin sat in test_native_display_idle.py:271 +
+   test_native_session.py:236) — grep the file name across tests/ before pushing a
+   ratchet (extends lesson 76.1).
+7. **Capture/engine-case QML traps (4 rounds)**: `grabToImage` result.image is not
+   exposed in this build; `Canvas { visible: false }` never paints, and
+   Canvas.Immediate without a Window never paints — engine cases must wrap a Window
+   (offscreen still renders a buffer); first `paint` fires before the source image
+   decodes → guard on artReady; a sibling Timer cannot see properties of an id-less
+   Item — qualify everything.
+8. **oc.sh background chains**: only `setsid` commands survive the session; run test
+   modules FOREGROUND, then start gates; a dead mid-chain is detected by
+   `&&`-semantics + pgrep, not by trusting the exit code.
+
+## Lesson 83 — A4 polish era: numeric plans + verify-kép at scale (2026-11-15, PRs #164–#167)
+
+1. **The #163 plan format is now the standard**: §0 hardcoded numbers (owner-approved
+   geometry/curves), §1 verbatim current file excerpts, §2 exact test assertions
+   (before/after values), §4 TDD task order, §5 PR body skeleton, §6 handoff verify-kép
+   checklist, §9 addendum that ABSORBS probe discoveries (plans learn). A plan whose
+   numbers are soft produces soft verification — "make it nicer" plans are where
+   regressions hide.
+2. **RED on main → GREEN on branch → MUTATION probe.** After green, flip one constant
+   in the product (e.g. `morph: scaled(421)` vs 420) and the case MUST fail; revert →
+   green. This is the only cheap proof a new test is not empty. (A4a: mutation failed
+   exactly `421 != 420`.)
+3. **The backend settings-push REVERTS snapshot prefs at the backendReady flip
+   (~+250 ms)**: engine cases that set prefs before backendReady are reading doomed
+   values — earlier tests passed on timing luck. Wait for backendReady, then set.
+4. **Render-seam numbers**: grim latency 64–65 ms → ±10 px tolerance; measure the
+   SECOND open (retained tree; first open wobbles 656→679→621); retry ×2 for
+   stability. Spring-vs-bezier differences are REAL product behavior (spring settles
+   early; at 350 ms the bezier is still 28 px from target — that gap WAS the A4b fix).
+5. **The two-agent cadence that shipped 8 PRs with zero post-merge regressions**:
+   Agent-2 (GLM sandbox) writes the numeric plan + steers → Agent-1 (OpenCode on the
+   owner's machine) implements with RED/GREEN/mutation + self-verifies → Agent-2
+   verify-kép (verbatim diff vs plan, RERUNS the gates itself, checks caps/ratchets/
+   isolation) → owner merges on the verdict. Never merge on the implementer's word
+   alone; never verify by re-reading their report — rerun the numbers.
+6. **G0 flake taxonomy on this machine**: `backend_reconnect` flaky by machine state
+   (red in #163, green in #164, red in G0-159, green in G0-160 — same code); G1 audio
+   = 3 identical failures across 5 baseline runs (environmental, not regression);
+   probe chains leave defunct quickshell zombies that cause one-off gate errors which
+   self-heal. Rule: A/B the failure against same-day main BEFORE calling it a
+   regression (extends lesson 52 — same-day, same-machine baseline).
+7. **Reconcile the "Ran N" arithmetic every time** (baseline + new tests = expected).
+   A mismatch means a module was discovered that shouldn't be (or wasn't that should
+   be) — e.g. 1406+19=1425 resolved a whole G0 dispute in one line. Never wave a
+   count through because the run is green.
+
+## Lesson 84 — c2c3 fixes: the week's overturned beliefs + sandbox/bridge hard limits (2026-11-15 evening, PRs #168–#171)
+
+1. **`Canvas.save()` is BROKEN on Qt 6.11.2/Quickshell 0.3.2** — both overloads
+   return false (minimal visible canvas, relative/absolute/file-URL names all fail);
+   `toDataURL` and `grabToImage` work. The product's AnnotationCanvas had used
+   Canvas.save since inception → Save PNG silently never worked in the real editor
+   while its tests passed (fixture never exercised the real save). Fix (PR #169):
+   export via `grabToImage` fired from `onPainted` with an `exporting` re-entry flag.
+   Probe the platform primitive with a minimal case before porting any save/export
+   feature; an API that "returns false" can hide a broken feature for months.
+2. **[OVERTURNED] the swaylock-pre-lock suspend design.** The Phase-2 lock_session
+   spawned swaylock BEFORE logind suspend whenever lock status wasn't already locked
+   — stacking a second session-lock client on the native path. C3 F2 evidence
+   (reports/l2-live-test.md): niri lock 18:52:13.673 < logind 18:52:13.734, owner
+   saw swaylock on resume. Correct ordering (PR #171): lock IPC reachable →
+   `prepare_sleep()` native handshake (locks, waits secure, falls back internally);
+   direct swaylock ONLY when IPC unreachable; `RuntimeError → CommandError` =
+   fail-closed, no suspend unlocked. Security ordering claims need a live timeline
+   (two timestamps), not a code read.
+3. **[OVERTURNED] "first enable is fine, it just re-syncs".** IdleState's syncPaused
+   HELD the first enable for the probe to settle, but the probe callback only
+   published — nothing re-entered sync → swayidle never started (running=false,
+   "swayidle stopped: "). Fix (PR #168): the probe callback re-enters syncPaused
+   when a profile exists. Restart race: the old child's childExited cleared the
+   just-installed command → serialize via `restartPending` + close() clears the
+   command immediately + childExited `Qt.callLater(startCurrent)`. And the PLAN was
+   wrong too: its startCurrent omitted the publish after startChild — Agent-1's
+   ruling added it (idleStatus.running would have stayed false). Treat plan steps
+   as hypotheses; each must survive its own RED.
+4. **Security-test isolation pattern (PR #171 tests)**: setUp patches
+   `backend.lock_ipc` AND arms a tripwire `secure_lock` side_effect=
+   AssertionError("test reached the real locker"); grep the WHOLE tests/ tree for
+   real paths to the dangerous function (3 unpatched suspend hits in
+   test_laptop_features.py) and patch each; isolation RED first, product fix second.
+5. **run-gates.sh exit 1 ≠ failure when skips exist.** "completed-with-skips" (190
+   opt-in/hardware skips) exits 1 from the runner while the gate JSON says
+   returncode 0 / passed. Read the G*.json, never the shell exit code, or every
+   normal run reads as red.
+6. **[MEASURED] the oc.sh bridge response cap is EXACTLY 49152 bytes.** Three
+   different-sized PNGs (152 KB / 289 KB / 1.2 MB) all landed at exactly 49152 —
+   silently truncated; PIL still OPENS a truncated PNG (header + first IDAT parse),
+   so "decode OK" is NOT completeness. Chunk anything > ~45 KB (dd bs=30000 |
+   base64 per chunk, reassemble, md5 BOTH ends — tools/pull_remote_file.sh) or make
+   a remote thumbnail and pull that. Refines lesson 30's prompt-side ~40 KB
+   truncation: BOTH directions truncate.
+7. **The sandbox recycles /tmp AND cwd between TURNS, not just sessions.** /tmp/oc_auth
+   vanished mid-conversation and cwd reset to /home/z/my-project between turns —
+   "relative" writes landed in the wrong dir. At the start of ANY turn that touches
+   the remote: source scripts/oc_env.sh → rebuild /tmp/oc_auth (base64 of
+   user:pass), use absolute paths everywhere, and re-verify cwd before writing.
+8. **This GLM model line has NO image input** — Read on an image returns
+   "[Media omitted from provider request...]". Verify images in code (PIL
+   size/histogram/decode) and leave visual judgment to the owner or a VLM call.
+   Budget image reads; they re-enter context every turn.
+9. **Backend PID change ≠ crash.** The live QML path is a symlink
+   (~/.config/quickshell/lme-shell → the repo checkout), so a git pull changes the
+   live files → Quickshell auto-reloads ("Reloading configuration... / Configuration
+   Loaded" in the instance log) → the backend child respawns under the same shell
+   PID. Check the log + parent PID before suspecting a crash (a real one was
+   investigated and cleared this way: parent = old shell, no Traceback).
+10. **Deploy "0 file changes" is EXPECTED on this setup** — deployment dir only holds
+    bin/quickshell; the live tree IS the repo via symlink. Verify a deploy by
+    md5-comparing repo files vs the symlinked live files (6 files done for
+    7bc362d), not by the change count. The niri kdl fragment is the exception
+    (deploy.sh swaps it for real, shell restart required).
