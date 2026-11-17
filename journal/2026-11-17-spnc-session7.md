@@ -28,9 +28,18 @@ cung cấp.
   INSTRUMENT TRUNG TÂM, tạo LEDGERS/REFOCUS_FACTORS.md (~1 trang đủ mục).
   Agent-1 còn tự đồng bộ LEDGERS cấp gốc với projects/SPNC/LEDGERS (bổ sung D15
   còn thiếu). Evidence grep đầy đủ, marker [AGENT-1 DONE #A2-001].
-- **A2-002 (đang chạy khi phiên đóng)**: săn toàn văn Chiang 2006 (ICAS 44 item)
-  qua các đường mới; kết quả sẽ ghi SOURCE_REGISTRY; ICAS chỉ là background,
-  không chặn tiến độ.
+- **A2-002 (DONE — kết quả lớn)**: Agent-1 mở được bản đọc công khai 268 trang
+  luận án Chiang (2006) trên Academia.edu qua browser thật (curl bị Cloudflare
+  403), trích **44/44 item ICAS nguyên văn** từ Appendix A tr.203–205 qua các
+  trang HTML công khai attachments.academia-assets.com/90027780/{n}.html;
+  tạo LEDGERS/ICAS_ITEMS.md; evidence: PDF tái dựng 18 trang Appendix A
+  (718KB, SHA-256 29ab7a70…) + 18 HTML + text extract; SOURCE_REGISTRY S6
+  chuyển "ĐÃ MỞ TOÀN VĂN + ĐÃ TRÍCH 44/44 item" + bảng 36 đường đã thử.
+  **Phát hiện quan trọng: số UMI đúng là 3249927** (task spec và sổ cũ ghi
+  3230047 — sai). PDF gốc vẫn sau login gate (ProQuest paywall, UMI xác nhận
+  đúng qua preview 200). Đã sửa deck (slide 4: 5/6→6/6 + card ICAS resolved;
+  slide 12: risk 02 RESOLVED) và sổ tay (kịch bản row 4/12, Bảng 2 Chiang
+  2006, Q&A 5.6 viết lại) — re-export + verify PASS + sync lại md5 4/4.
 
 ## Sản phẩm phiên 7 (đều đã tái định hướng theo D16)
 
