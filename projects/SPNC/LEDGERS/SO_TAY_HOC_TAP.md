@@ -7,7 +7,7 @@
 |---|---|---|---|
 | 0 | Đề tài hỏi gì; 3 RQ (bao nhiêu → cái gì → tại sao); khung 6 nhóm yếu tố; thang đo là gì; vai trò người dùng | HOÀN TẤT 2026-11-17 | deliverables/So_tay_hoc_tap_Bai_0.docx (+pdf) |
 | 1 | Tài liệu nghiên cứu: bài báo bình duyệt vs luận án; DOI; 4 dấu hiệu nguồn yếu (ví dụ THẬT: Ferdowsi sót [insert location], IJRISS review 3 ngày, Wang đổi chiều thang, 2 nguồn không mở được); đọc bài báo 10 phút | HOÀN TẤT 2026-11-17 (phiên 2) | deliverables/So_tay_hoc_tap_Bai_1.docx (+pdf) |
-| 2 | Thang Dong-20 chi tiết: 3 chiều, đảo điểm, khoảng điểm 20–100, các hệ số α của gốc | Kế hoạch phiên 3 (sau khi có PDF gốc Dong) | — |
+| 2 | Thang Dong-20 chi tiết: 3 chiều, đảo điểm, khoảng điểm 20–100, các hệ số α của gốc | SẴN SÀNG DỮ LIỆU (bản gốc đã xác minh toàn văn phiên 5 — verify/dong2013/DONG20_nguyen_van.md); soạn khi người dùng muốn | — |
 | 3 | Bộ 30 item: nhãn nguồn từng câu, thang Likert, vì sao "researcher-developed" | Kế hoạch phiên 2 (sau khi có bản nháp cũ) | — |
 | 4 | Số liệu: mean, SD, Cronbach alpha, item-total, vì sao KHÔNG EFA | Kế hoạch phiên 3 | — |
 | 5 | Phỏng vấn & phân tích chủ đề Braun & Clarke 6 bước; chọn mẫu 3 mức | Kế hoạch phiên 3 | — |

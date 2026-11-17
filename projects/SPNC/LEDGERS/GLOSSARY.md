@@ -25,7 +25,7 @@
 
 - **Bình duyệt (peer review)** — tạp chí gửi bài cho 2–3 chuyên gia giấu tên soi lỗi trước khi đăng. Ví dụ: bài FLCAS 1986 qua bình duyệt của The Modern Language Journal. Cần cho đề tài: biết phân biệt nguồn đã kiểm chứng và nguồn chưa.
 - **DOI (Digital Object Identifier)** — "số căn cước" vĩnh viễn của tài liệu số, mở qua https://doi.org/[mã]. Ví dụ: 10.3389/fpsyg.2025.1671239 là bài Wang 2025. DOI định danh bài chứ KHÔNG thẩm định chất lượng.
-- **Luận án (thesis/dissertation)** — nghiên cứu dài cho bằng tiến sĩ/thạc sĩ, có phụ lục chi tiết (thang ICAS 44 câu nằm ở Appendix A luận án Chiang 2006, tr.203–220) nhưng không qua bình duyệt tạp chí.
+- **Luận án (thesis/dissertation)** — nghiên cứu dài cho bằng tiến sĩ/thạc sĩ, có phụ lục chi tiết (thang ICAS 44 câu nằm ở Appendix A luận án Chiang 2006, tr.203–220) nhưng không qua bình duyệt tạp chí. Ví dụ mới (phiên 5): file "chiang.pdf" người dùng tải tưởng là luận án nhưng thực ra là bài báo Chiang 2010 trên Meta — cùng tác giả, khác tài liệu; luôn kiểm tra tựa đề + nhà xuất bản trước khi dùng.
 - **Preprint** — bản viết xong chưa bình duyệt, đăng trước lên kho mở; dùng thận trọng.
 - **Tạp chí đáng ngờ (predatory journal)** — tạp chí nhận tiền là đăng, bình duyệt hình thức. Dấu hiệu: bình duyệt quá nhanh (IJRISS 3 ngày), không có trong DOAJ.
 - **[CHƯA XÁC MINH]** — nhãn bắt buộc cho mọi số liệu chưa tự đọc được toàn văn. Không có nghĩa là sai — chỉ là chưa kiểm chứng được.

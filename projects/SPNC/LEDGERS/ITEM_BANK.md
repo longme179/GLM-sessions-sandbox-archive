@@ -25,7 +25,13 @@
   dịch đuổi, kinh nghiệm phiên dịch (nếu có). [TỰ VIẾT]
 - **Part B — Dong-20 thích nghi**: 20 item, thang Likert 5 điểm, item 1–8 đảo
   điểm; chờ thư xin phép GS. Dong (soạn, chưa gửi). Q2 đổi "trên đường đến
-  lớp"; Q10 chuyển role-play hoặc bỏ (→ G5).
+  lớp"; Q10 chuyển role-play hoặc bỏ (→ G5). **Bản gốc ĐÃ XÁC MINH TOÀN VĂN
+  phiên 5** (verify/dong2013/DONG20_nguyen_van.md — 20 item nguyên văn tiếng
+  Trung + dịch tham khảo): Q10 gốc = "hai bên được phục vụ biết chút ít ngôn
+  ngữ của nhau, lo họ phát hiện lỗi" (KHÔNG phải "bối cảnh hành nghề" như
+  tóm tắt cũ) → G5 cần đọc lại: nội dung gốc là sợ bị phát hiện lỗi, có thể
+  giữ nguyên bối cảnh lớp học mà chỉ cần đổi "hai bên được phục vụ" thành
+  "giảng viên + bạn học". A2 dùng cột nguyên văn làm chuẩn dịch.
 - **Part C — Bộ 30 item**: 6 nhóm × 5 câu song ngữ Anh–Việt, mỗi câu gắn nhãn
   nguồn ở cột riêng (bản nội bộ; bản in cho SV bỏ cột này).
 
