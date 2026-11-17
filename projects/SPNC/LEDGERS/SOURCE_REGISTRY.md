@@ -5,7 +5,25 @@
 > [CHƯA XÁC MINH] và nói rõ chưa kiểm chứng được gì. Bản gốc luôn thắng mô tả
 > thứ cấp.
 
-## Nguồn seed — đã xác minh toàn văn ở PHIÊN TRƯỚC (cần tái xác minh ở phiên này)
+## Nguồn seed — trạng thái TÁI XÁC MINH 2026-11-17 (bởi A1; chi tiết: Bao_cao_A1_xac_minh_nguon.md)
+
+| # | Nguồn | Trạng thái 2026-11-17 | Ghi chú mới |
+|---|---|---|---|
+| S1 | Ferdowsi & Razmi (2024) | ĐÃ MỞ TOÀN VĂN (A1) | 6 nhóm + sub-factor liệt kê đủ (individual: general anxious feelings, low concentration, perfectionism, introversion; input: language + speaker; note-taking: skill + creativity; environmental: noise + peer presence; output: meaning transfer + delivery; teacher: testing/scoring + behavior). CC-BY 4.0. Cờ editorial_quality_warning: sót "[insert location]", câu lặp, Table 1 sai thứ tự (15 trước 18), trích Chiang (2010) không có trong references |
+| S2 | Tran (2025) | ĐÃ MỞ TOÀN VĂN (A1) | 5 item + mean khớp 100%. Bối cảnh: Thai Nguyen University, 63 SV, Anh–Việt. Cờ low_quality_source: không DOAJ, review 3 ngày, missing references → chỉ dùng bối cảnh VN |
+| S3 | Wang (2025) | ĐÃ MỞ TOÀN VĂN (A1) | CONFIRMED lệch: Wang đổi tên chiều (task/error/confidence), tự gán 13/20 item, không báo cáo α. Q2 chấm ngược. Mẫu 47 SV Shanghai Dianji. KHÔNG trích Wang cho cấu trúc gốc Dong |
+| S4 | Dong, Chen & Yu (2013) | [CHƯA XÁC MINH phần lớn] | Qua snippet PDF RG: 3 chiều 艰巨性/服务性/一般自信 + α=.92 xác nhận. Còn lại (n=245, pilot .91, retest .84, r −.434/−.417/−.269, item mean 3.27, phân bổ item) CHƯA xác minh được — RG chặn bot (≥5 đường thử). Cần người dùng tải bằng trình duyệt thật |
+| S5 | Horwitz et al. (1986) FLCAS | ĐÃ MỞ TOÀN VĂN THANG ĐO (A1) | Đủ 33 item nguyên văn (FLCAS.pdf trong evidence). Item sợ đám đông: #9, 13, 20, 24, 31, 33. α=.93 CHƯA xác minh (cần bài gốc MLJ) |
+| S6 | Chiang (2006) | [CHƯA XÁC MINH item nguyên văn] | Secondhand qua Ghorbani & Ferdowsi 2025 (đã mở toàn văn): ICAS 44 item, Likert 5, 3 chiều fear of negative evaluation (.92) / cognitive processing (.80) / low self-confidence (.77), tổng .94. 5 nguồn lo âu (snippet): speaker, audience, self, task, classroom procedures. ≥10 đường tới PDF bị chặn — cần trình duyệt thật: repositories.lib.utexas.edu/items/9436dca1-6928-48c2-92ef-7bdb8d264421 |
+
+### Nguồn mới do A1 tìm (2024–2026)
+
+- Xing (2025), Humanities & Social Sciences Communications (Nature Portfolio), DOI 10.1057/s41599-025-05821-9 — 64 SV, r=.711 ngôn ngữ–hiệu suất; uy tín cao.
+- Song, Yanamoto, Lin, Li & Fei (2026), Japanese Psychological Research (Wiley), DOI 10.1111/jpr.70033 — eye-tracking + GSR, dùng thang Dong.
+- Ghorbani Payborj & Ferdowsi (2025), Applied Linguistics Inquiry 3(2):131–141, DOI 10.22077/ali.2025.9244.1134 — ICAS + disfluency; tạp chí nhỏ, chỉ dùng trích mô tả ICAS.
+- Jiang (2026) [CHƯA XÁC MINH] — PII S000169182600630X (khả năng Acta Psychologica), ScienceDirect chặn.
+
+### Nguồn seed cũ — giữ làm tham chiếu lịch sử (xác minh phiên trước)
 
 | # | Nguồn | Định danh | Trạng thái phiên này | Dùng cho | Cảnh báo |
 |---|---|---|---|---|---|

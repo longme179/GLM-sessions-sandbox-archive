@@ -1,0 +1,747 @@
+                                          Journal of Social Science Humanities and Literature, Vol.6, Issue4,
+                                                                                                            5,(Aug)
+                                                                                                               (Oct)
+                                                                                                 ISSN 2277-842X         2023
+                                                                                                     DOI: 10.53469/jsshl.2023.06(05).21
+
+
+
+
+              Scaffolding Strategies for Training
+             Anxiety-Stricken Novice Interpreters
+                                                        Sheng Yu
+                    School of the English Language & Culture, Xiamen University Tan Kah Kee College
+                                                   yusheng@xujc.com
+
+Abstract: Interpreting teaching and learning has long been a fret, particularly for novice undergraduate interpreters who
+suffer from higher levels of anxiety over their listening, note-taking, and production. This paper aims to ease this plight by
+offering various types of scaffolding, a method that has been maturely employed in language education. In this study, I use
+specific lecture examples to demonstrate how scaffolding can be used in each step of interpreting training for novices,
+including vocabulary building, active listening, discourse analysis, note-taking, production, shadow reading, and
+simultaneous interpreting. The present study may provide pedagogical implications for interpreter trainers and learning
+strategies for student or trainee interpreters.
+
+Keywords: novice interpreter, anxiety, scaffolding strategies, training.
+
+1. INTRODUCTION
+The Chinese government has, in recent years, emphasized the need to make great efforts to strengthen the building
+of international communication capacity, with the primary task being to tell China's stories, spread China's voice,
+and present a true, vivid, and comprehensive China. Dealing with foreigners provides a good opportunity for
+contemporary ordinary people to tell China's stories well and spread China's good voice. Thus its Ministry of
+Education has approved over 550 colleges and universities of the qualification to confer undergraduate and
+graduate English language and literature degrees.
+
+Almost all faculties of English language offer interpreting courses, though some, especially those in the field of
+business English or English teaching, just take them for only one or two semesters according to the Teaching
+Guide for Undergraduate Foreign Language and Literature Programs in General Colleges of Higher Education:
+English Programs (2020). We can, therefore, see that most undergraduate English majors are novice interpreters,
+who, according to existing literature, suffer from various levels of anxiety during interpreting training. Such
+anxiety negatively impacts interpreting performance, as has been documented by many studies (e.g. Chiang, 2006;
+Bontempo, Napier, Hayes, & Brashear, 2014; Chiang, 2009).
+
+For English–Chinese (E–C) interpreting, listening for the exact information has always been one of the greatest
+challenges, especially when the speaker has a strong accent (Hua & Dai, 2016). Student interpreters thus feel
+anxious about their listening. Production is also where they experience anxiety (Kang, 2011) because uttering
+promptly, accurately, and smoothly is mentally and linguistically demanding. For Chinese–English (C–E)
+interpreting, production, including information and pronunciation, is the main source of anxiety.
+
+To ease students' anxiety in a foreign language class, the academia has long loaned scaffolding, that is, "different
+types of support and assistance provided by teachers to help students understand and engage with content at levels
+higher than they would be able to reach on their own" (Tedick & Lyster, 2020).
+
+2. LITERATURE REVIEW
+2.1 Interpreting anxiety
+
+In this study, anxiety refers to "a distinct complex of self-perceptions, beliefs, feelings, and behaviors related to
+classroom language learning arising from the uniqueness of the language learning process" (Horwitz et al., 1986, p.
+128). Interpreting anxiety is by definition situation-and-language-skill-specific anxiety caused by the unique
+requirements of interpretation (Chiang, 2006) and should therefore include such a complex in the whole
+interpreting process including but not limited to listening (Mu et al., 2021), note-taking (Rozan, 2002; Michaela,
+
+
+
+
+                                                             138
+                                        Journal of Social Science Humanities and Literature, Vol.6, Issue4,
+                                                                                                          5,(Aug)
+                                                                                                             (Oct)
+                                                                                               ISSN 2277-842X        2023
+
+2008; Gillies, 2009; Gile, 2011), and production (Hortiwitz et al., 1986; Jimenez & Pinazo, 2001). For student
+interpreters, interpreting anxiety is even possible to be compounded by discourse analysis, shadow reading, etc.
+
+Student interpreters, mostly novices, may experience a high level of anxiety when delivering the target language,
+resulting in speech disfluencies (e.g., Cho and Roger, 2010). Indeed, people tend to stutter more when they are
+anxious (Craig, 1990; Menzies et al., 1999; Messenger et al., 2004). Zhao (2022) finds that in general, anxiety level,
+rather than language proficiency and working memory, impacts the occurrence of disfluencies. In particular, the
+more anxious interpreters are, the more fillers and repetitions they have. It should be noted that while too much
+stress is detrimental, a certain level of anxiety is conducive to the performance of interpreters positively because it
+helps activate their physical and mental resources as well as focus their attention on the task (Horváth, 2012).
+Similarly, Kang (2011) documents that the high and low levels of interpreting anxiety adversely impact
+interpreting performance, while the medium level enhances it. Kang (2012) further reports that excessive
+interpreting anxiety thwarts interpreting achievements by making students extremely stressed and that too low a
+level delays interpreters' response, whereas the medium level catalyzes consecutive interpreting. Such findings
+have also been reconfirmed by, for example, Chen (2018). In more detail, Zhang (2021) finds that too high and low
+degree of anxiety shortens the working memory span while a medium level of anxiety boosts it. In addition,
+participants with high working memory capacity perform with more stability in working memory span tests.
+
+Interpreting anxiety correlates with several factors. One of the major factors may be gender. For example, using
+t-test analysis, Arnaiz and Pérez-Luzardo (2016) report that female students experience significantly higher levels
+of anxiety than male students and that higher anxiety levels engender lower self-concept levels. Another element
+can be materials with different amounts of information volume (Zhang, 2021). A third one may be levels of
+interpreting or years of interpreting learning. Kurz (2003), for example, attests to clearly higher pulse rates of
+students than that of professional interpreters, indicating that "for novices even an 'ordinary' classroom situation
+involves measurably higher physiological stress". Using the Interpreting Anxiety Questionnaire, Liu (2015)
+concludes that both undergraduate English majors and graduate students of translation and interpreting suffer from
+interpreting anxiety, though the latter exhibit lower anxiety than the former. Using a self-developed Interpretation
+Classroom Anxiety Scale (ICAS) to measure the interpretation anxiety level of 327 Taiwanese university students
+learning Mandarin–English interpretation, Chiang (2006) concluded that interpretation anxiety exists as a specific
+phenomenon distinct from, but related to general foreign language anxiety.
+
+2.2 Scaffolding
+
+Scaffolding is a metaphor borrowed from the construction industry and has frequently been considered a temporary
+support (e.g., Cazden, 1983). Initially invoked as a means to characterize parent-child interaction, it was qualified
+to "enable a child or novice to solve a problem, carry out a task or achieve a goal which would be beyond his
+unassisted efforts" (Wood et al., 1976, p. 90). Researchers generally agree that the goal of scaffolding is student
+autonomy (Calvo, 2015), which can, in classroom contexts, be achieved via customized support from a teacher and
+involves slowly transferring the responsibility from the teacher to students (Lin et al. 2012). Scaffolding is often
+associated with Vygotsky's (1978) "zone of proximal development" or ZPD, an ability transition from what a
+learner is capable of doing unsupported to what the learner cannot do even with support. The notion of scaffolding
+has since been aptly applied to teacher-student interaction and considered to encapsulate effective teaching.
+
+Multiple researchers have delved into the theoretical dimension of scaffolding. Tedick and Lyster (2020), for
+example, classify scaffolding into two types: scaffolding for student comprehension and scaffolding for student
+production. The former includes three means: verbal scaffolding, procedural scaffolding, and instructional
+scaffolding. The latter also includes the three means for student production, whereas "instructional scaffolding for
+production" includes the teacher's modeling, which prepares students to make use of the relevant resources at their
+disposal. Tedick and Lyster (2020) argue:
+
+Teacher scaffolding is a key instructional strategy throughout the entire program from beginning to end. For this to
+happen, though, teachers need to engage in scaffolding that enhances and structures oral classroom discourse in
+ways that facilitate both student comprehension and production.
+
+A similar classification is Mahan's (2022) scaffolding strategies for second language learning co "Comprehension"
+and "Task-resolving" parts, modified from Maybin et al. (1992). Comprehension strategies include drawing on
+previous knowledge, academic language development, and supportive materials, all of which, as should be
+mentioned, apply to interpreting training. Task-resolving strategies include the use of discourse and metacognition,
+
+
+
+
+                                                           139
+                                         Journal of Social Science Humanities and Literature, Vol.6, Issue4,
+                                                                                                           5,(Aug)
+                                                                                                              (Oct)
+                                                                                                ISSN 2277-842X        2023
+
+both of which apply to interpreting training too because discourse analysis is key to the interpreting content and
+metacognitive strategies involve monitoring, evaluating, and regulating cognitive processes (Flavell et al., 2002)
+Since translation skills are fundamental to interpreter training, it is necessary to review the literature on
+translation-related scaffolding to provide references for interpreting-related scaffolding. In terms of scaffolding in
+translation education, using pre- and post-translation self-reflection questionnaires, Pietrzak (2019) reveals the
+experiential nature of self-reflection and advocates for structured self-reflection as a means to scaffold learning in
+translator training. Pietrzak (2019) contends that the object of reflection can be numerous since translation trainers
+and trainees can work together with varying aims. Nevertheless, Pietrzak's (2019) focus is not on providing
+specific steps, measures, or suggestions and therefore is of little significance to practical in-class teacher operation.
+
+By administering a questionnaire to a sample of 27 teachers of translation, Ali (2022) has the following findings. 1)
+scaffolding is used in translation classes at the university level; translation teachers use different scaffolding
+strategies; 2) teachers' gender and students' study stage do not exert influences on the use of such strategies in
+terms of being different from one study stage to another. Ali (2022) provides specific strategies though without
+examples or steps.
+
+The existing small strand of literature on scaffolding translation training is meaningful to interpreting, as the two
+have something in common. With regard to interpreting training, Rumsey M.Ed. (2019) designs a scaffolding plan
+to enhance English to ASL interpreting qualifications for pre-certified interpreters and interpreting students. Bown
+(2013) looks into how reflective learning can be applied to training for sign language interpreters, and illustrates
+that to achieve reflection, interpreter educators must establish robust scaffolding frameworks during training. It
+should be noted, however, that sign language interpreting is indeed an intersemiotic form of translation where the
+interpreter does not orally produce what he or she has understood (Domingue & Ingram, 1978; Tamez, 2015; Dusi,
+2015; Gottlieb, 2018).
+
+3. SCAFFOLDING STRATEGIES FOR INTERPRETER TRAINING
+In this section, I analyze in detail how interpreter teachers/trainers can use scaffolding strategies for both
+directions.
+
+3.1 target students: novice interpreters with average bilingual competence
+
+According to the Teaching Guide for Undergraduate Foreign Language and Literature Programs in General
+Colleges of Higher Education: English Programs, the majority of English majors commence their interpreting
+training at the beginning of the fifth semester (third year), and a very small proportion the fourth semester, both of
+which are around the Test for English Majors (TEM)-Grade 4 and at the level of College English Test (CET)-band
+6. In this study, I mainly focus on the third-year majors in the field of business English at Tan Kah Kee College of
+Xiamen University (TKKC); interpreter teachers (trainers) for student (trainee) interpreters of similar levels may
+also view my strategies as a reference.
+
+On the one hand, they are basically fluent in spoken English and equipped with business knowledge. Before the
+interpreting course, they learned some rudiments of contrastive linguistics, translation theories, concepts,
+strategies, methods, and techniques. On the other hand, some, if not many, are shy and suffer from certain levels of
+anxiety. Like Liu's (2015) empirical research, the vast majority, if not all, of them study interpreting out of
+instrumental motivation according to my informal preliminary survey. Notably, they display a distinct air of
+Chinglish and Westernized/ Europeanized Chinese.
+
+3.2 teaching objectives
+
+In TKKC, our teaching objectives usually fall into three facets: knowledge, ability, and overall caliber. Knowledge
+objectives: 1) to know about the general situation of a place in terms of geography, economy, and humanities and
+2) to familiarize with the basic concepts of terms. Ability Objective: 1) to translate figures orally quickly and
+accurately, 2) to be able to start visual translation of the content immediately after consulting the vocabulary, 3) to
+be able to make a verbal retelling in English and Chinese, and 4) to be basically able to interpret similar text in the
+on-site interpreting settings. Caliber Objective: to withstand on-site psychological pressure/ burden, 2) to develop
+a sense of identity and pride in the province, and 3) be able to tell part of the story of China in English and in the
+form of interpreting.
+
+
+
+
+                                                            140
+                                        Journal of Social Science Humanities and Literature, Vol.6, Issue4,
+                                                                                                          5,(Aug)
+                                                                                                             (Oct)
+                                                                                               ISSN 2277-842X        2023
+
+3.3 Elements of scaffolding
+
+3.3.1 Active listening and memory
+
+Since one of the major sources of interpreting anxiety is listening, whether it is from unfamiliar vocabulary, the
+speaker's speed, long and complex syntax, or accents (e.g. Liu & Xu, 2021; Ji, Qin, & Li, 2022 ), listening training
+should persist during interpreting training (Gile, 2011; Mu, Zhang and Chen, 2021). As Calvo (2015) argues,
+scaffolding should be adjusted to learners' needs and therefore for novices, listening training should involve the
+aforementioned influencing factors. It should be pointed out that listening in interpreting is active (Weger, Castle,
+& Emmett, 2010), rather than passive listening as in many test-oriented quizzes like IELTS, TOEFL, TEMs, or
+CETs. Moreover, a theoretical scaffolding at the outset will be of help (Gibbons, 2015; McCarthy, Bragg, &
+Gentle-Genitty, 2019; Tedick & Lyster, 2020), and a quick introduction to active and passive listening and logical
+memory (long, short, and permanent) should be in place. Below is an example of how interpreter trainers can
+scaffold novices (Example 1):
+
+Canada offers a huge range of attractions, from large cosmopolitan cities such as Montreal and Toronto in the
+south, to isolated Inuit (Eskimo) settlements dotted around the frozen shores of Hudson Bay. The contrasting
+Pacific and Atlantic seaboard and the thousands of lakes and rivers of the interior provide superb water sports and
+fishing. The Rocky Mountains and other ranges offer breathtaking scenery on a grand scale. Some of the best
+resorts are in the series of great National Parks, which preserve the wildlife and forests of Canada in their virgin
+state. Those in the north provide basic amenities for tours of the beautiful northern wilderness. A taste of the
+pioneering west can be had in the rich farming and grain regions of central Canada. Further north are the New
+Frontier of Yukon, the Northwest Territories and Nunavut.
+
+Example 1 contains many proper nouns of Canadian places, which are or may be, unfamiliar to novice interpreters,
+especially to those who have not taken a course on the overview of English-speaking countries.
+
+Step 1: front-load vocabulary (Cuba, 2020), that is, pre-teaching vocabulary which arms students with the
+information that they need ahead of time to understand the target sentences and contextualize what is going on. I,
+therefore, suggest that right at the beginning of listening training or before class, the teacher or trainer should list
+the proper nouns and provide support as follows:
+
+Teacher: Do you know what "Inuit" is?
+Students: Sounds familiar but...
+Teacher: Is it "因纽..."? Try a transliteration.
+Students: Oh, "因纽特".
+Teacher: Have you learned anything about these people? (soliciting prior knowledge, Grossman, 2015)
+Students: They live in frozen regions.
+Teacher: Good, that is a piece of important information, which you can use for anticipation (Besien, 1999;
+Chernov, 2004; Zhao, etc., 2022).
+The teacher may follow a similar course in introducing the other place names, or allow students to converse
+relaxingly in pairs or small groups about how much they know of the places, as knowledge activation (Förster &
+Liberman, 2007; Hattan et al., 2023).
+
+Step 2: Show to students (trainees) a bilingual list of those proper nouns.
+
+Step 3: Then, show a map of Canada containing those place names as another stimulus; this is visually conducive
+to understanding and memory (Chan-Hartley, 2021).
+
+Until this step, the teacher or trainer has given enough support on knowledge and some on prior knowledge. He or
+she can now give some hint that students (trainees) should pay attention to the sequence of geographical directions.
+
+Step 4: Play the audio for the first time.
+
+Step 5: Ask students to summarize in one sentence what they have heard, giving hints on the theme as a
+scaffolding.
+
+Step 6: Ask questions on how many aspects have been mentioned and on the details.
+
+
+
+
+                                                           141
+                                         Journal of Social Science Humanities and Literature, Vol.6, Issue4,
+                                                                                                           5,(Aug)
+                                                                                                              (Oct)
+                                                                                                ISSN 2277-842X        2023
+
+Step 7: Students retell the content together since group speaking can lessen anxiety (Neer & Kirchner, 1990),
+while the teacher may at times give hints (gradual release of support).
+
+Step 8: Students retell by themselves (no support, student autonomy).
+
+Listening in C–E interpreting is no problem for students with Chinese as L1. In this direction, memory and
+retelling are the most important steps (Example 2):
+
+经过巴黎圣母院向城市中心走去，在距塞纳河右岸漂亮的居易花园不远的地方，有一组气势雄伟的宫殿
+建筑群,这就是法国著名的艺术博物馆—卢浮宫。对于该博物馆的盛名我们早有所闻，它是世界上最重要
+的博物馆之一，并以其古老瑰丽的建筑和丰富多彩的艺术珍藏而著称于世。走进卢浮宫，只见它有一座
+高大方正的正殿。正殿两侧伸展出两个侧厅，巴卡鲁塞广场被围抱在当中。东面有长柱廊，远远望去极
+为壮观;南侧紧贴塞纳河;北侧是带有阁楼屋顶和长廊的四层古建筑群,一字排开,整齐美观。
+
+In Example 2, only "塞纳河" and "巴卡鲁塞", two transliterated words may cause listening difficult but the
+content as a whole, causes negligible, if not no, amount of anxiety, which will indeed be instrumental in
+concentrating focus (Horváth, 2012; Kang, 2011). The teacher may scaffold students as follows:
+
+Step 1: List the transliterated words.
+
+Step 2: Suggest that students or trainees close their eyes and visualize what they hear.
+
+Step 3: (after listening for the first time) ask questions like "What is on the right bank of '塞纳河'", "What did you
+first see in '卢浮宫'", "What are on the two sides, on the east, south, and north".
+
+Normally, students can easily give the right answers but if not, do give hints.
+
+Step 4: Students retell what they have heard while the teacher encourages them to add adjectives to the nouns, for
+the sake of more detailed information (gradual release of support).
+
+Step 5: Students retell again (student autonomy)
+
+3.3.2 note-taking
+
+Note-taking is difficult (Kuang & Zheng, 2022a), even for experienced conference interpreters who were not
+trained in note-taking skills, because it engages a balance between the brains and the pen (Kuang & Zheng, 2022b;
+Chen, 2021). This skill, though, has been regarded and validated as a memory-supporting technique that involves
+the reception and production of a cognitive notation text that builds coherence and constructs a mental
+representation (Albl-Mikasa, 2008). A sound note-taking system helps an interpreter analyze the source speech,
+and strong analysis utilizing notes promotes effective short-term memory operations (Gillies 2017), while
+excessive notation is detrimental to listening and analysis, especially in the first phase of CI (Mead, 2002;
+Seleskovitch, 2002).
+
+Some empirical findings provide implications for us. During note-taking, for example, professional interpreters
+write faster, use larger fonts, lag for shorter duration, and resort to lower note density than the students (Chen,
+2021). In both directions of Chinese and English interpreting, Chinese professional interpreters prefer language to
+symbol and English to Chinese, and a higher percentage of English notes may induce a worse performance. In E-C
+interpreting, professional interpreters perform better when the ear-pen span is shorter and when they use more
+symbols and fewer language notes (Chen, 2020).
+
+Since note-taking is a complex process, especially for novice interpreters, scaffolding in relevant training may take
+the following steps:
+
+Step 1: Ask simple questions like "Is it necessary to take notes in interpreting", "Do you think you can note down
+everything", "Have you seen any note-taking examples", etc. These questions may serve as an interest arousal.
+
+
+
+
+                                                            142
+                                       Journal of Social Science Humanities and Literature, Vol.6, Issue4,
+                                                                                                         5,(Aug)
+                                                                                                            (Oct)
+                                                                                              ISSN 2277-842X        2023
+
+Step 2: Introduce in brief effective note-taking and the adversity of excess note-taking (theoretical knowledge, all
+by the teacher).
+
+Step 3: Analyze the speech discourse (Yu, 2018), as a reinforcement scaffold (mainly by the teacher, accompanied
+by simple questions).
+
+Step 4: Teach symbols, abbreviations, and short forms of words since such elements are not readily transferable to
+the students' individual note-taking systems (Chmiel, 2010).
+
+Step 5: The teacher models and meantime explains which pieces of information in the global context should be
+noted and how they can be noted down promptly, quickly, and legibly to the interpreter per se. Modeling is a
+teaching strategy where a teacher explicitly shows the students how to complete an activity even before the
+students begin (Haston, 2007; Stickler & Sykes, 2016).
+
+Example 3:
+
+我们今天要讨论的第一个项目是本公司今后应该扮演何种角色，其次是持续性的劳工不稳定，及其对我
+们所造成的威胁，这些将是我们午餐以后的会议焦点。在下午会议结束投票选举各个干部以前，还要最
+后讨论一项由德国一家大公司所提议的友好并购本公司的议案。
+摆在我们前面的，将是忙碌的一天，因此我将把主席台转给大会秘书，他将在我们开始讨论其他问题以
+前，先宣读去年的大会记录，并提出今年的财政报告。
+感谢各位参加这次会议，我们知道，有了各位的继续支持，本公司将持续保持健康和活力。
+
+
+
+
+                                  Figure 1: Note-taking modeling of example 3.
+
+The teacher first explains commonly used symbols such as "d", "d", " の " (see Figure 1), and the vertical
+note-taking structure, then suggests using shorter forms of Chinese characters, and then encourages students
+should develop their own way of note-taking.
+
+Example 4:
+
+As mobile internet and smartphones penetrate every corner of the world, social networks and value-added services
+are changing many aspects of our daily lives.
+
+In China, this evolution is happening even faster and going even further than it is in other parts of the world.
+We can shop online, order food at restaurants or takeaways, pay utility bills and fares for public transport, book a
+medical appointment, or even register to get married—all with a few taps of our fingers on a smartphone screen.
+
+
+
+
+                                                          143
+                                       Journal of Social Science Humanities and Literature, Vol.6, Issue4,
+                                                                                                         5,(Aug)
+                                                                                                            (Oct)
+                                                                                              ISSN 2277-842X        2023
+
+
+
+
+                                  Figure 2: Note-taking modeling of example 4.
+
+The teacher first reiterates the importance of active listening and fast writing and then explains the commonly used
+symbols such as "( )', "v+", "$", "↓" (Figure 2), and the vertical note-taking structure.
+
+Step 6: Students follow the teacher in the logic, symbols and the like, and the structure of note-taking.
+
+Step 7: Students correct their errors, known as error correction, while the teacher gives some support. The purpose
+of doing so can be explained in terms of linguistic evidence, either positive or negative. Positive (negative)
+evidence is information about what is possible (impossible) in the language, provided through exposure to target
+exemplars in the input (through explanations or feedback) (Gass, 1997).
+
+Step 8: (in class or after class, depending on class arrangement) Students reflect on their notes, as well as the
+balance between listening and note-taking. This is done all by students (student autonomy) and has proven
+effective (Pietrzak, 2019; Bown, 2013).
+
+3.3.3 production
+
+Language production involves "the retrieval of information from memory, the planning of an articulatory program,
+and executive control and self-monitoring" (Piai & Zheng, 2019). In interpreting, production is essentially driven
+by the perceived requirements of the public, regarding contents/structure and other more formal elements such as
+register, and smooth delivery (Baxter, 2012). Interpreter users and assessors also pay attention to the speech
+behaviors as public speakers. These elements, though users have not explicitly expressed, include voice production
+(breathing and articulation), voice quality (the combination of loudness, duration, pitch, and resonance) (Bühler,
+1986; Pöchhacker, 2004; Cecot, 2001) and prosody (tempo/pace/rate/, pause, stress, and intonation) (Utterback,
+1990; Rodero, Diaz-Rodriguez, and Larrea, 2017; Wang, 2021). For novice interpreters, though, too much voice
+training may distract their attention or take too much of the in-class time. I therefore argue that speech behavior
+scaffolding for novice interpreters can be directed to intonation, tone, pause, and audibility.
+
+In short, "our ultimate goal must be to satisfy our audience" (Déjean Le Féal, 1990: 155).
+
+Novice interpreters in TKKC frequently suffer from anxiety, particularly in the first weeks, because they fear
+public speaking, both in English and Chinese. They lack the ability to utter long sentences successively. For them,
+interpreting production should not begin immediately after the first play of recording since insufficient anxiety
+causes tremendous anxiety and ultimately interpreter fiasco (Fang & Tang, 2021). In addition to that, interpreting
+production should always follow the principle of simplicity, one that is specific to the phase of the target language
+production and involves controlled output on the part of trainee interpreters (Baxter, 2012). Novice interpreters,
+alike, should therefore avoid unfamiliar lexicons and overly complex structures. Below are two examples of how
+the interpreter trainer can scaffold interpreting production for novices.
+
+
+
+
+                                                          144
+                                        Journal of Social Science Humanities and Literature, Vol.6, Issue4,
+                                                                                                          5,(Aug)
+                                                                                                             (Oct)
+                                                                                               ISSN 2277-842X        2023
+
+Example 5 (E–C):
+
+No nation, however large or small, wealthy or poor, can escape the impact of climate change. Rising sea levels
+threaten every coastline. More powerful storms and floods threaten every continent. More frequent droughts and
+crop failures breed hunger and conflict in places where hunger and conflict already thrive.
+
+On shrinking islands, families are already being forced to flee their homes as climate refugees. The security and
+stability of each nation and all peoples -- our prosperity, our health, and our safety -- are in jeopardy. And the time
+we have to reverse this tide is running out.
+
+And yet, we can reverse it. "Our problems are man-made, therefore they may be solved by man." It is true that for
+too many years, mankind has been slow to respond or even recognize the magnitude of the climate threat. It is true
+of my own country, as well.
+
+Example 5 is a speech on the severity of climate change given by an articulate politician who pauses frequently and
+appositely. The vocabulary is by no means difficult for junior English majors. Here are some scaffolding
+strategies:
+
+Step 1: Watch relevant video speech with subtitles, as a multimodal scaffold for easing listening anxiety.
+
+Step 2: Listen to the audio only, while the teacher shows to students via PowerPoint the speaker's speech behaviors,
+with arrows, slashes or back slashes, italics, bold fonts, or underlines, etc (mainly by the teacher).
+
+Step 3: Students shadow read after the speaker, with text and without emphasis marks (gradual release of support).
+
+After the above three steps, students will become familiar with the content, thus greatly reducing their anxiety in
+listening and oral production.
+
+Step 4: Both the teacher and students listen while taking notes, and after that, students interpret. With the above
+three scaffolding steps, they can at least interpret something; still, however, the overwhelming majority of them
+normally fail to perform up to the standards.
+
+Step 5: The teacher models, pointing to the notes shown to the class.
+
+Step 6: Students follow the teacher in interpreting, as a way to reinforce note-taking precautions and reflect on
+which pieces of information to note down and memorize in mind.
+
+Step 7: Students listen again while taking notes; then they interpret, with their voices being recorded (student
+autonomy).
+
+Step 8: The teacher evaluates a random recording or lets students evaluate their performances interchangeably.
+
+It should be noted that the dominant anxiety factor for E–C interpreting is fear of negative evaluation (Zhou, 2021;
+Fang & Tang, 2021). In-class peer assessment significantly lowers the "fear of negative evaluation" and
+significantly improves the performance of interpreting what students have learned (Wu, 2017).
+
+For C–E interpreting, scaffolding should be focused on speaking accurate, fluent English, with the correct and
+basically, if not fully, complete information. We simply should not and cannot expect too much from novices and
+even the China Accreditation Test for Translators and Interpreters only requires 60–70% full information. To
+reduce interpreting anxiety to the greatest extent, we may use simpler chunks of information.
+
+Example 6 (C–E):
+
+我们为什么要进行食品加工呢？首先是为了方便贮藏与运输。大家都知道海产品有很多不可食的部位，
+相对来说占有比较大的体积，比如说这个鱼头、鱼鳞或者虾头，这些都是不可食的部位。那通过海产品
+加工，把不可食的部位去掉，减少海产品体积。还有海产品都还有大量的水分，一般还产品的水含量可
+以达到80%，甚至有些海产品像海蜇，它的水分可以达到90%以上。通过加工脱水，可以减轻它的重量。
+
+
+
+
+                                                           145
+                                        Journal of Social Science Humanities and Literature, Vol.6, Issue4,
+                                                                                                          5,(Aug)
+                                                                                                             (Oct)
+                                                                                               ISSN 2277-842X        2023
+
+In Example 6, all the sentences are syntactically simple. Except for a few words such as "鱼鳞", "虾", "海蜇", and
+" 脱 水 ", no words will cause interpreting difficulty. In this example, the trainer may scaffold the interpreting
+process as follows:
+
+Step 1: Ask questions like "Do you know the English equivalent of..." If yes, we can directly move on to the next
+step; if yes, however, encourage them to place the bilingual words visually salient to their eyes.
+
+Step 2: Student sight interpret. Sight interpreting involves the transfer of a text written in one language into a text
+delivered orally in another language (Moser-Mercer, 1995). As it involves both aural and visual information
+processing (Ilg & Lambert, 1996), it is more challenging yet not that demanding. Even though they may encounter
+disfluencies (Cao, 2020), they will not feel that anxious.
+
+Step 3: Provide possible abbreviations or symbols for difficult words. This is particularly important because
+novice interpreters tend to take notes with the source language. In C–E interpreting, noting Chinese characters that
+contain unpredictably numerous strokes, is exceedingly time-consuming and therefore spares effort in listening
+comprehension according to Gile's (2011) effort model.
+
+Step 4: Slow down a bit the speed of the original audio if it is at normal or faster-than-normal speed so that they
+have more time for a brain-pen balance (gradual release of support).
+
+Step 5: Students interpret according to their memory and notes (student autonomy).
+
+Step 6: Simultaneous interpreting is also applicable because the flexible changes in the English parts of speech
+(Burton, 1984) require much fewer skills in C–E simultaneous interpreting. When trainee interpreters have
+experienced this form of interpreting, they will gain more confidence and less anxiety.
+
+4. CONCLUSION
+This study first explores interpreting anxiety and its correlations with such factors as gender, materials, and
+directionality. For novice interpreters, the anxiety levels are usually higher. To ease their anxiety, interpreter
+trainers should always provide scaffolding, which is support in various forms such as theory, audio, and videos.
+Specifically, as an interpreter trainer, I provide in this study theoretically informed scaffolding strategies for each
+of the three phases of consecutive interpreting, with practically feasible lecture examples of both directions. I hope
+that this study can provide pedagogical implications for interpreter trainers and learning strategies for student or
+trainee interpreters.
+
+REFERENCES
+[1] Ali, M. H. (2022). Scaffolding as a teaching strategy to improve students translation performance. Journal of
+    Language Studies, 5(4), 87–105.
+[2] Arnaiz, P. & Pérez-Luzardo, J. (2016). A study on the correlation between anxiety and academic self-concept
+    in interpreter trainees. Círculo de lingüística aplicada a la comunicación, 67, 57–88.
+    doi:10.5209/CLAC.53477
+[3] Baxter, R. N. (2012). A simplified multi-model approach to preparatory training in consecutive interpreting.
+    The Interpreter and Translator Trainer, 6, 21–43. doi:10.1080/13556509.2012.10798828
+[4] Besien, F.V. (1999). Anticipation in simultaneous interpretation. Meta: Translators' Journal, 44, 250–259.
+[5] Bontempo, K., Napier, J., Hayes, L., & Brashear, V. (2014). Does personality matter? An international study
+    of sign language interpreter disposition. Translation & Interpreting, 6(1): 23–46.
+[6] Bown, S. (2013) Autopoiesis: Scaffolding the reflective practitioner toward employability. International
+    Journal of Interpreter Education, 5(1), 51–63.
+[7] Bühler, H. (1986). Linguistic (semantic) and extra-linguistic (pragmatic) criteria for the evaluation of
+    conference interpretation and interpreters. Multilingua, 5(4), 231–235. doi: 10.1515/mult.1986.5.4.231
+[8] Calvo, E. (2015). Scaffolding translation skills through situated training approaches: Progressive and
+    reflective   methods.     The     Interpreter     and     Translator    Trainer,    9(3),    306–322,   doi:
+    10.1080/1750399X.2015.1103107
+[9] Cao, J. (2020). Investigating disfluencies in E–C sight translation. Language and Semiotic Studies, 6,
+    126–144.
+
+
+
+
+                                                           146
+                                      Journal of Social Science Humanities and Literature, Vol.6, Issue4,
+                                                                                                        5,(Aug)
+                                                                                                           (Oct)
+                                                                                             ISSN 2277-842X        2023
+
+[10] Cazden, C. B. (1983). Adult assistance to language development: Scaffolds, models, and direct instruction. In
+     R. P. Parker & F. A. Davis (Eds.), Developing literacy: Young children's use of language (pp. 3–17). Newark,
+     DE: International Reading Association.
+[11] Cecot, M. (2001). Pauses in simultaneous interpretation: A contrastive analysis of professional interpreters'
+     performances. The Interpreters' Newsletter, 11, 63–85.
+[12] Chan-Hartley, H. (2021). The visual listening guide. Oxford University Press.
+[13] Chen, S. J. (2020). The process of note-taking in consecutive interpreting. Interpreting, 22, 117–139.
+     doi:10.1075/intp.00036.che
+[14] Chen, S. J. (2021). The process and product of note-taking and consecutive interpreting: empirical data from
+     professionals and students. Perspectives, 30, 258–274. doi:10.1080/0907676X.2021.1909626
+[15] Chen, Z. Y. (2018). On multi-tier interpreting anxieties over performances and its coping strategies: A
+     synchronic study focusing on information volume. Shanghai International Studies University.
+[16] Chernov, G. V. (2004). Inference and anticipation in simultaneous interpreting: A probability-prediction
+     model. John Benjamins.
+[17] Chiang, Y. (2009). Foreign language anxiety in Taiwanese student interpreters. Meta: Translators' Journal,
+     54, 605–621.
+[18] Chiang, Y. N. (2006). Connecting two anxiety constructs: An interdisciplinary study of foreign language
+     anxiety and interpretation anxiety. Richardson: The University of Texas.
+[19] Chmiel, A. (2010). How effective is teaching note-taking to trainee interpreters. The Interpreter and
+     Translator Trainer, 4, 233–250.
+[20] Cho, J., & Roger, P. (2010). Improving interpreting performance through theatrical training. The Interpreter
+     and Translator Trainer, 4: 151–171. doi: 10.1186/s13063- 016-1291-7
+[21] Craig, A. (1990). An investigation into the relationship between anxiety and stuttering. Journal of Speech
+     Hearing Disorder, 55, 290–294. doi: 10.1044/jshd.5502.290
+[22] Cuba, M. J. (2020). Frontloading academic vocabulary for English learners with disabilities in an integrated
+     classroom setting. Intervention in School and Clinic, 55, 230–237.
+[23] Déjean Le Féal, K. (1990) Some thoughts on the evaluation of simultaneous interpretation, In D. Bowen, & M.
+     Bowen (Eds.), Interpreting: Yesterday, today, and tomorrow (pp. 154–160). SUNY.
+[24] Domingue, R. L. & Ingram, B. L. (1978). Sign language interpretation: the state of the art, In D. Gerver, & H.
+     W. Sinaiko (Eds.), Language interpretation and communication (pp. 81–85), Berlin: Springer Science &
+     Business Media.
+[25] Dusi, N. (2015). Intersemiotic translation: Theories, problems, analysis. Semiotica, 206: 181–205. doi:
+     10.1515/sem-2015-0018
+[26] Fang, F., & Tang, X. F. (2021). The relationship between Chinese English major Students' learning anxiety
+     and enjoyment in an English language classroom: A positive psychology perspective. Frontiers in
+     Psychology, 12. doi: 10.3389/fpsyg.2021.705244
+[27] Flavell, J. H., Miller, P. H., & Miller, S. A. (2002). Cognitive development (4th ed.). Prentice Hall.
+[28] Förster, J., & Liberman, N. (2007). Knowledge activation. In A. W. Kruglanski & E. T. Higgins (Eds.), Social
+     psychology: Handbook of basic principles (pp. 201–231). The Guilford Press.
+[29] Gibbons, P. (2015). Scaffolding language, scaffolding learning: teaching English language learners in the
+     mainstream classroom. Heinemann
+[30] Gile, D. (2011). Basic concepts and models for interpreter and translator training. Shanghai: Shanghai
+     Foreign Language Education Press.
+[31] Gillies, A. (2009). Note-taking for consecutive interpreting: A short course. Shanghai: Shanghai Foreign
+     Language Education Press.
+[32] Gillies, A. (2017). Note-taking for consecutive interpreting: A short course (2nd ed.). London: Routledge.
+[33] Gottlieb, H. (2018). Semiotics and translation. In K, Malmkjr (Ed.), The Routledge handbook of translation
+     studies and linguistics (pp. 31–45). Routledge.
+[34] Grossman, P. (2015). Protocol for language arts teaching observations (PLATO 5.0), Center to Support
+     Excellence in Teaching (CSET). Sunnyvale: Stanford University.
+[35] Haston, W. (2007). Teacher modeling as an effective teaching strategy. Music Educators Journal, 93(4),
+     26–30.
+[36] Horwitz, E. K., Horwitz, M. B., & Cope, J. (1986). Foreign language classroom anxiety. The Modern
+     language journal, 70(2): 125–132.
+[37] Hua, L., & Dai, H. P. (2016). The effect of separated training zones on release of English translation
+     professional students' listening anxiety: An intervention study. Studies of Psychology and Behavior, 14(2):
+     177–180.
+[38] Ilg, G., & Lambert, S. (1996). Teaching consecutive interpreting. Interpreting, 1, 69–99.
+
+
+
+
+                                                         147
+                                       Journal of Social Science Humanities and Literature, Vol.6, Issue4,
+                                                                                                         5,(Aug)
+                                                                                                            (Oct)
+                                                                                              ISSN 2277-842X        2023
+
+[39] Ji, S., Qin, X., & Li, K. (2022). A Systematic review of foreign language listening anxiety: Focus on the
+     Theoretical Definitions and Measurements. Frontiers in Psychology, 13.
+[40] Jimenez. A. I. & Pinazo. D. C. (2001). "I failed because I got very nervous." Anxiety and performance in
+     interpreting trainees: An empirical study. The Interpreters' Newsletter, 105–118.
+[41] Kang, Z. (2011). The causations, the degrees and the impacts of interpreting anxiety. Foreign Languages
+     Research, (4): 81–85.
+[42] Kang, Z. (2012). The influence of interpreting anxiety on consecutive interpreting. Chinese Science &
+     Technology Translators Journal, 25(1), 19–21+18.
+[43] Kuang, H., & Zheng, B. (2022a). How does interpreting performance correlate with note-taking process,
+     note-taking product and note-reading process: An eye-tracking and pen-recording study. Across Languages
+     and Cultures.
+[44] Kuang, H., & Zheng, B. (2022b). Note-taking effort in video remote interpreting: effects of source speech
+     difficulty and interpreter work experience. Perspectives, 31, 724–744.
+[45] Kurz, I. (2003). Physiological stress during simultaneous interpreting, a comparison with experts and novices.
+     Interpreters Newsletter, 12, 51–67.
+[46] lbl-Mikasa, M. (2006). Reduction and expansion in notation texts. In H. Garmen, K. Schubert & H.
+     Gerzymisch-Arbogast (Eds.), Text and translation: Theory and methodology of translation. Jahrbuch
+     übersetzen and Dolmetschen. DGüD. Tübingen: Gunter Narr, 195–214.
+[47] Levelt, W. J. M. (1989). Speaking: from intention to articulation. MIT Press.
+[48] Lin, Tzu-Chiang, Ying-Shao Hsu, Shu-Sheng Lin, Maio-Li Changlai, Kun-Yuan Yang, & Ting-Ling Lai.
+     2012. A review of empirical evidence on scaffolding for science education. International Journal of Science
+     and Mathematics Education, 10, (2): 437–455. doi:10.1007/s10763-011-9322-z.
+[49] Liu, H. Y. (2015). An empirical study on the correlations of interpreting anxiety and motivation of student
+     interpreters. Changsha: Hunan University.
+[50] Liu, M., & Xu, H. (2021). Testing effects of foreign language listening anxiety on Chinese university
+     students' English listening test performance. Frontiers in Psychology, 12. doi:10.3389/fpsyg.2021.701926
+[51] Mahan, K. R. (2022). The comprehending teacher: Scaffolding in content and language integrated learning
+     (CLIL), The Language Learning Journal, 50(1): 74–88, doi: 10.1080/09571736.2019.1705879.
+[52] Maybin, J., Mercer, N. & Stierer, B. (1992). Scaffolding: Learning in the classroom. In K. Norman (Ed.),
+     Thinking Voices. The Work of the National Oracy Project,186–95. Hodder & Stoughton.
+[53] McCarthy, K. M., Bragg, N., & Gentle-Genitty, C. (2019). Theory scaffolding of master-level social work
+     students.https://www.researchgate.net/publication/344404498_Theory_Scaffolding_of_Master-_Level_Soc
+     ial_Work_Students_Theory_and_Social_Work_BACKGROUND_INFORMATION
+[54] Mead, P. (2002). Exploring hesitation in consecutive interpreting: An empirical study. In G. Gazone & M.
+     Viezzi (Eds.), Interpreting in the 21st century (pp.73–82). John Benjamins..
+[55] Menzies, R. G., Onslow, M., and Packman, A. (1999). Anxiety and stuttering: Exploring a complex
+     relationship. American Journal of Speech-Language Pathology, 8, 3–10.
+[56] Messenger, M., Onslow, M., Packman, A., and Menzies, R. (2004). Social anxiety in stuttering: measuring
+     negative social expectancies. Journal of Fluency Disorder, 29, 201–212. doi: 10.1016/j.jfludis.2004.06.002
+[57] Michaela, A.M. (2008). (Non-)sense in note-taking for consecutive interpreting. Interpreting, 10(2):
+     197–231.
+[58] Moser-Mercer, B. (1995). Sight translation and human information processing. In Neubert, A. & Shreve, G.
+     M. (Eds.), Basic issues in translation studies: Proceedings of the fifth international conference (pp. 159-166).
+     Kent: Kent State University.
+[59] Mu, L., Zhang, R., & Chen, G. J. (2021). An empirical study into the correlation between listening
+     competence and interpreting competence of BTI students. Foreign Languages Education, 42 (3): 88–93.
+[60] Neer, M.A., & Kirchner, W. (1990). Classroom Interventions for Reducing Public Speaking Anxiety. Basic
+     Communication Course Annual, 3, 18.
+[61] Oteir, I. N., & Al-Otaibi, A. N. (2019). Foreign Language Anxiety: A Systematic Review. Arab World
+     English Journal, 10 (3): 309–317. doi: 10.24093/awej/vol10no3.21
+[62] Piai, V., & Zheng, X.Y. (2019). Speaking waves: Neuronal oscillations in language production. In K. D.
+     Federmeier (Ed.),
+[63] Pietrzak, P. (2019). Scaffolding student self-reflection in translator training, Translation and Interpreting
+     Studies, doi: 10.1075/tis.18029.pie
+[64] Rodero, E., Díaz-Rodríguez, C., & Larrea, O. (2017). A training model for improving journalists' voice.
+     Journal of Voice, 32(3), 386.e11–386.e19.
+[65] Rozan, J. (2002). Note-taking in Consecutive Interpreting. Tertium.
+
+
+
+
+                                                          148
+                                       Journal of Social Science Humanities and Literature, Vol.6, Issue4,
+                                                                                                         5,(Aug)
+                                                                                                            (Oct)
+                                                                                              ISSN 2277-842X        2023
+
+[66] Rumsey M.Ed., D. (2019). Building Interpreting Skills: A scaffolding plan to enhance your English to ASL
+     interpreting qualifications. Independently published.
+[67] Seleskovitch, D. (2002). Language and memory: A study of note-taking in consecutive interpreting. In F.
+     Pöchhacker & M. Shlesinger (Eds.), The interpreting studies reader (pp. 121–129). Routledge.
+[68] Stickler, L., & Sykes, G. (2016). Modeling and explaining content: Definition, research support, and
+     measurement of the ETS. National Observational Teaching Examination (NOTE) assessment series
+     (Research Memorandum No. RM-16-07). Princeton, NJ: Educational Testing Service.
+[69] Sub-committee of Teaching Guidance for English Major, National Language and Literature Teaching
+     Guidance Committee of Higher Education Institutions, Ministry of Education. (2020). Teaching guide for
+     undergraduate foreign language and literature programs in general colleges of higher education: English
+     programs. Foreign Language and Research Press.
+[70] Tamez, E. (2015). Sign language, performance, and identity. The Bible Translator, 66(3), 258–263. doi:
+     10.1177/2051677015608622
+[71] Tedick, D. J. & Lyster, R. (2020). Scaffolding Language Development in Immersion and Dual Language
+     Classrooms. New York: Routledge.
+[72] Utterback, A. S. Broadcast voice handbook, 1990 Washington Independent Productions, Washington D.C.
+[73] Wang, C. W. (2021). A theoretical model to elucidate the elusive concept 'voice' for interpreters. Perspectives,
+     30, 569–584.
+[74] Weger, H., Castle, G.R., & Emmett, M.C. (2010). Active listening in peer interviews: The influence of
+     message paraphrasing on perceptions of listening Skill. International Journal of Listening, 24, 34–49.
+[75] Wood, D., Bruner, J., & Ross, G. (1976). The role of tutoring in problem solving. Journal of Child
+     Psychology and Psychiatry, 17, 89–100.
+[76] Wu, Z. W. (2017). The interrelationship among in-class peer-assessment, interpreting anxiety and
+     interpreting performance. Language Education, 5 (4): 33–37.
+[77] Yu, S. (2018). New perspectives of note-taking training in consecutive interpreting. DEStech Transactions on
+     Social Science, Education and Human Science.
+[78] Zhang, S. Y. (2021). A study on the effects of interpreting anxiety on working memory in Chinese–English
+     consecutive interpreting". Shanghai: Shanghai International Studies University.
+[79] Zhao, N. (2022) . Speech disfluencies in consecutive interpreting by student interpreters: The role of language
+     proficiency, working memory, and anxiety. Frontiers in Psychology, 13: 881778. doi:
+     10.3389/fpsyg.2022.881778
+[80] Zhao, N., Chen, X. C., & Cai, Z. G. (2022) Planning ahead: Interpreters predict source language in
+     consecutive      interpreting.    Bilingualism:    Language        and     Cognition,      25(4),     588–602.
+     doi:10.1017/S1366728921001097
+[81] Zhou, Y. J. (2021). A correlation study of directionality and anxiety in interpreting classroom(s), Beijing:
+     Beijing Foreign Studies University.
+
+
+
+
+                                                          149
+

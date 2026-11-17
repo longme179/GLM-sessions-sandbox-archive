@@ -55,3 +55,13 @@ hoạch), agents/ đủ 5 hồ sơ + AGENTS-OVERVIEW.
 
 **Deliverable phiên 1:** projects/SPNC/deliverables/So_tay_hoc_tap_Bai_0.docx
 (+ .pdf) — 8 trang, postcheck 0 lỗi, A4 hoàn tất.
+
+**A1 hoàn tất (cuối phiên):** 4/6 nguồn mở được toàn văn (Ferdowsi 2024, Tran
+2025, Wang 2025, FLCAS 1986); Dong 2013 + Chiang 2006 bị bot-block (RG, UT
+Austin — cần trình duyệt thật của người dùng). Chi tiết:
+LEDGERS/Bao_cao_A1_xac_minh_nguon.md + SOURCE_REGISTRY đã cập nhật + evidence
+trong download/source-verification-evidence/. Điểm nổi bật: xác nhận lệch
+chiều thang của Wang 2025 (tự gán 13/20 item, đổi tên chiều, không α); cảnh
+báo IJRISS (không DOAJ, review 3 ngày); tìm thêm 4 nguồn 2024–2026 (Xing
+2025 Nature Portfolio; Song 2026 JPR; Ghorbani & Ferdowsi 2025; Jiang 2026
+[CHƯA XÁC MINH]). VIỆC DỠ PHIÊN SAU: nhờ người dùng tải 2 PDF bị chặn.

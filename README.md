@@ -12,6 +12,7 @@ The repo owner reads both.
 
 | Path | What it is |
 |---|---|
+| `projects/SPNC/` | Senior thesis project (interpreting anxiety, HCMUE) — ledgers, 5 agent briefs, deliverables. Start with `projects/SPNC/README.md` |
 | `tools/` | Bridge tools to drive remote AI agents (OpenCode gateway) + GitHub API helpers |
 | `skills/` | SKILL.md files — read the matching one BEFORE starting that kind of task |
 | `knowledge/` | Live project state + lessons learned (UPDATE AT SESSION END) + dependency capability snapshots (`niri.md`, `quickshell.md`) |
