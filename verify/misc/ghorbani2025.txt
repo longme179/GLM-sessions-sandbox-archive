@@ -1,0 +1,704 @@
+  Original Article
+
+
+                               Applied Linguistics Inquiry
+                                                Fall 2025, Vol. 3, No. 2, pp. 131-141
+
+
+                                            https://doi.org/10.22077/ali.2025.9244.1134
+
+
+
+   Examining Disfluencies in Translation Students: The Effects
+     of Anxiety on English-Persian Consecutive Interpreting
+                                                       Maedeh Ghorbani Payborj1*
+                                                           Sima Ferdowsi2
+
+    *1M.A. in Translation Studies, Department of Foreign Languages, Faculty of Literature and Humanities, Shahid Bahonar University of
+
+                                                                   Kerman, Iran
+    2
+        Assistant professor of Translation Studies, Department of Foreign Languages, Faculty of Literature and Humanities, Shahid Bahonar
+                                                            University of Kerman, Iran
+
+
+
+                                       ABSTRACT
+ARTICLE HISTORY
+                                       Given the cognitive demands of consecutive interpreting and the psychological pressures faced by
+                                       novice interpreters, the present quantitative study aims to identify the most frequently occurring
+Received:      20 April 2025           disfluencies in the output of English-Persian interpreter trainees and to explore how interpreting anxiety
+Revised:       02 July 2025            influences different types of disfluencies. A total of 23 translation trainee students were selected based
+                                       on convenience sampling. Data were gathered through the Interpreting Classroom Anxiety Scale and a
+Accepted:      21 July 2025            CI exam. After classifying the disfluencies, it was revealed that hesitation, silent pauses, and
+Published: 30 September 2025           prolongation are the predominant disfluency features. These types of disfluencies indicate cognitive
+                                       overload and failures in language planning. Statistical analyses showed a significant correlation
+                                       between high levels of anxiety and an increased frequency of these disfluencies; however, no
+                                       significant relationship was found between interpreting anxiety and disfluency in general. This suggests
+                                       that anxiety adversely affects fluency and overall interpreting performance. This study highlights the
+                                       critical role of psychological factors, particularly anxiety, in interpreter performance and training. The
+CORRESPONDING AUTHOR                   findings call for the inclusion of anxiety-reduction techniques in interpreter education and suggest
+                                       future research on experience-based disfluency patterns and Persian-specific disfluency classification.
+E-mail: maedehghorbani@ens.uk.ac.ir
+                                       KEYWORDS: consecutive interpreting, disfluency, interpreting anxiety, trainee, interpreters
+
+
+1. Introduction
+
+Consecutive interpreting (CI) is a multitasking, time-sensitive linguistic endeavor conducted before an audience (Zhao, 2022).
+In contrast to simultaneous interpreting, which often takes place in a tranquil setting such as a booth, consecutive interpreting
+may occur in a noisy environment. This exposure to ambient noise affects how interpreters regulate their voice. Psycholinguistic
+research on speech production indicates that speakers adapt to variations in environmental noise levels, with the term ‘Lombard
+sign’ denoting this sensitivity to ambient sound (Bakti, 2009). In noisy environments, speakers adjust their voice level, pitch,
+frequency, pause patterns, articulation, and speech rates (Gósy, 2007; Lane & Tranel, 1971; Summers, 1988). Moreover, most
+speech disfluencies that arise during speech production in ambient noise are characterized by restarts and repetitions (Gósy,
+2007). Speech disfluency denotes the interruptions that arise in the typical progression of speech. Disruptions manifest in various
+forms, such as pauses, repetitions, revisions, and interjections, and are regarded as a natural component of spontaneous speech
+(Bortfeld, 2001). Disfluencies frequently occur in human communication and are evident in the speech of both native and non-
+native speakers across various contexts and settings.
+          Interpreting necessitates the execution of various complex cognitive and psychomotor tasks for an audience, whether in
+public or private settings, making it a highly stressful profession (Kurz, 2003; Riccardi, 1998). Researchers have consistently
+identified anxiety management as essential for successful interpreting (Cooper, 1982; Gile, 1995; Moser-Mercer, 1985; Moser-
+
+
+Cite this article: Ghorbani Payborj, M. & Ferdowsi, S. (2025). Examining disfluencies in translation students: The effects of anxiety on
+English-Persian consecutive interpreting. Applied Linguistics Inquiry, 3(2), 131-141. https://doi.org/10.22077/ali.2025.9244.1134
+Applied Linguistics Inquiry 3(2)
+
+
+Mercer et al., 1998), and it serves as a significant predictor of interpreter competence (Alexieva, 1997). Stress impacts
+interpreters' performance and significantly influences the quality of their output. Zhao and Dong (2013) assert that interpreting
+quality is influenced by multiple factors, notably two critical criteria: the accurate transmission of the source content and the
+fluent expression in the target language. According to Zhao (2023), the potential for misinterpretation reflects the former, while
+Zhao (2022) argues that the fluency of the output signifies the latter. Fluency has been recognized as “an important construct in
+interpretation quality assessment in both professional and educational settings and for different stakeholders” (Han et al., 2020,
+p. 1).
+          Zhao (2022) underscores the importance of stress in interpreting, asserting that students aspiring to be interpreters must
+overcome the anxiety associated with public speaking during their interpreting assignments. However, as noted by Penet and
+Fernandez-Parra (2023), while it may not be possible to fundamentally change students' personalities based on trait emotional
+intelligence theory, fostering an understanding of their emotional traits can help them build resilience in the face of such
+challenges. Anxiety during target language delivery is likely to cause speech disfluencies among interpreters, especially among
+inexperienced interpreters, such as student interpreters (Cho & Roger, 2010). Studies indicate that anxiety correlates with foreign
+language (FL) speaking (MacIntyre & Noels, 1996), resulting in disfluencies during FL communication (Arnaiz & Pérez-
+Luzardo, 2014) and in public speaking scenarios (Andrade & Williams, 2009). Moreover, research conducted by Craig (1990),
+Menzies (1999), and Messenger (2004) demonstrate that anxiety intensifies stuttering. Stuttering constitutes a notable form of
+speech disfluency, with anxiety potentially acting as a contributory factor (Zhao, 2022).
+          Disfluency has been the subject of considerable research (Ambrose & Yairi, 1999; Diemand-Yauman et al., 2011;
+Schachter, 1991). In recent decades, the term disfluency has gained prominence in the literature concerning speech production
+and perception (Lickley, 2015). Nevertheless, the academic community in Interpreting Studies (IS) has not yet allocated
+significant attention to the speech disfluencies evident in interpreters' output (Tóth, 2011). Moreover, a study of the relevant
+literature indicates that little effort has been undertaken to investigate the English-Persian language pair in relation to disfluency
+in interpreting. Nonetheless, this does not suggest that Persian disfluency has not been studied scientifically in any discipline.
+The majority of studies on disfluency in the Persian language concentrate on its clinical aspects, particularly stuttering (Mozafar
+Zangeneh et al., 2012; Sakhai, 2021; Salehpoor, 2020; Vahab, 2013).
+          The present study aimed to address this research gap by conducting one of the preliminary investigations on disfluencies
+in the English-Persian language pair within interpreting studies. Given the scarcity of research on disfluencies in this language
+combination, this study contributes novel insights into how anxiety manifests in students' target-language output, particularly in
+a context where Persian remains understudied in interpreting research. Consecutive interpreting was chosen as the interpreting
+mode for this research due to its recognized position as the predominant instructional method in interpreting programs (Setton &
+Dawrant, 2016a). The researchers intended to examine the correlation between students' CI anxiety and the types and frequency
+of disfluencies in their target language production. This focus is crucial because disfluencies not only affect perceived interpreting
+quality but may also serve as observable markers of cognitive strain and anxiety—factors that can hinder professional
+development. Zhao (2022, p. 7) supports the exploration of the relationship between CI anxiety and disfluency, asserting that
+“speech disfluencies, especially fillers and repetitions, tended to increase as a function of a student interpreter’s anxiety level.”
+         To reach this aim, the present study posed the following research questions:
+         RQ1. What are the most frequently occurring disfluencies in the English-Persian output of CI trainees?
+         RQ2. What issues do these disfluencies indicate within the speech production system?
+         RQ3. Does interpreting anxiety correlate with CI trainees’ output in terms of fluency?
+
+2. Literature Review
+
+The concept of disfluency has been examined from multiple perspectives within the field of interpreting, including the
+categorization of disfluencies and their correlation with other significant aspects of interpreting practice. This range of
+investigation underscores the complexity of disfluency as a phenomenon and its implications for interpreter performance and
+communication efficacy.
+         For instance, Mead (2002) investigated the management of pauses by both professional and trainee interpreters during
+consecutive interpreting in their A (L1) and B (L2) languages. The study comprised 45 participants, encompassing novice and
+expert conference interpreting students, along with professional interpreters, principally concentrating on those who used Italian
+as their A language and English as their B language. Mead found that as interpretation experience rose, the incidence of
+hesitations associated with grammatical and lexical errors diminished. Trainee interpreters exhibited a higher frequency of pauses
+when interpreting into their B language.
+          A study by Yin (2011) further investigated the correlation between interpreter experience and pause management by
+analyzing successive interpretation outputs from undergraduate students. The research analyzed 28 consecutive interpretation
+outputs from third-year English majors in China to assess the frequency of disfluencies. The students were evaluated on their
+final interpretation examination and later were interviewed about the obstacles they encountered. The results indicated that
+inexperienced CI learners often depend on excessive fillers and redundant expressions, whereas they handle pauses more adeptly
+in language laboratory environments. Yin determined that optimal stress levels could help students reduce substantial pauses,
+highlighting the importance for both students and teachers to recognize the challenges associated with fillers and repetition.
+
+
+
+                                                                132
+                       Examining Disfluencies in Translation Students: The Effects of Anxiety on English-Persian Consecutive Interpreting
+
+
+          Focusing on training progression, Bakti (2019) investigated the target language output of trainee interpreters,
+specifically analyzing the frequency and distribution of different error types in relation to training progression. The consecutive
+interpreting of English source texts into Hungarian by seven interpreting students was documented over three semesters. Error
+analyses indicated that the frequency of error types remained relatively consistent across semesters. Interpreted texts displayed a
+greater incidence of disfluencies than spontaneous speech, indicating that task difficulty, rather than the level of training, affected
+disfluency patterns.
+          The findings from Zhang and Song’s (2019) study enhance the comprehension of interpreter performance. The study
+examined the correlations between self-repair behaviors and subjective assessments of student interpreters' CI performance. The
+researchers transcribed twelve interpretations from a competition, identifying instances of self-repair according to Levelt’s (1983)
+classification system. The statistical analysis revealed strong positive correlations between overt repairs and content quality,
+alongside negative correlations between form and delivery with covert repairs. The results demonstrated that subjective
+evaluations correlated more strongly with content quality than with instances of self-repair, offering important implications for
+CI training and future research initiatives.
+          Shen and Liang (2021) further explored self-repair utilization in professional and student interpreters, emphasizing
+form, motivation, and the influence of expertise on fluency. The retrospective interview-based experiment on Chinese-to-English
+CI revealed that both groups employed a range of repair techniques, primarily motivated by error correction and appropriateness.
+Professional interpreters demonstrated a higher focus on semantic accuracy and exhibited fewer syntactic errors, reflecting
+different processing capabilities in comparison to student interpreters.
+         Expanding on cognitive aspects of interpreting, Zhao (2022) examined the role of individual factors—namely language
+proficiency, working memory, and anxiety levels—on speech disfluencies in simultaneous interpretation among 53 student
+interpreters. This study adopted cognitive assessments and an interpreting test, demonstrating that anxiety levels significantly
+influenced the frequency of disfluencies, especially fillers and repetitions.
+          A review of the current literature reveals that, while disfluency has been extensively examined in the field of interpreting
+studies worldwide, this subject remains inadequately investigated by scholars in the Iranian context. However, Yenkimaleki et
+al. (2022) have significantly contributed to this field by investigating the impact of fluency methods on the speech fluency of
+English as a Foreign Language (EFL) students. Their study had two groups of 34 trainees each: one group was acquainted with
+the topic, while the other was not. The results indicated that fluency training markedly improved trainees' performance, especially
+in relation to prevalent subjects. These findings highlight the prospective significance of fluency training for EFL educators,
+material developers, and interpretation training initiatives, establishing a basis for more investigation within the Iranian context.
+          Yenkimaleki and van Heuven (2024a) conducted another study to examine the impact of fluency training on interpreter
+trainees’ speech, focusing on fluency, comprehensibility, and accentedness. The trainees were categorized into two groups: one
+group dedicated 33% of their training time to fluency strategy training, while the other group concentrated 67% of their training
+time on comprehensive oral communication skills. Structured interviews were used to evaluate fluency, comprehensibility, and
+accentedness. The results indicated that fluency training notably improved fluency and comprehensibility, with a negligible effect
+on accentedness.
+          In a recent study, Yenkimaleki and van Heuven (2024b) investigated the relationship between oral fluency perception
+in two contexts: a broad perspective, which includes overall speaking proficiency, and a narrow perspective, which emphasizes
+flow, smoothness, grammar, and vocabulary. The results indicated that raters provided notably lower fluency scores when
+assessments were conducted using narrow criteria in contrast to broader criteria. Expert raters exhibited a higher level of severity
+in their evaluations compared to non-experts, especially regarding the narrow fluency criteria. No significant differences were
+observed between the ratings of native and non-native raters. The research indicates that interpreter trainees can enhance their
+broad and narrow fluency skills via focused training and regular practice.
+
+3. Methodology
+This study adopted a quasi-experimental, correlational design (Creswell & Creswell, 2018) to investigate the relationship
+between interpreting anxiety and disfluency in the CI output of trainee interpreters. While the study did not employ
+control/experimental groups or interventions (typical of strict experimental designs), it met key criteria for experimental research
+through (1) controlled task administration under standardized conditions, (2) systematic measurement of variables (anxiety via
+ICAS and disfluencies via Praat), and (3) quantitative analysis of their relationship. The study included 23 students (14 female,
+9 male), aged 20 to 23 years (M = 21.5, SD = 1.12), enrolled in the English-Persian Translation program at Shahid Bahonar
+University of Kerman; Iran. The participants were in their seventh semester and had registered for the ‘Consecutive Interpreting’
+course. Prior to the consecutive interpreting test (CIT), the trainees completed 16 sessions (90 minutes each), focusing on CI
+skills and requirements following Setton and Dawrant’s (2016b) framework. The course was taught by an instructor with 10
+years of experience in teaching consecutive interpreting. None of the participants possessed previous experience or training in
+interpretation. All participants identified Persian as their A-language and English as their B-language. Participants were chosen
+through convenience sampling to maintain the constancy of other variables, such as teaching methods and materials, which are
+not the focus of this research. The research employed three instruments for data collection.
+        The study commenced with the implementation of the listening module of the International English Language Testing
+System (IELTS) to ensure consistency in participants' listening skills. Only participants who achieved a minimum score of Band
+
+
+
+                                                                 133
+Applied Linguistics Inquiry 3(2)
+
+
+6.0—a benchmark indicating competent listening comprehension—were included in the study. This screening ensured that
+observed disfluencies could be more confidently attributed to anxiety, not uneven listening skills. The choice to include only the
+listening module in the IELTS package was determined by the importance of listening skills in CI. Interpreting requires oral
+input; therefore, inadequate listening comprehension among student interpreters results in incomplete or insufficient output in
+the target language. Participants were tasked with interpreting a 5-minute speech on the topic of 'Locusts Invasion,' which
+comprised 385 words sourced from Voice of America English News (VOA). This topic was selected because it represents a real-
+world scenario where accurate interpreting is critical (e.g., agricultural crises requiring international response), thereby eliciting
+naturalistic interpreter performance. An American-accented native speaker presented the speech at an appropriate pace. The
+selected audio clip presented no linguistic or vocabulary challenges for students. The length, content, and complexity of the
+speech were comparable to those experienced by students during their classroom CI treatment.
+         Moreover, the research employed Chiang's (2006) interpreting classroom anxiety scale (ICAS) to assess and quantify
+the anxiety levels experienced by interpreters in educational environments. The instrument uses a 5-point Likert scale, with
+values from 1 (strongly disagree) to 5 (strongly agree), comprising 44 items, several of which necessitate reverse scoring. The
+scale consists of three subcategories: fear of interpretation and negative evaluation, cognitive processing anxiety, and low self-
+confidence. Chiang (2006) found alpha coefficients of 0.94 for the overall measure, 0.92 for the fear of interpretation and negative
+assessment subscale, 0.80 for the cognitive processing anxiety subscale, and 0.77 for the poor self-confidence subscale. The
+participants' replies to the ICAS questionnaire were analyzed using the Statistical Package for the Social Sciences (SPSS)
+software (version 23). Concerning the CI test, the participants' recorded CI performances were transcribed in preparation for the
+forthcoming evaluations.
+          The researchers used Gósy's (2003) taxonomy of speech disfluencies to examine each transcription and deployed Praat
+software to quantify silent pauses and prolongations. Gósy's (2003) taxonomy differentiates between two principal groups of
+speech disfluencies: (a) uncertainty-related disfluencies (UDSs) and (b) error-type disfluencies (ETDs). UDSs encompass
+hesitations, fillers, repetitions, restarts, elongations, and intra-word pauses. ETDs include Freudian slips, grammatical
+inaccuracies, contamination, erroneous word activation, 'tip of the tongue' (TOT) phenomena, alterations, sequencing issues, and
+slips of the tongue (SOT).
+         Furthermore, silent pauses can be classified into two subcategories: grammatical and non-grammatical. Grammatical
+pauses are inherent interruptions in speech or writing that arise from structural elements, including punctuation or sentence clarity
+such as pauses for punctuation and commas. Conversely, non-grammatical pauses are unrelated to the structural pauses of the
+language and stem from alternative reasons. Non-grammatical pauses encompass subcategories such as silent pauses, which,
+while not contributing to grammatical structure, fulfill functions like emphasis or contemplation. These contrasts facilitate
+comprehension of the subtleties of pauses in communication.
+         Analyzing silent pauses requires establishing a sensitivity level or cut-off point to differentiate between the two
+categories. The current literature on CI reveals a lack of agreement on the establishment of a minimal threshold for measuring
+silent pauses. However, Cardoen (2012) proposes two distinct cut-off points: 1.40 seconds for grammatical pauses and 0.56
+seconds for non-grammatical pauses. The present study applied these threshold values. In the prolongation category, the
+researchers compared the word spoken by the participant under normal conditions with the word presumed to be prolonged to
+ensure accuracy. If the latter was articulated for a longer duration than the former, it was classified as a prolongation.
+
+4. Results
+The initial question intended to identify the most frequently occurring disfluencies in the English-Persian output of CI trainees.
+Descriptive statistics, including range, mean, and standard deviation, were run to answer this question. The normality assumption
+was checked prior to analysis, and the findings are presented below (Table 1).
+
+
+
+
+                                                                134
+                      Examining Disfluencies in Translation Students: The Effects of Anxiety on English-Persian Consecutive Interpreting
+
+
+Table 1.
+Tests of Normality of Disfluency Features
+                                                           Kolmogorov-Smirnova Shapiro-Wilk
+                                                            Statistic df Sig. Statistic df Sig.
+                              Hesitation                      .16     23 .11    .92 23 .08
+                              Contamination                   .36     23 .06    .71 23 .1
+                              Phonological                    .44     23 .05    .59 23 .07
+                              Prolongation                    .15     23 .13    .86 23 .06
+                              Serial order error              .53     23 .11    .32 23 .07
+                              Syntactic error                 .18     23 .06     .9 23 .12
+                              Pause with a word               .51     23 .09     .4 23 .00
+                              False word activation           .31     23 .07    .61 23 .00
+                              Filler                          .36     23 .07    .57 23 .00
+                              Restart                         .16     23 .12    .92 23 .1
+                              Restart with change of affix    .09     23 .2     .93 23 .14
+                              Change of word                  .26     23 .13    .85 23 .07
+                              False start                     .11     23 .2     .91 23 .42
+                              Silent pauses                   .16     23 .12    .91 23 .06
+                              Repetition                       .2     23 .22    .81 23 .11
+                              Freudian slip                   .52     23 .16    .32 23 .05
+                              Others                          .25     23 .05    .64 23 .06
+
+
+         The results do not show significant deviations from normality (p>.05). Therefore, it is safe to conduct parametric
+analyses in terms of normality assumption.
+
+
+Table 2.
+Descriptive Statistics of Disfluency Features
+                                                    N Minimum Maximum Mean Std. Deviation Variance
+
+                      Hesitation                   23      .82         120    110.26       24.94       622.36
+                      Contamination                23      .00          3        .6          .89         .79
+                      Phonological                 23      .00          2       .34          .64         .41
+                      Prolongation                 23      83           99    89.86        10.35       107.2
+                      Slip of tongue               23      .00         .00      .00          .00         .00
+                      Serial order error           23      .00          1       .08          .28         .08
+                      Syntactic error              23       4           22    16.49          3.8       14.49
+                      Pause with a word            23      .00          1       .13          .34         .11
+                      False word activation        23      .00          7       .91          1.7         2.9
+                      Filler                       23      .00          14     1.65         3.32       11.05
+                      Restart                      23      .00          8       2.8          2.3        5.33
+                      Restart with change of affix 23      .00          10     3.82         2.87        8.24
+                      Change of word               23      .00          5      1.91         1.75        3.08
+                      False start                  23      .00          17     5.26         3.84       14.74
+                      Silent pauses                23      82           95    83.26        11.14       124.2
+                      Repetition                   23      .00          18     4.08         4.27       18.26
+                      Freudian slip                23      .00          2       .17          .57         .33
+                      Others                       23      .00          14     2.13         2.97        8.84
+
+
+          As shown in Table 2, among the 18 disfluency features, the most frequently used ones were hesitation (M = 110.26,
+SD= 24.94, Max= 120), silent pauses (M = 89.86, SD= 3.84, Max= 95), prolongation (M = 83.69, SD= 10.35, Max= 99), and
+syntactic error (M = 16.49, SD= 3.8, Max= 22). It is noteworthy that the SOT feature was not found in the data (M=0), so it was
+the least frequently used disfluency feature.
+         The results of the second question based on Gósy's (2003) speech disfluency taxonomy (Figure 1) reveals several
+significant observations:
+
+
+
+                                                                 135
+Applied Linguistics Inquiry 3(2)
+
+
+    •    Hesitation and silent pauses are classified as speech disfluencies connected to uncertainty, arising from both conceptual
+         and linguistic planning processes. Gósy's (2003) model posits that these disfluencies arise at the interface between
+         conceptualization and linguistic formulation, signifying difficulties in transitioning from abstract concepts to concrete
+         linguistic structures.
+    •    Prolongation is ascribed to mechanisms related to the mental lexicon and articulation planning. Gósy's (2003) model
+         posits that prolongations may indicate challenges in lexical retrieval or phonetic encoding during speech production.
+    •    Syntactic errors are generally linked to inadequacies in language planning. In Gósy's (2003) model, syntactic errors are
+         likely to arise during the form encoding phase, particularly during morpho-phonological encoding.
+
+
+
+
+Figure 1.
+Speech Production Process and Locations of Disfluencies (Gósy, 2003, p. 82).
+
+
+         The third research question examined the potential relationship between interpreting anxiety and the fluency of trainees'
+CI output. A Pearson product-moment correlation was run to compare the interpreting anxiety scores of the participants with the
+18 disfluency features (Table 3).
+
+
+
+
+                                                              136
+                      Examining Disfluencies in Translation Students: The Effects of Anxiety on English-Persian Consecutive Interpreting
+
+
+Table 3.
+Descriptive Statistics of Disfluency Features and CI Anxiety
+                                                                               Mean SD N
+                                                   Hesitation                  110.2624.9423
+                                                   Contamination               .6    .89 23
+                                                   Phonological                .34   .64 23
+                                                   Prolongation                89.86 10.3523
+                                                   Slip of tongue              .00   .00 23
+                                                   Serial order error          .08   .28 23
+                                                   Syntactic error             5.3   3.8 23
+                                                   Pause with a word           .13   .34 23
+                                                   False word activation       .91   1.7 23
+                                                   Filler                      1.65 3.32 23
+                                                   Restart                     2.8   2.3 23
+                                                   Restart with change of affix3.82 2.87 23
+                                                   Change of word              1.91 1.75 23
+                                                   False start                 5.26 3.84 23
+                                                   Silent pauses               83.26 11.1423
+                                                   Repetition                  4.08 4.27 23
+                                                   Freudian slip               .17   .57 23
+                                                   Others                      2.13 2.97 23
+                                                   CI anxiety score            130.9117.5423
+
+
+        As the above table shows, from the disfluency features, the highest mean belonged to hesitation (M=110.26), and the
+lowest was for the slip-of-tongue feature (M=0). Also, the mean score of CI anxiety was 130.91.
+
+
+Table 4.
+Correlation between Disfluency Features and CI Anxiety
+                                                                                                                                                                                                      Restart with change of affix
+                                                                                                                                                           False word activation
+                                                                                                                                       Pause with a word
+                                                                                                Serial order error
+
+
+
+
+                                                                                                                                                                                                                                     Change of word
+                                               Contamination
+
+
+
+
+                                                                                                                     Syntactic error
+                                                                  Phonological
+
+
+
+
+                                                                                                                                                                                                                                                                    Silent pauses
+
+
+
+                                                                                                                                                                                                                                                                                                 Freudian slip
+                                                                                 Prolongation
+
+
+
+
+                                                                                                                                                                                                                                                                                    Repetition
+                                  Hesitation
+
+
+
+
+                                                                                                                                                                                                                                                      False start
+                                                                                                                                                                                            Restart
+
+
+
+
+                                                                                                                                                                                                                                                                                                                 Others
+                                                                                                                                                                                   Filler
+
+
+
+
+                Pearson
+Consecutive                       .48* -.05 -.00 .35* -.00 .18 -.28 .19 -.04 .2 -.10 .35 -.00 .4*                                                                                                                                                                                   .05 -.03 .05
+                Correlation
+interpreting
+                Sig. (2-tailed) .02        .79 .99 .04 .97 .4 .18 .38 .82 .34 .64 .09 .98 .04                                                                                                                                                                                       .8           .87             .8
+anxiety score
+                N                  23      23      23 23 23 23 23 23 23 23 23 23 23 23                                                                                                                                                                                              23           23              23
+*. The mean difference is significant at the .05 level.
+
+         There was a statistically significant relationship between the interpreting anxiety scores of the participants and the
+disfluency features of hesitation (r=48, p=.02), prolongation (r=35, p=.04), and silent pauses (r=.4, p=.04). In other words, the
+higher the CI anxiety, the higher the manifestation of the disfluency features of hesitations, prolongations, and silent pauses.
+
+
+Table 5.
+Descriptive Statistics of Disfluency and CI Anxiety
+                                                                                Mean SD      N
+                                                               Disfluency       16.85 23.53 23
+                                                               CI anxiety score 130.91 17.54 23
+
+
+
+
+                                                                                                             137
+Applied Linguistics Inquiry 3(2)
+
+
+Table 6.
+Correlation between Disfluency and CI Anxiety
+                                                                                             disfluency
+                             Consecutive interpreting anxiety score   Pearson Correlation    .19
+                                                                      Sig. (2-tailed)        .34
+                                                                      N                      23
+
+           As the above table shows, there was no significant relationship between disfluency and CI anxiety (r= .19, p= .34).
+
+5. Discussion
+
+This study intended to explore disfluencies in English-Persian CI, addressing a gap in interpreting studies in the context of Iran.
+The results indicated that hesitations, silent pauses, prolongations, and syntactic errors were the most frequently occurring
+disfluencies. Gósy (2001) similarly identified hesitations and silent pauses as the predominant disfluency features. Her
+observation of slips of the tongue as a prevalent disfluency stands in contrast to the findings of the current study, in which such
+occurrences were the least commonly recorded. This divergence likely reflects inherent differences between monolingual speech
+and bilingual CI, compounded by language-pair specifics and training effects. Future studies could explicitly compare disfluency
+hierarchies across modalities (e.g., CI vs. simultaneous interpreting) to isolate task-specific influences.
+          Also, the findings of the second question highlighted that hesitation and silent pauses indicate malfunctions in both
+concepts and language planning, while prolongation signifies challenges in mental lexicon and articulation planning. Syntactic
+errors stem from deficiencies in language planning. Gósy (2001) explores the functions of disfluencies in spontaneous speech,
+emphasizing their role as indicators of cognitive processes and reflecting a disharmony of speech planning. This aligns with the
+current findings suggesting that the structure of a language influences the processes of speech planning and production, leading
+to specific types of disfluencies that may differ from one language to another. Bakti's (2009) analysis noted that grammatical
+errors indicate malfunction in morphological and syntactical planning. Both studies emphasize the importance of understanding
+cognitive processes, such as lexical retrieval and grammatical structuring, in relation to disfluencies in simultaneous
+interpretation. Similarly, Tóth (2011) believed disfluencies are primarily linked to issues of lexical access and the disharmony
+between lexical access and articulatory planning. He asserted that prolongations are a sign of problems connected to the activation
+of the mental lexicon; as the current study reported that prolongation signifies challenges in mental lexicon.
+          The findings from the last question revealed that, while no significant relationship was observed between interpreting
+anxiety and disfluency in general, a statistically significant relationship existed between the participants' interpreting anxiety
+scores and the disfluency features of hesitations, prolongations, and silent pauses. This is consistent with Bakti's (2009) research
+on speech disfluencies, despite her focus on simultaneous interpreting. However, Bakti reported that elevated anxiety levels
+resulting from the cognitive load experienced by interpreters lead to an increase in error-type disfluencies (ETDs). This finding
+contrasts with the results of the current study indicating that uncertainty-related speech disfluencies (UDSs) are influenced by
+heightened interpreting anxiety. This contrast may be attributed to the study of different types of interpreting. Zhao's (2022)
+findings indicate a correlation between elevated anxiety levels in student interpreters and an increased frequency of fillers and
+repetitions. This does not align with the current findings, potentially due to the examination of different languages; however,
+both studies support the idea that anxiety influences UDSs.
+
+6. Conclusion
+
+This study offers significant insights into the influence of interpreting anxiety on disfluency among English-Persian trainee
+interpreters. Through the analysis of a sample of 23 students at Shahid Bahonar University of Kerman, it was found that
+hesitation, silent pauses, and prolongation are the primary manifestations of disfluency in their performance during consecutive
+interpreting tasks.
+          The findings of this study have significant pedagogical implications for interpreter training programs, particularly in
+addressing disfluencies and anxiety in consecutive interpreting (CI). First, since hesitation, silent pauses, and prolongation were
+the most frequent disfluencies—and were linked to interpreting anxiety—trainers should incorporate targeted exercises to reduce
+cognitive load and enhance fluency. Techniques such as chunking exercises, shadowing, and delayed repetition can help trainees
+improve their conceptual and linguistic planning, reducing uncertainty-related disfluencies. Additionally, since syntactic errors
+were prevalent, explicit instruction on grammatical structures and syntactic reformulation in both source and target languages
+should be emphasized to strengthen language planning skills. Second, given the correlation between anxiety and disfluencies like
+hesitations and prolongations, trainers should integrate stress-management strategies into the curriculum. Mock interpreting
+sessions under timed conditions, along with mindfulness and relaxation techniques, may help trainees build resilience against
+performance anxiety. Furthermore, providing constructive feedback in a supportive environment can mitigate anxiety and
+encourage smoother output. Finally, since disfluencies often stem from lexical retrieval difficulties (as seen with prolongations),
+trainees should engage in extensive vocabulary-building and lexical access drills, such as rapid word association and paraphrasing
+exercises. By addressing both cognitive and affective factors, interpreter training programs can enhance fluency, reduce
+disfluencies, and better prepare students for real-world interpreting scenarios.
+
+
+
+                                                               138
+                      Examining Disfluencies in Translation Students: The Effects of Anxiety on English-Persian Consecutive Interpreting
+
+
+         This research proposes multiple intriguing directions for further investigation to improve our understanding of
+disfluencies in English-Persian interpretation and their implications for interpreter training and performance. A comparative
+analysis of beginner and expert interpreters across various genres of source texts may uncover trends in disfluencies, thereby
+identifying unique obstacles for trainees and guiding targeted training approaches. Establishing a taxonomy of disfluencies
+unique to Persian will greatly aid in categorizing elements such as pauses and repeats, hence improving the comprehension of
+interpretation performance. Furthermore, investigating the factors contributing to disfluencies—such as text complexity or time
+constraints—may yield insights into the cognitive mechanisms engaged in interpretation. Nonetheless, akin to other
+investigations, the present one possessed certain constraints, including a restricted sample size and an emphasis on a singular
+language pair, which may constrain the generalizability of the results.
+
+7. References
+
+
+Alexieva, B. (1997). A typology of interpreter-mediated                          events.     The     Translator,     3(2),    153-174.
+        https://doi.org/10.1080/13556509.1997.10798996
+
+Ambrose, N. G., & Yairi, E. (1999). Normative disfluency data for early childhood stuttering. Journal of Speech, Language, and
+       Hearing Research, 42(4), 895-909. https://doi.org/10.4324/9780429030376
+
+Andrade, M., & Williams, K. (2009). Foreign language learning anxiety in Japanese EFL university classes: Physical, emotional,
+        expressive, and verbal reactions. Sophia Junior College Faculty Journal, 29(1), 1-24. https://e-
+        flt.nus.edu.sg/v5n22008/williams.pdf
+
+Arnaiz, P., & Pérez-Luzardo, J. (2014). Anxiety in Spanish EFL university lessons: Causes, responsibility attribution and coping.
+         Studia Anglica Posnaniensia, 49(1), 57-76. https://doi.org/10.2478/stap-2014-0003
+
+Bakti, M. (2009). Speech disfluencies in simultaneous interpretation. In D. De Crom (Ed.), Selected papers of the CETRA
+        research seminar in translation studies 2008. http://www.kuleuven.be/cetra/papers/papers.html
+
+Bakti, M. (2019). Error type disfluencies in consecutively interpreted and spontaneous monolingual Hungarian speech. In R. L.
+        Rose & R. Eklund (Eds.), Proceedings of DiSS (pp. 71-74). ELTE Eötvös Loránd University.
+        https://doi.org/10.21862/diss-09-019-bakti
+
+Bortfeld, H., Leon, S. D., Bloom, J. E., Schober, M. F., & Brennan, S. E. (2001). Disfluency rates in conversation: Effects of
+         age,     relationship,   topic,    role,    and    gender.     Language      and     speech,     44(2),     123-147.
+         https://doi.org/10.1177/00238309010440020101
+
+Cardoen, H. (2012). The effect of note-taking on target-text fluency. In G. González Núñez, Y. Khaled, & T. Voinova (Eds.),
+        Translating     and       interpreting      as      a     social     practice    (pp.     123-145).     Routledge.
+        https://www.academia.edu/20724428/The_Effect_of_Note_taking_on_Target_text_Fluency
+
+Chiang, Y. N. (2006). Connecting two anxiety constructs: An interdisciplinary study of foreign language anxiety and
+        interpretation anxiety [Doctoral dissertation, University of Texas at Austin]. ProQuest Dissertations Publishing.
+        http://hdl.handle.net/2152/2695
+
+Cho, J., & Roger, P. (2010). Improving Interpreting Performance through Theatrical Training. The Interpreter and Translator
+         Trainer, 4(2), 151–171. https://doi.org/10.1080/13556509.2010.10798802
+
+ Cooper, C., Davis, R., & Tung, R. (1982). Interpreting stress: Sources of job stress among conference interpreters. Multilingua,
+        1(2), 97-108. https://doi.org/10.1515/mult.1982.1.2.97
+
+Craig, A. (1990). An investigation into the relationship between anxiety and stuttering. Journal of speech and hearing disorders,
+         55(2), 290-294. https://doi.org/10.1044/jshd.5502.290
+
+Creswell, J. W., & Creswell, J. D. (2018). Research design: Qualitative, quantitative, and mixed methods approaches (5th ed.).
+        SAGE Publications. https://spada.uns.ac.id/pluginfile.php/510378/mod_resource/content/1/creswell.pdf
+
+Diemand-Yauman, C., Oppenheimer, D. M., & Vaughan, E. B. (2011). Fortune favors the: Effects of disfluency on educational
+       outcomes. Cognition, 118(1), 111-115. https://doi.org/10.1016/j.cognition.2010.09.012
+
+Gile, D. (1995). Regards sur la recherche en interprétation de conférence.                  Presses Universitaires du Septentrion.
+        https://doi.org/10.1075/intp.1.1.10ilg
+
+
+
+
+                                                                139
+Applied Linguistics Inquiry 3(2)
+
+
+Gósy, M. (2001). The double function of disfluency phenomena in spontaneous speech. In ISCA Tutorial and Research Workshop
+        (ITRW) on Disfluency in Spontaneous Speech (pp. 57-60). https://www.isca-archive.org/diss_2001/gosy01_diss.pdf
+
+Gósy, M. (2003). Co-occurrences and frequency of disfluencies in Hungarian spontaneous speech. Govor, 20(1-2), 79-97.
+       https://hrcak.srce.hr/179334
+
+Gósy, M. (2007). Disfluencies and self-monitoring. Govor, 24 (2), 91-110. https://hrcak.srce.hr/173610
+
+Han, C., Chen, S., Fu, R., & Fan, Q. (2020). Modeling the relationship between utterance fluency and raters’ perceived fluency
+         of consecutive interpreting. Interpreting, 22(2), 211-237. https://doi.org/10.1075/intp.00040.han
+
+Kurz, I. (2003). Physiological stress during simultaneous interpreting: A comparison of experts and novices. The Interpreters'
+          Newsletter,12, 51-68. http://hdl.handle.net/10077/10166
+
+Lane, H., & Tranel, B. (1971). The Lombard sign and the role of hearing in speech. Journal of speech and hearing research,
+        14(4), 677-709. https://doi.org/10.1044/jshr.1404.677
+
+Levelt, W. J. (1983). Monitoring and self-repair in speech. Cognition, 14(1), 41-104. https://doi.org/10.1016/0010-
+        0277(83)90026-4
+
+Lickley, R. J. (2015). Fluency and disfluency. In M. Redford (Ed.), The handbook of speech production (pp. 445-474). Wiley-
+         Blackwell. https://doi.org/10.1002/9781118584156.ch20
+
+MacIntyre, P. D., & Noels, K. A. (1996). Using social‐psychological variables to predict the use of language learning strategies.
+        Foreign language annals, 29(3), 373-386. https://doi.org/10.1111/j.1944-9720.1996.tb01249.x
+
+Mead, P. (2002). Exploring hesitation in consecutive interpreting: An empirical study. In G. Garzone and M. Vizzi (Eds.),
+        Interpreting in the 21st century: Challenges and opportunities (pp. 73-82). John Benjamins.
+        https://doi.org/10.1075/btl.43.08mea
+
+Messenger, M., Onslow, M., Packman, A., & Menzies, R. (2004). Social anxiety in stuttering: measuring negative social
+       expectancies. Journal of fluency disorders, 29(3), 201-212. https://doi.org/10.1016/j.jfludis.2004.06.002
+
+Menzies, R. G., Onslow, M., & Packman, A. (1999). Anxiety and stuttering: Exploring a complex relationship. American Journal
+        of Speech-Language Pathology, 8(1), 3-10. https://doi.org/10.1044/1058-0360.0801.03
+
+Moser-Mercer, B. (1985). Screening potential interpreters. Meta, 30 (1): 97–100. https://doi.org/10.7202/003631ar
+
+Moser-Mercer, B., Künzli, A., & Korac, M. (1998). Prolonged turns in interpreting: Effects on quality, physiological and
+       psychological stress (Pilot study). Interpreting, 3(1), 47-64. https://doi.org/10.1075/intp.3.1.03mos
+
+Mozafar Zangeneh, A., Pooladi, S., Mahmoodi Bakhtiari, B., & Haghani, H. (2012). Investigation of nonfluency frequency on
+        words and nonwords in Persian speaking adults who stutter. Journal of Research in Rehabilitation Sciences, 8(5), 905-
+        912. https://doi.org/10.22122/JRRS.V8I5.529
+
+Penet, J. C., & Fernandez-Parra, M. (2023). Dealing with students’ emotions: Exploring trait EI theory in translator education.
+          The Interpreter and Translator Trainer, 17(3), 332-352. https://doi.org/10.1080/1750399X.2023.2237327
+
+Riccardi, A., Zecchin, S., & Marinuzzi, G. (1998). Interpretation and stress. The Interpreters' Newsletter, 8, 93-106.
+         http://hdl.handle.net/10077/2493
+
+Sakhai, F., Darouie, A., Anderson, J. D., Dastjerdi-Kazemi, M., Golmohammadi, G., & Bakhshi, E. (2021). A comparison of the
+         performance of Persian speaking children who do and do not stutter on three nonwords repetition tasks. Journal of
+         Fluency Disorders, 67, 105825. https://doi.org/10.1016/j.jfludis.2020.105825
+
+Salehpoor, A., Latifi, Z., & Tohidast, S. A. (2020). Evaluating parents' reactions to Children's stuttering using a Persian version
+        of reaction to Speech Disfluency Scale. International Journal of Pediatric Otorhinolaryngology, 134, 110076.
+        https://doi.org/10.4324/9781315760100
+
+Schachter, S., Christenfeld, N., Ravina, B., & Bilous, F. (1991). Speech disfluency and the structure of knowledge. Journal of
+        personality and social psychology, 60(3), 362-367. https://psycnet.apa.org/doi/10.1037/0022-3514.60.3.362
+
+
+
+
+                                                               140
+                      Examining Disfluencies in Translation Students: The Effects of Anxiety on English-Persian Consecutive Interpreting
+
+
+Setton, R. & Dawrant, A. (2016a). Conference interpreting: A complete course. John Benjamins Publishing Company.
+        https://doi.org/10.1075/btl.120
+
+Setton, R. & Dawrant, A. (2016b). Conference interpreting: A trainer's guide. John Benjamins Publishing Company.
+        https://doi.org/10.1075/btl.121
+
+Shen, M., & Liang, J. (2021). Self-repair in consecutive interpreting: Similarities and differences between professional
+       interpreters and student interpreters. Perspectives, 29(5), 761-777. https://doi.org/10.1080/0907676X.2019.1701052
+
+Summers, W. V., Pisoni, D. B., Bernacki, R. H., Pedlow, R. I., & Stokes, M. A. (1988). Effects of noise on speech production:
+       Acoustic and perceptual analyses. The Journal of the Acoustical Society of America, 84(3), 917-928.
+       https://doi.org/10.1121/1.396660
+
+Tóth, A. (2011). Speech disfluencies in simultaneous interpreting: A mirror on cognitive processes. SKASE Journal of
+        Translation and Interpretation, 5(2), 23-31. http://www.skase.sk/Volumes/JTI06/pdf_doc/03.pdf
+
+Vahab, M., Zandiyan, A., Falahi, M. H., & Howell, P. (2013). Lexical category influences in Persian children who stutter.
+       Clinical linguistics & phonetics, 27(12), 862-873. https://doi.org/10.3109/02699206.2013.809792
+
+Yenkimaleki, M., Van Heuven, V. J., & Hosseini, M. (2022). The effect of fluency strategy training on interpreter trainees’
+       speech      fluency:    Does     content   familiarity  matter?      Speech     Communication,       146,      1–10.
+       https://doi.org/10.1016/j.specom.2022.11.002
+
+Yenkimaleki, M., & Van Heuven, V. J. (2024a). The effect of fluency training on interpreter trainees’ speech fluency,
+       comprehensibility, and accentedness. Revista Española De Lingüística Aplicada/Spanish Journal of Applied
+       Linguistics. https://doi.org/10.1075/resla.22044.yen
+
+Yenkimaleki, M., & van Heuven, V. J. (2024b). Perception of ‘broad’ and ‘narrow’ fluency in the EFL performance of student
+       interpreters. Journal of Applied Linguistics and Professional Practice, 18 (3), 1-18. https://doi.org/10.1558/jalpp.26465
+
+Yin, K. (2011). Disfluencies in Consecutive Interpreting among Undergraduates in the Language Lab Environment in the final
+         version. In H. H. Gao & M. Dong (Eds.), Proceedings of the 25th Pacific Asia conference on language, information
+         and computation (pp. 459-466). Institute of Digital Enhancement of Cognitive Processing, Waseda University.
+         https://aclanthology.org/Y11-1048
+
+Zhang, W., & Song, Z. (2019). The effect of self-repair on judged quality of consecutive interpreting: Attending to content, form
+        and delivery. International Journal of Interpreter Education, 11(1), 3. https://tigerprints.clemson.edu/ijie/vol11/iss1/3
+
+Zhao, N. (2022). Speech Disfluencies in Consecutive Interpreting by Student Interpreters: The Role of Language Proficiency,
+        Working Memory, and Anxiety. Frontiers in Psychology, 13, 881778. https://doi.org/10.3389/fpsyg.2022.881778
+
+Zhao, N., & Dong, Y. P. (2013). A validating study using many-facet Rasch analysis on a consecutive interpreting. Frontiers, 7,
+        1-12. https://doi.org/10.3389/fcomm.2022.1047389
+
+Zhao, N., Cai, Z. G., & Dong, Y. (2023). Speech errors in consecutive interpreting: Effects of language proficiency, working
+        memory, and anxiety. Plos one, 18(10), 1-17. https://doi.org/10.1371/journal.pone.0292718
+
+
+
+
+                                                                141
+

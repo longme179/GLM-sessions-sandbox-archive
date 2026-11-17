@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Verifying...</title>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <style>
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        font-family: sans-serif;
+        background-color: #f9f9f9;
+      }
+      .box {
+        padding: 2rem;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <form id="challenge-form" action="/" method="POST">
+        <input type="hidden" name="next_url" value="http://150.254.65.57/docstore/download/UAMaa06e6622f7541c184ca7e0aa7156176/Pawel+Korpal+PhD.pdf?entityType=phd&amp;entityId=UAMa130ea80c38940c788b36a79eba66977">
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAABgsyFPWXoPA3gJ1" data-callback="onTurnstileSuccess"></div>
+      </form>
+    </div>
+    <script>
+      function onTurnstileSuccess(token) {
+        document.getElementById("challenge-form").submit();
+      }
+    </script>
+  </body>
+</html>
