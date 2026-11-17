@@ -8,6 +8,17 @@
 > "researcher-developed, pending pilot validation" (tự phát triển, chờ kiểm
 > định bằng pilot).
 
+## Trọng tâm công cụ (D16, 2026-11-17)
+
+- **Bộ 30 item (Part C) = INSTRUMENT TRUNG TÂM** của đề tài — công cụ chính
+  trả lời RQ2' (yếu tố nào gây lo âu nhiều nhất và nhóm nào nổi bật). Mọi
+  quyết định về item, thứ tự, nhóm, bản song ngữ phục vụ trực tiếp RQ2'.
+- **Dong-20 (Part B) = công cụ HỖ TRỢ**: (a) baseline mô tả mức độ lo âu của
+  mẫu; (b) điểm phân tầng chọn 10–12 SV phỏng vấn (high/mid/low) cho RQ3'.
+  Không phải công cụ trung tâm, không dùng để xếp hạng nguyên nhân.
+- **Phỏng vấn bán cấu trúc = công cụ GIẢI THÍCH**: làm rõ cơ chế vì sao các
+  yếu tố xếp hạng cao gây lo âu (RQ3').
+
 ## Trạng thái phiên 1 (2026-11-17)
 
 - Bộ 30 item (6 nhóm × 5) + bản song ngữ + ma trận item↔nguồn: **tồn tại trong
@@ -23,7 +34,7 @@
 
 - **Part A — Nhân khẩu học**: tuổi, giới tính, lớp, học kỳ đã học phần phiên
   dịch đuổi, kinh nghiệm phiên dịch (nếu có). [TỰ VIẾT]
-- **Part B — Dong-20 thích nghi**: 20 item, thang Likert 5 điểm, item 1–8 đảo
+- **Part B — Dong-20 thích nghi (công cụ hỗ trợ: baseline + phân tầng)**: 20 item, thang Likert 5 điểm, item 1–8 đảo
   điểm; chờ thư xin phép GS. Dong (soạn, chưa gửi). Q2 đổi "trên đường đến
   lớp"; Q10 chuyển role-play hoặc bỏ (→ G5). **Bản gốc ĐÃ XÁC MINH TOÀN VĂN
   phiên 5** (verify/dong2013/DONG20_nguyen_van.md — 20 item nguyên văn tiếng
@@ -32,7 +43,7 @@
   tóm tắt cũ) → G5 cần đọc lại: nội dung gốc là sợ bị phát hiện lỗi, có thể
   giữ nguyên bối cảnh lớp học mà chỉ cần đổi "hai bên được phục vụ" thành
   "giảng viên + bạn học". A2 dùng cột nguyên văn làm chuẩn dịch.
-- **Part C — Bộ 30 item**: 6 nhóm × 5 câu song ngữ Anh–Việt, mỗi câu gắn nhãn
+- **Part C — Bộ 30 item (INSTRUMENT TRUNG TÂM)**: 6 nhóm × 5 câu song ngữ Anh–Việt, mỗi câu gắn nhãn
   nguồn ở cột riêng (bản nội bộ; bản in cho SV bỏ cột này).
 
 ## Tiến trình công cụ (kế hoạch đã chốt phiên trước)

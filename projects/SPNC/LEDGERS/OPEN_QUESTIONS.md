@@ -13,7 +13,7 @@
 
 | # | Câu hỏi | Phương án A | Phương án B | Khuyến nghị | Lý do khuyến nghị |
 |---|---|---|---|---|---|
-| G1 | Phiếu khảo sát: giữ cả 50 item (A+B+C) hay bỏ Part B (Dong-20), chỉ dùng bộ 30? | Giữ 50 item (đo cả mức độ lẫn nguồn gốc) | Chỉ bộ 30 (ngắn, ít mệt SV) | A nếu sĩ số ≥80; B nếu <60 | Part B cho RQ1 một thang có α đã công bố; bỏ nó thì RQ1 mất công cụ chuẩn |
+| G1 | Phiếu khảo sát: giữ cả 50 item (A+B+C) hay bỏ Part B (Dong-20), chỉ dùng bộ 30? | Giữ 50 item (đo cả mức độ lẫn nguồn gốc) | Chỉ bộ 30 (ngắn, ít mệt SV) | A nếu sĩ số ≥80; B nếu <60 | Part B cho RQ1 một thang có α đã công bố; bỏ nó thì RQ1 mất công cụ chuẩn. Bổ sung D16: Dong-20 giờ là công cụ baseline mô tả bối cảnh + phân tầng chọn mẫu phỏng vấn (high/mid/low) cho trọng tâm factors (RQ2') |
 | G2 | Ngôn ngữ phiếu khảo sát | Song ngữ Anh–Việt | Chỉ tiếng Việt | Song ngữ | SV ngôn ngữ Anh hiểu cả hai; song ngữ giảm hiểu sai nghĩa |
 | G3 | Cách lấy mẫu | Thuận tiện toàn bộ lớp | Chọn lớp ngẫu nhiên trong khoa | Thuận tiện (giữ D3) | Khả thi, đúng đối tượng đã học học phần |
 | G4 | Có phỏng vấn thêm giảng viên phiên dịch không? | Có (2–3 GV, hỏi góc nhìn giảng dạy) | Không (chỉ SV) | B (mặc định), A nếu thời gian cho phép | Đề tài về SV; GV là nguồn phụ, thêm sẽ dài tiến độ |
