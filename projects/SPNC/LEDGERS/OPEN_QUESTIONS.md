@@ -6,7 +6,7 @@
 |---|---|---|---|
 | U1 | Bạn còn bản nháp cũ không (proposal 7 mục, bảng 30 item song ngữ, bản dịch Việt thang Dong-20)? Nếu có, gửi vào `upload/` | Luật seed: bản nháp cũ là artifact gốc, mọi tái tạo phải khớp nó | 2026-11-17 |
 | U2 | Tên học phần phiên dịch đuổi, học kỳ nào (năm 3 học kỳ 1 hay 2), số tín chỉ, sĩ số dự kiến khoa Tiếng Anh HCMUE | Không có → phần Sample và timeline chỉ viết được dạng placeholder có nhãn | 2026-11-17 |
-| U3 | Mật khẩu OpenCode gateway mới (mật khẩu cũ 401 — có thể đã đổi) | Để các agent chạy trên máy bạn (thư mục SPNC) thay vì chỉ trong sandbox | 2026-11-17 |
+| U3 | ~~Mật khẩu OpenCode gateway~~ **ĐÃ GIẢI QUYẾT phiên 4 (2026-11-17):** mật khẩu không đổi, gateway 200 ổn định từ sandbox. Nguyên nhân 401 là lỗi tạm thời chuỗi tunnel (xem D14), không phải mật khẩu sai. Lưu ý bảo mật: mật khẩu đã lộ trong transcript nhiều lần → vẫn nên rotate khi rảnh rỗi (`opencode service set password`) | Để các agent chạy trên máy bạn (thư mục SPNC) thay vì chỉ trong sandbox | 2026-11-17 |
 | U4 | Bạn muốn nhận sản phẩm nào TRƯỚC trong đợt sau: proposal tiếng Anh nháp, hay bộ công cụ (phiếu khảo sát song ngữ)? | Ưu tiên thứ tự sản phẩm Phase 2 | 2026-11-17 |
 
 ## Tầng 2 — Chờ GVHD quyết (trình phương án A/B + khuyến nghị)
