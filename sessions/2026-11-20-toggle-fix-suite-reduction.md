@@ -54,9 +54,11 @@ Lesson #20 records the general rule.
 
 ## Result
 
-- Architecture + catalog + focused suites green; final full battery on the
-  reduced suite + fix branch: see /tmp/reduced-battery.log on the desktop
-  (result recorded in the owner report of this session).
+- Architecture + catalog + focused suites green. Final full battery on the
+  reduced suite + fix branch: 1420 tests, 0 failures, 185 skipped; the single
+  ERROR (test_managed_supervision quickshell quit missed its 4 s window under
+  full-suite load) passes standalone — load-timing flake, not a regression.
+- PR #180 opened for the toggle fix with that verification.
 - Restore path for anything: `mv ~/lme-tests-disabled/<file> tests/`.
 
 ## Consolidation proposals for the owner (NOT executed — need sign-off)
