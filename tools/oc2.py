@@ -125,6 +125,18 @@ if __name__ == "__main__":
                           "dir": s.get("location", {}).get("directory")}, indent=1))
     elif c == "sh":
         print(sh(sys.argv[2], int(sys.argv[3]) if len(sys.argv) > 3 else 120))
+    elif c == "newsess":
+        model_id = os.environ.get("OC_MODEL_ID", "baidu/ernie-5.5-flash-preview:free")
+        provider = os.environ.get("OC_PROVIDER", "openrouter")
+        body = {"title": sys.argv[2],
+                "model": {"id": model_id, "providerID": provider, "modelID": model_id}}
+        r = api("/api/session", body)
+        d = (r or {}).get("data", r) or {}
+        print("SID:", d.get("id"), "|", json.dumps(r)[:200])
+    elif c == "sessions":
+        r = api("/api/session?limit=30")
+        for s in ((r or {}).get("data") or []):
+            print(s.get("id"), "|", s.get("title"))
     elif c == "dispatch":
         pf = sys.argv[2]
         ws = int(sys.argv[3]) if len(sys.argv) > 3 else 600

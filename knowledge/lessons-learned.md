@@ -1392,3 +1392,27 @@ event line per committed store rides the existing pipe.
     md5-comparing repo files vs the symlinked live files (6 files done for
     7bc362d), not by the change count. The niri kdl fragment is the exception
     (deploy.sh swaps it for real, shell restart required).
+11. **OpenCode session-create Model.Ref shape (2.3.0)** — `"model"` accepts
+    only an object `{"id": "<model-id>", "providerID": "<provider>",
+    "modelID": "<model-id>"}` where **id must NOT contain the provider
+    prefix** (a prefixed id routes as `openrouter/openrouter/...` ->
+    provider.no-route). A plain string is rejected ("Expected Model.Ref |
+    null"). `variantID` is accepted but stored as variant "default" — ignore
+    it. See `tools/oc2.py newsess`.
+12. **opencode.json `model` default does NOT hot-reload.** The running
+    service keeps resolving new sessions to the old default until
+    `systemctl --user restart opencode-server.service`. That restart is
+    safe: port 49374 is stable across restarts and the Tailscale funnel
+    mapping survives — but always re-probe `/api/info` on both URLs after.
+    Session-info `model: null` on a fresh session is normal (resolves at
+    first prompt); verify the default with a plain session + tiny prompt.
+13. **Free models need NO provider API key on this gateway.** There is no
+    `~/.local/share/opencode/auth.json` and no OPENROUTER_API_KEY in the
+    service env; `*:free` models route through OpenCode's own gateway and
+    the quota is the OpenCode-account free tier. "Free usage limit reached"
+    (AI.Error.QuotaExceeded) resets within hours — retry the same model
+    before switching. Paid defaults (gemini-neon) fail with 402
+    "Insufficient balance ... OpenCode Models credits" when credits are 0.
+14. **PR bodies: never fight shell quoting** — write the body to a local
+    file, `put` it to `/tmp/<name>.md`, then `gh pr create --body-file`.
+    Zero-escaping, reviewable, reusable. (Used for PR #176.)

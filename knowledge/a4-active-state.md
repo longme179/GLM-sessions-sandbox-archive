@@ -1,5 +1,12 @@
 # A4c/Tier-A ACTIVE STATE — read this FIRST on any new session
 
+> **UPDATE 2026-11-20: this era is closed.** Roadmap closed 100% on
+> 2026-11-01; the post-roadmap hardening series (a4c fixes, PB-31..PB-35)
+> is fully merged — last was PR #176 (flameshot) — main `1f0880c`. Read
+> `sessions/2026-11-20-pb35-closeout-end4pC-analysis.md` and the
+> "Session 2026-11-20" section of `knowledge/lme-shell-state.md` instead.
+> Everything below is history (A4c/Tier-A era).
+
 Last updated: 2026-11-15 ~23:45 +07 (Agent-2 session: c2c3 closeout + verify-kép + deploy).
 Supersedes q5-active-state.md (Q5/Q6 closed long ago — kept for history).
 

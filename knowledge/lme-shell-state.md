@@ -1,9 +1,32 @@
 # lme-fedora-niri-qs — live state
 
 > UPDATE THIS FILE at the end of every work session. Last updated:
-> 2026-11-15 ~23:45 +07 (Agent-2 session: c2c3 fix cycle fully landed — PRs
-> #168-#171 merged + deployed, main 7bc362d, shell 1621529; owner live checklist
-> + OQ-5 pending. Current read-first file: knowledge/a4-active-state.md.)
+> 2026-11-20 (Agent-2 session: PB-35 merged as PR #176, main 1f0880c in sync
+> with origin, gateway default model switched to deepseek-v4.1-flash-free.
+> Current read-first file: sessions/2026-11-20-pb35-closeout-end4pC-analysis.md
+> for the era summary; this file keeps the tree state.)
+
+## Session 2026-11-20 (Agent-2) — PB-35 landed, roadmap review, end4-pC comparison
+
+- **Tree**: main = `1f0880c` (merge of PR #176, flameshot screenshot pipeline),
+  in sync with origin. The live desktop shell runs this main (deployed +
+  live-verified during PB-35; kill+respawn regression PASS, PNG mode 0600).
+- **Roadmap**: closed 100% on 2026-11-01 by owner decision. Post-closure
+  hardening series complete: #169-171 a4c, #172 PB-31 ambient power gating,
+  #173 PB-32 timer gating, #174 PB-33 SmartImage DPR decode, #175 PB-34
+  lock-reload-recovery, #176 PB-35 flameshot. All merged; no open PRs.
+- **Gateway**: default model now `opencode/deepseek-v4.1-flash-free`
+  (verified end-to-end); priority fallbacks in the 2026-11-20 handoff.
+- **Cleanup**: worktree ~/lme-pb35 removed, branch fix/screenshot-flameshot
+  deleted. ~30 older worktrees remain (owner call).
+- **Known small debt**: README Features table still says Satty/Swappy and
+  in-shell image annotation (stale after PB-35) — docs sync PR pending.
+- **New analysis** (owner request): end4-pC comparison report delivered to
+  the owner (sandbox download/, 15 pp). Headline: invest in UI/design system
+  (P1: wallpaper->theme dynamic colors, Motion factory, README sync), one
+  boundary at a time; do NOT rewrite the backend. Details in
+  sessions/2026-11-20-pb35-closeout-end4pC-analysis.md §4.
+
 
 ## Session 2026-11-15 (Agent-2 + Agent-1) — A4c closeout, c2c3 fixes, verify-kép, deploy
 
