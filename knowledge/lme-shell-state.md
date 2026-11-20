@@ -49,6 +49,20 @@
   180 files, tests Python −1,279 lines. Consolidation proposals (wallpaper×4,
   audio×7, battery_saver×2) await owner sign-off. See
   sessions/2026-11-20-toggle-fix-suite-reduction.md.
+- **Playlist-follow gap fix (#181, 2026-11-21)**: the owner reported "Next
+  image" changed the wallpaper without the palette following. Root cause: the
+  wallpaperNext/wallpaperResetOutput capabilities bound straight to
+  self.wallpapers.advance/reset_output, bypassing the host where
+  follow_wallpaper_palette was composed (only apply_wallpaper had it). Fixed
+  with advance_wallpaper/reset_wallpaper_output host wrappers + cap rewiring;
+  ceiling 1637. Deployed (pull + settings-app restart only — no QML changed,
+  main shell left running) and verified end-to-end on the live machine
+  (wallpaper w5m1y7.jpg→k81oj1.png, accent #84d992→#c0c5e7, "palette updated").
+  Deploy topology recorded: main shell runs off the repo via the
+  ~/.config/quickshell/lme-shell symlink; the settings app runs
+  deployment/bin/quickshell -p <repo>/settings.qml with its own
+  desktop_backend.py --settings — that backend serves wallpaperNext. See
+  sessions/2026-11-21-playlist-follow-fix.md.
 
 
 ## Session 2026-11-15 (Agent-2 + Agent-1) — A4c closeout, c2c3 fixes, verify-kép, deploy
