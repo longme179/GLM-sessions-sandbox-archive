@@ -1416,3 +1416,29 @@ event line per committed store rides the existing pipe.
 14. **PR bodies: never fight shell quoting** — write the body to a local
     file, `put` it to `/tmp/<name>.md`, then `gh pr create --body-file`.
     Zero-escaping, reviewable, reusable. (Used for PR #176.)
+15. **oc2.py has NO `prompt` command — the send-and-wait verb is
+    `dispatch <prompt_file> [wait_s]`.** A mistyped verb prints usage AND
+    exits 0, so `&&` chains continue silently (cost: 15 idle minutes).
+16. **The local battery (~1455 tests) needs ~10 min test time but 35-45 min
+    wall time with engine cases; give /api/shell a 2700s timeout.**
+    Interrupting an agent session mid-bash ORPHANS the process — before any
+    new check.sh run, `pgrep -af check.sh` and kill orphans by PID: two
+    concurrent batteries poison each other (6 phantom failures).
+17. **Free-model fallbacks (2026-11-20): deepseek-v4.1-flash-free hit
+    FreeUsageLimit (429) after ~2h of light use; every `openrouter/*:free`
+    model fails with "0 endpoints ... guardrail restrictions and data
+    policy" through this gateway. Working alternative:
+    `opencode/tidepool-alpha-free` (1M ctx). Other opencode-provider free
+    options: hy4-flash-free, longcat-2.5-free, beam-free, mimo-v2.6-flash-free,
+    nemotron-3.5-super-vl-free, nemotron-3.5-lightning-free. Enumerate with
+    GET /api/model (428 models listed).
+18. **Drive mechanical desktop work through the raw shell channel directly**
+    (the PB-35 T05-T07 pattern): put patch → git apply → focused tests with
+    `PYTHONPATH=tests:scripts python3 -m unittest <module> -v` → fixture
+    regen → commit/push/gh pr. Reserve model sessions for judgment work.
+    Worker-action tests are deterministic via: handle() →
+    `live.feature_jobs[name].result(timeout=5)` → `live.finish_features()`
+    (finish_features only processes futures that are already done).
+19. **Worker ActionSpecs MUST carry a callable `complete`** — the registry
+    rejects execution='worker' without one ("Only synchronous actions are
+    supported") at provide() time.

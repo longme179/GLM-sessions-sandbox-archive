@@ -26,6 +26,17 @@
   (P1: wallpaper->theme dynamic colors, Motion factory, README sync), one
   boundary at a time; do NOT rewrite the backend. Details in
   sessions/2026-11-20-pb35-closeout-end4pC-analysis.md §4.
+- **P1 executed (same day, owner-authorized from the report)**: three stacked
+  PRs — #177 docs/labels flameshot sync (13 files incl. install lists and niri
+  overlay titles), #178 Motion factory (curve token set, MotionAnimation
+  role/ms, new OpacityMotion, two exemplar refactors, docs/MOTION.md),
+  #179 wallpaper-following Material palettes (wallpaperPaletteAuto + paletteSync
+  worker action + net-zero host composition in apply_wallpaper + WallpaperState
+  advance hook + Settings switch; fixture ceilings grow by one key:
+  634→638, 24743→24880). Full battery on the stacked tip: no new failures
+  (4 pre-existing baseline failures, proven identical on plain main). Merge
+  order #177 → #178 → #179; live wallpaper→palette flow is the owner's
+  real-session check after deploy. See sessions/2026-11-20-p1-quickwins.md.
 
 
 ## Session 2026-11-15 (Agent-2 + Agent-1) — A4c closeout, c2c3 fixes, verify-kép, deploy
