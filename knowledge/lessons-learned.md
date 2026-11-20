@@ -1442,3 +1442,18 @@ event line per committed store rides the existing pipe.
 19. **Worker ActionSpecs MUST carry a callable `complete`** — the registry
     rejects execution='worker' without one ("Only synchronous actions are
     supported") at provide() time.
+20. **The local-only test policy hides breakage from PRs.** P1's three
+    contract breaks (Motion.qml's 25-nonblank pin, the 158-key schema pin,
+    the sync-appearance golden) were invisible in the PR diff and only
+    surfaced in the owner's local battery after merge. Before asking the
+    owner to merge anything that adds a preference key, touches
+    qml/theme/Motion.qml, or adds an action: grep the local suite for pins
+    (`grep -rn "<key>\|Motion.qml" tests/test_*.py`) and run the battery to
+    completion. Goldens regenerate with the suite's own machinery
+    (observations()/etc.), never hand-edit, and re-dump in the ORIGINAL
+    format — sync-appearance.json is compact (one JSON line per
+    observation); indent=2 explodes it past the architecture size cap.
+    Also: the architecture scanner walks ALL of tests/ (subdirs included),
+    and moving a test file out of tests/ orphans its largeFiles ceiling —
+    keep disabled tests OUTSIDE the repo (~/lme-tests-disabled/) and note
+    that skip decorators ADD a nonblank line to capped files.

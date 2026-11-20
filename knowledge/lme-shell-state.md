@@ -37,6 +37,18 @@
   (4 pre-existing baseline failures, proven identical on plain main). Merge
   order #177 → #178 → #179; live wallpaper→palette flow is the owner's
   real-session check after deploy. See sessions/2026-11-20-p1-quickwins.md.
+- **P1 follow-up (same day, owner live report)**: the merged Follow-wallpaper
+  toggle was inert alone (it only set wallpaperPaletteAuto; the follow gate
+  also needed paletteSource=wallpaper, which only manual Preview/Apply set).
+  Fixed in PR #180 (fix/palette-follow-toggle): toggle-on now also switches
+  the source and syncs the current wallpaper immediately. Also repaired the
+  three local contract tests P1 had broken (Motion 25→48 pin, schema 158→159,
+  sync-appearance golden regenerated compact), and executed the owner's test
+  reduction: 6 lockscreen files (48 tests, 38s) moved to ~/lme-tests-disabled/
+  and 4 always-red env flakes skip-decorated; laptop ceiling 390→391. Suite:
+  180 files, tests Python −1,279 lines. Consolidation proposals (wallpaper×4,
+  audio×7, battery_saver×2) await owner sign-off. See
+  sessions/2026-11-20-toggle-fix-suite-reduction.md.
 
 
 ## Session 2026-11-15 (Agent-2 + Agent-1) — A4c closeout, c2c3 fixes, verify-kép, deploy
