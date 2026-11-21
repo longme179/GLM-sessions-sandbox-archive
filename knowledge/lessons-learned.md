@@ -1457,3 +1457,38 @@ event line per committed store rides the existing pipe.
     and moving a test file out of tests/ orphans its largeFiles ceiling —
     keep disabled tests OUTSIDE the repo (~/lme-tests-disabled/) and note
     that skip decorators ADD a nonblank line to capped files.
+
+## Lesson 85 — P2 execution: gate-reading discipline + repo classification mechanics (2026-11-21, PRs #182–#185)
+
+- **Never read a check's verdict with `| tail -1`.** check-architecture.sh
+  prints the language-mix line LAST even when it failed, so tail -1 showed
+  a normal-looking line while "Forbidden dependency: DesktopCard.qml ->
+  WeatherWidget.qml" sat above it — the #184 cross-layer break slipped
+  past the first focused run and only the full battery caught it. Read the
+  exit code and grep the verdict ("Forbidden", "Unclassified", "Size cap")
+  instead.
+- **New scripts need real classification, not docstring markers.** The
+  checker's ownership map comes from policy lists (sharedFiles /
+  legacyFeatures / feature descriptors in config/features.json), never from
+  the "(owner: x)" docstring comment — that is documentation only. A new
+  helper module goes into architecture.json's sharedFiles; adding a line
+  there trips architecture.json's OWN self-referential size cap (413→414),
+  which must be bumped in the same commit.
+- **The architecture graph means it: panels never consume panels across
+  layers.** Reusing the bar's WeatherWidget inside the desktop card was the
+  natural-looking move and the gate rejected it. The intended pattern is
+  data from services: an inline compact card reading ShellState.weather
+  keeps the layering and is the better widget presentation anyway.
+- **Quickshell.env() returns null, not "", for unset variables** — any
+  `.length`/method deref on it throws exactly where the variable is
+  blanked (engine fixtures, gateway shells that lost their session env).
+  Guard with `(... || "")`; the battery surfaced a live one in LockState
+  (#183) that had been latent because earlier runs inherited the variable
+  set. Related: the opencode channel env can lose WAYLAND_DISPLAY after a
+  gateway restart — engine tests inherit it (that's how #183 fired), and
+  any live measurement driving awww needs it passed explicitly.
+- Stacked PRs + one battery per tip remains the cheapest honest gate:
+  #182←#183←#184←#185, each green run covering everything below it. The
+  two real bugs this era (LockState null deref, the cross-layer edge) were
+  both found by gates that already existed — the value is in reading their
+  output correctly.

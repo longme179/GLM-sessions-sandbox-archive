@@ -63,6 +63,27 @@
   deployment/bin/quickshell -p <repo>/settings.qml with its own
   desktop_backend.py --settings — that backend serves wallpaperNext. See
   sessions/2026-11-21-playlist-follow-fix.md.
+- **P2 selective expansion executed (2026-11-21, PRs #182-#185 stacked)**:
+  #182 Settings exposes the wallpaper transition effect (curated
+  fade/grow/outer/wipe/wave + none, exotic stored types stay selectable) +
+  duration slider — the backend/awww machinery already existed end to end;
+  live acceptance measured on the machine: grow 3.0 s ran 2.91 s (no
+  starvation), awww +8.1 MB transient, ~10% of one core, aggregate
+  363.5 MiB < 400 budget. #183 one-line guard for Quickshell.env() null on
+  unset WAYLAND_DISPLAY (real bug the battery surfaced; engine tests now
+  run with the variable unset). #184 desktop widgets grow weather (inline
+  card reading ShellState.weather — the graph forbids reusing the weather
+  panel), calendar (pure QML month grid) and account cards, with
+  empty-region placement (grid scan, cascade fallback). #185 two-way
+  settings hot-reload: prefs_watcher.py (sharedFiles) stat-polls
+  settings.json 0.25 s + self-pipe into the serve loop selector — external
+  edits republish <1 s (verified over the real JSON-lines protocol,
+  write-read-write loop included); own atomic writes stay silent.
+  Batteries: green on the #183, #184 (after the arch repair) and #185
+  tips. Merge order #182→#185 (stacked). Deploy after merge needs a MAIN
+  shell restart (widget QML + watcher run there), not just the settings
+  app. i18n deferred by the owner. See
+  sessions/2026-11-21-p2-execution.md.
 
 
 ## Session 2026-11-15 (Agent-2 + Agent-1) — A4c closeout, c2c3 fixes, verify-kép, deploy
