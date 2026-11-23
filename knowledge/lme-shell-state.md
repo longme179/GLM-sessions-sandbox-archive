@@ -6,6 +6,23 @@
 > Current read-first file: sessions/2026-11-20-pb35-closeout-end4pC-analysis.md
 > for the era summary; this file keeps the tree state.)
 
+## Session 2026-11-23 (Agent-2) — wallpaper palette follow fix (PR #191 OPEN)
+
+- Owner reported: auto playlist rotation does not follow the palette; manual
+  "Next image" does. Audit found THREE root causes on main @ 8027691:
+  (1) --no-wallpaper polarity inverted in desktop_backend.py::main → the main
+  backend ran the legacy scheduler and starved the native one (which has the
+  follow); (2) WallpaperState.qml busy-wedge (busy=true before ready()→runTool
+  queues → first job wedged forever, masked by #1); (3) wallpaperCycle had no
+  follow_wallpaper_palette composition. All fixed in PR #191
+  (fix/wallpaper-palette-follow @ 06d4a2a) + new "Next wallpaper" bar module
+  (config/wallpaper.json bar + qml/bar/WallpaperButton.qml) and CC tile
+  (control-grid.json + ControlDashboard + desktop_features migrations) + image
+  ShellIcon glyph. Ceilings ratcheted 338/1652/254/418. Sandbox checks green;
+  HOST-SIDE battery + new regression tests still pending (tests/ is untracked
+  on dev machines — see sessions/2026-11-23-wallpaper-palette-fix.md for the
+  full plan incl. gowallApply follow gap noted-not-fixed).
+
 ## Session 2026-11-20 (Agent-2) — PB-35 landed, roadmap review, end4-pC comparison
 
 - **Tree**: main = `1f0880c` (merge of PR #176, flameshot screenshot pipeline),
