@@ -19,7 +19,10 @@
   (config/wallpaper.json bar + qml/bar/WallpaperButton.qml) and CC tile
   (control-grid.json + ControlDashboard + desktop_features migrations) + image
   ShellIcon glyph. Ceilings ratcheted 338/1652/254/418. Sandbox checks green;
-  HOST-SIDE battery + new regression tests still pending (tests/ is untracked
+  HOST BATTERY GREEN (focused 113 OK, check.sh 1500 OK, canonical 1500 + 1
+  known load flake standalone-OK) via Agent-1 worktree ~/lme-191; fixture
+  ceilings ratcheted in 6c96d5f; PR comment posted. Pending owner: merge +
+  restart main shell + live acceptance (tests/ is untracked
   on dev machines — see sessions/2026-11-23-wallpaper-palette-fix.md for the
   full plan incl. gowallApply follow gap noted-not-fixed).
 

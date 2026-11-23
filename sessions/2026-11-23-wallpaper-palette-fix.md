@@ -65,3 +65,31 @@ unwedge engine case WITHOUT injected runner + fake awww), then merge + deploy
 Also NOT fixed (same-class minor gap, noted in PR): gowallApply →
 ImageUtilities.apply → Wallpapers.apply bypasses the host wrapper (no palette
 follow on gowall-applied wallpapers).
+
+## Phase 2 (same day) — host battery via Agent-1, verdict GREEN
+
+- Agent-1 work session (qwen4-max-free): worktree ~/lme-191 @ 06d4a2a.
+  IMPORTANT: /home/kimhoanglong/Desktop/dev-lme-shell is an EMPTY git init —
+  the real repo is /home/kimhoanglong/lme-fedora-niri-qs (main @ 8027691).
+  Worktree + tests copy-back from/to there.
+- New/updated tests (tests/ untracked on dev machines):
+  test_wallpaper_follow_regressions.py NEW (109 nonblank): main() polarity
+  pins (5 argv cases) + the WallpaperState ENGINE case (fake awww on PATH, NO
+  injected runner, two full advances, busy releases, paletteSync fires).
+  test_wallpaper_palette_auto.py: wallpaperCycle follow ON/OFF functional.
+  test_native_wallpaper.py: static no-busy-before-ready pin. test_control_grid
+  8x8 roundtrip + 3 fixture goldens regenerated.
+- RED on main: 8 failures incl. engine reproducing RC2 latch verbatim
+  ({'timeout': 0, 'busy': True}). GREEN on branch: focused 113 OK; check.sh
+  exit 0 (arch clean + 1500 OK); canonical battery 1500 with ONE known load
+  flake (quickshell-quit 4s timeout, standalone OK — same class as prior
+  sessions' flakes).
+- Tracked-file follow-up (Agent-2 done): fixture ceilings ratcheted in PR
+  commit 6c96d5f (settings-validation 25550→25560, catalog-legacy 349→355);
+  PR #191 comment posted with full results.
+- Remaining for owner: merge #191, restart MAIN shell (QML changed; deploy
+  = git pull on main checkout, restart shell; settings app unaffected but
+  restart harmless), then live acceptance: follow on + playlist auto-rotate
+  (incl. during a fullscreen session) → palette must match; add "Next
+  wallpaper" from Settings → Top bar; check CC tile row 8.
+- gowallApply follow gap: still open, separate PR candidate.
