@@ -1,0 +1,417 @@
+{
+ "renderer": "gles2",
+ "scenario": "shell",
+ "runs": [
+  {
+   "actions": [
+    {
+     "action": "toggle:control",
+     "ready_ms": null,
+     "first_content_frame_ms": 115,
+     "settled_ms": 222,
+     "max_frame_gap_ms": 58,
+     "frames": 118
+    },
+    {
+     "action": "toggle:control",
+     "ready_ms": null,
+     "first_content_frame_ms": 104,
+     "settled_ms": 212,
+     "max_frame_gap_ms": 57,
+     "frames": 121
+    },
+    {
+     "action": "toggle:notifications",
+     "ready_ms": 95,
+     "first_content_frame_ms": 191,
+     "settled_ms": 299,
+     "max_frame_gap_ms": 106,
+     "frames": 121
+    },
+    {
+     "action": "toggle:control",
+     "ready_ms": 0,
+     "first_content_frame_ms": 110,
+     "settled_ms": 208,
+     "max_frame_gap_ms": 58,
+     "frames": 121
+    },
+    {
+     "action": "toggle:control",
+     "ready_ms": null,
+     "first_content_frame_ms": 117,
+     "settled_ms": 221,
+     "max_frame_gap_ms": 57,
+     "frames": 65
+    },
+    {
+     "action": "tab:audio",
+     "ready_ms": 170,
+     "first_content_frame_ms": 174,
+     "settled_ms": null,
+     "max_frame_gap_ms": 239,
+     "frames": 44
+    },
+    {
+     "action": "tab:devices",
+     "ready_ms": 755,
+     "first_content_frame_ms": 762,
+     "settled_ms": null,
+     "max_frame_gap_ms": 762,
+     "frames": 53
+    },
+    {
+     "action": "tab:agenda",
+     "ready_ms": 571,
+     "first_content_frame_ms": 578,
+     "settled_ms": null,
+     "max_frame_gap_ms": 578,
+     "frames": 55
+    },
+    {
+     "action": "tab:monitor",
+     "ready_ms": 1,
+     "first_content_frame_ms": 20,
+     "settled_ms": null,
+     "max_frame_gap_ms": 22,
+     "frames": 52
+    },
+    {
+     "action": "tab:controls",
+     "ready_ms": null,
+     "first_content_frame_ms": null,
+     "settled_ms": null,
+     "max_frame_gap_ms": 23,
+     "frames": 53
+    },
+    {
+     "action": "tab:audio",
+     "ready_ms": 1,
+     "first_content_frame_ms": 20,
+     "settled_ms": null,
+     "max_frame_gap_ms": 22,
+     "frames": 52
+    },
+    {
+     "action": "tab:devices",
+     "ready_ms": 1,
+     "first_content_frame_ms": 12,
+     "settled_ms": null,
+     "max_frame_gap_ms": 23,
+     "frames": 53
+    },
+    {
+     "action": "tab:agenda",
+     "ready_ms": 1,
+     "first_content_frame_ms": 13,
+     "settled_ms": null,
+     "max_frame_gap_ms": 22,
+     "frames": 54
+    },
+    {
+     "action": "tab:monitor",
+     "ready_ms": 1,
+     "first_content_frame_ms": 20,
+     "settled_ms": null,
+     "max_frame_gap_ms": 22,
+     "frames": 53
+    },
+    {
+     "action": "tab:controls",
+     "ready_ms": null,
+     "first_content_frame_ms": null,
+     "settled_ms": null,
+     "max_frame_gap_ms": 59,
+     "frames": 107
+    },
+    {
+     "action": "toggle:launcher",
+     "ready_ms": 61,
+     "first_content_frame_ms": 166,
+     "settled_ms": 280,
+     "max_frame_gap_ms": 131,
+     "frames": 114
+    },
+    {
+     "action": "toggle:clipboard",
+     "ready_ms": 98,
+     "first_content_frame_ms": 152,
+     "settled_ms": 300,
+     "max_frame_gap_ms": 135,
+     "frames": 116
+    },
+    {
+     "action": "toggle:power",
+     "ready_ms": 99,
+     "first_content_frame_ms": 158,
+     "settled_ms": 325,
+     "max_frame_gap_ms": 123,
+     "frames": 115
+    },
+    {
+     "action": "toggle:control",
+     "ready_ms": 1,
+     "first_content_frame_ms": 41,
+     "settled_ms": 238,
+     "max_frame_gap_ms": 60,
+     "frames": 118
+    },
+    {
+     "action": "toggle:launcher",
+     "ready_ms": 1,
+     "first_content_frame_ms": 47,
+     "settled_ms": 203,
+     "max_frame_gap_ms": 61,
+     "frames": 118
+    },
+    {
+     "action": "toggle:settings",
+     "ready_ms": 1119,
+     "first_content_frame_ms": 1266,
+     "settled_ms": 1362,
+     "max_frame_gap_ms": 1156,
+     "frames": 75
+    },
+    {
+     "action": "page:appearance",
+     "ready_ms": null,
+     "first_content_frame_ms": null,
+     "settled_ms": null,
+     "max_frame_gap_ms": 23,
+     "frames": 52
+    },
+    {
+     "action": "page:elements",
+     "ready_ms": 417,
+     "first_content_frame_ms": 752,
+     "settled_ms": null,
+     "max_frame_gap_ms": 752,
+     "frames": 38
+    },
+    {
+     "action": "page:topbar",
+     "ready_ms": 806,
+     "first_content_frame_ms": 817,
+     "settled_ms": null,
+     "max_frame_gap_ms": 817,
+     "frames": 52
+    },
+    {
+     "action": "page:wallpaper",
+     "ready_ms": 500,
+     "first_content_frame_ms": 509,
+     "settled_ms": null,
+     "max_frame_gap_ms": 509,
+     "frames": 50
+    },
+    {
+     "action": "page:notifications",
+     "ready_ms": 268,
+     "first_content_frame_ms": 268,
+     "settled_ms": null,
+     "max_frame_gap_ms": 268,
+     "frames": 63
+    },
+    {
+     "action": "page:behavior",
+     "ready_ms": 376,
+     "first_content_frame_ms": 401,
+     "settled_ms": null,
+     "max_frame_gap_ms": 401,
+     "frames": 85
+    },
+    {
+     "action": "page:about",
+     "ready_ms": 86,
+     "first_content_frame_ms": 105,
+     "settled_ms": null,
+     "max_frame_gap_ms": 105,
+     "frames": 63
+    },
+    {
+     "action": "page:appearance",
+     "ready_ms": 421,
+     "first_content_frame_ms": 439,
+     "settled_ms": null,
+     "max_frame_gap_ms": 439,
+     "frames": 79
+    },
+    {
+     "action": "page:wallpaper",
+     "ready_ms": 0,
+     "first_content_frame_ms": 27,
+     "settled_ms": null,
+     "max_frame_gap_ms": 87,
+     "frames": 176
+    }
+   ],
+   "errors": [],
+   "rss": [
+    [
+     "control",
+     494300
+    ],
+    [
+     "close",
+     494412
+    ],
+    [
+     "control",
+     494512
+    ],
+    [
+     "close",
+     492792
+    ],
+    [
+     "notifications",
+     492112
+    ],
+    [
+     "close",
+     497892
+    ],
+    [
+     "control",
+     497064
+    ],
+    [
+     "close",
+     496032
+    ],
+    [
+     "control",
+     493460
+    ],
+    [
+     "audio",
+     496656
+    ],
+    [
+     "devices",
+     524608
+    ],
+    [
+     "agenda",
+     544828
+    ],
+    [
+     "monitor",
+     547584
+    ],
+    [
+     "controls",
+     548504
+    ],
+    [
+     "audio",
+     548452
+    ],
+    [
+     "devices",
+     549968
+    ],
+    [
+     "agenda",
+     550000
+    ],
+    [
+     "monitor",
+     550356
+    ],
+    [
+     "controls",
+     550236
+    ],
+    [
+     "close",
+     550292
+    ],
+    [
+     "launcher",
+     555640
+    ],
+    [
+     "close",
+     565892
+    ],
+    [
+     "clipboard",
+     569380
+    ],
+    [
+     "close",
+     589464
+    ],
+    [
+     "power",
+     590732
+    ],
+    [
+     "close",
+     589128
+    ],
+    [
+     "control",
+     586248
+    ],
+    [
+     "close",
+     590912
+    ],
+    [
+     "launcher",
+     586920
+    ],
+    [
+     "close",
+     588936
+    ],
+    [
+     "settings",
+     618904
+    ],
+    [
+     "appearance",
+     636324
+    ],
+    [
+     "elements",
+     642064
+    ],
+    [
+     "topbar",
+     698140
+    ],
+    [
+     "wallpaper",
+     718400
+    ],
+    [
+     "notifications",
+     741148
+    ],
+    [
+     "behavior",
+     754916
+    ],
+    [
+     "about",
+     766536
+    ],
+    [
+     "appearance",
+     768112
+    ],
+    [
+     "wallpaper",
+     759084
+    ],
+    [
+     "close",
+     757652
+    ]
+   ]
+  }
+ ]
+}

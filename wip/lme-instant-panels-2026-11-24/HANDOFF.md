@@ -97,3 +97,19 @@ Owner's guess (preload + cache) is right; the missing piece in LME was multi-ins
 - Frame-gate the reveal (DMS SurfaceFrameGate): first rendered frame at final geometry before slide starts.
 - Cut per-button cost (LiquidButton/GlassMaterial/LiquidFeedback shared material pool or lazy children until hover).
 - Retention budget: measure PSS after warming all panels (limit 400/500 MB); evict heavy panels LRU if over.
+
+## UPDATE 2026-11-24 (second pass) — implementation done, awaiting gates/PR
+
+Branch `perf/instant-panels-pages`, commit `334b57f` (implementation) on top of
+main a38a4e2. Final design and numbers: repo `docs/INSTANT_UI_PLAN.md`.
+- PageHost = keyed sync Loaders, off-screen park, LRU 6; PanelStage (new
+  `qml/panels/PanelStage.qml`) = PageHost keyed by panelKind, LRU 4, permanent
+  SlideLoader content, loaded synchronously; 4 s prewarm now completes.
+  `SettingsApplication` hides + linger 60 s; `SettingsView.active` gates timers.
+- Harness final7.json: first control 115 ms, switch-back 41–110 ms, tab
+  revisits 3–20 ms, Settings retained revisits 24–27 ms. First visits stay
+  build-bound (tabs 170–760, Settings 105–820).
+- Remaining: run `check.sh` on final tree + G0/G1/G2/G3, docs commit, push
+  branch + PR. Real-session checks owed: prewarm hitch, Settings re-show via
+  niri rules, aggregate PSS (harness demo RSS ~740 MB is not the real total).
+- Do NOT use the live session for measurements.

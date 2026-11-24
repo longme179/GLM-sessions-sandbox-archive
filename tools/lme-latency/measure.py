@@ -20,12 +20,10 @@ PATCHES = {
          '        Connections { target: overlay.contentItem.Window.window; function onFrameSwapped() { console.warn("TRACE frame " + Date.now() + " " + panelLoader.progress.toFixed(3) + " " + (panelLoader.outsideViewport ? 0 : 1) + " " + panelLoader.status); } }\n'
          '        Item {'),
     ],
-    'qml/components/SlideLoader.qml': [('    onLoaded: {\n', '    onLoaded: {\n        console.warn("TRACE slide-loaded " + Date.now());\n')],
-    'qml/components/PageHost.qml': [('        previous.visible = false;', '        console.warn("TRACE page-activate " + Date.now());\n        previous.visible = false;')],
-    'qml/settings/SettingsView.qml': [('            source: FeatureCatalog.url(root.currentPage.entry)\n',
-                                       '            source: FeatureCatalog.url(root.currentPage.entry)\n            onLoaded: console.warn("TRACE catalog-loaded " + Date.now())\n')],
-    'qml/panels/ControlCenter.qml': [('onLoaded: if (item && "embedded" in item) item.embedded = true }',
-                                      'onLoaded: { console.warn("TRACE catalog-loaded " + Date.now()); if (item && "embedded" in item) item.embedded = true } }')],
+    'qml/components/PageHost.qml': [
+        ('    function present(page) {\n', '    function present(page) {\n        console.warn("TRACE page-activate " + Date.now() + " " + key);\n'),
+        ('            onLoaded: {\n', '            onLoaded: {\n                console.warn("TRACE page-loaded " + Date.now() + " " + pageKey);\n'),
+    ],
 }
 # Optional patches: applied when the anchor exists (lets the same harness trace a modified tree).
 OPTIONAL = {'qml/components/PageHost.qml', 'qml/settings/SettingsView.qml', 'qml/panels/ControlCenter.qml', 'qml/components/SlideLoader.qml'}
@@ -33,9 +31,21 @@ OPTIONAL = {'qml/components/PageHost.qml', 'qml/settings/SettingsView.qml', 'qml
 
 VARIANTS = {
     'sync': {
-        'qml/components/PageHost.qml': [('asynchronous: true', 'asynchronous: false')] * 2,
+        'qml/settings/SettingsView.qml': [
+        ('    PageNavigation { target: pageLoader.item; onRequested:', '    Component.onCompleted: { const t = Date.now(); for (const page of SettingsRegistry.pages) if (page.entry) Qt.createComponent(FeatureCatalog.url(page.entry), Component.Asynchronous); console.warn("TRACE precompiled " + (Date.now() - t)); }\n    PageNavigation { target: pageLoader.item; onRequested:'),
+    ],
+    'qml/panels/ControlCenter.qml': [
+        ('    Component.onCompleted: { initialized = true; markTabRead(); refreshControls(); }',
+         '    Component.onCompleted: { console.warn("TRACE cc-created " + Date.now() + " parent=" + (parent ? parent.toString() + " < " + (parent.parent ? parent.parent.toString() : "null") + " < " + (parent.parent && parent.parent.parent ? parent.parent.parent.toString() : "null") : "null")); initialized = true; markTabRead(); refreshControls(); }'),
+        ('    Keys.onEscapePressed: if (editing) editing = false; else ShellState.closePanels()',
+         '    Component.onDestruction: console.warn("TRACE cc-destroyed " + Date.now())\n    Keys.onEscapePressed: if (editing) editing = false; else ShellState.closePanels()'),
+    ],
+    'qml/components/PageHost.qml': [('asynchronous: true', 'asynchronous: false')] * 2,
         'qml/settings/SettingsView.qml': [('asynchronous: true', 'asynchronous: false')],
-        'qml/panels/ControlCenter.qml': [('asynchronous: true', 'asynchronous: false')],
+        'qml/settings/SettingsView.qml': [
+        ('    PageNavigation { target: pageLoader.item; onRequested:', '    Component.onCompleted: { const t = Date.now(); for (const page of SettingsRegistry.pages) if (page.entry) Qt.createComponent(FeatureCatalog.url(page.entry), Component.Asynchronous); console.warn("TRACE precompiled " + (Date.now() - t)); }\n    PageNavigation { target: pageLoader.item; onRequested:'),
+    ],
+    'qml/panels/ControlCenter.qml': [('asynchronous: true', 'asynchronous: false')],
         'qml/components/SlideLoader.qml': [('    asynchronous: true', '    asynchronous: false')],
     },
 }
@@ -80,7 +90,7 @@ def analyze(events, kinds=('toggle', 'tab', 'page')):
         ready_at = None; visible = None; settled = None; frames = []; prev = t0; gap = 0
         for k2, a2 in events[i + 1:]:
             if k2 in kinds: break
-            if k2 in ('slide-loaded', 'page-activate', 'catalog-loaded', 'stack-ready'):
+            if k2 in ('slide-loaded', 'page-activate', 'page-loaded', 'catalog-loaded', 'stack-ready'):
                 ready_at = int(a2[0]); visible = None if kind != 'toggle' else visible
             if k2 == 'frame':
                 t = int(a2[0]); frames.append(t); gap = max(gap, t - prev); prev = t
@@ -101,7 +111,8 @@ def main():
     scenario = sys.argv[sys.argv.index('--scenario') + 1] if '--scenario' in sys.argv else 'shell'
     if os.environ.get('LAT_INSIDE') != '1':
         work = Path(tempfile.mkdtemp(prefix='lme-lat-'))
-        env = {k: v for k, v in os.environ.items() if not k.startswith(('WAYLAND', 'SWAYSOCK', 'DBUS_SESSION', 'NIRI', 'LME_'))}
+        keep = {'LME_SHELL_PREWARM', 'LME_SHELL_NO_PREWARM'}
+        env = {k: v for k, v in os.environ.items() if k in keep or not k.startswith(('WAYLAND', 'SWAYSOCK', 'DBUS_SESSION', 'NIRI', 'LME_'))}
         env.pop('DISPLAY', None)
         env.update(LAT_INSIDE='1', LAT_WORK=str(work), XDG_RUNTIME_DIR=str(work / 'rt'), XDG_CONFIG_HOME=str(work / 'cfg'),
                    XDG_STATE_HOME=str(work / 'state'), XDG_CACHE_HOME=str(work / 'cache'), XDG_DATA_HOME=str(work / 'data'),
@@ -144,9 +155,17 @@ def run_shell(root, work, steps, entry='shell.qml', extra_env=None):
                 if json.loads(ipc('tState')).get('ready'): break
             except Exception: pass
             time.sleep(.1)
+        samples = []
+        def rss():
+            try:
+                for line in open(f'/proc/{proc.pid}/status'):
+                    if line.startswith('VmRSS'): return int(line.split()[1])
+            except OSError: return None
+            return None
         for step in steps:
             if isinstance(step, (int, float)): time.sleep(step)
-            else: ipc(*step)
+            else:
+                ipc(*step); samples.append((step[-1], rss()))
         time.sleep(1.2)
         rss = [l for l in open(f'/proc/{proc.pid}/status') if l.startswith(('VmRSS', 'RssAnon'))]
         print('RSS', ' '.join(x.strip() for x in rss), file=sys.stderr)
@@ -154,7 +173,7 @@ def run_shell(root, work, steps, entry='shell.qml', extra_env=None):
         proc.terminate(); proc.wait(timeout=10)
     logf.seek(0); log = logf.read()
     errors = [l for l in log.splitlines() if re.search(r'TypeError|ReferenceError|Binding loop|Unable to assign|Cannot read', l)]
-    return analyze(parse(log)), errors[:20]
+    return analyze(parse(log)), errors[:20], samples
 
 
 def close(): return ('close',)
@@ -178,8 +197,8 @@ def shell_scenario(root, work):
     steps += [close(), 1.0]
     runs = []
     for _ in range(int(os.environ.get('LAT_REPEAT', '1'))):
-        result, errors = run_shell(root, work, steps)
-        runs.append({'actions': result, 'errors': errors})
+        result, errors, samples = run_shell(root, work, steps)
+        runs.append({'actions': result, 'errors': errors, 'rss': samples})
     return runs
 
 
