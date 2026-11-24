@@ -176,6 +176,15 @@ use `visible` after measurement.
     analyzer can attribute a neighbour's load to the requested action. Judge
     open latency by the first frame with final content and by settled time;
     keep a scenario without neighbour warming for clean attribution.
+15. **No `anchors.fill` on a parked loader.** Anchors silently override the
+    parking `x`, leaving all retained pages stacked at x=0 (the newest
+    creation order happens to win). Set `y`, `width`, `height` explicitly and
+    verify in the probe that hidden kids sit at `x >= host.width`.
+16. **A `show()` triggered from a binding's first evaluation re-enters.**
+    `onResolveChanged: show()` fired while `show()` was still inside
+    `resolve()`, so `entries` was still empty and the page built twice.
+    Guard re-entrancy or drop the handler if no caller rebinds `resolve`; check
+    for duplicate Loaders per key in the probe.
 
 ## 6. Verification pattern
 

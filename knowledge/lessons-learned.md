@@ -1565,4 +1565,12 @@ event line per committed store rides the existing pipe.
 - **Settings process linger:** hide instead of `Qt.quit()`, gate the view with
   `active:false`, quit after `LME_SETTINGS_LINGER_MS` (default 60 s). Do not
   assign `window.visible` in the IPC handler — it breaks the visibility
-  binding; set a `shown` flag instead.
+  binding; set a `shown` flag instead; default `shown:true` so the window can
+  paint before the backend is ready.
+- **Two implementation bugs the probe caught:** (a) `Loader.anchors.fill`
+  overrides the parking `x`; use explicit y/width/height. (b) `onResolveChanged:
+  show()` fires from the lazy first evaluation of `resolve` while the first
+  `show()` is mid-resolve, re-entering before `entries` is populated and
+  building the page twice. The duplicate build cost ~90 ms on first open and
+  ~140 MB of demo RSS (740→603 MB after the fix). Verify one Loader per key
+  and parked x values in the probe.
