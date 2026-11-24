@@ -21,6 +21,7 @@ echo them into files, commits, issues, PRs, or this archive.
 | `oc_report.py <sid> ...` | `GET /api/session/{sid}/message` | Read agent progress: `tail`, `report` (final long text), `trace` (tool calls), `wait` (block until `idle`). |
 | `oc_fetch.py <sid> <remote> <local>` | session shell, chunked base64 | Pull a file from the desktop byte-exactly (screenshots, artifacts). |
 | `gh_pr.py --repo ... --head ...` | GitHub REST API | Create (and optionally immediately merge) a PR; token from `--token-file` (default `/tmp/.ghtoken`). |
+| `oc_verify.sh health\|create\|prompt\|wait\|report\|all` | session prompt/wait/message API | One-command verification session: create (`provider/model`, default `opencode/beam-free`), queue a prompt file, wait for idle, print the last assistant text. Env `OC_URL`, `OC_AUTH` (`user:pass`). No credentials stored. |
 
 ## Channel map (discovered 2026-11, gateway OpenAPI)
 

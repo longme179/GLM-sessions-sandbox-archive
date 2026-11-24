@@ -1272,3 +1272,42 @@ Recent history (newest first):
 - Next: Q5 content families (weather, lyrics, wallpaper, file search,
   equalizer, clipboard) — awaiting per-phase owner authorization; fileOpen
   moves with Q5's search entries.
+
+## Session 2026-11-24 — instant panel/Settings research (docs-only PR)
+
+- Owner ask: opening panels (especially Control Center) and switching Settings
+  tabs still loads; make it feel instant; clone famous Quickshell shells,
+  analyze preload/cache, write a deeply technical plan; commit + PR.
+- Current main: `f234268` (PR #191 merged, wallpaper palette follow). Live shell
+  PID 32729 at session start; Quickshell 0.3.2, Qt 6.11.2, niri 26.04; live
+  config is the repo symlink `~/.config/quickshell/lme-shell`.
+- Verified root causes: (1) one arbitrary-panel `SlideLoader` -> opening
+  another panel destroys the previous tree; only the last stays warm (460 ms
+  cold / ~70 ms retained baseline from the #107 body; current comment
+  300-450/70); (2) `PageHost` destroys the retired page and keeps only
+  current+incoming, so revisiting a page rebuilds it (Control Center and
+  Settings); (3) live Settings is a separate Quickshell process that quits on
+  close (`onClosed: Qt.quit()`), so the IPC reuse path has nothing to reuse;
+  (4) prewarm is two fixed timers (4 s CC, 6.5 s island); (5) 0.3.2 has no
+  user-QML disk cache, so a cold Settings process recompiles; (6)
+  `controlsRefresh` is a backend no-op/cache invalidation, not the dead
+  interval.
+- Reference mechanisms (pinned): DMS prewarm-on-hover + grace unload + 6-page
+  LRU settings cache (90 ms anticipation, 50 ms teardown); Caelestia resident
+  panel wrappers; end4 eager family LazyLoaders after `Config.ready`;
+  Serpantinum hidden `preloaderContainer` + `widgetCache` +
+  `StackView.replace`; Quickshell `LazyLoader` docs. No reference was
+  benchmarked; constants are not LME measurements.
+- Deliverables: `docs/INSTANT_UI_PLAN.md`, `docs/INSTANT_UI_RESEARCH.md` on
+  `docs/instant-ui-plan`; docs-only PR #192 against main (no runtime change):
+  https://github.com/longme179/lme-fedora-niri-qs/pull/192. G0 on the docs
+  worktree: 1315 passed / 0 failed / 185 skipped (534 s). Owner decisions listed
+  in the plan §7 (retention budget, Settings linger/in-process, secondary
+  prewarm, Quickshell upgrade).
+- Verification: remote beam-free session `ses_df405eb98ffe0KaRr8gs4Oc8R2`;
+  6 CONFIRMED / 4 CORRECTED; report at
+  `~/agent-collab/research/verify-instant-ui.md`.
+- Not done: no code changes, no live shell restart, no settings/config edits,
+  no package changes. G0 on the docs worktree requires symlinking the main
+  checkout's untracked `tests/` (the worktree alone lacks
+  `tests/migration_checks.py`).

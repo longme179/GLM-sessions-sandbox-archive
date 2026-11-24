@@ -1492,3 +1492,44 @@ event line per committed store rides the existing pipe.
   two real bugs this era (LockState null deref, the cross-layer edge) were
   both found by gates that already existed — the value is in reading their
   output correctly.
+
+## Lesson 86 — instant UI: retention, not rebuild (2026-11-24, LME instant-UI plan)
+
+1. **"Preload" is a portfolio, not a switch.** Reference Quickshell shells
+   combine resident wrappers (Caelestia), lazy heavy content, type prewarm on
+   hover (DMS), hidden item caches (Serpantinum), eager family load at startup
+   (end4), offscreen warm render, LRU/grace eviction and async teardown. LME
+   already had the offscreen park + warm pass; it was missing multi-instance
+   retention and a page cache.
+2. **A single retained panel is not a panel cache; a two-slot PageHost is not
+   a page cache.** Switching panels changes `SlideLoader.sourceComponent` and
+   destroys the previous tree. PageHost destroys the retired page; only an
+   already-incubating next page is reused. Returning to a page/panel later is
+   cold again.
+3. **Retention without suspension converts open latency into idle CPU.**
+   `SlideLoader` parks with `visible` still true (toggling `visible` on a large
+   tree measured ~800 ms in LME), so visible-bound timers and visualizers keep
+   running. Multi-retention multiplies it. Add a `panelActive`/`pageActive`
+   contract and audit timers before claiming a win.
+4. **Quickshell 0.3.2 has no user-QML disk cache.** It rejects
+   `@pragma DiskCache`/`RenderControl`; `launch.cpp` comments out the
+   `QML_DISK_CACHE` env because qsintercept paths cannot be cached. Probes
+   with `QML_DISK_CACHE=1`/`QML_FORCE_DISK_CACHE=1` produced 0 `.qmlc`. A cold
+   process recompiles user QML; an in-process page recreation does not. Do not
+   sell bytecode caching on this version; keep the process alive or host
+   in-process.
+5. **Read the commit body, not the subject.** LME #107's subject says
+   "460 ms -> 33 ms"; the body documents 460 ms cold arrival vs ~70 ms
+   retained reopen. Citing the subject would have overstated the retained path.
+6. **Delegate a numbered verification pass.** The beam-free verifier confirmed
+   6/10 claims and corrected 4 (including "PageHost reinstantiates on every
+   switch" and "two SlideLoaders"). Ask for CONFIRMED/CORRECTED/UNVERIFIABLE +
+   file:line and a "what the plan must not claim" section.
+7. **Copy mechanisms, not constants.** DMS's 6 pages / 90 ms / 50 ms are
+   reference values; LME must measure its own page cost, memory and frame
+   budget. The same applies to Caelestia's resident-everything model: LME's
+   400/500 MB target is tighter.
+8. **Measure the right event.** Open latency is input -> first frame with final
+   content, not animation end. A 200 ms entrance on a ready tree is fine; a
+   200 ms blank before it is not. Headless software rendering is for relative
+   before/after; final acceptance on the real GPU/compositor.

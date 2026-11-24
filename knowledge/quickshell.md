@@ -34,6 +34,33 @@ Gotchas found the same round:
 - Upstream releases: still **v0.3.2** (2026-10-08), master `9b0f339`
   (2026-10-17) — re-checked 2026-11-11 via the GitHub API.
 
+## 0.1 CORRECTIONS 2026-11-24 — disk cache, pragmas, LazyLoader (probed on the owner's desktop)
+
+- **No `DiskCache`/`RenderControl` pragma on 0.3.2.** The launch parser
+  recognizes UseQApplication, NativeTextRendering, IgnoreSystemSettings,
+  RespectSystemStyle, DropExpensiveFonts, IconTheme, AppId, ShellId, DataDir,
+  StateDir, CacheDir and Env/DefaultEnv; `@pragma DiskCache` and
+  `@pragma RenderControl` print "Unrecognized pragma". DMS uses them on a newer
+  build; do not copy them to LME 0.3.2.
+- **User-QML disk cache is disabled.** `src/launch/launch.cpp` at `9b0f339`
+  leaves the `QML_DISK_CACHE` env path commented out because the engine refuses
+  to cache qsintercept paths (lines 233-242). Probes with a local component +
+  `QML_DISK_CACHE=1` / `QML_FORCE_DISK_CACHE=1` / `QML_DISK_CACHE_PATH`
+  produced 0 `.qmlc`; `~/.cache/quickshell/qmlcache` held one 688-byte file.
+  A new Quickshell process recompiles user QML. The Qt pipeline cache
+  (`qtpipelinecache-*`, ~160 KB) is separate and exists. Do not design a
+  startup win on `.qmlc`; keep a process alive or host the UI in-process.
+- **LazyLoader semantics for warmup:** `loading: true` starts background
+  creation in frame gaps; reading `item` or `active: true` forces completion on
+  the GUI thread; `active: false` destroys the item. `Variants` does not
+  support asynchronous loading (header warning), so do not wrap a Variants in a
+  warm loader.
+- **Implication for the instant-UI plan:** compiled types stay in the engine
+  within one process, so destroying/recreating a page does not recompile QML.
+  The tab-switch cost is object creation + layout/polish + first render; the
+  Settings *process* start is where QML compilation reappears. Retention and
+  offscreen warm render are the levers, not bytecode cache.
+
 ## 1. Facts my training data gets WRONG
 
 | Training belief | Reality (verified) | Evidence |
