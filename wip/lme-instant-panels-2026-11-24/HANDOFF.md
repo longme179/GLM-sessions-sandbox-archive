@@ -113,3 +113,19 @@ main a38a4e2. Final design and numbers: repo `docs/INSTANT_UI_PLAN.md`.
   branch + PR. Real-session checks owed: prewarm hitch, Settings re-show via
   niri rules, aggregate PSS (harness demo RSS ~740 MB is not the real total).
 - Do NOT use the live session for measurements.
+
+## FINAL 2026-11-24 — branch pushed, PR #196 open
+
+- Branch `perf/instant-panels-pages`: `5ff881e` implementation, `8a2d27c` docs.
+  PR https://github.com/longme179/lme-fedora-niri-qs/pull/196 (base main a38a4e2).
+- Final harness (final8.json): first Control Center 102 ms, switch-back 84–98 ms,
+  tab revisits 0–16 ms, retained Settings page 21–27 ms; demo RSS ~603 MB
+  (740 before the duplicate-build fix).
+- Fixed during verification: Loader anchors overriding the park x; re-entrant
+  `show()` from `onResolveChanged` building the first page twice.
+- Gates: check.sh 1500 tests with only the known flaky prefs shutdown timeout
+  (passed twice on rerun); qmllint clean; G1–G6 failures are identical on clean
+  main in this environment (missing private pointer helper/test modules, stale
+  native catalog fixtures, polling snapshot). No gate claimed green beyond that.
+- Owed on the real session: prewarm hitch, Settings re-show through niri rules,
+  aggregate PSS vs 400/500 MB.

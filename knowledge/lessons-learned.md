@@ -1549,8 +1549,8 @@ event line per committed store rides the existing pipe.
 - **Retention + sync build is the lever.** One keyed Loader per visited page
   (sync create, park at `x=width+8`, LRU 6) plus a retained panel stage (LRU 4)
   moved the harness from first Control Center 986 ms / switch-back 888 ms /
-  tab revisits 200–730 ms to 104–115 / 41–110 / 3–20 ms. Retained Settings
-  page revisits: 24–27 ms.
+  tab revisits 200–730 ms to 102 / 84–98 / 0–16 ms. Retained Settings page
+  revisits: 21–27 ms. Final PR: lme-fedora-niri-qs#196.
 - **Retained != visible.** Per-page `Item.visible` toggling cost ~500 ms on a
   large tree; the x-offset park is free. Window-level hide is fine (surface
   teardown, items survive).
