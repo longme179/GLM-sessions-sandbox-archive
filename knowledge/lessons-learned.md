@@ -1533,3 +1533,36 @@ event line per committed store rides the existing pipe.
    content, not animation end. A 200 ms entrance on a ready tree is fine; a
    200 ms blank before it is not. Headless software rendering is for relative
    before/after; final acceptance on the real GPU/compositor.
+
+## Lesson 87 — instant UI, second pass: async prewarm is a lie in an idle shell (2026-11-24, LME `perf/instant-panels-pages`)
+
+- **The prewarm never ran.** LME's 4 s timer mounted the panel stage with
+  `Loader.asynchronous: true`. Quickshell's incubator budget is 1/3 of a
+  rendered frame, and an idle scene renders none: the stage was still
+  `Loading` at 9 s, so the first open paid the build anyway. `asynchronous =
+  false` does not affect a load already in flight. The deterministic fix is a
+  synchronous one-time prewarm (existing 4 s timer) or a cancel-and-rebuild
+  synchronous path on click; accept one hitch and measure it on the real GPU.
+- **Frame-driving a parked loader did not work.** A `FrameAnimation` bound to
+  `dormant && status===Loading` produced no frames while the overlay was idle;
+  don't ship a warm path justified by "frames should be happening".
+- **Retention + sync build is the lever.** One keyed Loader per visited page
+  (sync create, park at `x=width+8`, LRU 6) plus a retained panel stage (LRU 4)
+  moved the harness from first Control Center 986 ms / switch-back 888 ms /
+  tab revisits 200–730 ms to 104–115 / 41–110 / 3–20 ms. Retained Settings
+  page revisits: 24–27 ms.
+- **Retained != visible.** Per-page `Item.visible` toggling cost ~500 ms on a
+  large tree; the x-offset park is free. Window-level hide is fine (surface
+  teardown, items survive).
+- **LRU correctness:** never evict the shown page or the requested key, bump
+  recency on present/hit, delete the map entry before `destroy()`. Settings
+  and panels get separate caps.
+- **Measurement discipline:** a background warm's `page-loaded` event can be
+  attributed to the clicked action; use first-content-frame + settled, and a
+  no-neighbour-warm scenario for attribution. Demo/software-GL RSS (~740 MB)
+  is not the real-session total (owner's live shell was ~241 MB); report caps
+  and ask for real PSS.
+- **Settings process linger:** hide instead of `Qt.quit()`, gate the view with
+  `active:false`, quit after `LME_SETTINGS_LINGER_MS` (default 60 s). Do not
+  assign `window.visible` in the IPC handler — it breaks the visibility
+  binding; set a `shown` flag instead.

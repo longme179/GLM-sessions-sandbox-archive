@@ -155,6 +155,27 @@ use `visible` after measurement.
    offscreen.
 9. **Don't copy DMS's 6/90/50 constants** without measuring LME page cost and
    the 400/500 MB budget.
+10. **An async prewarm does not run in an idle scene.** Quickshell gives
+    asynchronous `Loader` incubation ~1/3 of a *rendered* frame; an idle shell
+    swaps none. A 4 s prewarm of a heavy panel was still `Loading` at 9 s with
+    zero frames. `asynchronous = false` on a load already in flight is a no-op
+    (Qt docs). Either prewarm the stage synchronously at an idle moment, or
+    destroy the in-flight loader and rebuild it synchronously when the user
+    asks for it. Measure the one-time hitch on the real GPU.
+11. **A frame driver is not a substitute.** `FrameAnimation`/`Timer`-driven
+    repaints did not reliably advance a parked loader's incubation; do not
+    ship a warm path whose only proof is "frames should be happening".
+12. **Retained != visible.** Park pages by an x offset, not per-page
+    `Item.visible` (measured ~500 ms propagation on a large tree). Window-level
+    `visible:false` is different: it destroys the layer surface, which is
+    acceptable for a hidden Settings window.
+13. **LRU details matter.** Skip the shown page and the requested key when
+    evicting, bump recency on `present()` and on cache hits, and destroy only
+    after removing the entry. Cap Settings pages and panels separately.
+14. **"ready" is ambiguous.** If background warm builds emit load events, the
+    analyzer can attribute a neighbour's load to the requested action. Judge
+    open latency by the first frame with final content and by settled time;
+    keep a scenario without neighbour warming for clean attribution.
 
 ## 6. Verification pattern
 
