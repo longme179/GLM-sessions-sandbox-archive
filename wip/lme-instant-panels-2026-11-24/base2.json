@@ -1,0 +1,251 @@
+{
+ "renderer": "gles2",
+ "scenario": "shell",
+ "runs": [
+  {
+   "actions": [
+    {
+     "action": "toggle:control",
+     "ready_ms": 167,
+     "first_content_frame_ms": 986,
+     "settled_ms": 1127,
+     "max_frame_gap_ms": 747,
+     "frames": 73
+    },
+    {
+     "action": "toggle:control",
+     "ready_ms": null,
+     "first_content_frame_ms": 118,
+     "settled_ms": 208,
+     "max_frame_gap_ms": 61,
+     "frames": 119
+    },
+    {
+     "action": "toggle:notifications",
+     "ready_ms": 219,
+     "first_content_frame_ms": 270,
+     "settled_ms": 416,
+     "max_frame_gap_ms": 320,
+     "frames": 62
+    },
+    {
+     "action": "toggle:control",
+     "ready_ms": 119,
+     "first_content_frame_ms": 888,
+     "settled_ms": 1019,
+     "max_frame_gap_ms": 847,
+     "frames": 77
+    },
+    {
+     "action": "toggle:control",
+     "ready_ms": null,
+     "first_content_frame_ms": 95,
+     "settled_ms": 205,
+     "max_frame_gap_ms": 56,
+     "frames": 64
+    },
+    {
+     "action": "tab:audio",
+     "ready_ms": 200,
+     "first_content_frame_ms": 213,
+     "settled_ms": null,
+     "max_frame_gap_ms": 116,
+     "frames": 27
+    },
+    {
+     "action": "tab:devices",
+     "ready_ms": 358,
+     "first_content_frame_ms": 372,
+     "settled_ms": null,
+     "max_frame_gap_ms": 350,
+     "frames": 28
+    },
+    {
+     "action": "tab:agenda",
+     "ready_ms": 526,
+     "first_content_frame_ms": 535,
+     "settled_ms": null,
+     "max_frame_gap_ms": 170,
+     "frames": 33
+    },
+    {
+     "action": "tab:monitor",
+     "ready_ms": 370,
+     "first_content_frame_ms": 730,
+     "settled_ms": null,
+     "max_frame_gap_ms": 730,
+     "frames": 17
+    },
+    {
+     "action": "tab:controls",
+     "ready_ms": null,
+     "first_content_frame_ms": null,
+     "settled_ms": null,
+     "max_frame_gap_ms": 22,
+     "frames": 53
+    },
+    {
+     "action": "tab:audio",
+     "ready_ms": 505,
+     "first_content_frame_ms": 509,
+     "settled_ms": null,
+     "max_frame_gap_ms": 25,
+     "frames": 37
+    },
+    {
+     "action": "tab:devices",
+     "ready_ms": 364,
+     "first_content_frame_ms": 373,
+     "settled_ms": null,
+     "max_frame_gap_ms": 351,
+     "frames": 28
+    },
+    {
+     "action": "tab:agenda",
+     "ready_ms": 513,
+     "first_content_frame_ms": 528,
+     "settled_ms": null,
+     "max_frame_gap_ms": 175,
+     "frames": 32
+    },
+    {
+     "action": "tab:monitor",
+     "ready_ms": 375,
+     "first_content_frame_ms": 732,
+     "settled_ms": null,
+     "max_frame_gap_ms": 732,
+     "frames": 17
+    },
+    {
+     "action": "tab:controls",
+     "ready_ms": null,
+     "first_content_frame_ms": null,
+     "settled_ms": null,
+     "max_frame_gap_ms": 59,
+     "frames": 107
+    },
+    {
+     "action": "toggle:launcher",
+     "ready_ms": 200,
+     "first_content_frame_ms": 246,
+     "settled_ms": 384,
+     "max_frame_gap_ms": 331,
+     "frames": 63
+    },
+    {
+     "action": "toggle:clipboard",
+     "ready_ms": 89,
+     "first_content_frame_ms": 131,
+     "settled_ms": 271,
+     "max_frame_gap_ms": 435,
+     "frames": 55
+    },
+    {
+     "action": "toggle:power",
+     "ready_ms": 82,
+     "first_content_frame_ms": 148,
+     "settled_ms": 268,
+     "max_frame_gap_ms": 444,
+     "frames": 56
+    },
+    {
+     "action": "toggle:control",
+     "ready_ms": 149,
+     "first_content_frame_ms": 867,
+     "settled_ms": 1028,
+     "max_frame_gap_ms": 498,
+     "frames": 78
+    },
+    {
+     "action": "toggle:launcher",
+     "ready_ms": 160,
+     "first_content_frame_ms": 211,
+     "settled_ms": 351,
+     "max_frame_gap_ms": 358,
+     "frames": 60
+    },
+    {
+     "action": "toggle:settings",
+     "ready_ms": 262,
+     "first_content_frame_ms": 712,
+     "settled_ms": 848,
+     "max_frame_gap_ms": 670,
+     "frames": 38
+    },
+    {
+     "action": "page:appearance",
+     "ready_ms": null,
+     "first_content_frame_ms": null,
+     "settled_ms": null,
+     "max_frame_gap_ms": 0,
+     "frames": 0
+    },
+    {
+     "action": "page:elements",
+     "ready_ms": 425,
+     "first_content_frame_ms": 432,
+     "settled_ms": null,
+     "max_frame_gap_ms": 432,
+     "frames": 15
+    },
+    {
+     "action": "page:topbar",
+     "ready_ms": 1091,
+     "first_content_frame_ms": 1096,
+     "settled_ms": null,
+     "max_frame_gap_ms": 451,
+     "frames": 26
+    },
+    {
+     "action": "page:wallpaper",
+     "ready_ms": 6,
+     "first_content_frame_ms": 10,
+     "settled_ms": null,
+     "max_frame_gap_ms": 86,
+     "frames": 44
+    },
+    {
+     "action": "page:notifications",
+     "ready_ms": 789,
+     "first_content_frame_ms": 806,
+     "settled_ms": null,
+     "max_frame_gap_ms": 34,
+     "frames": 64
+    },
+    {
+     "action": "page:behavior",
+     "ready_ms": 978,
+     "first_content_frame_ms": 982,
+     "settled_ms": null,
+     "max_frame_gap_ms": 462,
+     "frames": 35
+    },
+    {
+     "action": "page:about",
+     "ready_ms": 1,
+     "first_content_frame_ms": 12,
+     "settled_ms": null,
+     "max_frame_gap_ms": 22,
+     "frames": 26
+    },
+    {
+     "action": "page:appearance",
+     "ready_ms": 164,
+     "first_content_frame_ms": 169,
+     "settled_ms": null,
+     "max_frame_gap_ms": 188,
+     "frames": 47
+    },
+    {
+     "action": "page:wallpaper",
+     "ready_ms": 14,
+     "first_content_frame_ms": 34,
+     "settled_ms": null,
+     "max_frame_gap_ms": 313,
+     "frames": 61
+    }
+   ],
+   "errors": []
+  }
+ ]
+}
