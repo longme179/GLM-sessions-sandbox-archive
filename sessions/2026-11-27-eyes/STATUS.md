@@ -90,4 +90,4 @@ session sau; nếu vẫn đứt, owner cần restart tunnel.
   đủ), cursor-probe/ (thí nghiệm grim), tools/ (12 script: mắt, push, chạy, phân
   tích pixel/rect/dim)
 - Trên host: runs/20261127-034106-s2-vision1 (Skip), 20261127-041443-s2-vision2
-  (thành công), 20261127-043450-s2-aside-a (Skip pages=0)
+  (thành công), 20261127-043450 + 044626-s2-aside-a (Skip pages=0 ×2)
