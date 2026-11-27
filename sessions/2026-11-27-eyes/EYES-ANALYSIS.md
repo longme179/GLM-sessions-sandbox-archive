@@ -58,6 +58,10 @@ cho thấy nội dung khác — rect có thể stale sau scroll).
 
 ## Kết luận cho owner
 
+*(Ghi chú phiên 6: kết luận dưới đây được kiểm trên run S2. Riêng run S1 lúc 11:22 có click
+trượt thật, do harness click khi panel còn đang trượt vào; đã sửa — xem "Cập nhật phiên 6" ở
+cuối file.)*
+
 Quan sát "click trượt / cuộn lố" khi xem realtime **không phải lỗi harness**:
 mọi click đều vào tâm delegate đã settle; button được render đầy đủ tại điểm click
 trong 6/17 trường hợp bị nuốt. Đây là hành vi thật của shell (đã xác nhận từ đêm 4
@@ -121,9 +125,9 @@ một ảnh.
 
 ### A (main) so với B (nhánh) — cùng harness, probe `6fc853ea329a`
 
-- S1: không khác. Click → built 9–16 ms, click → settled 385–403 ms (trừ `notifications` trên
-  nhánh: 518 ms), Escape → gone 20–24 ms, 6/6 rep ok mỗi phía. Stall GUI thread > 100 ms trong 9
-  rep: main 13 (tệ nhất 2215 ms), nhánh 9 (tệ nhất 3088 ms).
+- S1: không thấy khác trong 3 rep. Click → built 9–16 ms, click → settled 385–403 ms (trừ
+  `notifications` trên nhánh: 518 ms), Escape → gone 20–24 ms, 6/6 rep ok mỗi phía. Stall GUI
+  thread > 100 ms trong 9 rep: main 13 (tệ nhất 2215 ms), nhánh 9 (tệ nhất 3088 ms).
 - S3: chỉ khác ở `activity`. Trên main 0/9 bước `activity` đóng bằng Escape (9 lần + 3 lần warm-up
   phải đóng qua IPC); trên nhánh 9/9 (median 16.7 ms, max 451.6 ms). Các panel khác: mở 104–304 ms
   median, Escape → gone 17–49 ms (settings, cửa sổ riêng: 91 / 236 ms), như nhau hai phía.
