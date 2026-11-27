@@ -65,7 +65,7 @@ với retry cũng bị nuốt) — và nay có bằng chứng hình ảnh: **cli
 hiện đầy đủ mà shell không phản ứng**. Giống triệu chứng S2 (trang đứng dim giữa
 animation) — nghi ngờ cùng cơ chế: navigation/recede state machine nuốt input.
 
-## Còn lại (cho session sau)
+## Còn lại (ghi lúc cuối phiên 5 — cả ba mục dưới đây đã xong trong phiên 6, xem mục "Cập nhật phiên 6")
 
 - S2 A-side (p-main): cần chạy để trả lời regression hay pre-existing.
   Đã chuẩn bị: settingsHover fix cho p-main (preflight 208 files OK).
@@ -84,3 +84,58 @@ animation) — nghi ngờ cùng cơ chế: navigation/recede state machine nuố
 - `cursor-probe/` — thí nghiệm grim-cursor (park 3 vị trí, diff = 0).
 - Trên host: `~/.cache/lme-perf/rv2/runs/20261127-041443-s2-vision2/` (đầy đủ),
   repo checkout ở 9a81fbd (detached, đã push origin/perf/responsive-v2).
+
+## Cập nhật phiên 6 (2026-11-27, 11:00–13:35 giờ host)
+
+### S2 phía A (main): hành vi có sẵn, không phải regression
+
+Run A `20261127-111001-s2-aside-a` (p-main) so với run B `20261127-041443-s2-vision2` ở trên,
+cùng variant `all`, 3 rep: A 16/54 và B 17/54 click không navigate; 16 cặp (rep, page) trùng
+nhau, B chỉ có thêm `about` ở rep0 (`AB-S2-COMPARE.txt`). 67 ảnh mỗi phía, 54/54 click khớp với
+một ảnh.
+
+### S1 Control Center: vì sao phiên trước nhìn thấy "click trượt"
+
+- Run 11:22 (`runs/s1s3-b/`, **không hợp lệ**): harness cũ click 127 ms sau khi mở panel, khi
+  panel stage còn đang trượt vào (transitioning hết ~1.48 s). Trace cho thấy `panel[4]` (transitioning)
+  true ở +22 ms và chỉ false ở +1484 ms. Run đó có 11 click "mù" ra desktop trống.
+- Đã sửa harness (`c2e51ba`, `08da4b7`, `b990406`): S1 đợi stage đứng yên rồi mới đọc rect;
+  mỗi rep lưu rect của từng nút tab (`meta.s1_tab_rects`).
+- Chạy lại có mắt, mỗi phía một run S1: B `20261127-122409-s1-b2`, A `20261127-130005-s1-a`.
+  36 lần đọc rect mỗi run, tất cả chỉ cần 2 lần đọc (moved 0.0 px) → khi đọc thì stage đã đứng yên.
+- Ảnh: 54 crop mỗi phía (ordered 3 rep × 6 tab = 18 click, random 3 rep × 12 = 36), crop 440 px
+  quanh điểm click, crosshair đỏ tại điểm click.
+
+### Kiểm ảnh S1 bằng hình học (không dùng VLM)
+
+- Hai file kết quả: `S1-B2-EYES-CHECK.txt` (phía B) và mục "Eyes" của
+  `AB-S1S3-COMPARE.txt` (A và B).
+- Kết quả: **54/54 mỗi phía** điểm click nằm trong rect nút tab mà harness đọc được; nút
+  287–288 × 40 px, tâm (px cửa sổ) x 1163.5 / 1456 / 1748.5, y 212 / 257; lề trái/phải 143–144 px,
+  trên/dưới 20 px → đúng tâm nút. Hình học hai phía giống hệt nhau.
+- Bằng chứng hành vi khớp: mỗi click sinh `cc.select <tab>` đúng tab sau 9–16 ms khi GUI thread
+  rảnh (click → built/present).
+- Phép thử "đo màu chạy từ tâm ra mép nút" trên crop **không kết luận được**: chữ nhãn của nút
+  nằm ngay dưới crosshair nên màu đổi sau ~29–44 px, chưa tới mép nút. Không dùng làm bằng chứng.
+- Công cụ: `tools/eyes_tabs_check.py <run dir>`.
+
+### A (main) so với B (nhánh) — cùng harness, probe `6fc853ea329a`
+
+- S1: không khác. Click → built 9–16 ms, click → settled 385–403 ms (trừ `notifications` trên
+  nhánh: 518 ms), Escape → gone 20–24 ms, 6/6 rep ok mỗi phía. Stall GUI thread > 100 ms trong 9
+  rep: main 13 (tệ nhất 2215 ms), nhánh 9 (tệ nhất 3088 ms).
+- S3: chỉ khác ở `activity`. Trên main 0/9 bước `activity` đóng bằng Escape (9 lần + 3 lần warm-up
+  phải đóng qua IPC); trên nhánh 9/9 (median 16.7 ms, max 451.6 ms). Các panel khác: mở 104–304 ms
+  median, Escape → gone 17–49 ms (settings, cửa sổ riêng: 91 / 236 ms), như nhau hai phía.
+- Chi tiết: `AB-S1S3-COMPARE.txt`, `S3-B2-PEEK.txt`, `S1FAST-B2-PEEK.txt`, `PEEK-s1-a.txt`,
+  `PEEK-s3-a.txt`, `PEEK-s1fast-a.txt`.
+- Lưu ý: mỗi phía 3 rep cho mỗi variant — dưới luật N ≥ 10 của harness, chỉ mang tính chỉ dấu.
+
+## Files (phiên 6)
+
+- `AB-S2-COMPARE.txt`, `AB-S1S3-COMPARE.txt`, `S1-B2-EYES-CHECK.txt`, `S1FAST-B2-PEEK.txt`,
+  `S3-B2-PEEK.txt`, `PEEK-s1-a.txt`, `PEEK-s3-a.txt`, `PEEK-s1fast-a.txt`.
+- `tools/` — 29 script (chạy, fetch, peek, so sánh, kiểm ảnh, vá repo có neo).
+- Ảnh và records: `../runs/s1-b2/eyes/` (54 ảnh), `../runs/s1-a/eyes/` (54 ảnh), `../runs/s3-b2/`,
+  `../runs/s1fast-b2/`, `../runs/s3-a/`, `../runs/s1fast-a/`.
+- Hand-off: `../STATUS.md`; bản PR: `../PR-DRAFT.md`.

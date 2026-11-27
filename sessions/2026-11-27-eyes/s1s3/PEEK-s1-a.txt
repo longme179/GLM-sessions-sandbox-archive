@@ -1,0 +1,73 @@
+specs: [{"scenario": "warmup:rounds=1", "started_ms": 1795759223551.5364, "ended_ms": 1795759240610.559}, {"scenario": "s1:variants=ordered+random,reps=3", "started_ms": 1795759240610.5728, "ended_ms": 1795759311770.0144}]
+truncated: None | ended: finished | eyes: 54
+problems:
+    {"t": 1795759230044.523, "recover": "activity stayed open after Escape", "how": "ipc_close"}
+
+S1 ordered rep0 ok=True tabs=['controls', 'audio', 'devices', 'agenda', 'notifications', 'system'] clicks=6 duration=18407.3 final_settle=410.43 close=23.83 recovery=None stalls=3 ping=44.52
+    controls       select=10.75 react=None page=None settle=31.75 frame=None
+    audio          select=10.71 react=11.71 page=11.71 settle=391.71 frame=None
+    devices        select=11.43 react=11.43 page=12.43 settle=393.43 frame=None
+    agenda         select=9.03 react=9.03 page=9.03 settle=395.03 frame=None
+    notifications  select=9.45 react=9.45 page=16.45 settle=393.45 frame=None
+    system         select=17.43 react=17.43 page=17.43 settle=410.43 frame=None
+    biggest stalls: [[1419.0, '-'], [334.0, '-'], [31.0, '-']]
+
+S1 ordered rep1 ok=True tabs=['controls', 'audio', 'devices', 'agenda', 'notifications', 'system'] clicks=6 duration=4913.1 final_settle=391.47 close=19.82 recovery=None stalls=3 ping=44.89
+    controls       select=10.56 react=11.56 page=11.56 settle=402.56 frame=None
+    audio          select=8.19 react=9.19 page=9.19 settle=394.19 frame=None
+    devices        select=9.13 react=9.13 page=9.13 settle=1465.13 frame=None
+    agenda         select=12.04 react=12.04 page=12.04 settle=730.04 frame=None
+    notifications  select=9.45 react=9.45 page=13.45 settle=401.45 frame=None
+    system         select=8.47 react=8.47 page=8.47 settle=391.47 frame=None
+    biggest stalls: [[625.0, '-'], [442.0, '-'], [324.0, '-']]
+
+S1 ordered rep2 ok=True tabs=['controls', 'audio', 'devices', 'agenda', 'notifications', 'system'] clicks=6 duration=3480.7 final_settle=386.08 close=21.99 recovery=None stalls=0 ping=46.99
+    controls       select=10.73 react=10.73 page=10.73 settle=392.73 frame=None
+    audio          select=8.38 react=8.38 page=8.38 settle=386.38 frame=None
+    devices        select=9.25 react=9.25 page=9.25 settle=403.25 frame=None
+    agenda         select=10.59 react=10.59 page=11.59 settle=383.59 frame=None
+    notifications  select=9.11 react=9.11 page=15.11 settle=393.11 frame=None
+    system         select=15.08 react=15.08 page=16.08 settle=386.08 frame=None
+    biggest stalls: []
+
+S1 random rep0 ok=True tabs=['controls', 'audio', 'devices', 'agenda', 'notifications', 'system'] clicks=12 duration=5608.1 final_settle=395.19 close=21.73 recovery=None stalls=1 ping=46.69
+    tabs    : ['audio', 'controls', 'notifications', 'agenda', 'audio', 'controls', 'notifications', 'controls', 'agenda', 'audio', 'controls', 'audio']
+    react_ms: [9.28, 9.04, 10.54, 9.08, 9.44, 9.49, 8.64, 80.73, 8.56, 9.13, 10.88, 9.19]
+    select  : [9.28, 9.04, 10.54, 9.08, 9.44, 9.49, 8.64, 80.73, 8.56, 9.13, 10.88, 9.19]
+    gaps ms : [496, 409, 551, 519, 365, 638, 461, 532, 542, 504, 590] 
+    first click -> last click ms: 5608
+    biggest stalls: [[328.0, '-']]
+
+S1 random rep1 ok=True tabs=['controls', 'audio', 'devices', 'agenda', 'notifications', 'system'] clicks=12 duration=5577.1 final_settle=483.46 close=19.81 recovery=None stalls=2 ping=47.61
+    tabs    : ['system', 'agenda', 'notifications', 'system', 'agenda', 'system', 'audio', 'notifications', 'controls', 'system', 'controls', 'agenda']
+    react_ms: [11.54, 8.75, 14.15, 12.11, 9.39, 9.2, None, None, None, 489.23, 9.16, 115.46]
+    select  : [10.54, 8.75, 14.15, 12.11, 8.39, 9.2, None, None, None, 489.23, 9.16, 115.46]
+    gaps ms : [397, 529, 592, 399, 599, 451, 526, 602, 450, 592, 441] 
+    first click -> last click ms: 5577
+    biggest stalls: [[2215.0, '-'], [325.0, '-']]
+
+S1 random rep2 ok=True tabs=['controls', 'audio', 'devices', 'agenda', 'notifications', 'system'] clicks=12 duration=5639.1 final_settle=390.82 close=18.6 recovery=None stalls=1 ping=45.41
+    tabs    : ['devices', 'system', 'agenda', 'audio', 'system', 'agenda', 'system', 'controls', 'notifications', 'audio', 'agenda', 'system']
+    react_ms: [9.92, 9.1, 8.88, 112.58, 9.37, 8.79, 9.2, 9.32, 8.83, 9.6, 9.34, 10.82]
+    select  : [9.92, 9.1, 8.88, 112.58, 8.37, 8.79, 9.2, 9.32, 8.83, 9.6, 9.34, 10.82]
+    gaps ms : [639, 598, 477, 472, 661, 572, 499, 471, 451, 438, 361] 
+    first click -> last click ms: 5639
+    biggest stalls: [[324.0, '-']]
+
+meta: still_reads / s1_tab_rects
+  still_reads: 36 reads: [2] moved_px max: 0.0
+  t=1795759244424 {'controls': (1163.5, 212, 287, 40), 'audio': (1456, 212, 288, 40), 'devices': (1748.5, 212, 287, 40), 'agenda': (1163.5, 257, 287, 40), 'notifications': (1456, 257, 288, 40), 'system': (1748.5, 257, 287, 40)}
+  t=1795759267236 {'controls': (1163.5, 212, 287, 40), 'audio': (1456, 212, 288, 40), 'devices': (1748.5, 212, 287, 40), 'agenda': (1163.5, 257, 287, 40), 'notifications': (1456, 257, 288, 40), 'system': (1748.5, 257, 287, 40)}
+  t=1795759276576 {'controls': (1163.5, 212, 287, 40), 'audio': (1456, 212, 288, 40), 'devices': (1748.5, 212, 287, 40), 'agenda': (1163.5, 257, 287, 40), 'notifications': (1456, 257, 288, 40), 'system': (1748.5, 257, 287, 40)}
+  t=1795759285499 {'controls': (1163.5, 212, 287, 40), 'audio': (1456, 212, 288, 40), 'devices': (1748.5, 212, 287, 40), 'agenda': (1163.5, 257, 287, 40), 'notifications': (1456, 257, 288, 40), 'system': (1748.5, 257, 287, 40)}
+  t=1795759295329 {'controls': (1163.5, 212, 287, 40), 'audio': (1456, 212, 288, 40), 'devices': (1748.5, 212, 287, 40), 'agenda': (1163.5, 257, 287, 40), 'notifications': (1456, 257, 288, 40), 'system': (1748.5, 257, 287, 40)}
+  t=1795759305196 {'controls': (1163.5, 212, 287, 40), 'audio': (1456, 212, 288, 40), 'devices': (1748.5, 212, 287, 40), 'agenda': (1163.5, 257, 287, 40), 'notifications': (1456, 257, 288, 40), 'system': (1748.5, 257, 287, 40)}
+
+inject.log tail:
+   lines: 419
+    1795759311456544108 ev 45431675473887 1795759311456503701 1:1=0
+    1795759311456585085 ok 141 45431675480801 1795759311456510615 tap esc
+    1795759311769933710 ev 45431988876575 1795759311769906378 3:0=16392 3:1=16398
+    1795759311769958878 ok 142 45431988881975 1795759311769911789 move 960 540
+    1795759311859661105 ok 143 45432078595263 1795759311859625037 release
+    1795759311859764421 ok 144 45432078713086 1795759311859742860 quit

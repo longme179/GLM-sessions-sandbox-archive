@@ -1,0 +1,145 @@
+S2 A/B - variant all, 3 reps, eyes on (computed from records.json + eyes/)
+  A (main)   finished, eyes 67, problems 2, dir s2-aside-a
+  B (branch) finished, eyes 67, problems 1, dir s2-vision2
+
+1. Outcome per page and rep (o = settled, x = swallowed / not settled)
+  page             A r0    A r1    A r2     B r0    B r1    B r2  
+  elements          o       x       x       o       x       x    
+  appearance        o       x       x       o       x       x    
+  topbar            o       x       x       o       x       x    
+  controlLayout     o       o       o       o       o       o    
+  display           o       o       o       o       o       o    
+  nightLight        x       o       o       x       o       o    
+  desktop           o       o       o       o       o       o    
+  wallpaper         o       o       o       o       o       o    
+  utilities         o       o       o       o       o       o    
+  weather           o       o       o       o       o       o    
+  notifications     x       o       o       x       o       o    
+  clipboard         x       o       o       x       o       o    
+  idle              o       o       o       o       o       o    
+  keybinds          x       x       x       x       x       x    
+  lock              x       o       o       x       o       o    
+  equalizer         o       o       o       o       o       o    
+  behavior          x       x       x       x       x       x    
+  about             o       o       o       x       o       o    
+
+  A (main)   violations 16/54  per rep [6, 5, 5]
+  B (branch) violations 17/54  per rep [7, 5, 5]
+
+  Pages violated on A but not B, and on B but not A (same rep):
+    rep0 nightLight      violated on both (same checks)
+    rep0 notifications   violated on both (same checks)
+    rep0 clipboard       violated on both (same checks)
+    rep0 keybinds        violated on both (same checks)
+    rep0 lock            violated on both (same checks)
+    rep0 behavior        violated on both (same checks)
+    rep0 about           violated on B only ['opaque', 'not_receding']
+    rep1 elements        violated on both (checks differ A=['shown_is_page'] B=['shown_is_page', 'opaque', 'not_receding'])
+    rep1 appearance      violated on both (checks differ A=['shown_is_page'] B=['shown_is_page', 'opaque', 'not_receding'])
+    rep1 topbar          violated on both (checks differ A=['shown_is_page'] B=['shown_is_page', 'opaque', 'not_receding'])
+    rep1 keybinds        violated on both (same checks)
+    rep1 behavior        violated on both (same checks)
+    rep2 elements        violated on both (same checks)
+    rep2 appearance      violated on both (same checks)
+    rep2 topbar          violated on both (same checks)
+    rep2 keybinds        violated on both (same checks)
+    rep2 behavior        violated on both (same checks)
+  => both 16, A only 0, B only 1
+
+2. Latency in ms (median / p95 / max): click -> first frame, click -> page built/present, click -> settled
+  A (main)   frame 5.0 / 6.8 / 7.6 (n=53)
+             built  28.1 / 794.9 / 1701.7 (n=41)
+             settle(all) 490.5 / 1281.5 / 2100.7 (n=38)
+             settle(ok)   490.5 / 1281.5 / 2100.7 (n=38)
+  B (branch) frame 4.9 / 7.0 / 9.6 (n=52)
+             built  28.1 / 753.3 / 1471.6 (n=41)
+             settle(all) 485.9 / 1190.5 / 1875.6 (n=37)
+             settle(ok)   485.9 / 1190.5 / 1875.6 (n=37)
+
+  GUI-thread stalls during the S2 reps (heartbeat of the shell process):
+    A (main)   rep0: 19 >33ms, 18 >100ms, 7 >300ms, max 2860ms, total 14983ms
+    A (main)   rep1: 20 >33ms, 20 >100ms, 19 >300ms, max 3190ms, total 22492ms
+    A (main)   rep2: 21 >33ms, 21 >100ms, 17 >300ms, max 4339ms, total 25448ms
+    A (main)   all  : 60 >33ms, 59 >100ms, 43 >300ms, max 4339ms, total 62923ms
+    B (branch) rep0: 17 >33ms, 16 >100ms, 13 >300ms, max 3983ms, total 18092ms
+    B (branch) rep1: 22 >33ms, 21 >100ms, 17 >300ms, max 2650ms, total 16813ms
+    B (branch) rep2: 22 >33ms, 22 >100ms, 18 >300ms, max 3250ms, total 20732ms
+    B (branch) all  : 61 >33ms, 59 >100ms, 48 >300ms, max 3983ms, total 55637ms
+
+3. Click point vs the delegate rect of its last nav read (window px; rect centre x,y, size w x h)
+  A (main)   OK inside=38 outside=0; FAIL inside=16 outside=0; FAIL dy from rect centre median +0.0px (max |dy| 0.0), distance to the nearest edge median 24.0px (min 24.0)
+  B (branch) OK inside=37 outside=0; FAIL inside=17 outside=0; FAIL dy from rect centre median +0.0px (max |dy| 0.0), distance to the nearest edge median 24.0px (min 24.0)
+
+4. Eyes: 67 shots in A, 67 in B; clicks matched to a shot: A 54/54, B 54/54
+   Row under the crosshair: strongest brightness edges above/below the centre (button ~48 px).
+  A (main)
+    ok   clicks: row height median 108px (min 35.0, max 173.0, n=38)
+    fail clicks: row height median 66px (min 47.0, max 146.0, n=16)
+  B (branch)
+    ok   clicks: row height median 104px (min 36.0, max 164.0, n=37)
+    fail clicks: row height median 89px (min 47.0, max 181.0, n=17)
+   Every swallowed click:
+  A (main)
+    rep0 nightLight      edges up=-80 down=+59 (h=139px, rect h=48) band mean=47.0 std=31.0 006_click-539-636.jpg
+    rep0 notifications   edges up=-80 down=+48 (h=128px, rect h=48) band mean=41.4 std=33.1 011_click-539-906.jpg
+    rep0 clipboard       edges up=-49 down=+97 (h=146px, rect h=48) band mean=47.6 std=29.4 013_click-539-816.jpg
+    rep0 keybinds        edges up=-4 down=+43 (h=47px, rect h=50) band mean=41.0 std=31.7 015_click-539-911.jpg
+    rep0 lock            edges up=-41 down=+91 (h=132px, rect h=48) band mean=47.9 std=29.4 017_click-539-822.jpg
+    rep0 behavior        edges up=-3 down=+44 (h=47px, rect h=48) band mean=41.2 std=31.6 019_click-539-910.jpg
+    rep1 elements        edges up=-54 down=+6 (h=60px, rect h=50) band mean=61.6 std=60.0 022_click-539-220.jpg
+    rep1 appearance      edges up=-49 down=+41 (h=90px, rect h=48) band mean=47.4 std=35.0 024_click-539-275.jpg
+    rep1 topbar          edges up=-12 down=+59 (h=71px, rect h=48) band mean=46.1 std=31.7 026_click-539-329.jpg
+    rep1 keybinds        edges up=-4 down=+43 (h=47px, rect h=50) band mean=40.3 std=31.8 038_click-539-911.jpg
+    rep1 behavior        edges up=-3 down=+44 (h=47px, rect h=48) band mean=40.7 std=31.6 042_click-539-910.jpg
+    rep2 elements        edges up=-54 down=+6 (h=60px, rect h=50) band mean=61.6 std=60.0 045_click-539-220.jpg
+    rep2 appearance      edges up=-49 down=+41 (h=90px, rect h=48) band mean=47.3 std=35.0 047_click-539-275.jpg
+    rep2 topbar          edges up=-12 down=+59 (h=71px, rect h=48) band mean=45.8 std=31.7 049_click-539-329.jpg
+    rep2 keybinds        edges up=-4 down=+43 (h=47px, rect h=50) band mean=40.3 std=31.8 061_click-539-911.jpg
+    rep2 behavior        edges up=-3 down=+44 (h=47px, rect h=48) band mean=40.3 std=31.7 065_click-539-910.jpg
+  B (branch)
+    rep0 nightLight      edges up=-30 down=+59 (h=89px, rect h=48) band mean=57.2 std=36.2 006_click-539-636.jpg
+    rep0 notifications   edges up=-78 down=+48 (h=126px, rect h=48) band mean=44.7 std=33.4 011_click-539-906.jpg
+    rep0 clipboard       edges up=-49 down=+97 (h=146px, rect h=48) band mean=48.2 std=31.7 013_click-539-816.jpg
+    rep0 keybinds        edges up=-4 down=+43 (h=47px, rect h=50) band mean=44.4 std=32.2 015_click-539-911.jpg
+    rep0 lock            edges up=-13 down=+91 (h=104px, rect h=48) band mean=47.7 std=30.6 017_click-539-822.jpg
+    rep0 behavior        edges up=-3 down=+44 (h=47px, rect h=48) band mean=44.3 std=32.1 019_click-539-910.jpg
+    rep0 about           edges up=-83 down=+98 (h=181px, rect h=48) band mean=47.1 std=29.6 021_click-539-856.jpg
+    rep1 elements        edges up=-49 down=+6 (h=55px, rect h=50) band mean=70.2 std=56.8 022_click-539-220.jpg
+    rep1 appearance      edges up=-49 down=+41 (h=90px, rect h=48) band mean=54.5 std=38.8 024_click-539-275.jpg
+    rep1 topbar          edges up=-60 down=+59 (h=119px, rect h=48) band mean=57.7 std=38.4 026_click-539-329.jpg
+    rep1 keybinds        edges up=-4 down=+43 (h=47px, rect h=50) band mean=44.4 std=32.2 038_click-539-911.jpg
+    rep1 behavior        edges up=-3 down=+44 (h=47px, rect h=48) band mean=45.6 std=32.9 042_click-539-910.jpg
+    rep2 elements        edges up=-49 down=+6 (h=55px, rect h=50) band mean=70.2 std=56.8 045_click-539-220.jpg
+    rep2 appearance      edges up=-49 down=+41 (h=90px, rect h=48) band mean=54.4 std=38.8 047_click-539-275.jpg
+    rep2 topbar          edges up=-60 down=+59 (h=119px, rect h=48) band mean=57.4 std=38.7 049_click-539-329.jpg
+    rep2 keybinds        edges up=-4 down=+43 (h=47px, rect h=50) band mean=44.4 std=32.2 061_click-539-911.jpg
+    rep2 behavior        edges up=-3 down=+44 (h=47px, rect h=48) band mean=44.3 std=32.1 065_click-539-910.jpg
+
+5. Same (rep, page) on A and on B: crop difference, mean |dLum| over the pixels (0 = identical picture)
+  pairs 54: mean |dLum| median 15.40, p95 30.21, max 41.92; pictures within 0.5 of identical: 0; same row height: 26
+  Most different pairs (|dLum|, rep, page, ok A, ok B):
+     41.92  rep1 elements        A=x B=x
+     40.67  rep2 elements        A=x B=x
+     31.02  rep1 appearance      A=x B=x
+     29.78  rep2 appearance      A=x B=x
+     21.77  rep1 topbar          A=x B=x
+     18.84  rep2 topbar          A=x B=x
+     18.65  rep0 utilities       A=o B=o
+     18.19  rep0 wallpaper       A=o B=o
+  Swallowed on both sides - A vs B band mean/std at the crosshair:
+    rep0 nightLight      A 47.0/31.0 h=139   B 57.2/36.2 h=89
+    rep0 notifications   A 41.4/33.1 h=128   B 44.7/33.4 h=126
+    rep0 clipboard       A 47.6/29.4 h=146   B 48.2/31.7 h=146
+    rep0 keybinds        A 41.0/31.7 h=47   B 44.4/32.2 h=47
+    rep0 lock            A 47.9/29.4 h=132   B 47.7/30.6 h=104
+    rep0 behavior        A 41.2/31.6 h=47   B 44.3/32.1 h=47
+    rep1 elements        A 61.6/60.0 h=60   B 70.2/56.8 h=55
+    rep1 appearance      A 47.4/35.0 h=90   B 54.5/38.8 h=90
+    rep1 topbar          A 46.1/31.7 h=71   B 57.7/38.4 h=119
+    rep1 keybinds        A 40.3/31.8 h=47   B 44.4/32.2 h=47
+    rep1 behavior        A 40.7/31.6 h=47   B 45.6/32.9 h=47
+    rep2 elements        A 61.6/60.0 h=60   B 70.2/56.8 h=55
+    rep2 appearance      A 47.3/35.0 h=90   B 54.4/38.8 h=90
+    rep2 topbar          A 45.8/31.7 h=71   B 57.4/38.7 h=119
+    rep2 keybinds        A 40.3/31.8 h=47   B 44.4/32.2 h=47
+    rep2 behavior        A 40.3/31.7 h=47   B 44.3/32.1 h=47

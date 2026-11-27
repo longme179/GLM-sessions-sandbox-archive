@@ -1,0 +1,87 @@
+specs: [{"scenario": "warmup:rounds=1", "started_ms": 1795759333574.4175, "ended_ms": 1795759350595.856}, {"scenario": "s3:reps=3", "started_ms": 1795759350595.8665, "ended_ms": 1795759462021.1477}]
+truncated: None | ended: finished | eyes: None
+problems:
+    {"t": 1795759339052.375, "recover": "activity stayed open after Escape", "how": "ipc_close"}
+    {"t": 1795759356357.317, "recover": "activity stayed open after Escape", "how": "ipc_close"}
+    {"t": 1795759371487.343, "recover": "activity stayed open after Escape", "how": "ipc_close"}
+    {"t": 1795759382289.873, "recover": "overview stayed open after Escape", "how": "ipc_close"}
+    {"t": 1795759389471.904, "recover": "activity stayed open after Escape", "how": "ipc_close"}
+    {"t": 1795759395927.689, "recover": "activity stayed open after Escape", "how": "ipc_close"}
+    {"t": 1795759409286.252, "recover": "activity stayed open after Escape", "how": "ipc_close"}
+    {"t": 1795759422596.172, "recover": "activity stayed open after Escape", "how": "ipc_close"}
+    {"t": 1795759429657.591, "recover": "activity stayed open after Escape", "how": "ipc_close"}
+    {"t": 1795759444716.811, "recover": "activity stayed open after Escape", "how": "ipc_close"}
+    {"t": 1795759454529.844, "recover": "overview stayed open after Escape", "how": "second_escape"}
+    {"t": 1795759461842.069, "recover": "activity stayed open after Escape", "how": "ipc_close"}
+
+S3 rep0 steps=17 stalls=27 ping=47.97 workspace={"before": {"id": 6, "idx": 2}, "skipped": "the focused workspace holds no window: leaving it would remove it"} final_open=False
+    control        dwell=250 open=268.9 esc->gone=23.9 gone=None closed=True recovery=None stalls_open=[[217.0, '-']] stalls_close=[]
+    activity       dwell=785 open=98.6 esc->gone=None gone=None closed=False recovery=ipc_close stalls_open=[] stalls_close=[[324.0, '-']]
+    clipboard      dwell=722 open=155.6 esc->gone=42.0 gone=None closed=True recovery=None stalls_open=[[80.0, '-']] stalls_close=[]
+    overview       dwell=341 open=125.4 esc->gone=33.9 gone=None closed=True recovery=None stalls_open=[[39.0, '-']] stalls_close=[]
+    launcher       dwell=521 open=112.6 esc->gone=21.9 gone=None closed=True recovery=None stalls_open=[[43.0, '-']] stalls_close=[]
+    notifications  dwell=487 open=195.3 esc->gone=38.1 gone=None closed=True recovery=None stalls_open=[[71.0, '-'], [65.0, '-']] stalls_close=[]
+    power          dwell=638 open=152.8 esc->gone=31.2 gone=None closed=True recovery=None stalls_open=[[98.0, '-']] stalls_close=[]
+    settings       dwell=741 open=154.8 esc->gone=529.7 gone=556.8 closed=True recovery=None stalls_open=[[1529.0, '-']] stalls_close=[[324.0, '-']]
+    activity       dwell=220 open=135.8 esc->gone=None gone=None closed=False recovery=ipc_close stalls_open=[[123.0, '-']] stalls_close=[]
+    control        dwell=171 open=309.5 esc->gone=31.5 gone=None closed=True recovery=None stalls_open=[[218.0, '-'], [47.0, '-']] stalls_close=[]
+    launcher       dwell=776 open=455.8 esc->gone=33.7 gone=None closed=True recovery=None stalls_open=[[314.0, '-'], [83.0, '-']] stalls_close=[]
+    notifications  dwell=474 open=188.8 esc->gone=49.6 gone=None closed=True recovery=None stalls_open=[[98.0, '-']] stalls_close=[]
+    power          dwell=721 open=154.1 esc->gone=62.4 gone=None closed=True recovery=None stalls_open=[[82.0, '-']] stalls_close=[]
+    overview       dwell=151 open=136.9 esc->gone=None gone=None closed=False recovery=ipc_close stalls_open=[[39.0, '-'], [31.0, '-'], [52.0, '-']] stalls_close=[[3738.0, '-'], [44.0, '-']]
+    clipboard      dwell=484 open=101.0 esc->gone=35.3 gone=None closed=True recovery=None stalls_open=[[42.0, '-']] stalls_close=[[32.0, '-']]
+    settings       dwell=691 open=234.8 esc->gone=184.5 gone=227.0 closed=True recovery=None stalls_open=[[93.0, '-']] stalls_close=[]
+    activity       dwell=321 open=114.4 esc->gone=None gone=None closed=False recovery=ipc_close stalls_open=[[111.0, '-']] stalls_close=[]
+    biggest stalls: [[3738.0, '-'], [1529.0, '-'], [324.0, '-'], [324.0, '-'], [314.0, '-'], [312.0, '-'], [218.0, '-'], [217.0, '-']]
+
+S3 rep1 steps=17 stalls=22 ping=1829.18 workspace={"before": {"id": 6, "idx": 2}, "skipped": "the focused workspace holds no window: leaving it would remove it"} final_open=False
+    control        dwell=858 open=91.4 esc->gone=57.2 gone=None closed=True recovery=None stalls_open=[[42.0, '-']] stalls_close=[]
+    activity       dwell=826 open=84.3 esc->gone=None gone=None closed=False recovery=ipc_close stalls_open=[] stalls_close=[[1417.0, '-']]
+    clipboard      dwell=172 open=164.0 esc->gone=38.4 gone=None closed=True recovery=None stalls_open=[[78.0, '-']] stalls_close=[]
+    overview       dwell=169 open=126.5 esc->gone=75.9 gone=None closed=True recovery=None stalls_open=[[318.0, '-'], [46.0, '-']] stalls_close=[]
+    launcher       dwell=556 open=118.9 esc->gone=54.7 gone=None closed=True recovery=None stalls_open=[[44.0, '-']] stalls_close=[]
+    notifications  dwell=854 open=210.1 esc->gone=54.2 gone=None closed=True recovery=None stalls_open=[[91.0, '-']] stalls_close=[]
+    power          dwell=435 open=159.1 esc->gone=46.3 gone=None closed=True recovery=None stalls_open=[[87.0, '-']] stalls_close=[]
+    settings       dwell=312 open=160.1 esc->gone=156.2 gone=197.8 closed=True recovery=None stalls_open=[[94.0, '-']] stalls_close=[]
+    activity       dwell=466 open=105.3 esc->gone=None gone=None closed=False recovery=ipc_close stalls_open=[[110.0, '-']] stalls_close=[[1369.0, '-']]
+    control        dwell=171 open=348.6 esc->gone=48.7 gone=None closed=True recovery=None stalls_open=[[212.0, '-'], [36.0, '-'], [33.0, '-']] stalls_close=[]
+    launcher       dwell=316 open=149.5 esc->gone=87.7 gone=None closed=True recovery=None stalls_open=[[79.0, '-']] stalls_close=[]
+    notifications  dwell=478 open=157.1 esc->gone=23.1 gone=None closed=True recovery=None stalls_open=[[90.0, '-'], [47.0, '-']] stalls_close=[]
+    power          dwell=521 open=160.6 esc->gone=45.2 gone=None closed=True recovery=None stalls_open=[[84.0, '-']] stalls_close=[]
+    overview       dwell=324 open=175.0 esc->gone=30.3 gone=None closed=True recovery=None stalls_open=[[48.0, '-']] stalls_close=[]
+    clipboard      dwell=323 open=160.8 esc->gone=39.3 gone=None closed=True recovery=None stalls_open=[[44.0, '-']] stalls_close=[]
+    settings       dwell=314 open=155.7 esc->gone=0.5 gone=33.8 closed=True recovery=None stalls_open=[[95.0, '-']] stalls_close=[]
+    activity       dwell=494 open=103.5 esc->gone=None gone=None closed=False recovery=ipc_close stalls_open=[[101.0, '-']] stalls_close=[]
+    biggest stalls: [[1417.0, '-'], [1369.0, '-'], [318.0, '-'], [212.0, '-'], [110.0, '-'], [101.0, '-'], [95.0, '-'], [94.0, '-']]
+
+S3 rep2 steps=17 stalls=28 ping=46.51 workspace={"before": {"id": 6, "idx": 2}, "skipped": "the focused workspace holds no window: leaving it would remove it"} final_open=False
+    control        dwell=367 open=114.3 esc->gone=24.5 gone=None closed=True recovery=None stalls_open=[[43.0, '-'], [32.0, '-']] stalls_close=[]
+    activity       dwell=166 open=100.0 esc->gone=None gone=None closed=False recovery=ipc_close stalls_open=[] stalls_close=[[319.0, '-']]
+    clipboard      dwell=778 open=153.2 esc->gone=56.7 gone=None closed=True recovery=None stalls_open=[[84.0, '-']] stalls_close=[]
+    overview       dwell=567 open=128.5 esc->gone=40.1 gone=None closed=True recovery=None stalls_open=[[38.0, '-']] stalls_close=[]
+    launcher       dwell=631 open=361.7 esc->gone=23.4 gone=None closed=True recovery=None stalls_open=[[322.0, '-'], [54.0, '-']] stalls_close=[]
+    notifications  dwell=289 open=192.7 esc->gone=48.4 gone=None closed=True recovery=None stalls_open=[[92.0, '-'], [33.0, '-']] stalls_close=[]
+    power          dwell=894 open=174.4 esc->gone=47.8 gone=None closed=True recovery=None stalls_open=[[99.0, '-']] stalls_close=[]
+    settings       dwell=794 open=1686.4 esc->gone=0.7 gone=30.4 closed=True recovery=None stalls_open=[[1753.0, '-'], [36.0, '-'], [90.0, '-']] stalls_close=[]
+    activity       dwell=240 open=102.2 esc->gone=None gone=None closed=False recovery=ipc_close stalls_open=[[104.0, '-'], [33.0, '-']] stalls_close=[]
+    control        dwell=399 open=296.1 esc->gone=61.2 gone=None closed=True recovery=None stalls_open=[[227.0, '-'], [36.0, '-']] stalls_close=[]
+    launcher       dwell=691 open=157.7 esc->gone=32.2 gone=None closed=True recovery=None stalls_open=[[77.0, '-']] stalls_close=[]
+    notifications  dwell=683 open=190.5 esc->gone=36.2 gone=None closed=True recovery=None stalls_open=[[90.0, '-']] stalls_close=[]
+    power          dwell=852 open=160.3 esc->gone=34.0 gone=None closed=True recovery=None stalls_open=[[90.0, '-']] stalls_close=[]
+    overview       dwell=466 open=157.6 esc->gone=None gone=None closed=False recovery=second_escape stalls_open=[[42.0, '-'], [46.0, '-']] stalls_close=[[2328.0, '-'], [47.0, '-']]
+    clipboard      dwell=772 open=110.0 esc->gone=54.5 gone=None closed=True recovery=None stalls_open=[[46.0, '-']] stalls_close=[]
+    settings       dwell=652 open=156.2 esc->gone=25.0 gone=57.4 closed=True recovery=None stalls_open=[[95.0, '-'], [273.0, '-']] stalls_close=[]
+    activity       dwell=377 open=114.4 esc->gone=None gone=None closed=False recovery=ipc_close stalls_open=[[105.0, '-']] stalls_close=[]
+    biggest stalls: [[2328.0, '-'], [1753.0, '-'], [322.0, '-'], [319.0, '-'], [273.0, '-'], [227.0, '-'], [105.0, '-'], [104.0, '-']]
+
+meta: still_reads / s1_tab_rects
+  still_reads: 0 reads: [] moved_px max: None
+
+inject.log tail:
+   lines: 660
+    1795759460269390014 ev 45580488293614 1795759460269323378 1:1=0
+    1795759460269428677 ok 145 45580488300848 1795759460269330642 tap esc
+    1795759462021094562 ev 45582240044029 1795759462021073833 3:0=16392 3:1=16398
+    1795759462021113388 ok 146 45582240049169 1795759462021078983 move 960 540
+    1795759462109780041 ok 147 45582328723316 1795759462109753120 release
+    1795759462109842670 ok 148 45582328803087 1795759462109832901 quit
